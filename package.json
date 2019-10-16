@@ -10,15 +10,37 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
+        "@babel/preset-react": "^7.0.0",
         "axios": "^0.19",
+        "axios-endpoint": "^1.0.1",
+        "bootstrap": "^4.1.0",
         "cross-env": "^5.1",
+        "jquery": "^3.2",
         "laravel-mix": "^4.0.7",
         "lodash": "^4.17.13",
+        "mui-nutella": "*",
+        "popper.js": "^1.12",
+        "react-localization": "^1.0.15",
+        "react-pose": "^4.0.9",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.15.2",
-        "sass-loader": "^7.1.0"
+        "sass-loader": "^7.1.0",
+        "vue": "^2.5.17"
     },
     "dependencies": {
-        "mix-dependency": "0.0.2"
+        "@material-ui/core": "^4.4.3",
+        "@material-ui/icons": "^4.4.3",
+        "@material-ui/styles": "^4.4.3",
+        "jss": "^10.0.0",
+        "jss-rtl": "^0.3.0",
+        "mix-dependency": "0.0.2",
+        "react": "^16.9.0",
+        "react-dom": "^16.9.0",
+        "react-github-contribution-calendar": "^1.0.0",
+        "react-redux": "^7.1.0",
+        "react-router-dom": "^5.1.0",
+        "redux": "^4.0.4",
+        "redux-thunk": "^2.3.0",
+        "roboto-fontface": "^0.10.0"
     }
 }
