@@ -8,9 +8,7 @@ function Attachment(props) {
     return (
         <ListItem button>
             <ListItemAvatar>
-                <IconButton>
                     <AttachmentIcon />
-                </IconButton>
             </ListItemAvatar>
             <ListItemText primary={name} />
         </ListItem>
