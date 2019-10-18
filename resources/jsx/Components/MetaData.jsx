@@ -16,8 +16,22 @@ export default function MetaData() {
                 <Typography variant="h5">
                     Categories
                 </Typography>
-                <Chip label="category" />
+                <div>
+                    <Chip label="hello" />
+                    <Chip label="hello" />
+                    <Chip label="hello" />
+                    <Chip label="hello" />
+                </div>
                 <Divider />
+                <Typography variant="h5">
+                    Tags
+                </Typography>
+                <div>
+                    <Chip label="hello" />
+                    <Chip label="hello" />
+                    <Chip label="hello" />
+                    <Chip label="hello" />
+                </div>
             </CardContent>
         </Card>
     )
