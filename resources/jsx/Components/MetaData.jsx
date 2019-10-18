@@ -5,6 +5,12 @@ const useStyles = makeStyles({
     card: {
         borderRadius: 16
     },
+    chip: {
+        margin: 2
+    },
+    divider: {
+        margin: 18
+    }
 })
 
 
@@ -17,20 +23,20 @@ export default function MetaData() {
                     Categories
                 </Typography>
                 <div>
-                    <Chip label="hello" />
-                    <Chip label="hello" />
-                    <Chip label="hello" />
-                    <Chip label="hello" />
+                    <Chip label="hello" className={styles.chip}/>
+                    <Chip label="hello" className={styles.chip}/>
+                    <Chip label="hello" className={styles.chip}/>
+                    <Chip label="hello" className={styles.chip}/>
                 </div>
-                <Divider />
+                <Divider className={styles.divider} />
                 <Typography variant="h5">
                     Tags
                 </Typography>
                 <div>
-                    <Chip label="hello" />
-                    <Chip label="hello" />
-                    <Chip label="hello" />
-                    <Chip label="hello" />
+                    <Chip label="hello" className={styles.chip}/>
+                    <Chip label="hello" className={styles.chip}/>
+                    <Chip label="hello" className={styles.chip}/>
+                    <Chip label="hello" className={styles.chip}/>
                 </div>
             </CardContent>
         </Card>
