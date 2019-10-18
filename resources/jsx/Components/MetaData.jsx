@@ -2,6 +2,9 @@ import React from 'react'
 import { Divider, makeStyles, Card, CardContent, Chip, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles({
+    title: {
+        margin: '8px 0px'
+    },
     card: {
         borderRadius: 16
     },
@@ -19,7 +22,7 @@ export default function MetaData() {
     return (
         <Card className={styles.card}>
             <CardContent>
-                <Typography variant="h5">
+                <Typography variant="h5" className={styles.title}>
                     Categories
                 </Typography>
                 <div>
@@ -29,7 +32,7 @@ export default function MetaData() {
                     <Chip label="hello" className={styles.chip}/>
                 </div>
                 <Divider className={styles.divider} />
-                <Typography variant="h5">
+                <Typography variant="h5" className={styles.title}>
                     Tags
                 </Typography>
                 <div>
