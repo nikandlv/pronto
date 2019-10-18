@@ -1,12 +1,20 @@
 import React from 'react'
-import { Paper, List } from "@material-ui/core";
+import { makeStyles, Card, CardContent, Chip } from "@material-ui/core";
+
+const useStyles = makeStyles({
+    card: {
+        borderRadius: 16
+    },
+})
+
 
 export default function MetaData() {
+    const styles = useStyles()
     return (
-        <Paper>
-            <List>
-                
-            </List>
-        </Paper>
+        <Card className={styles.card}>
+            <CardContent>
+                <Chip label="category" />
+            </CardContent>
+        </Card>
     )
 }

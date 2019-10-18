@@ -6,7 +6,7 @@ import AttachmentIcon from '@material-ui/icons/AttachmentOutlined'
 const useStyles = makeStyles({
     card: {
         borderRadius: 16
-    }
+    },
 })
 
 function Attachment(props) {
@@ -32,7 +32,10 @@ export default function Attachments() {
                     Attachments
                 </Typography>
                 <List>
-                    <Attachment />
+                <Attachment />
+                <Attachment />
+                <Attachment />
+                <Attachment />
                 </List>
             </CardContent>
         </Card>
