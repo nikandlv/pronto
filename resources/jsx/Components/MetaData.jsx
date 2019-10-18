@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles, Card, CardContent, Chip } from "@material-ui/core";
+import { Divider, makeStyles, Card, CardContent, Chip, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles({
     card: {
@@ -13,7 +13,11 @@ export default function MetaData() {
     return (
         <Card className={styles.card}>
             <CardContent>
+                <Typography variant="h5">
+                    Categories
+                </Typography>
                 <Chip label="category" />
+                <Divider />
             </CardContent>
         </Card>
     )
