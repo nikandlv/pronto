@@ -6,6 +6,7 @@ import Message from '@material-ui/icons/MessageOutlined';
 import Attachments from '../../Components/Attachments'
 import MetaData from '../../Components/MetaData'
 import Comments from './Comments'
+import Gutter from '../../Components/Gutter';
 const useStyles = makeStyles({
     card: {
         borderRadius: 16
@@ -76,10 +77,16 @@ export default function Post() {
                     <div className={styles.push}/>
                     
                 </CardActions>
-                <Attachments />
-                <MetaData />
-                <Comments />
             </Card>
+
+            <Gutter size="xs" />
+            <Attachments />
+
+            <Gutter size="xs" />
+            <MetaData />
+
+            <Gutter size="xs" />
+            <Comments />
         </section>
     )
 }
