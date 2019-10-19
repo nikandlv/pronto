@@ -12,7 +12,7 @@ class PostsController extends Controller
 {
 
     /**
-     * Get all posts
+     * To Get all posts
      *
      * @return AnonymousResourceCollection
      */
@@ -21,6 +21,18 @@ class PostsController extends Controller
         $post = Post::all();
 
         return PostResource::collection($post);
+    }
+
+
+    /**
+     * To get a specific post
+     *
+     * @param Post $post
+     * @return PostResource
+     */
+    public function show(Post $post)
+    {
+        return new PostResource($post);
     }
 
     /**
