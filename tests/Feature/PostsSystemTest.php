@@ -2,10 +2,13 @@
 
 namespace Tests\Feature;
 
+use App\Http\Resources\PostResource;
 use App\Post;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Util\Json;
 use Tests\TestCase;
 
 class PostsSystemTest extends TestCase
@@ -48,12 +51,7 @@ class PostsSystemTest extends TestCase
         $this->postJson('/api/posts' , [
             'title' => $post->title,
             'body' => $post->body
-        ])->assertExactJson([
-            'errors' => [
-                'title' => ["The title field is required."]
-            ],
-            "message" => "The given data was invalid."
-        ]);
+        ])->assertJsonValidationErrors('title');
     }
 
     /** @test **/
@@ -73,10 +71,9 @@ class PostsSystemTest extends TestCase
     public function all_posts_can_be_fetched()
     {
         $this->withoutExceptionHandling();
-//        given : we have a post saved in the past
+
         $post1 = $this->newPost();
-//        when : we get request for /posts
-        $this->assertInstanceOf(Resource::class, $this->getJson('/api/posts'));
-//        then : we must get all the posts back
+
+        $response = $this->getJson('api/posts')->assertStatus(200);
     }
 }

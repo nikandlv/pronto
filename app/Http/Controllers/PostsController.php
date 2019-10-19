@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostResource;
 use App\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
@@ -12,7 +13,7 @@ class PostsController extends Controller
     {
         $post = Post::all();
 
-        return new PostResource($post);
+        return PostResource::collection($post);
     }
 
     /**
