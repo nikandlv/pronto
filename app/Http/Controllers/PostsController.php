@@ -9,9 +9,15 @@ class PostsController extends Controller
 {
     public function store()
     {
+        $attributes = \request()->validate([
+            'title' => 'required|min:5|max:255',
+            'body' => 'required'
+        ]);
+
+
         Post::create([
-            'title' => \request()->title,
-            'body' => \request()->body
+            'title' => $attributes->title,
+            'body' => $attributes->body
         ]);
     }
 }
