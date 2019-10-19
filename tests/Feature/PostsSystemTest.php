@@ -17,7 +17,7 @@ class PostsSystemTest extends TestCase
 //        given  : we have a post
         $post = factory(Post::class)->create();
 //        when : user tries to save it
-        $this->post('/posts', [
+        $this->postJson('/posts' , [
             'title' => $post->title,
             'body' => $post->body
         ]);
