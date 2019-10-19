@@ -95,7 +95,7 @@ class PostsSystemTest extends TestCase
 
 //        when : we put request to update the field in the database
 
-        $this->putJson('/posts/' . $post->id, [])->assertStatus(200);
+        $this->putJson('/api/posts/' . $post->id, [])->assertStatus(200);
         $this->assertDatabaseMissing('posts', [
             'title' => $post->title,
             'body' => $post->body
