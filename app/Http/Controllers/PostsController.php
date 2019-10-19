@@ -3,30 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Post;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PostsController extends Controller
 {
-    public function store(Post $post)
+    public function store()
     {
-        $attributes = \request()->validate([
-            'title' => 'required|min:5|max:255',
+        $validator = Validator::make(request()->all() , [
+           'title' => 'required|min:5|max:255',
             'body' => 'required'
+        ])->validate();
+
+
+        Post::create([
+            'title' => \request()->title,
+            'body' => \request()->body
         ]);
 
-
-        $post->title = $attributes['title'];
-        $post->body = $attributes['body'];
-
-        if ($post->save()) {
-            return [
-                'status' => 201,
-                'post' => [
-                    'title' => $post->title,
-                    'body' => $post->body
-                ],
-                'message' => 'post has been created successfully'
-            ];
-        }
+        return response()->json(['message' => 'post created successfully']);
     }
 }

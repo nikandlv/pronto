@@ -18,14 +18,7 @@ class PostsSystemTest extends TestCase
         $this->postJson('/api/posts' , [
             'title' => $post->title,
             'body' => $post->body
-        ])->assertExactJson([
-            'status' => 201,
-            'post' => [
-                'title' => $post->title,
-                'body' => $post->body
-            ],
-            'message' => 'post has been created successfully'
-        ]);
+        ])->assertJson(['message' => 'post created successfully']);
 
         $this->assertDatabaseHas('posts', [
             'title' => $post->title,
@@ -36,13 +29,21 @@ class PostsSystemTest extends TestCase
     /** @test **/
     public function a_post_needs_title_and_body()
     {
+//        given :  we have a post with bad title
         $post = factory(Post::class)->create(['title' => '']);
 
-        $this->expectException(ValidationException::class);
+//        when : when user wants to save the post
+
         $this->postJson('/api/posts' , [
             'title' => $post->title,
             'body' => $post->body
-        ])->isInvalid();
+        ])->assertExactJson([
+            'errors' => [
+                'title' => ["The title field is required."]
+            ],
+            "message" => "The given data was invalid."
+        ]);
+//        then : an validation error will be thrown
     }
 
 
