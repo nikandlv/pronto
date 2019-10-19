@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 
 class PostsController extends Controller
 {
+    /**
+     * To store a post
+     *
+     * @return JsonResponse
+     */
     public function store()
     {
         $validator = Validator::make(request()->all() , [
@@ -21,5 +27,12 @@ class PostsController extends Controller
         ]);
 
         return response()->json(['message' => 'post created successfully']);
+    }
+
+    public function destroy(Post $post)
+    {
+        if ($post->delete()) {
+            return response()->json(['message' => 'post deleted successfully']);
+        }
     }
 }
