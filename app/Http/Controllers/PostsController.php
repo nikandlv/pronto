@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
-    public function store()
+    public function store(Post $post)
     {
         $attributes = \request()->validate([
             'title' => 'required|min:5|max:255',
@@ -15,9 +15,18 @@ class PostsController extends Controller
         ]);
 
 
-        Post::create([
-            'title' => $attributes->title,
-            'body' => $attributes->body
-        ]);
+        $post->title = $attributes['title'];
+        $post->body = $attributes['body'];
+
+        if ($post->save()) {
+            return [
+                'status' => 201,
+                'post' => [
+                    'title' => $post->title,
+                    'body' => $post->body
+                ],
+                'message' => 'post has been created successfully'
+            ];
+        }
     }
 }
