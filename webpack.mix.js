@@ -1,5 +1,10 @@
 const mix = require('laravel-mix');
+const mixDependency = require('mix-dependency');
 
+mixDependency.require('react-localization');
+mixDependency.require('react-pose');
+mixDependency.require('axios');
+mixDependency.require('axios-endpoint');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,5 +16,4 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+mix.react('resources/jsx/App.jsx', 'public/jsx/application.js');
