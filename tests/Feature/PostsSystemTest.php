@@ -84,4 +84,27 @@ class PostsSystemTest extends TestCase
         $post = $this->newPost();
         $this->getJson('/api/posts/' . $post->id)->assertStatus(200);
     }
+
+    /** @test **/
+    public function a_post_can_be_updated()
+    {
+        $this->withoutExceptionHandling();
+//        given : we have a post saved in the Db in the past
+        $post = $this->newPost();
+        $post2 = factory(Post::class)->create();
+
+//        when : we put request to update the field in the database
+
+        $this->putJson('/posts/' . $post->id, [])->assertStatus(200);
+        $this->assertDatabaseMissing('posts', [
+            'title' => $post->title,
+            'body' => $post->body
+        ]);
+
+        $this->assertDatabaseHas('posts' , [
+           'title' => $post2->title,
+           'body' => $post2->body
+        ]);
+//        then : the database must have been updated and status code 200 returned too
+    }
 }
