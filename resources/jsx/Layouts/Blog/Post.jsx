@@ -79,13 +79,13 @@ export default function Post() {
                 </CardActions>
             </Card>
 
-            <Gutter size="xs" />
+            <Gutter size="sm" />
             <Attachments />
 
-            <Gutter size="xs" />
+            <Gutter size="sm" />
             <MetaData />
 
-            <Gutter size="xs" />
+            <Gutter size="sm" />
             <Comments />
         </section>
     )
