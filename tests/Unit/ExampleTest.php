@@ -7,12 +7,8 @@ use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testBasicTest()
+    /** @test **/
+    public function this_is_a_dumy_test()
     {
         $this->assertTrue(true);
     }
