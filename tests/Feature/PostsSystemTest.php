@@ -76,4 +76,12 @@ class PostsSystemTest extends TestCase
 
         $response = $this->getJson('api/posts')->assertStatus(200);
     }
+
+    /** @test **/
+    public function an_specific_post_can_be_fetched()
+    {
+        $this->withoutExceptionHandling();
+        $post = $this->newPost();
+        $this->getJson('/api/posts/' . $post->id)->assertStatus(200);
+    }
 }
