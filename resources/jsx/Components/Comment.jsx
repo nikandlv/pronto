@@ -1,7 +1,7 @@
 import React from 'react'
-import { Paper, ListItem, ListItemText, ListItemAvatar, Avatar } from '@material-ui/core'
+import { Avatar, Card, CardHeader, IconButton } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
-
+import Reply from '@material-ui/icons/ReplyOutlined'
 const useStyles = makeStyles({
     comment: {
         borderRadius: 16
@@ -12,14 +12,20 @@ export default function Comment() {
     const styles = useStyles()
     return (
         <div>
-            <Paper className={styles.comment}>
-                <ListItem>
-                    <ListItemAvatar>
+            <Card className="paper" className={styles.comment}>
+                <CardHeader
+                    avatar={
                         <Avatar src={'/img/user.png'} />
-                    </ListItemAvatar>
-                    <ListItemText primary="Nikan Dalvand" secondary="Oct 12 2019" />
-                </ListItem>
-            </Paper>
+                    }
+                    title="I Think this is a good idea, however i suggest that we look into more stuff before taking further actions"
+                    subheader={<div>Nikan Dalvand - Oct 18 2019</div>}
+                    action={
+                        <IconButton>
+                            <Reply />
+                        </IconButton>
+                    }
+                />
+            </Card>
         </div>
     )
 }
