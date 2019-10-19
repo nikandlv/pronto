@@ -28,4 +28,6 @@ class PostsSystemTest extends TestCase
         ]);
 //        then : there must be a post related to the field in the database
     }
+
+
 }
