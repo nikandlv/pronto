@@ -9,6 +9,7 @@ use Tests\TestCase;
 
 class PostsSystemTest extends TestCase
 {
+    use RefreshDatabase;
     /** @test * */
     public function a_user_can_make_a_new_post()
     {
