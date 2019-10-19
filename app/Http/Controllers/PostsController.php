@@ -5,10 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Resources\PostResource;
 use App\Post;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Validator;
 
 class PostsController extends Controller
 {
+
+    /**
+     * Get all posts
+     *
+     * @return AnonymousResourceCollection
+     */
     public function index()
     {
         $post = Post::all();
