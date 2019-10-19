@@ -42,20 +42,31 @@ class PostsController extends Controller
      */
     public function store()
     {
-        $validator = Validator::make(request()->all(), [
+        $attributes = request()->validate([
             'title' => 'required|min:5|max:255',
             'body' => 'required'
-        ])->validate();
+        ]);
 
 
         Post::create([
-            'title' => \request()->title,
-            'body' => \request()->body
+            'title' => $attributes['title'],
+            'body' => $attributes['body']
         ]);
 
         return response()->json(['message' => 'post created successfully']);
     }
 
+    public function update(Post $post)
+    {
+        $attributes = request()->validate([
+            'title' => 'required|min:5|max:255',
+            'body' => 'required'
+        ]);
+        $post->title = $attributes['title'];
+        $post->body = $attributes['body'];
+
+        $post->save();
+    }
 
     /**
      * To delete a post

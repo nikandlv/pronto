@@ -2,13 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Http\Resources\PostResource;
 use App\Post;
-use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Resources\Json\Resource;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use PHPUnit\Util\Json;
 use Tests\TestCase;
 
 class PostsSystemTest extends TestCase
@@ -89,22 +84,30 @@ class PostsSystemTest extends TestCase
     public function a_post_can_be_updated()
     {
         $this->withoutExceptionHandling();
-//        given : we have a post saved in the Db in the past
-        $post = $this->newPost();
+        $post1 = $this->newPost();
         $post2 = factory(Post::class)->create();
 
-//        when : we put request to update the field in the database
-
-        $this->putJson('/api/posts/' . $post->id, [])->assertStatus(200);
-        $this->assertDatabaseMissing('posts', [
-            'title' => $post->title,
-            'body' => $post->body
-        ]);
+        $this->putJson('/api/posts/' . $post1->id, [
+            'title' => $post2->title,
+            'body' => $post2->body
+        ])->assertStatus(200);
 
         $this->assertDatabaseHas('posts' , [
            'title' => $post2->title,
            'body' => $post2->body
         ]);
-//        then : the database must have been updated and status code 200 returned too
+    }
+
+    /** @test **/
+    public function a_title_and_a_body_is_needed_for_updating_a_post()
+    {
+        $post1 = $this->newPost();
+        $post2 = factory(Post::class)->create(['title' => '']);
+
+        $this->putJson('/api/posts/' . $post1->id, [
+            'title' => $post2->title,
+            'body' => $post2->body
+        ])->assertJsonValidationErrors('title');
+//        get : validation error
     }
 }
