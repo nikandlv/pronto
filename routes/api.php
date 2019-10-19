@@ -13,3 +13,4 @@
 */
 
 Route::post('/posts' , 'PostsController@store');
+Route::delete('/posts/{post}', 'PostsController@destroy');
