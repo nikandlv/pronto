@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class MessageResource extends JsonResource
+class PostResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,8 +14,6 @@ class MessageResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'message' => $this['message']
-        ];
+        return parent::toArray($request);
     }
 }

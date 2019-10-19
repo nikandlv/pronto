@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\Validator;
 
 class PostsController extends Controller
 {
+    public function index()
+    {
+        $post = Post::all();
+
+        return new PostResource($post);
+    }
+
     /**
      * To store a post
      *
