@@ -9,11 +9,11 @@ const useStyles = makeStyles({
         borderRadius: 16
     },
     media: {
-        maxHeight: 400,
+        maxHeight: 600,
         width: '100%'
     },
     img: {
-        maxHeight: 400,
+        maxHeight: 600,
         width: '100%',
         visibility: 'hidden'
     },
