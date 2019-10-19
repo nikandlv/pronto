@@ -15,8 +15,8 @@ class PostsController extends Controller
      */
     public function store()
     {
-        $validator = Validator::make(request()->all() , [
-           'title' => 'required|min:5|max:255',
+        $validator = Validator::make(request()->all(), [
+            'title' => 'required|min:5|max:255',
             'body' => 'required'
         ])->validate();
 
@@ -29,6 +29,14 @@ class PostsController extends Controller
         return response()->json(['message' => 'post created successfully']);
     }
 
+
+    /**
+     * To delete a post
+     *
+     * @param Post $post
+     * @return JsonResponse
+     * @throws \Exception
+     */
     public function destroy(Post $post)
     {
         if ($post->delete()) {
