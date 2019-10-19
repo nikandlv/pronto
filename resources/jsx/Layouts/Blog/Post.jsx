@@ -54,10 +54,10 @@ export default function Post() {
                 </Menu>
                 <CardMedia
                     className={styles.media}
-                    image={'https://images.unsplash.com/photo-1569844514393-4e409050d5d7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'}
+                    image={'/img/post-1.jpg'}
                     title="Paella dish"
                 >
-                    <img src={'https://images.unsplash.com/photo-1569844514393-4e409050d5d7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'} className={styles.img} />
+                    <img src={'/img/post-1.jpg'} className={styles.img} />
                     </CardMedia>
                 <CardContent>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat nisl vel pretium lectus. Egestas diam in arcu cursus euismod quis viverra nibh cras. Platea dictumst quisque sagittis purus sit amet. Eu consequat ac felis donec et odio. Elementum sagittis vitae et leo duis ut diam quam nulla. Id semper risus in hendrerit gravida rutrum quisque non. Adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus urna. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Faucibus ornare suspendisse sed nisi lacus. Platea dictumst quisque sagittis purus sit amet volutpat. Tortor posuere ac ut consequat semper viverra. Facilisi cras fermentum odio eu feugiat pretium. Neque gravida in fermentum et sollicitudin ac. Urna neque viverra justo nec ultrices dui sapien.
