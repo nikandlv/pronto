@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Post;
+use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -42,10 +43,7 @@ class PostsSystemTest extends TestCase
     /** @test **/
     public function a_post_needs_title_and_body()
     {
-//        given :  we have a post with bad title
         $post = factory(Post::class)->create(['title' => '']);
-
-//        when : when user wants to save the post
 
         $this->postJson('/api/posts' , [
             'title' => $post->title,
@@ -56,23 +54,29 @@ class PostsSystemTest extends TestCase
             ],
             "message" => "The given data was invalid."
         ]);
-//        then : an validation error will be thrown
     }
 
     /** @test **/
     public function a_post_can_be_deleted()
     {
-        $this->withoutExceptionHandling();
-//        given : we have a post
         $post = $this->newPost();
-//        when : request is sent to delete the post with method of delete
+
         $this->deleteJson('/api/posts/' . $post->id)->assertStatus(200)->assertJson(['message' => 'post deleted successfully']);
         $this->assertDatabaseMissing('posts', [
             'id' => $post->id,
             'title' => $post->title,
             'body' => $post->body
         ]);
-//        then : the post must be deleted => it means there must be a message returned with status code and database check
+    }
 
+    /** @test **/
+    public function all_posts_can_be_fetched()
+    {
+        $this->withoutExceptionHandling();
+//        given : we have a post saved in the past
+        $post1 = $this->newPost();
+//        when : we get request for /posts
+        $this->assertInstanceOf(Resource::class, $this->getJson('/api/posts'));
+//        then : we must get all the posts back
     }
 }
