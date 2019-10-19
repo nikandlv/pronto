@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Validator;
 
 class PostsController extends Controller
 {
-
     /**
      * To Get all posts
      *
