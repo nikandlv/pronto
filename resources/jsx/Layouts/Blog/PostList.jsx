@@ -73,9 +73,13 @@ class PostList extends React.Component {
         super(props)
         this.state = {
             mode: 0,
-            posts: [{}, {}],
+            posts: [],
             loading: false,
         }
+    }
+    
+    componentDidMount() {
+        this.update()
     }
 
     update() {
