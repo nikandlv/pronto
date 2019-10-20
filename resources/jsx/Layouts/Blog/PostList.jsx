@@ -83,9 +83,11 @@ class PostList extends React.Component {
     }
 
     update() {
-        this.setState({
-            posts: [...this.state.posts, {}, {}]
-        })
+        window.setTimeout(() => {
+            this.setState({
+                posts: [...this.state.posts, {}, {}]
+            })
+        },1000)
     }
     
     render() {
