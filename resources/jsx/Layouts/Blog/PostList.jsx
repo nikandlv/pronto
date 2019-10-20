@@ -158,20 +158,24 @@ class PostList extends React.Component {
                 </div>
                 <Grid container className={styles.container} spacing={2}>
                     {
-                        posts.map((post,key) => {
-                            if(mode === modes.LIST) {
+                        posts.length === 0 && loading
+                        ? <div>loading</div>
+                        :
+                            posts.map((post,key) => {
+                                if(mode === modes.LIST) {
+                                    return (
+                                        <Grid item xs={12} key={key}>
+                                            <PostPreview />
+                                        </Grid>
+                                    )    
+                                }
                                 return (
-                                    <Grid item xs={12} key={key}>
+                                    <Grid item xs={12} md={6} key={key}>
                                         <PostPreview />
                                     </Grid>
-                                )    
-                            }
-                            return (
-                                <Grid item xs={12} md={6} key={key}>
-                                    <PostPreview />
-                                </Grid>
-                            )
-                        })
+                                )
+                            })
+                        
                     }
                     <Grid item xs={12} className={styles.loadMoreWrapper}>
                     <StyledButton disabled={loading} onClick={() => {
