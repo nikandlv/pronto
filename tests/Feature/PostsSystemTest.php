@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Resources\PostResource;
 use App\Post;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -13,11 +14,6 @@ class PostsSystemTest extends TestCase
     public function newPost($post = null)
     {
         $post = $post!==null ? $post : factory(Post::class)->create();
-
-        $this->postJson('/api/posts' , [
-            'title' => $post->title,
-            'body' => $post->body
-        ]);
 
         return $post;
     }
@@ -66,10 +62,10 @@ class PostsSystemTest extends TestCase
     public function all_posts_can_be_fetched()
     {
         $this->withoutExceptionHandling();
+        $post1 = $this->newPost()->toArray();
+        $post2 = $this->newPost()->toArray();
 
-        $post1 = $this->newPost();
-
-        $response = $this->getJson('api/posts')->assertStatus(200);
+        $this->getJson('/api/posts')->assertJson([ 'data' => [$post1, $post2]]);
     }
 
     /** @test **/
