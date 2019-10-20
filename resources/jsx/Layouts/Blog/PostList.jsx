@@ -82,11 +82,20 @@ class PostList extends React.Component {
         this.update()
     }
 
+    setMode = (mode) => {
+        this.setState({mode})
+    }
+    setLoading = (loading) => {
+        this.setState({loading})
+    }
+
     update() {
+        this.setLoading(true)
         window.setTimeout(() => {
             this.setState({
                 posts: [...this.state.posts, {}, {}]
             })
+            this.setLoading(true)
         },1000)
     }
     
@@ -95,12 +104,7 @@ class PostList extends React.Component {
         const {loading,mode,posts} = this.state
         const reducer = this.props.ApplicationReducer || {}
         
-        const setMode = (mode) => {
-            this.setState({mode})
-        }
-        const setLoading = (loading) => {
-            this.setState({loading})
-        }
+        
         return (
             <section>
                 
