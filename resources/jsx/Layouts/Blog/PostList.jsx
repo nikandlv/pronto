@@ -83,7 +83,9 @@ class PostList extends React.Component {
     }
 
     update() {
-        console.log('ok')
+        this.setState({
+            posts: [...this.state.posts, {}, {}]
+        })
     }
     
     render() {
