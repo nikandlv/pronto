@@ -74,7 +74,7 @@ class PostList extends React.Component {
         this.state = {
             mode: 0,
             posts: [],
-            loading: false,
+            loading: true,
         }
     }
     
@@ -101,7 +101,6 @@ class PostList extends React.Component {
         const setLoading = (loading) => {
             this.setState({loading})
         }
-
         return (
             <section>
                 
@@ -160,7 +159,7 @@ class PostList extends React.Component {
                 </div>
                 <Grid container className={styles.container} spacing={2}>
                     {
-                        posts.length === 0 && loading
+                        posts.length === 0 && loading 
                         ? <div>loading</div>
                         :
                             posts.map((post,key) => {
