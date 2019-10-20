@@ -180,11 +180,7 @@ class PostList extends React.Component {
                     }
                     <Grid item xs={12} className={styles.loadMoreWrapper}>
                     <StyledButton disabled={loading} onClick={() => {
-                                setLoading(true)
-                                setTimeout(() => {
-                                    this.update()
-                                    setLoading(false)
-                                }, 1000)
+                                this.update()   
                             }}>
                         {
                             loading
