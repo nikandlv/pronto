@@ -3,6 +3,8 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import withDynamic from '../Data/withDynamic';
+import Topbar from './Blog/Topbar';
+import { Box } from '@material-ui/core';
 const theme = {
     light: createMuiTheme({
         palette: {
@@ -23,6 +25,9 @@ function Wrapper(props) {
     return (
         <ThemeProvider theme={currentTheme}>
             <CssBaseline />
+            <Box m={2}>
+            <Topbar />
+            </Box>
             {props.children}
         </ThemeProvider>
     )

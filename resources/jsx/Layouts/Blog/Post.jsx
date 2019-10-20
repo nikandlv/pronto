@@ -11,6 +11,7 @@ import Attachments from '../../Components/Attachments'
 import MetaData from '../../Components/MetaData'
 import Comments from './Comments'
 import Gutter from '../../Components/Gutter';
+import StyledTitle from '../../Components/StyledTitle';
 const useStyles = makeStyles(theme => ({
     card: {
         borderRadius: 16
@@ -48,6 +49,10 @@ export default function Post(props) {
     const styles = useStyles()
     return (
         <section>
+            <div>
+            <StyledTitle>
+                Post
+            </StyledTitle>
             <Paper className={styles.bread}>
                 <Breadcrumbs>
                     <Typography color="textPrimary" className={styles.link}>
@@ -86,6 +91,7 @@ export default function Post(props) {
                 
                 </Breadcrumbs>
             </Paper>
+            </div>
             <Gutter className="sm" />
             <Gutter className="sm" />
             <Card className={styles.card}>
