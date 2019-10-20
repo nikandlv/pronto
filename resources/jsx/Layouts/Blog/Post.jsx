@@ -1,7 +1,11 @@
 import React from 'react'
-import { Card, CardContent, makeStyles, CardHeader, CardMedia, Avatar, IconButton, CardActions, Button, Menu, MenuItem, Divider } from "@material-ui/core";
+import { Card, CardContent, makeStyles, CardHeader, CardMedia, Avatar, IconButton, CardActions, Button, Menu, MenuItem, Divider, Breadcrumbs, Paper } from "@material-ui/core";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Favorite from '@material-ui/icons/FavoriteBorderOutlined';
+import Home from '@material-ui/icons/HomeOutlined';
+import Back from '@material-ui/icons/ChevronLeftOutlined';
+import Category from '@material-ui/icons/CategoryOutlined';
+import PostIcon from '@material-ui/icons/ReceiptOutlined';
 import Message from '@material-ui/icons/MessageOutlined';
 import Attachments from '../../Components/Attachments'
 import MetaData from '../../Components/MetaData'
@@ -24,6 +28,9 @@ const useStyles = makeStyles({
     },
     divider: {
         margin: 16
+    },
+    bread: {
+        borderRadius: 16
     }
 })
 
@@ -32,6 +39,15 @@ export default function Post() {
     const styles = useStyles()
     return (
         <section>
+            <Paper className={styles.bread}>
+            <Breadcrumbs>
+            <Button size="small"><Back /> Go Back</Button>
+            <Button size="small"><Home /> Home</Button>
+            <Button size="small"><Category /> General</Button>
+            <Button size="small"><PostIcon /> How to avoid mistakes</Button>
+            </Breadcrumbs>
+            </Paper>
+            <Gutter className="sm" />
             <Card className={styles.card}>
                 <CardHeader 
                     avatar={
