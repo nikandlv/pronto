@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardContent, makeStyles, CardHeader, CardMedia, Avatar, IconButton, CardActions, Button, Menu, MenuItem, Divider, Breadcrumbs, Paper } from "@material-ui/core";
+import { Card, CardContent, makeStyles, CardHeader, CardMedia, Avatar, IconButton, CardActions, Button, Menu, MenuItem, Divider, Breadcrumbs, Paper, Link, Typography } from "@material-ui/core";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Favorite from '@material-ui/icons/FavoriteBorderOutlined';
 import Home from '@material-ui/icons/HomeOutlined';
@@ -11,7 +11,7 @@ import Attachments from '../../Components/Attachments'
 import MetaData from '../../Components/MetaData'
 import Comments from './Comments'
 import Gutter from '../../Components/Gutter';
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     card: {
         borderRadius: 16
     },
@@ -30,23 +30,63 @@ const useStyles = makeStyles({
         margin: 16
     },
     bread: {
-        borderRadius: 16
-    }
-})
+        borderRadius: 16,
+        padding: 4
+    },
+    link: {
+        display: 'flex',
+    },
+    icon: {
+        marginRight: theme.spacing(0.5),
+        width: 20,
+        height: 20,
+    },
+}))
 
-export default function Post() {
+export default function Post(props) {
     const [menuEl, setMenuEl] = React.useState()
     const styles = useStyles()
     return (
         <section>
             <Paper className={styles.bread}>
-            <Breadcrumbs>
-            <Button size="small"><Back /> Go Back</Button>
-            <Button size="small"><Home /> Home</Button>
-            <Button size="small"><Category /> General</Button>
-            <Button size="small"><PostIcon /> How to avoid mistakes</Button>
-            </Breadcrumbs>
+                <Breadcrumbs>
+                    <Typography color="textPrimary" className={styles.link}>
+                        {props.history.length > 1
+                        ? (
+                            <Link color="inherit" href="/" className={styles.link} onClick={event => {
+                                event.preventDefault()
+                                props.history.goBack()
+                            }}>
+                                <Back className={styles.icon} />
+                                Go Back
+                            </Link>
+                        )
+                        : null
+                        } 
+                    
+                    </Typography>
+                    <Typography color="textPrimary" className={styles.link}>
+                    <Link color="inherit" href="/" className={styles.link}>
+                        <Home className={styles.icon} />
+                        Home
+                    </Link>
+                    </Typography>
+                    <Typography color="textPrimary" className={styles.link}>
+                    <Link color="inherit" href="/" className={styles.link}>
+                        <Category className={styles.icon} />
+                        Category
+                    </Link>
+                    </Typography>
+                    <Typography color="textPrimary" className={styles.link}>
+                    <Link color="inherit" href="/" className={styles.link}>
+                        <PostIcon className={styles.icon} />
+                        How to avoid mistakes
+                    </Link>
+                    </Typography>
+                
+                </Breadcrumbs>
             </Paper>
+            <Gutter className="sm" />
             <Gutter className="sm" />
             <Card className={styles.card}>
                 <CardHeader 

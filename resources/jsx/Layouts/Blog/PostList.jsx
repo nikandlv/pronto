@@ -15,6 +15,7 @@ import withDynamic from '../../Data/withDynamic'
 import { setTag, setSearch } from '../../Data/Actions/ApplicationActions'
 import StyledButton from '../../Components/StyledButton'
 import { withStyles } from '@material-ui/styles'
+import StyledTitle from '../../Components/StyledTitle'
 
 const styles = (theme => (
     {
@@ -95,7 +96,12 @@ class PostList extends React.Component {
 
         return (
             <section>
+                
                 <div className={styles.header}>
+                    <StyledTitle >
+                        Home
+                    </StyledTitle>    
+                    <div className={styles.push} />
                     {
                         reducer.search === ""
                         ? (
@@ -129,7 +135,7 @@ class PostList extends React.Component {
                             this.props.setTag('')
                         }}/>
                     }                
-                    <div className={styles.push} />
+                    
                     <IconButton onClick={event => {
                         setMode(
                             mode === modes.LIST
@@ -144,7 +150,6 @@ class PostList extends React.Component {
                         }
                     </IconButton>
                 </div>
-                <Divider/>
                 <Grid container className={styles.container} spacing={2}>
                     {
                         posts.map((post,key) => {

@@ -1,7 +1,8 @@
 import React from 'react'
-import { List, ListItem, ListItemText, ListItemAvatar, Typography, Card, CardContent, makeStyles } from "@material-ui/core";
+import { List, ListItem, ListItemText, ListItemAvatar, ListItemSecondaryAction, Typography, Card, CardContent, makeStyles, IconButton } from "@material-ui/core";
 
 import AttachmentIcon from '@material-ui/icons/AttachmentOutlined'
+import DownloadIcon from '@material-ui/icons/CloudDownloadOutlined'
 
 const useStyles = makeStyles({
     card: {
@@ -18,6 +19,11 @@ function Attachment(props) {
                     <AttachmentIcon />
             </ListItemAvatar>
             <ListItemText primary={name} />
+            <ListItemSecondaryAction>
+                <IconButton>
+                    <DownloadIcon />
+                </IconButton>
+            </ListItemSecondaryAction>
         </ListItem>
     )
 }
