@@ -56,7 +56,7 @@ export default function PostPreview(props) {
             <CardMedia
                     className={styles.media}
                     image={image}
-                    title={"Paella dish"}
+                    title={title}
                 >
                     <img src={image} className={styles.img} />
                     </CardMedia>
