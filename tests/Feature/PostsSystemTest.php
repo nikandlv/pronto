@@ -69,7 +69,7 @@ class PostsSystemTest extends TestCase
 
         $post1 = $this->newPost();
 
-        $response = $this->getJson('api/posts')->assertStatus(200);
+        $response = $this->getJson('api/posts')->assertJson(200);
     }
 
     /** @test **/
