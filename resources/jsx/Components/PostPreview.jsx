@@ -25,7 +25,11 @@ const useStyles = makeStyles({
     }
 })
 
-export default function PostPreview() {
+export default function PostPreview(props) {
+    const title = props.title || "--"
+    const date = props.date || "--"
+    const image = props.image || "--"
+    const description = props.description || "--"
     const [menuEl, setMenuEl] = React.useState()
     const styles = useStyles()
     return (
@@ -41,8 +45,8 @@ export default function PostPreview() {
                         <MoreVertIcon />
                     </IconButton>
                     }
-                    title="How to get over something simple"
-                    subheader="October 1, 2019"
+                    title={title}
+                    subheader={date}
             />
             <Menu open={Boolean(menuEl)} anchorEl={menuEl} onClose={() => {
                 setMenuEl(null)
@@ -51,13 +55,13 @@ export default function PostPreview() {
             </Menu>
             <CardMedia
                     className={styles.media}
-                    image={'/img/post-1.jpg'}
-                    title="Paella dish"
+                    image={image}
+                    title={"Paella dish"}
                 >
-                    <img src={'/img/post-1.jpg'} className={styles.img} />
+                    <img src={image} className={styles.img} />
                     </CardMedia>
             <CardContent>
-                Hello!
+                {description}
             </CardContent>
             <CardActions>
                 <IconButton color="secondary">

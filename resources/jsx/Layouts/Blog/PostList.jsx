@@ -185,13 +185,13 @@ class PostList extends React.Component {
                                 if(mode === modes.LIST) {
                                     return (
                                         <Grid item xs={12} key={key}>
-                                            <PostPreview />
+                                            <PostPreview {...post}/>
                                         </Grid>
                                     )    
                                 }
                                 return (
                                     <Grid item xs={12} md={6} key={key}>
-                                        <PostPreview />
+                                        <PostPreview {...post}/>
                                     </Grid>
                                 )
                             })
