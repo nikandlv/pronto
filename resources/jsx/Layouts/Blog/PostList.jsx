@@ -95,7 +95,7 @@ class PostList extends React.Component {
             this.setState({
                 posts: [...this.state.posts, {}, {}]
             })
-            this.setLoading(true)
+            this.setLoading(false)
         },1000)
     }
     
