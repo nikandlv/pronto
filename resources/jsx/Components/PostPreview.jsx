@@ -9,8 +9,12 @@ const useStyles = makeStyles({
         borderRadius: 16
     },
     media: {
+        maxHeight: 600,
+        width: '100%'
     },
     img: {
+        maxHeight: 600,
+        width: '100%',
         visibility: 'hidden'
     },
     readMore: {
@@ -45,13 +49,13 @@ export default function PostPreview() {
             }}>
                 <MenuItem>Open in a new tab</MenuItem>
             </Menu>
-             <CardMedia
-                className={styles.media}
-                image={'https://images.unsplash.com/photo-1569844514393-4e409050d5d7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'}
-                title="Paella dish"
-            >
-                <img src={'https://images.unsplash.com/photo-1569844514393-4e409050d5d7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'} className={styles.img} />
-                </CardMedia>
+            <CardMedia
+                    className={styles.media}
+                    image={'/img/post-1.jpg'}
+                    title="Paella dish"
+                >
+                    <img src={'/img/post-1.jpg'} className={styles.img} />
+                    </CardMedia>
             <CardContent>
                 Hello!
             </CardContent>
