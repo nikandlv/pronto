@@ -102,7 +102,7 @@ class PostList extends React.Component {
                 {
                     title: 'Hello world!',
                     date: 'Oct 21, 2019',
-                    description: 'Hello world! in this post im gonna talk about my self and everything i went through',
+                    description: 'Hello world! in this post im gonna talk about my self and everything i went through, and how i started this blog and basically the story of my life!',
                     image: '/img/post-1.jpg'
                 }
             ]
