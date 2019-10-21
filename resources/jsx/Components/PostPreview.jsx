@@ -51,7 +51,9 @@ export default function PostPreview(props) {
             <Menu open={Boolean(menuEl)} anchorEl={menuEl} onClose={() => {
                 setMenuEl(null)
             }}>
-                <MenuItem>Open in a new tab</MenuItem>
+                <MenuItem onClick={() => {
+                    window.open('/post/slug','_blank');
+                }}>Open in a new tab</MenuItem>
             </Menu>
             <CardMedia
                     className={styles.media}
