@@ -173,7 +173,7 @@ class PostList extends React.Component {
                     }                
                     
                     <IconButton onClick={event => {
-                        setMode(
+                        this.setMode(
                             mode === modes.LIST
                             ? modes.GRID
                             : modes.LIST
