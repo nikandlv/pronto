@@ -1,6 +1,7 @@
 const mix = require('laravel-mix');
 const mixDependency = require('mix-dependency');
 
+mixDependency.require('typeface-hammersmith-one')
 mixDependency.require('react-localization');
 mixDependency.require('react-pose');
 mixDependency.require('axios');
