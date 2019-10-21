@@ -93,7 +93,12 @@ class PostList extends React.Component {
         this.setLoading(true)
         window.setTimeout(() => {
             this.setState({
-                posts: [...this.state.posts, {}, {}]
+                posts: [...this.state.posts, {
+                    title: 'Hello world!',
+                    date: 'Oct 21, 2019',
+                    description: 'Hello world! in this post im gonna talk about my self and everything i went through',
+                    image: '/img/post-1.jpg'
+                }, {}]
             })
             this.setLoading(false)
         },1000)
