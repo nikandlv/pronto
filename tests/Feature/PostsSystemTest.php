@@ -73,7 +73,9 @@ class PostsSystemTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $post = $this->newPost();
-        $this->getJson('/api/posts/' . $post->id)->assertStatus(200);
+        $postArray = $post->toArray();
+
+        $this->getJson('/api/posts/' . $post->id)->assertJson($postArray);
     }
 
     /** @test **/
