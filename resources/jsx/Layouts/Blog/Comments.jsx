@@ -6,7 +6,8 @@ import StyledTitle from '../../Components/StyledTitle'
 
 const useStyles = makeStyles({
     wrapper: {
-        display: 'flex'
+        display: 'flex',
+        alignItems: 'center'
     },
     push: {
         flexGrow: 1
