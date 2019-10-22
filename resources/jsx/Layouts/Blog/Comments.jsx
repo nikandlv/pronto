@@ -1,18 +1,23 @@
 import React from 'react'
-import { Grid, makeStyles, IconButton } from '@material-ui/core'
+import { Grid, makeStyles, IconButton, Tooltip, Button, Fab } from '@material-ui/core'
 import Comment from '../../Components/Comment'
 import WriteIcon from '@material-ui/icons/EditOutlined'
 import StyledTitle from '../../Components/StyledTitle'
 
-const useStyles = makeStyles({
-    wrapper: {
-        display: 'flex',
-        alignItems: 'center'
-    },
-    push: {
-        flexGrow: 1
+const useStyles = makeStyles(theme => (
+    {
+        wrapper: {
+            display: 'flex',
+            alignItems: 'center'
+        },
+        push: {
+            flexGrow: 1
+        },
+        extendedIcon: {
+            marginRight: theme.spacing(1),
+          },
     }
-})
+))
 
 export default function Comments() {
     const styles = useStyles()
@@ -24,9 +29,10 @@ export default function Comments() {
                 </StyledTitle>
                 <div className={styles.push}/>
                 <div>
-                <IconButton>
-                    <WriteIcon />
-                </IconButton>
+                <Fab variant="extended" color="primary" size="medium">
+                    <WriteIcon className={styles.extendedIcon} />
+                    Post a comment!
+                </Fab>
                 </div>
             </div>
             <Grid container spacing={1}>
