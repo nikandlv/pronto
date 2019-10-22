@@ -16,6 +16,9 @@ const useStyles = makeStyles(theme => (
         extendedIcon: {
             marginRight: theme.spacing(1),
           },
+          postComment: {
+              textTransform: 'none'
+          }
     }
 ))
 
@@ -29,10 +32,10 @@ export default function Comments() {
                 </StyledTitle>
                 <div className={styles.push}/>
                 <div>
-                <Fab variant="extended" color="primary" size="medium">
-                    <WriteIcon className={styles.extendedIcon} />
+                <Button className={styles.postComment}>
+                <WriteIcon className={styles.extendedIcon} />
                     Post a comment!
-                </Fab>
+                </Button>
                 </div>
             </div>
             <Grid container spacing={1}>
