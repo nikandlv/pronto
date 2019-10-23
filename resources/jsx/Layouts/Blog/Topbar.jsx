@@ -41,6 +41,7 @@ function Topbar(props) {
   const theme = props.ApplicationReducer.theme || 'light'
 
   function openAdminPanel() {
+    console.log(props)
     props.history.push('/admin')
   }
 
