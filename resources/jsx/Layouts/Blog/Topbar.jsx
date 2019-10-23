@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -94,4 +95,4 @@ function Topbar(props) {
   );
 }
 
-export default withDynamic(Topbar).injectReducer('ApplicationReducer').injectAction('toggleTheme',toggleTheme).build()
+export default withDynamic(withRouter(Topbar)).injectReducer('ApplicationReducer').injectAction('toggleTheme',toggleTheme).build()

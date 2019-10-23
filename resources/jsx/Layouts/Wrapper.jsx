@@ -22,6 +22,7 @@ function Wrapper(props) {
     if(props.ApplicationReducer.theme === 'dark') {
         currentTheme = theme.dark
     }
+    console.log(props)
     return (
         <ThemeProvider theme={currentTheme}>
             <CssBaseline />
