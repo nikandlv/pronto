@@ -2,9 +2,13 @@ import * as types from '../Actions/types'
 import LocalizedStrings from 'react-localization';
 import EnglishLocale from '../../Locale/EN_US.json'
 import TestLocale from '../../Locale/TEST_TEST.json'
+
+const hours = new Date().getHours()
+const isDayTime = hours > 6 && hours < 20
+
 const initialState = {
     name: 'Pronto',
-    theme: 'light',
+    theme: isDayTime ? 'light' : 'dark',
     language: 'en_us',
     locale: new LocalizedStrings({
         en_us: EnglishLocale,
