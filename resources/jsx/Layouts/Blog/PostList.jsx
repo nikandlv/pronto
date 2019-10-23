@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconButton, makeStyles, Divider, Grid, CircularProgress, Chip } from '@material-ui/core'
+import { IconButton, makeStyles, Divider, Grid, CircularProgress, Chip, LinearProgress } from '@material-ui/core'
 
 import Amber from '@material-ui/core/colors/amber'
 import Blue from '@material-ui/core/colors/blue'
@@ -95,7 +95,7 @@ class PostList extends React.Component {
             this.setState({
                 posts: [...this.state.posts, {}, {}]
             })
-            this.setLoading(true)
+            this.setLoading(false)
         },1000)
     }
     
@@ -164,7 +164,10 @@ class PostList extends React.Component {
                 <Grid container className={styles.container} spacing={2}>
                     {
                         posts.length === 0 && loading 
-                        ? <div>loading</div>
+                        ? <Grid item xs={12}>
+                            <LinearProgress variant="indeterminate" />
+                        </Grid>
+
                         :
                             posts.map((post,key) => {
                                 if(mode === modes.LIST) {
@@ -188,11 +191,10 @@ class PostList extends React.Component {
                             }}>
                         {
                             loading
-                            ? <CircularProgress className={styles.progressBar} color="default" />
+                            ? <CircularProgress className={styles.progressBar} color="inherit" />
                             : 'Load More'
                         }        
                             </StyledButton>
-                        
                     </Grid>
                 </Grid>
             </section>
