@@ -6,10 +6,9 @@ import Overview from '../Layouts/AdminPanel/Overview'
 export default function AdminRouter() {
     return (
         <Wrapper>
-            a
             <Switch>
-            <Route path="/admin" component={Overview} exact />
-            <Route path="/admin/" component={Overview} exact />
+                <Route path="/admin" component={Overview} exact />
+                <Route path="/admin/" component={Overview} exact />
             </Switch>
         </Wrapper>
     )
