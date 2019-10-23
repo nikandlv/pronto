@@ -11,8 +11,9 @@ export default function MainRouter(props) {
             <BrowserRouter>
                 <Wrapper>
                         <Switch>
-                            <Route path="/panel/*" component={AdminRouter} {...props}/>
-                            <Route path="/admin/*" component={PanelRouter} {...props}/>
+                            <Route path="/panel/*" component={PanelRouter} {...props}/>
+                            <Route path="/admin/*" component={AdminRouter} {...props}/>
+                            <Route path="/admin" component={AdminRouter} exact />
                             <Route path="/*" component={BlogRouter} {...props}/>
                         </Switch>
                 </Wrapper>
