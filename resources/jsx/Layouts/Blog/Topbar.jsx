@@ -15,7 +15,7 @@ import { toggleTheme } from '../../Data/Actions/ApplicationActions';
 const useStyles = makeStyles(theme => ({
     appbar: {
         backgroundColor: theme.palette.background.default,
-        borderRadius: '1rem'
+        borderRadius: '1rem',
     },
     root: {
         flexGrow: 1,
@@ -42,7 +42,7 @@ function Topbar(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="default" className={classes.appbar}>
+      <AppBar position="static" color="default" className={classes.appbar} elevation={2}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             {name}

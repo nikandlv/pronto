@@ -15,6 +15,7 @@ import withDynamic from '../../Data/withDynamic'
 import { setTag, setSearch } from '../../Data/Actions/ApplicationActions'
 import StyledButton from '../../Components/StyledButton'
 import { withStyles } from '@material-ui/styles'
+import StyledTitle from '../../Components/StyledTitle'
 
 const styles = (theme => (
     {
@@ -72,13 +73,30 @@ class PostList extends React.Component {
         super(props)
         this.state = {
             mode: 0,
-            posts: [{}, {}],
-            loading: false,
+            posts: [],
+            loading: true,
         }
+    }
+    
+    componentDidMount() {
+        this.update()
+    }
+
+    setMode = (mode) => {
+        this.setState({mode})
+    }
+    setLoading = (loading) => {
+        this.setState({loading})
     }
 
     update() {
-        console.log('ok')
+        this.setLoading(true)
+        window.setTimeout(() => {
+            this.setState({
+                posts: [...this.state.posts, {}, {}]
+            })
+            this.setLoading(true)
+        },1000)
     }
     
     render() {
@@ -86,16 +104,15 @@ class PostList extends React.Component {
         const {loading,mode,posts} = this.state
         const reducer = this.props.ApplicationReducer || {}
         
-        const setMode = (mode) => {
-            this.setState({mode})
-        }
-        const setLoading = (loading) => {
-            this.setState({loading})
-        }
-
+        
         return (
             <section>
+                
                 <div className={styles.header}>
+                    <StyledTitle >
+                        Home
+                    </StyledTitle>    
+                    <div className={styles.push} />
                     {
                         reducer.search === ""
                         ? (
@@ -129,7 +146,7 @@ class PostList extends React.Component {
                             this.props.setTag('')
                         }}/>
                     }                
-                    <div className={styles.push} />
+                    
                     <IconButton onClick={event => {
                         setMode(
                             mode === modes.LIST
@@ -144,31 +161,30 @@ class PostList extends React.Component {
                         }
                     </IconButton>
                 </div>
-                <Divider/>
                 <Grid container className={styles.container} spacing={2}>
                     {
-                        posts.map((post,key) => {
-                            if(mode === modes.LIST) {
+                        posts.length === 0 && loading 
+                        ? <div>loading</div>
+                        :
+                            posts.map((post,key) => {
+                                if(mode === modes.LIST) {
+                                    return (
+                                        <Grid item xs={12} key={key}>
+                                            <PostPreview />
+                                        </Grid>
+                                    )    
+                                }
                                 return (
-                                    <Grid item xs={12} key={key}>
+                                    <Grid item xs={12} md={6} key={key}>
                                         <PostPreview />
                                     </Grid>
-                                )    
-                            }
-                            return (
-                                <Grid item xs={12} md={6} key={key}>
-                                    <PostPreview />
-                                </Grid>
-                            )
-                        })
+                                )
+                            })
+                        
                     }
                     <Grid item xs={12} className={styles.loadMoreWrapper}>
                     <StyledButton disabled={loading} onClick={() => {
-                                setLoading(true)
-                                setTimeout(() => {
-                                    this.update()
-                                    setLoading(false)
-                                }, 1000)
+                                this.update()   
                             }}>
                         {
                             loading
