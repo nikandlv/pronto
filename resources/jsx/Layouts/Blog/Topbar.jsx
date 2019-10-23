@@ -40,6 +40,10 @@ function Topbar(props) {
   const name = props.ApplicationReducer.name || 'Pronto'
   const theme = props.ApplicationReducer.theme || 'light'
 
+  function openAdminPanel() {
+    props.history.push('/admin')
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default" className={classes.appbar} elevation={2}>
@@ -78,7 +82,7 @@ function Topbar(props) {
           <Menu open={Boolean(accountEl)} anchorEl={accountEl} onClose={() => {
             setAccountEl(null)
           }}>
-              <MenuItem>Admin panel</MenuItem>
+              <MenuItem onClick={openAdminPanel}>Admin panel</MenuItem>
               <MenuItem>Profile</MenuItem>
               <MenuItem>Sign out</MenuItem>
           </Menu>
