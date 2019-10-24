@@ -91,7 +91,7 @@ function ResponsiveDrawer(props) {
   return (
         <Box m={2}>
     <div className={classes.root}>
-      <Topbar position="absolute" className={classes.appBar}/>
+      <Topbar position="absolute" className={classes.appBar} hasMenu onMenuClick={handleDrawerToggle.bind(this)}/>
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
