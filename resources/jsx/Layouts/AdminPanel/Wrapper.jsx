@@ -17,18 +17,21 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Topbar from '../Blog/Topbar';
+import { Box, Paper } from '@material-ui/core';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+    position: 'relative'
   },
   drawer: {
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
       flexShrink: 0,
     },
+    
   },
   appBar: {
       zIndex: 2000
@@ -42,6 +45,10 @@ const useStyles = makeStyles(theme => ({
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
+    margin: 16,
+    borderRadius: 16,
+    paddingTop: 64,
+    borderLeft: '1px solid rgba(0, 0, 0, 0.12)'
   },
   content: {
     flexGrow: 1,
@@ -61,8 +68,6 @@ function ResponsiveDrawer(props) {
 
   const drawer = (
     <div>
-      <div className={classes.toolbar} />
-      <Divider />
       <List>
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
           <ListItem button key={text}>
@@ -84,8 +89,9 @@ function ResponsiveDrawer(props) {
   );
 
   return (
+        <Box m={2}>
     <div className={classes.root}>
-      <Topbar position="fixed" className={classes.appBar}/>
+      <Topbar position="absolute" className={classes.appBar}/>
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
@@ -122,6 +128,7 @@ function ResponsiveDrawer(props) {
         {props.children}
       </main>
     </div>
+      </Box>
   );
 }
 
