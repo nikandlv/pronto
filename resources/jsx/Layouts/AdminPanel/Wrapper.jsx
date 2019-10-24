@@ -9,6 +9,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ExploreIcon from '@material-ui/icons/ExploreOutlined';
 import CategoryIcon from '@material-ui/icons/CategoryOutlined';
 import SettingsIcon from '@material-ui/icons/SettingsOutlined';
+import UsersIcon from '@material-ui/icons/PeopleOutlineOutlined';
 import PostIcon from '@material-ui/icons/ReceiptOutlined';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Topbar from '../Blog/Topbar';
@@ -81,6 +82,12 @@ function ResponsiveDrawer(props) {
               <PostIcon />
             </ListItemIcon>
             <ListItemText primary="Posts" />
+          </ListItem>
+          <ListItem button >
+            <ListItemIcon>
+              <UsersIcon />
+            </ListItemIcon>
+            <ListItemText primary="Users" />
           </ListItem>
           <ListItem button >
             <ListItemIcon>
