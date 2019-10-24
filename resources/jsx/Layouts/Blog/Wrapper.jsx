@@ -2,6 +2,7 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Sidebar from './Sidebar'
 import { Box, makeStyles } from '@material-ui/core'
+import Topbar from './Topbar'
 
 const useStyles = makeStyles({
     gutter: {
@@ -17,6 +18,9 @@ export default function Wrapper(props) {
     const styles = useStyles()
     return (
         <section>
+                        <Box m={2}>
+            <Topbar {...props} />
+            </Box>
             <Box m={2} className={styles.box}>
                 <div className={styles.gutter} />
                 <Grid container spacing={4} className={styles.grid}>
