@@ -11,7 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Topbar from '../Blog/Topbar';
-import { Box, Paper } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 const drawerWidth = 240;
 
