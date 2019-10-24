@@ -10,6 +10,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
 import ExploreIcon from '@material-ui/icons/ExploreOutlined';
+import CategoryIcon from '@material-ui/icons/CategoryOutlined';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Topbar from '../Blog/Topbar';
 import { Box } from '@material-ui/core';
@@ -69,6 +70,12 @@ function ResponsiveDrawer(props) {
               <ExploreIcon />
             </ListItemIcon>
             <ListItemText primary="Overview" />
+          </ListItem>
+          <ListItem button >
+            <ListItemIcon>
+              <CategoryIcon />
+            </ListItemIcon>
+            <ListItemText primary="Categories" />
           </ListItem>
       </List>
     </div>
