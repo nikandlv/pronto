@@ -18,8 +18,8 @@ export default function Wrapper(props) {
     const styles = useStyles()
     return (
         <section>
-                        <Box m={2}>
-            <Topbar {...props} />
+            <Box m={2}>
+                <Topbar {...props} />
             </Box>
             <Box m={2} className={styles.box}>
                 <div className={styles.gutter} />

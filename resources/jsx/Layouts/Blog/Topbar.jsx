@@ -46,9 +46,11 @@ function Topbar(props) {
     props.history.push('/admin')
   }
 
+  const className = props.className || ''
+  const position = props.position || 'static'
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="default" className={classes.appbar} elevation={2}>
+      <AppBar position={position} color="default" className={`${classes.appbar} ${className}`} elevation={2}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             {name}
