@@ -14,9 +14,10 @@ export default function Settings() {
         <div>
             <AppBar className={styles.appbar} position="static" color="default">
                 <Tabs value={0}  aria-label="simple tabs example">
-                    <Tab label="Item One" />
-                    <Tab label="Item Two" />
-                    <Tab label="Item Three" />
+                    <Tab label="General" />
+                    <Tab label="Posts" />
+                    <Tab label="Comments" />
+                    <Tab label="Users" />
                 </Tabs>
             </AppBar>
         </div>
