@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconButton, makeStyles, Divider, Grid, CircularProgress, Chip, LinearProgress } from '@material-ui/core'
+import { IconButton, Grid, CircularProgress, Chip, LinearProgress } from '@material-ui/core'
 
 import Amber from '@material-ui/core/colors/amber'
 import Blue from '@material-ui/core/colors/blue'
