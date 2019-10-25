@@ -93,7 +93,32 @@ class PostList extends React.Component {
         this.setLoading(true)
         window.setTimeout(() => {
             this.setState({
-                posts: [...this.state.posts, {}, {}]
+                posts: [...this.state.posts, 
+                {
+                    title: 'My new post!',
+                    date: 'Oct 24, 2019',
+                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin libero nunc consequat interdum varius. Morbi tincidunt ornare massa eget egestas purus viverra. ',
+                    image: '/img/post-4.jpg'
+                },
+                {
+                    title: 'Awesome post!',
+                    date: 'Oct 23, 2019',
+                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin libero nunc consequat interdum varius. Morbi tincidunt ornare massa eget egestas purus viverra. ',
+                    image: '/img/post-3.jpg'
+                },
+                {
+                    title: 'Whats the best way to learn',
+                    date: 'Oct 20, 2019',
+                    description: 'In this post we are going to learn how to learn!',
+                    image: '/img/post-2.jpg'
+                }, 
+                {
+                    title: 'Hello world!',
+                    date: 'Oct 21, 2019',
+                    description: 'Hello world! in this post im gonna talk about my self and everything i went through, and how i started this blog and basically the story of my life!',
+                    image: '/img/post-1.jpg'
+                },
+            ]
             })
             this.setLoading(false)
         },1000)
@@ -148,7 +173,7 @@ class PostList extends React.Component {
                     }                
                     
                     <IconButton onClick={event => {
-                        setMode(
+                        this.setMode(
                             mode === modes.LIST
                             ? modes.GRID
                             : modes.LIST
@@ -173,13 +198,13 @@ class PostList extends React.Component {
                                 if(mode === modes.LIST) {
                                     return (
                                         <Grid item xs={12} key={key}>
-                                            <PostPreview />
+                                            <PostPreview {...post}/>
                                         </Grid>
                                     )    
                                 }
                                 return (
                                     <Grid item xs={12} md={6} key={key}>
-                                        <PostPreview />
+                                        <PostPreview {...post}/>
                                     </Grid>
                                 )
                             })
