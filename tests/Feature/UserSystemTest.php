@@ -17,14 +17,15 @@ class UserSystemTest extends TestCase
         $this->withoutExceptionHandling();
 //        given : we have a user that wants to make a account
         $user = factory(User::class)->create();
-
 //        when : user hit the end point of login
+//        dd($user);
         $token = $this->postJson('/api/login' , [
             'username' => $user->email,
-            'password' => $user->password
+            'password' => 'password',
+            'password_confirm' => 'password'
         ]);
 
 //        then : it will get the token back
-        $this->assertIsString($token);
+        dd($token);
     }
 }
