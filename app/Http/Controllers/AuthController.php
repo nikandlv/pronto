@@ -21,7 +21,7 @@ class AuthController extends Controller
 
         $response = app(InternalRequest::class)->request('POST','/oauth/token',$data);
         if($response->status() === 200) {
-            dd($response->content());
+            return 'ok!';
         } else {
             $error = new \stdClass();
             dd($response->content());
