@@ -6,6 +6,7 @@ mixDependency.require('react-localization');
 mixDependency.require('react-pose');
 mixDependency.require('axios');
 mixDependency.require('axios-endpoint');
+mixDependency.require('@babel/plugin-proposal-class-properties');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management

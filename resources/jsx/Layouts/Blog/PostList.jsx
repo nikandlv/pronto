@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconButton, makeStyles, Divider, Grid, CircularProgress, Chip } from '@material-ui/core'
+import { IconButton, Grid, CircularProgress, Chip, LinearProgress } from '@material-ui/core'
 
 import Amber from '@material-ui/core/colors/amber'
 import Blue from '@material-ui/core/colors/blue'
@@ -73,13 +73,55 @@ class PostList extends React.Component {
         super(props)
         this.state = {
             mode: 0,
-            posts: [{}, {}],
-            loading: false,
+            posts: [],
+            loading: true,
         }
+    }
+    
+    componentDidMount() {
+        this.update()
+    }
+
+    setMode = (mode) => {
+        this.setState({mode})
+    }
+    setLoading = (loading) => {
+        this.setState({loading})
     }
 
     update() {
-        console.log('ok')
+        this.setLoading(true)
+        window.setTimeout(() => {
+            this.setState({
+                posts: [...this.state.posts, 
+                {
+                    title: 'My new post!',
+                    date: 'Oct 24, 2019',
+                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin libero nunc consequat interdum varius. Morbi tincidunt ornare massa eget egestas purus viverra. ',
+                    image: '/img/post-4.jpg'
+                },
+                {
+                    title: 'Awesome post!',
+                    date: 'Oct 23, 2019',
+                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin libero nunc consequat interdum varius. Morbi tincidunt ornare massa eget egestas purus viverra. ',
+                    image: '/img/post-3.jpg'
+                },
+                {
+                    title: 'Whats the best way to learn',
+                    date: 'Oct 20, 2019',
+                    description: 'In this post we are going to learn how to learn!',
+                    image: '/img/post-2.jpg'
+                }, 
+                {
+                    title: 'Hello world!',
+                    date: 'Oct 21, 2019',
+                    description: 'Hello world! in this post im gonna talk about my self and everything i went through, and how i started this blog and basically the story of my life!',
+                    image: '/img/post-1.jpg'
+                },
+            ]
+            })
+            this.setLoading(false)
+        },1000)
     }
     
     render() {
@@ -87,13 +129,7 @@ class PostList extends React.Component {
         const {loading,mode,posts} = this.state
         const reducer = this.props.ApplicationReducer || {}
         
-        const setMode = (mode) => {
-            this.setState({mode})
-        }
-        const setLoading = (loading) => {
-            this.setState({loading})
-        }
-
+        
         return (
             <section>
                 
@@ -137,7 +173,7 @@ class PostList extends React.Component {
                     }                
                     
                     <IconButton onClick={event => {
-                        setMode(
+                        this.setMode(
                             mode === modes.LIST
                             ? modes.GRID
                             : modes.LIST
@@ -152,36 +188,38 @@ class PostList extends React.Component {
                 </div>
                 <Grid container className={styles.container} spacing={2}>
                     {
-                        posts.map((post,key) => {
-                            if(mode === modes.LIST) {
+                        posts.length === 0 && loading 
+                        ? <Grid item xs={12}>
+                            <LinearProgress variant="indeterminate" />
+                        </Grid>
+
+                        :
+                            posts.map((post,key) => {
+                                if(mode === modes.LIST) {
+                                    return (
+                                        <Grid item xs={12} key={key}>
+                                            <PostPreview {...post}/>
+                                        </Grid>
+                                    )    
+                                }
                                 return (
-                                    <Grid item xs={12} key={key}>
-                                        <PostPreview />
+                                    <Grid item xs={12} md={6} key={key}>
+                                        <PostPreview {...post}/>
                                     </Grid>
-                                )    
-                            }
-                            return (
-                                <Grid item xs={12} md={6} key={key}>
-                                    <PostPreview />
-                                </Grid>
-                            )
-                        })
+                                )
+                            })
+                        
                     }
                     <Grid item xs={12} className={styles.loadMoreWrapper}>
                     <StyledButton disabled={loading} onClick={() => {
-                                setLoading(true)
-                                setTimeout(() => {
-                                    this.update()
-                                    setLoading(false)
-                                }, 1000)
+                                this.update()   
                             }}>
                         {
                             loading
-                            ? <CircularProgress className={styles.progressBar} color="default" />
+                            ? <CircularProgress className={styles.progressBar} color="inherit" />
                             : 'Load More'
                         }        
                             </StyledButton>
-                        
                     </Grid>
                 </Grid>
             </section>
