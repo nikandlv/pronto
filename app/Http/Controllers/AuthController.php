@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\InternalRequest;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -18,6 +19,14 @@ class AuthController extends Controller
             'scope' => '',
         ];
 
+        $response = app(InternalRequest::class)->request('POST','/oauth/token',$data);
+        if($response->status() === 200) {
+            dd($response->content());
+        } else {
+            $error = new \stdClass();
+            dd($response->content());
+            return $error;
+        }
 
     }
 }
