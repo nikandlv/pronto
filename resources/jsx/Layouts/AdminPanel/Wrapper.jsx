@@ -78,7 +78,7 @@ function ResponsiveDrawer(props) {
             </ListItemIcon>
             <ListItemText primary="Overview" />
           </ListItem>
-          <ListItem button >
+          <ListItem button onClick={navigate('/admin/categories')}>
             <ListItemIcon>
               <CategoryIcon />
             </ListItemIcon>
