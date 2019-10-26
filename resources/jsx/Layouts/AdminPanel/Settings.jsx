@@ -21,6 +21,15 @@ export default function Settings() {
                     <Tab label="Users" />
                 </Tabs>
             </AppBar>
+            <SwipeableViews
+                index={index}
+                onChangeIndex={this.handleChangeIndex}
+            >
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+            </SwipeableViews>
         </div>
     );
 }
