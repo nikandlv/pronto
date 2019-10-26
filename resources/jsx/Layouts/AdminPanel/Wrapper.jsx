@@ -96,7 +96,7 @@ function ResponsiveDrawer(props) {
             </ListItemIcon>
             <ListItemText primary="Media" />
           </ListItem>
-          <ListItem button >
+          <ListItem button onClick={navigate('/uploads')}>
             <ListItemIcon>
               <UploadIcon />
             </ListItemIcon>
