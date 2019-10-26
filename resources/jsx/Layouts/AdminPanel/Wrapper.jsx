@@ -84,13 +84,13 @@ function ResponsiveDrawer(props) {
             </ListItemIcon>
             <ListItemText primary="Categories" />
           </ListItem>
-          <ListItem button onClick={navigate('/posts')}>
+          <ListItem button onClick={navigate('/admin/posts')}>
             <ListItemIcon>
               <PostIcon />
             </ListItemIcon>
             <ListItemText primary="Posts" />
           </ListItem>
-          <ListItem button >
+          <ListItem button onClick={navigate('/admin/media')}>
             <ListItemIcon>
               <MediaIcon />
             </ListItemIcon>
