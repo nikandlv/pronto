@@ -7,6 +7,7 @@ mixDependency.require('react-pose');
 mixDependency.require('axios');
 mixDependency.require('axios-endpoint');
 mixDependency.require('@babel/plugin-proposal-class-properties');
+mixDependency.require('react-swipeable-views');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
