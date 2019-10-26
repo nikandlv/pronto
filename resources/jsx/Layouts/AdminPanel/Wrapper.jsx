@@ -64,10 +64,14 @@ function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const navigate = (link) => () => {
+    props.history.push(link)
+  } 
+
   const drawer = (
     <div>
       <List>
-          <ListItem button >
+          <ListItem button onClick={navigate('/admin')}>
             <ListItemIcon>
               <ExploreIcon />
             </ListItemIcon>
