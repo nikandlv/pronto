@@ -108,7 +108,7 @@ function ResponsiveDrawer(props) {
             </ListItemIcon>
             <ListItemText primary="Users" />
           </ListItem>
-          <ListItem button >
+          <ListItem button onClick={navigate('/settings')}>
             <ListItemIcon>
               <SettingsIcon />
             </ListItemIcon>
