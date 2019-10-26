@@ -15,17 +15,20 @@ export default function Settings() {
     return (
         <div>
             <AppBar className={styles.appbar} position="static" color="default">
-                <Tabs value={0} aria-label="simple tabs example">
+                <Tabs
+                    value={tab}
+                    onChange={(_, tab) => {
+                        setTab(tab);
+                    }}
+                    aria-label="simple tabs example"
+                >
                     <Tab label="General" />
                     <Tab label="Posts" />
                     <Tab label="Comments" />
                     <Tab label="Users" />
                 </Tabs>
             </AppBar>
-            <SwipeableViews
-                index={index}
-                onChangeIndex={this.handleChangeIndex}
-            >
+            <SwipeableViews index={tab}>
                 <div>1</div>
                 <div>2</div>
                 <div>3</div>
