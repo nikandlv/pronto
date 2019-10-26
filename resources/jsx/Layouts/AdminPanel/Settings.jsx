@@ -11,6 +11,7 @@ const useStyles = makeStyles({
 
 export default function Settings() {
     const styles = useStyles();
+    const [tab, setTab] = React.useState(0);
     return (
         <div>
             <AppBar className={styles.appbar} position="static" color="default">
