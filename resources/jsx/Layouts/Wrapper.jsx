@@ -25,9 +25,6 @@ function Wrapper(props) {
     return (
         <ThemeProvider theme={currentTheme}>
             <CssBaseline />
-            <Box m={2}>
-            <Topbar {...props} />
-            </Box>
             {props.children}
         </ThemeProvider>
     )

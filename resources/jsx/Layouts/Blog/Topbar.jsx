@@ -8,8 +8,9 @@ import IconButton from '@material-ui/core/IconButton';
 import LanguageIcon from '@material-ui/icons/LanguageOutlined';
 import LightIcon from '@material-ui/icons/BrightnessLowOutlined'
 import LightOutIcon from '@material-ui/icons/Brightness2Outlined'
+import MenuIcon from '@material-ui/icons/MenuOutlined'
 import withDynamic from '../../Data/withDynamic';
-import { Avatar, Menu, MenuItem } from '@material-ui/core';
+import { Avatar, Menu, MenuItem, Hidden } from '@material-ui/core';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import { toggleTheme } from '../../Data/Actions/ApplicationActions';
 
@@ -46,10 +47,23 @@ function Topbar(props) {
     props.history.push('/admin')
   }
 
+  const className = props.className || ''
+  const position = props.position || 'static'
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="default" className={classes.appbar} elevation={2}>
+      <AppBar position={position} color="default" className={`${classes.appbar} ${className}`} elevation={2}>
         <Toolbar>
+          <Hidden smUp implementation="css">
+            {
+              props.hasMenu
+              ? (
+                <IconButton onClick={props.onMenuClick}>
+                  <MenuIcon />
+                </IconButton>
+              )
+              : null
+            }
+          </Hidden>
           <Typography variant="h6" className={classes.title}>
             {name}
           </Typography>
