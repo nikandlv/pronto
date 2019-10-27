@@ -22,11 +22,12 @@ function Wrapper(props) {
     if(props.ApplicationReducer.theme === 'dark') {
         currentTheme = theme.dark
     }
+    console.log(props)
     return (
         <ThemeProvider theme={currentTheme}>
             <CssBaseline />
             <Box m={2}>
-            <Topbar />
+            <Topbar {...props} />
             </Box>
             {props.children}
         </ThemeProvider>

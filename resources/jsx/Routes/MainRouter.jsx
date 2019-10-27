@@ -8,14 +8,14 @@ import PanelRouter from './PanelRouter'
 
 export default function MainRouter(props) {
     return (
-        <Wrapper>
             <BrowserRouter>
-                <Switch>
-                    <Route path="/panel/*" component={AdminRouter} {...props}/>
-                    <Route path="/admin/*" component={PanelRouter} {...props}/>
-                    <Route path="/*" component={BlogRouter} {...props}/>
-                </Switch>
+                <Wrapper>
+                        <Switch>
+                            <Route path="/panel/*" component={AdminRouter} {...props}/>
+                            <Route path="/admin/*" component={PanelRouter} {...props}/>
+                            <Route path="/*" component={BlogRouter} {...props}/>
+                        </Switch>
+                </Wrapper>
             </BrowserRouter>
-        </Wrapper>
     )
 }

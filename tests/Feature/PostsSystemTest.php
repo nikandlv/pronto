@@ -73,7 +73,9 @@ class PostsSystemTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $post = $this->newPost();
-        $this->getJson('/api/posts/' . $post->id)->assertStatus(200);
+        $postArray = $post->toArray();
+
+        $this->getJson('/api/posts/' . $post->id)->assertJson($postArray);
     }
 
     /** @test **/
@@ -81,12 +83,17 @@ class PostsSystemTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $post1 = $this->newPost();
-        $post2 = factory(Post::class)->create();
+        $post2 = $this->newPost();
 
         $this->putJson('/api/posts/' . $post1->id, [
             'title' => $post2->title,
             'body' => $post2->body
         ])->assertStatus(200);
+
+        $this->assertDatabaseMissing('posts' , [
+            'title' => $post1->title,
+            'body' => $post1->body
+        ]);
 
         $this->assertDatabaseHas('posts' , [
            'title' => $post2->title,
