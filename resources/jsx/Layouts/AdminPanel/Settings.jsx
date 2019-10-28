@@ -1,11 +1,12 @@
-import React from 'react';
-import { Tabs, Tab, AppBar, makeStyles } from '@material-ui/core';
-import SwipeableViews from 'react-swipeable-views';
+import React from "react";
+import { Tabs, Tab, AppBar, makeStyles } from "@material-ui/core";
+import SwipeableViews from "react-swipeable-views";
+import General from "./Settings/General";
 
 const useStyles = makeStyles({
     appbar: {
-        borderRadius: '1rem',
-        overflow: 'hidden'
+        borderRadius: "1rem",
+        overflow: "hidden"
     }
 });
 
@@ -29,7 +30,7 @@ export default function Settings() {
                 </Tabs>
             </AppBar>
             <SwipeableViews index={tab}>
-                <div>General</div>
+                <General />
                 <div>Posts</div>
                 <div>Comments</div>
                 <div>Users</div>
