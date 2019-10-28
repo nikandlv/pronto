@@ -3,6 +3,7 @@ import { Tabs, Tab, AppBar, makeStyles } from "@material-ui/core";
 import SwipeableViews from "react-swipeable-views";
 import General from "./Settings/General";
 import Posts from "./Settings/Posts";
+import Comments from "./Settings/Comments";
 
 const useStyles = makeStyles({
     appbar: {
@@ -33,7 +34,7 @@ export default function Settings() {
             <SwipeableViews index={tab}>
                 <General />
                 <Posts />
-                <div>Comments</div>
+                <Comments />
                 <div>Users</div>
             </SwipeableViews>
         </div>
