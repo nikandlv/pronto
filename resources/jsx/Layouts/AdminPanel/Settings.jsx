@@ -4,6 +4,7 @@ import SwipeableViews from "react-swipeable-views";
 import General from "./Settings/General";
 import Posts from "./Settings/Posts";
 import Comments from "./Settings/Comments";
+import Users from "./Settings/Users";
 
 const useStyles = makeStyles({
     appbar: {
@@ -35,7 +36,7 @@ export default function Settings() {
                 <General />
                 <Posts />
                 <Comments />
-                <div>Users</div>
+                <Users />
             </SwipeableViews>
         </div>
     );
