@@ -29,7 +29,7 @@ export default function Settings() {
                 </Tabs>
             </AppBar>
             <SwipeableViews index={tab}>
-                <div>1</div>
+                <div>General</div>
                 <div>2</div>
                 <div>3</div>
                 <div>4</div>
