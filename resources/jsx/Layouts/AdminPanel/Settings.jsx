@@ -31,7 +31,7 @@ export default function Settings() {
             <SwipeableViews index={tab}>
                 <div>General</div>
                 <div>Posts</div>
-                <div>3</div>
+                <div>Comments</div>
                 <div>4</div>
             </SwipeableViews>
         </div>
