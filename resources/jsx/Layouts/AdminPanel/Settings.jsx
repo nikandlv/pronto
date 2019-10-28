@@ -32,7 +32,7 @@ export default function Settings() {
                 <div>General</div>
                 <div>Posts</div>
                 <div>Comments</div>
-                <div>4</div>
+                <div>Users</div>
             </SwipeableViews>
         </div>
     );
