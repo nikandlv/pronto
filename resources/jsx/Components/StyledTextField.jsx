@@ -8,5 +8,5 @@ const useStyles = makeStyles({});
 export default function StyledTextField(props) {
     const styles = useStyles();
     const variant = props.variant || "outlined";
-    return <TextField variant={variant}>{props.children}</TextField>;
+    return <TextField variant={variant} label={props.children} {...props} />;
 }
