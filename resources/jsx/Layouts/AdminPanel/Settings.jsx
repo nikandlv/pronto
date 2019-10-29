@@ -24,7 +24,7 @@ export default function Settings() {
                     onChange={(_, tab) => {
                         setTab(tab);
                     }}
-                    aria-label="simple tabs example"
+                    aria-label="Settings tabs"
                 >
                     <Tab label="General" />
                     <Tab label="Posts" />
