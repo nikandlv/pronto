@@ -11,7 +11,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import Switch from "@material-ui/core/Switch";
 import WifiIcon from "@material-ui/icons/Wifi";
-import BluetoothIcon from "@material-ui/icons/Bluetooth";
 import LightIcon from "@material-ui/icons/BrightnessLowOutlined";
 import LightOutIcon from "@material-ui/icons/Brightness2Outlined";
 
@@ -19,7 +18,8 @@ const useGeneralStyles = makeStyles({
     container: {
         width: "100%",
         margin: "unset"
-    }
+    },
+    paper: {}
 });
 
 export default function General() {
@@ -29,7 +29,7 @@ export default function General() {
             <StyledTitle>General</StyledTitle>
             <Grid container>
                 <Grid item xs={12} md={6}>
-                    <Card>
+                    <Card className={styles.paper}>
                         <CardContent>
                             <StyledTextField fullWidth>
                                 Blog title
