@@ -19,7 +19,9 @@ const useGeneralStyles = makeStyles({
         width: "100%",
         margin: "unset"
     },
-    paper: {}
+    paper: {
+        borderRadius: 16
+    }
 });
 
 export default function General() {
