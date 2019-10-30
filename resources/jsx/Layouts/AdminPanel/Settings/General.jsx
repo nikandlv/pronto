@@ -81,26 +81,6 @@ function GeneralToggles() {
                 subheader={<ListSubheader>General</ListSubheader>}
                 className={classes.root}
             >
-                <ListItem button onClick={handleToggle("maintenance")}>
-                    <ListItemIcon>
-                        <BuildIcon />
-                    </ListItemIcon>
-                    <ListItemText
-                        id="switch-list-label-maintenance"
-                        primary="Maintenance mode"
-                        secondary="Restrict users from accessing the blog for upgrades"
-                    />
-                    <ListItemSecondaryAction>
-                        <Switch
-                            edge="end"
-                            onChange={handleToggle("maintenance")}
-                            checked={checked.indexOf("maintenance") !== -1}
-                            inputProps={{
-                                "aria-labelledby": "switch-list-label-wifi"
-                            }}
-                        />
-                    </ListItemSecondaryAction>
-                </ListItem>
                 <ListItem button onClick={handleToggle("bluetooth")}>
                     <ListItemIcon>
                         {checked.indexOf("bluetooth") !== -1 ? (
@@ -121,6 +101,26 @@ function GeneralToggles() {
                             checked={checked.indexOf("bluetooth") !== -1}
                             inputProps={{
                                 "aria-labelledby": "switch-list-label-bluetooth"
+                            }}
+                        />
+                    </ListItemSecondaryAction>
+                </ListItem>
+                <ListItem button onClick={handleToggle("maintenance")}>
+                    <ListItemIcon>
+                        <BuildIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                        id="switch-list-label-maintenance"
+                        primary="Maintenance mode"
+                        secondary="Restrict users from accessing the blog for upgrades"
+                    />
+                    <ListItemSecondaryAction>
+                        <Switch
+                            edge="end"
+                            onChange={handleToggle("maintenance")}
+                            checked={checked.indexOf("maintenance") !== -1}
+                            inputProps={{
+                                "aria-labelledby": "switch-list-label-wifi"
                             }}
                         />
                     </ListItemSecondaryAction>
