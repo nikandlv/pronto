@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {withRouter} from 'react-router-dom'
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import List from '@material-ui/core/List';
@@ -64,46 +65,50 @@ function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const navigate = (link) => () => {
+    props.history.push(link)
+  } 
+
   const drawer = (
     <div>
       <List>
-          <ListItem button >
+          <ListItem button onClick={navigate('/admin')}>
             <ListItemIcon>
               <ExploreIcon />
             </ListItemIcon>
             <ListItemText primary="Overview" />
           </ListItem>
-          <ListItem button >
+          <ListItem button onClick={navigate('/admin/categories')}>
             <ListItemIcon>
               <CategoryIcon />
             </ListItemIcon>
             <ListItemText primary="Categories" />
           </ListItem>
-          <ListItem button >
+          <ListItem button onClick={navigate('/admin/posts')}>
             <ListItemIcon>
               <PostIcon />
             </ListItemIcon>
             <ListItemText primary="Posts" />
           </ListItem>
-          <ListItem button >
+          <ListItem button onClick={navigate('/admin/media')}>
             <ListItemIcon>
               <MediaIcon />
             </ListItemIcon>
             <ListItemText primary="Media" />
           </ListItem>
-          <ListItem button >
+          <ListItem button onClick={navigate('/admin/uploads')}>
             <ListItemIcon>
               <UploadIcon />
             </ListItemIcon>
             <ListItemText primary="Uploads" />
           </ListItem>
-          <ListItem button >
+          <ListItem button onClick={navigate('/admin/users')}>
             <ListItemIcon>
               <UsersIcon />
             </ListItemIcon>
             <ListItemText primary="Users" />
           </ListItem>
-          <ListItem button >
+          <ListItem button onClick={navigate('/admin/settings')}>
             <ListItemIcon>
               <SettingsIcon />
             </ListItemIcon>
@@ -165,4 +170,4 @@ ResponsiveDrawer.propTypes = {
   container: PropTypes.instanceOf(typeof Element === 'undefined' ? Object : Element),
 };
 
-export default ResponsiveDrawer;
+export default withRouter(ResponsiveDrawer);

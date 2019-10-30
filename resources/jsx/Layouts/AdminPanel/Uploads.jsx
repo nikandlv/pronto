@@ -1,8 +1,8 @@
 import React from 'react'
-export default function Posts() {
+export default function Uploads() {
     return (
         <div>
-            Posts
+            Uploads
         </div>
     )
 }
