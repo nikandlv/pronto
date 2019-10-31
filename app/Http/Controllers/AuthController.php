@@ -14,12 +14,13 @@ class AuthController extends Controller
             'grant_type' => config('passport.grant_type'),
             'client_id' => config('passport.client_id'),
             'client_secret' => config('passport.client_secret'),
-            'username' => 'test@example.com',
-            'password' => 'password',
+            'username' => \request('username'),
+            'password' => \request('password'),
             'scope' => '',
         ];
 
         $response = app(InternalRequest::class)->request('POST','/oauth/token',$data);
+
         if($response->status() === 200) {
             return 'ok!';
         } else {
