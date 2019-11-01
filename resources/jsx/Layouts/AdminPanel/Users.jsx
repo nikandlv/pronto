@@ -7,6 +7,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Box } from "@material-ui/core";
+import StyledTitle from "../../Components/StyledTitle";
 
 const useStyles = makeStyles({
     root: {
@@ -67,6 +68,7 @@ export default class Users extends React.Component {
     render() {
         return (
             <Box m={2}>
+                <StyledTitle>Users</StyledTitle>
                 <UsersTable />
             </Box>
         );
