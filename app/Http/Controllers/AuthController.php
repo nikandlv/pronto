@@ -60,6 +60,11 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * update a user data
+     *
+     * @return ResponseFactory|Response
+     */
     public function update()
     {
         User::where('id' , \request('id'))
