@@ -48,10 +48,6 @@ export default function General() {
                         </CardContent>
                     </Card>
                     <br />
-                    <Button>Primary color</Button>
-                    <CirclePicker />
-                    <Button>Primary color</Button>
-                    <CirclePicker />
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <GeneralToggles />
