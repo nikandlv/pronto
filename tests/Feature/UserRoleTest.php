@@ -13,6 +13,23 @@ class UserRoleTest extends TestCase
     use RefreshDatabase;
 
     /** @test **/
+    public function a_member_can_not_promote_another_user_to_be_admin()
+    {
+        $user1 = $this->signIn();
+        $user2 = factory(User::class)->create();
+
+        $this->patchJson('/api/user/' . $user2->id . '/admin', [
+            'id' => $user2->id,
+            'name' => $user2->name,
+            'email' => $user2->email,
+            'password' => $user2->password,
+            'role' => UserRoleManager::ROLE_ADMIN
+        ])->assertExactJson([
+            'status' => 404
+        ]);
+    }
+
+    /** @test **/
     public function an_admin_can_promote_another_user_to_be_admin()
     {
         $user = factory(User::class)->create();
@@ -49,7 +66,7 @@ class UserRoleTest extends TestCase
     }
 
     /** @test **/
-    public function a_user_can_be_updated_to_be_member()
+    public function an_admin_can_demote_a_user_to_be_member()
     {
         $admin = $this->beAdmin();
 
@@ -80,6 +97,23 @@ class UserRoleTest extends TestCase
             'email' => $admin->email,
             'password' => $admin->password,
             'role' => UserRoleManager::ROLE_ADMIN
+        ]);
+    }
+
+    /** @test **/
+    public function a_user_can_not_demote_a_admin_to_a_member()
+    {
+        $user = $this->signIn();
+        $admin = factory(User::class)->create(['role' => UserRoleManager::ROLE_ADMIN]);
+
+        $this->patchJson('/api/user/' . $admin->id . '/admin', [
+            'id' => $admin->id,
+            'name' => $admin->name,
+            'email' => $admin->email,
+            'password' => $admin->password,
+            'role' => UserRoleManager::ROLE_MEMBER
+        ])->assertExactJson([
+            'status' => 404
         ]);
     }
 }
