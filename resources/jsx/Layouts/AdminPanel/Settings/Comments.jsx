@@ -12,6 +12,7 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import Switch from "@material-ui/core/Switch";
 import Message from "@material-ui/icons/MessageOutlined";
 import HowToRegOutlined from "@material-ui/icons/HowToRegOutlined";
+import Trash from "@material-ui/icons/DeleteOutlineOutlined";
 
 const useCommentsStyles = makeStyles({
     container: {
@@ -116,6 +117,26 @@ function CommentsToggles() {
                             checked={checked.indexOf("anonymous") !== -1}
                             inputProps={{
                                 "aria-labelledby": "switch-list-label-anonymous"
+                            }}
+                        />
+                    </ListItemSecondaryAction>
+                </ListItem>
+                <ListItem button onClick={handleToggle("delete")}>
+                    <ListItemIcon>
+                        <Trash />
+                    </ListItemIcon>
+                    <ListItemText
+                        id="switch-list-label-delete"
+                        primary="Allow comment delete"
+                        secondary="Allow viewer to delete their comment"
+                    />
+                    <ListItemSecondaryAction>
+                        <Switch
+                            edge="end"
+                            onChange={handleToggle("delete")}
+                            checked={checked.indexOf("delete") !== -1}
+                            inputProps={{
+                                "aria-labelledby": "switch-list-label-delete"
                             }}
                         />
                     </ListItemSecondaryAction>
