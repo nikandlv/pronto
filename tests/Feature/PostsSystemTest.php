@@ -23,7 +23,6 @@ class PostsSystemTest extends TestCase
     /** @test * */
     public function a_guest_can_not_make_a_post()
     {
-        $user = factory(User::class)->create();
         $post = $this->newPost();
 
         $this->postJson('/api/posts', [
@@ -66,7 +65,6 @@ class PostsSystemTest extends TestCase
     /** @test **/
     public function a_guest_can_not_delete_post()
     {
-        $user = factory(User::class)->create();
         $post = $this->newPost();
 
         $this->deleteJson('/api/posts/' . $post->id)
@@ -75,7 +73,7 @@ class PostsSystemTest extends TestCase
             ]);
     }
     /** @test **/
-    public function a_post_can_be_deleted()
+    public function a_logged_in_user_can_delete_a_post()
     {
         $this->signIn();
         $post = $this->newPost();
@@ -88,20 +86,42 @@ class PostsSystemTest extends TestCase
         ]);
     }
 
-    /** @test * */
-    public function all_posts_can_be_fetched()
+    /** @test **/
+    public function a_guest_can_not_fetch_all_posts()
     {
-        $this->withoutExceptionHandling();
+        $user = factory(User::class)->create();
+
+        $this->getJson('/api/posts')
+        ->assertExactJson([
+            'message' => 'Unauthenticated.'
+        ]);
+    }
+    /** @test * */
+    public function a_logged_in_user_can_fetch_all_posts()
+    {
+        $this->signIn();
+
         $post1 = $this->newPost()->toArray();
         $post2 = $this->newPost()->toArray();
 
         $this->getJson('/api/posts')->assertJson(['data' => [$post1, $post2]]);
     }
 
-    /** @test * */
-    public function an_specific_post_can_be_fetched()
+    /** @test **/
+    public function a_guest_can_not_fetch_an_specific_post()
     {
-        $this->withoutExceptionHandling();
+        $post = $this->newPost();
+
+        $this->getJson('/api/posts/' . $post->id)
+        ->assertExactJson([
+            'message' => 'Unauthenticated.'
+        ]);
+    }
+
+    /** @test * */
+    public function a_logged_in_user_can_fetch_a_specific_post()
+    {
+        $this->signIn();
         $post = $this->newPost();
         $postArray = $post->toArray();
 
