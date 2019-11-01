@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\InternalRequest;
+use App\pronto\users\UserRoleManager;
 use App\User;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
@@ -11,6 +12,11 @@ use Psy\Util\Json;
 
 class AuthController extends Controller
 {
+    /**
+     * get currently logged in user
+     *
+     * @return ResponseFactory|Response
+     */
     public function index()
     {
         return \response(auth()->user()->toArray());
@@ -33,7 +39,8 @@ class AuthController extends Controller
         User::create([
             'name' => $attributes['name'],
             'email' => $attributes['email'],
-            'password' => $attributes['password']
+            'password' => $attributes['password'],
+            'role' => UserRoleManager::ROLE_MEMBER
         ]);
 
         return  response(['message' => 'account created successfully!']);
