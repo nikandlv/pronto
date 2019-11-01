@@ -43,7 +43,7 @@ class AuthController extends Controller
             'role' => UserRoleManager::ROLE_MEMBER
         ]);
 
-        return  response(['message' => 'account created successfully!']);
+        return response(['message' => 'account created successfully!']);
     }
 
     /**
@@ -58,5 +58,13 @@ class AuthController extends Controller
         return \response([
             'message' => 'User have been logged out!'
         ]);
+    }
+
+    public function update()
+    {
+        User::where('id' , \request('id'))
+            ->update(\request()->all());
+
+        return \response(['message' => 'user updated successfully']);
     }
 }

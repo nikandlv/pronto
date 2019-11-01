@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use App\pronto\users\UserRoleManager;
 use App\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Laravel\Passport\Passport;
@@ -17,5 +18,14 @@ abstract class TestCase extends BaseTestCase
         Passport::actingAs($user);
 
         return $user;
+    }
+
+    public function beAdmin()
+    {
+        $admin = factory(User::class)->create(['role' => UserRoleManager::ROLE_ADMIN]);
+
+        Passport::actingAs($admin);
+
+        return $admin;
     }
 }

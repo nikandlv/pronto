@@ -15,23 +15,40 @@ class UserRoleTest extends TestCase
     /** @test * */
     public function a_user_can_be_updated_to_be_a_admin()
     {
-        $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
 
-        $this->assertDatabaseHas('users' ,[
+        $this->assertDatabaseHas('users', [
             'name' => $user->name,
             'email' => $user->email,
+            'password' => $user->password,
             'role' => UserRoleManager::ROLE_MEMBER
         ]);
 
-        $this->patchJson('/user/' . $user->id . '/admin', [
+        $this->patchJson('/api/user/' . $user->id . '/admin', [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'password' => $user->password,
             'role' => UserRoleManager::ROLE_ADMIN
         ]);
 
         $this->assertDatabaseHas('users', [
             'name' => $user->name,
-            'email' => $user->password,
+            'email' => $user->email,
+            'password' => $user->password,
             'role' => UserRoleManager::ROLE_ADMIN
         ]);
+
+        $this->assertDatabaseMissing('users', [
+            'name' => $user->name,
+            'email' => $user->email,
+            'password' => $user->password,
+            'role' => UserRoleManager::ROLE_MEMBER
+        ]);
+    }
+
+    public function a_user_can_be_updated_to_be_member()
+    {
+
     }
 }

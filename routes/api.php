@@ -17,7 +17,7 @@
 Route::post('/register', 'AuthController@store');
 Route::post('/logout', 'AuthController@destroy')->middleware('auth:api');
 Route::get('/user', 'AuthController@index')->middleware('auth:api');
-
+Route::patch('/user/{user}/admin' , 'AuthController@update');
 Route::post('/login', 'LoginController@login');
 
 
