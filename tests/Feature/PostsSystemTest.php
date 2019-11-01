@@ -128,10 +128,23 @@ class PostsSystemTest extends TestCase
         $this->getJson('/api/posts/' . $post->id)->assertJson($postArray);
     }
 
+    /** @test **/
+    public function a_guest_can_not_update_a_post()
+    {
+        $post1 = $this->newPost();
+        $post2 = $this->newPost();
+
+        $this->putJson('/api/posts/' . $post1->id, [
+            'title' => $post2->title,
+            'body' => $post2->body
+        ])->assertExactJson([
+            'message' => 'Unauthenticated.'
+        ]);
+    }
     /** @test * */
     public function a_post_can_be_updated()
     {
-        $this->withoutExceptionHandling();
+        $this->signIn();
         $post1 = $this->newPost();
         $post2 = $this->newPost();
 
@@ -154,6 +167,7 @@ class PostsSystemTest extends TestCase
     /** @test * */
     public function a_title_and_a_body_is_needed_for_updating_a_post()
     {
+        $this->signIn();
         $post1 = $this->newPost();
         $post2 = factory(Post::class)->create(['title' => '']);
 
