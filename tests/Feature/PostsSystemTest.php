@@ -51,9 +51,10 @@ class PostsSystemTest extends TestCase
         ]);
     }
 
-    /** @test * */
+    /** @test **/
     public function a_post_needs_title_and_body()
     {
+        $this->signIn();
         $post = factory(Post::class)->create(['title' => '']);
 
         $this->postJson('/api/posts', [
@@ -62,9 +63,21 @@ class PostsSystemTest extends TestCase
         ])->assertJsonValidationErrors('title');
     }
 
-    /** @test * */
+    /** @test **/
+    public function a_guest_can_not_delete_post()
+    {
+        $user = factory(User::class)->create();
+        $post = $this->newPost();
+
+        $this->deleteJson('/api/posts/' . $post->id)
+            ->assertExactJson([
+                'message' => 'Unauthenticated.'
+            ]);
+    }
+    /** @test **/
     public function a_post_can_be_deleted()
     {
+        $this->signIn();
         $post = $this->newPost();
 
         $this->deleteJson('/api/posts/' . $post->id)->assertStatus(200)->assertJson(['message' => 'post deleted successfully']);
