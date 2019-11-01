@@ -150,6 +150,17 @@ class UserSystemTest extends TestCase
         ]);
     }
 
+    /** @test **/
+    public function a_user_must_already_be_logged_in_to_be_able_to_logout()
+    {
+        $user = factory(User::class)->create();
+
+        $this->postJson('api/logout')->assertExactJson([
+            'message' => 'Unauthenticated.'
+        ]);
+
+    }
+
     /** @test * */
     public function the_currently_logged_in_user_can_be_get()
     {

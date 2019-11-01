@@ -15,7 +15,7 @@
 
 
 Route::post('/register', 'AuthController@store');
-Route::post('/logout', 'AuthController@destroy');
+Route::post('/logout', 'AuthController@destroy')->middleware('auth:api');
 Route::get('/user', 'AuthController@index');
 
 Route::post('/login', 'LoginController@login');
