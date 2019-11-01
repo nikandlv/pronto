@@ -17,8 +17,10 @@
 //    return $request->user();
 //});
 
-Route::post('/register', 'RegisterController@store');
-Route::post('/register', '@store');
+
+Route::post('/register', 'AuthController@store');
+Route::post('/login', 'LoginController@login');
+
 
 Route::post('/posts' , 'PostsController@store');
 Route::delete('/posts/{post}', 'PostsController@destroy');

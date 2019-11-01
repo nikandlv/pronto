@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Psy\Util\Json;
 
-class RegisterController extends Controller
+class AuthController extends Controller
 {
 
     /**
