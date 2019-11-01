@@ -17,8 +17,8 @@
 //    return $request->user();
 //});
 
-Route::post('/register', 'AuthController@store');
-Route::post('/register', 'AuthController@store');
+Route::post('/register', 'RegisterController@store');
+Route::post('/register', '@store');
 
 Route::post('/posts' , 'PostsController@store');
 Route::delete('/posts/{post}', 'PostsController@destroy');
