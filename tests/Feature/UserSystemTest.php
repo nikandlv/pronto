@@ -3,8 +3,10 @@
 namespace Tests\Feature;
 
 use App\User;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class UserSystemTest extends TestCase
@@ -45,7 +47,7 @@ class UserSystemTest extends TestCase
         ])->assertJsonValidationErrors(['password', 'name', 'email']);
     }
 
-    /** @test **/
+    /** @test * */
     public function a_user_must_confirm_his_password_when_is_creating_an_account()
     {
         $guest = factory(User::class)->make();
@@ -58,18 +60,81 @@ class UserSystemTest extends TestCase
 
     }
 
-    /** @test **/
+    /** @test * */
     public function a_user_can_login_and_get_bearer_token()
     {
-        $this->withoutExceptionHandling();
-
         $user = factory(User::class)->create();
+        DB::table('oauth_clients')
+            ->insert([
+                'name' => 'API',
+                'secret' => env('PASSPORT_CLIENT_SECRET'),
+                'personal_access_client' => 0,
+                'password_client' => 1,
+                'revoked' => 0,
+                'redirect' => '/home'
+            ]);
 
-        $response = $this->postJson('/api/login',[
+        $response = $this->postJson('/api/login', [
             'email' => $user['email'],
-            'password'=> $user['password']
-        ]);
+            'password' => 'password'
+        ])->assertStatus(200);
 
-        return $response;
+        $this->assertJson($response->getContent());
+
+        $json = json_decode($response->getContent());
+        $this->assertIsString($json->access_token);
+    }
+
+    /** @test **/
+    public function a_username_and_a_password_is_needed_to_login()
+    {
+        $user = factory(User::class)->create();
+        DB::table('oauth_clients')
+            ->insert([
+                'name' => 'API',
+                'secret' => env('PASSPORT_CLIENT_SECRET'),
+                'personal_access_client' => 0,
+                'password_client' => 1,
+                'revoked' => 0,
+                'redirect' => '/home'
+            ]);
+
+        $response = $this->postJson('/api/login', [
+            'email' => null,
+            'password' => null
+        ])->assertExactJson([
+            'errors' => [
+                'email' => ['The email field is required.'],
+                'password' => ['The password field is required.']
+            ],
+            "message" => 'The given data was invalid.'
+        ]);
+    }
+
+    /** @test **/
+    public function a_valid_already_created_user_credentials_must_be_used_to_log_in()
+    {
+        $this->withoutExceptionHandling();
+//        given :  we have a guest
+        $guest  = factory(User::class)->make();
+
+        DB::table('oauth_clients')
+            ->insert([
+                'name' => 'API',
+                'secret' => env('PASSPORT_CLIENT_SECRET'),
+                'personal_access_client' => 0,
+                'password_client' => 1,
+                'revoked' => 0,
+                'redirect' => '/home'
+            ]);
+//        when : he requests to login
+        $response = $this->postJson('/api/login', [
+            'email' => $guest['email'],
+            'password' => 'password'
+        ])->assertExactJson([
+            'message' => 'The email you entered does not belong to an account, please try again!'
+        ]);
+//        then : it will get response indicating he must make acc first
+
     }
 }
