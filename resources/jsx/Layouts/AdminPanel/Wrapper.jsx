@@ -15,7 +15,6 @@ import MediaIcon from "@material-ui/icons/PermMediaOutlined";
 import UploadIcon from "@material-ui/icons/CloudUploadOutlined";
 import PostIcon from "@material-ui/icons/ReceiptOutlined";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Topbar from "../Blog/Topbar";
 import { Box } from "@material-ui/core";
 
 const drawerWidth = 240;
