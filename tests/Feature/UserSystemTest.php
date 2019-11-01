@@ -137,4 +137,27 @@ class UserSystemTest extends TestCase
 //        then : it will get response indicating he must make acc first
 
     }
+
+    /** @test **/
+    public function a_logged_in_user_can_logout()
+    {
+        $user = $this->signIn();
+
+        $response = $this->postJson('/api/logout');
+
+        $response->assertExactJson([
+            'message' => 'User have been logged out!'
+        ]);
+    }
+
+    /** @test **/
+    public function the_currently_logged_in_user_can_be_get()
+    {
+        $this->withoutExceptionHandling();
+        $user = $this->signIn();
+
+        $response = $this->getJson('/api/user' );
+
+        $this->assertEquals($user , $response);
+    }
 }

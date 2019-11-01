@@ -13,7 +13,7 @@ class AuthController extends Controller
 {
 
     /**
-     * to create a new user
+     * A new User can be created
      *
      * @return ResponseFactory|Response
      */
@@ -33,5 +33,14 @@ class AuthController extends Controller
         ]);
 
         return  response(['message' => 'account created successfully!']);
+    }
+
+    public function destroy()
+    {
+        auth()->user()->token()->revoke();
+
+        return \response([
+            'message' => 'User have been logged out!'
+        ]);
     }
 }

@@ -19,8 +19,10 @@
 
 
 Route::post('/register', 'AuthController@store');
-Route::post('/login', 'LoginController@login');
+Route::post('/logout', 'AuthController@destroy');
+Route::get('/user', 'AuthController@index');
 
+Route::post('/login', 'LoginController@login');
 
 Route::post('/posts' , 'PostsController@store');
 Route::delete('/posts/{post}', 'PostsController@destroy');
