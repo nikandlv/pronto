@@ -15,6 +15,7 @@ import MediaIcon from "@material-ui/icons/PermMediaOutlined";
 import UploadIcon from "@material-ui/icons/CloudUploadOutlined";
 import PostIcon from "@material-ui/icons/ReceiptOutlined";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import WidgetIcon from "@material-ui/icons/WidgetsOutlined";
 import { Box } from "@material-ui/core";
 
 const drawerWidth = 240;
@@ -46,9 +47,15 @@ const useStyles = makeStyles(theme => ({
         margin: 16,
         maxHeight: "95%",
         borderRadius: 16,
-        paddingTop: 64,
         borderLeft: "1px solid rgba(0, 0, 0, 0.12)",
-        borderBottom: "2px solid rgba(0, 0, 0, 0.12)"
+        borderBottom: "2px solid rgba(0, 0, 0, 0.12)",
+        "&::before": {
+            position: "absolute",
+            width: "24%",
+            height: "100%",
+            background: theme.palette.primary.main,
+            content: "''"
+        }
     },
     content: {
         flexGrow: 1,
@@ -80,43 +87,49 @@ function ResponsiveDrawer(props) {
             <List>
                 <ListItem button onClick={navigate("/admin")}>
                     <ListItemIcon>
-                        <ExploreIcon />
+                        <ExploreIcon className={classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Overview" />
                 </ListItem>
                 <ListItem button onClick={navigate("/admin/categories")}>
                     <ListItemIcon>
-                        <CategoryIcon />
+                        <CategoryIcon className={classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Categories" />
                 </ListItem>
                 <ListItem button onClick={navigate("/admin/posts")}>
                     <ListItemIcon>
-                        <PostIcon />
+                        <PostIcon className={classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Posts" />
                 </ListItem>
                 <ListItem button onClick={navigate("/admin/media")}>
                     <ListItemIcon>
-                        <MediaIcon />
+                        <MediaIcon className={classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Media" />
                 </ListItem>
                 <ListItem button onClick={navigate("/admin/uploads")}>
                     <ListItemIcon>
-                        <UploadIcon />
+                        <UploadIcon className={classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Uploads" />
                 </ListItem>
                 <ListItem button onClick={navigate("/admin/users")}>
                     <ListItemIcon>
-                        <UsersIcon />
+                        <UsersIcon className={classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Users" />
                 </ListItem>
+                <ListItem button onClick={navigate("/admin/widgets")}>
+                    <ListItemIcon>
+                        <WidgetIcon className={classes.icon} />
+                    </ListItemIcon>
+                    <ListItemText primary="Widgets" />
+                </ListItem>
                 <ListItem button onClick={navigate("/admin/settings")}>
                     <ListItemIcon>
-                        <SettingsIcon />
+                        <SettingsIcon className={classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Settings" />
                 </ListItem>
