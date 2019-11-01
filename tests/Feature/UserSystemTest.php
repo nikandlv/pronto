@@ -20,7 +20,7 @@ class UserSystemTest extends TestCase
             'name' => $guest['name'],
             'email' => $guest['email'],
             'password' => $guest['password'],
-            'password_confirm' => $guest['password']
+            'password_confirmation' => $guest['password']
         ]);
 
 
@@ -32,8 +32,7 @@ class UserSystemTest extends TestCase
         $response->assertJson(['message' => 'account created successfully!']);
     }
 
-    /** @test **/
-
+    /** @test * */
     public function a_email_password_and_name_is_required_for_register_a_account()
     {
         $guest = factory(User::class)->make();
@@ -45,4 +44,18 @@ class UserSystemTest extends TestCase
             'password_confirm' => null
         ])->assertJsonValidationErrors(['password', 'name', 'email']);
     }
+
+    /** @test **/
+    public function a_user_must_confirm_his_password_when_is_creating_an_account()
+    {
+        $guest = factory(User::class)->make();
+
+        $response = $this->postJson('/api/register', [
+            'name' => $guest['name'],
+            'email' => $guest['email'],
+            'password' => $guest['password'],
+        ])->assertJsonValidationErrors(['password']);
+
+    }
+
 }

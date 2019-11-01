@@ -22,7 +22,7 @@ class AuthController extends Controller
         $attributes = \request()->validate([
             'name' => 'required|string|min:5|max:255',
             'email' => 'required|email',
-            'password' => 'required|string|min:5|max:255'
+            'password' => 'required|string|min:5|max:255|confirmed'
         ]);
 
 
