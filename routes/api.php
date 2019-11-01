@@ -16,7 +16,8 @@
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
-Route::post('/login' , 'AuthController@login');
+
+Route::post('/register', 'AuthController@store');
 
 Route::post('/posts' , 'PostsController@store');
 Route::delete('/posts/{post}', 'PostsController@destroy');
