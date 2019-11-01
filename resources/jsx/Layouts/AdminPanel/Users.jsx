@@ -12,11 +12,10 @@ import StyledTitle from "../../Components/StyledTitle";
 const useStyles = makeStyles({
     root: {
         width: "100%",
-        overflowX: "auto"
+        overflowX: "auto",
+        borderRadius: 16
     },
-    table: {
-        minWidth: 650
-    },
+    table: {},
     info: {
         display: "flex",
         alignItems: "center"
@@ -50,7 +49,7 @@ function UsersTable() {
                         <TableCell align="center">Calories</TableCell>
                         <TableCell align="center">Fat&nbsp;(g)</TableCell>
                         <TableCell align="center">Carbs&nbsp;(g)</TableCell>
-                        <TableCell align="center">Protein&nbsp;(g)</TableCell>
+                        <TableCell align="center">Actions</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
