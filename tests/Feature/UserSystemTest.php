@@ -150,7 +150,7 @@ class UserSystemTest extends TestCase
         ]);
     }
 
-    /** @test **/
+    /** @test * */
     public function a_user_must_already_be_logged_in_to_be_able_to_logout()
     {
         $user = factory(User::class)->create();
@@ -162,14 +162,23 @@ class UserSystemTest extends TestCase
     }
 
     /** @test * */
-    public function the_currently_logged_in_user_can_be_get()
+    public function the_currently_logged_in_user_can_be_fetched()
     {
-        $this->withoutExceptionHandling();
         $user = $this->signIn();
 
         $response = $this->getJson('/api/user');
 
         $content = $response->getContent();
         $this->assertEquals($user, $content);
+    }
+
+    /** @test * */
+    public function a_user_must_have_already_logged_in_to_be_able_to_fetch_current_logged_in_user()
+    {
+        $user = factory(User::class)->create();
+
+        $this->getJson('/api/user')->assertExactJson([
+            'message' => 'Unauthenticated.'
+        ]);
     }
 }
