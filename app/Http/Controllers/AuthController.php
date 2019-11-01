@@ -19,7 +19,18 @@ class AuthController extends Controller
      */
     public function store()
     {
-        User::create(\request()->all());
+        $attributes = \request()->validate([
+            'name' => 'required|string|min:5|max:255',
+            'email' => 'required|email',
+            'password' => 'required|string|min:5|max:255'
+        ]);
+
+
+        User::create([
+            'name' => $attributes['name'],
+            'email' => $attributes['email'],
+            'password' => $attributes['password']
+        ]);
 
         return  response(['message' => 'account created successfully!']);
     }
