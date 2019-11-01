@@ -85,8 +85,8 @@ function CommentsToggles() {
                     </ListItemIcon>
                     <ListItemText
                         id="switch-list-label-bluetooth"
-                        primary="Automatic night mode"
-                        secondary="automatically turn on dark theme after dusk"
+                        primary="Approve comments automatically"
+                        secondary="approve comments without wating for approval"
                     />
                     <ListItemSecondaryAction>
                         <Switch
