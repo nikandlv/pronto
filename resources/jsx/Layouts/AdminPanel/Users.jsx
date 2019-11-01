@@ -6,7 +6,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { Box } from "@material-ui/core";
+import { Box, Avatar, Typography } from "@material-ui/core";
 import StyledTitle from "../../Components/StyledTitle";
 
 const useStyles = makeStyles({
@@ -16,6 +16,13 @@ const useStyles = makeStyles({
     },
     table: {
         minWidth: 650
+    },
+    info: {
+        display: "flex",
+        alignItems: "center"
+    },
+    avatar: {
+        margin: "0px 4px"
     }
 });
 
@@ -39,7 +46,7 @@ function UsersTable() {
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Dessert (100g serving)</TableCell>
+                        <TableCell>Avatar/Name</TableCell>
                         <TableCell align="right">Calories</TableCell>
                         <TableCell align="right">Fat&nbsp;(g)</TableCell>
                         <TableCell align="right">Carbs&nbsp;(g)</TableCell>
@@ -50,7 +57,15 @@ function UsersTable() {
                     {rows.map(row => (
                         <TableRow key={row.name}>
                             <TableCell component="th" scope="row">
-                                {row.name}
+                                <div className={classes.info}>
+                                    <Avatar
+                                        src="/img/user.png"
+                                        className={classes.avatar}
+                                    />
+                                    <Typography variant="body2">
+                                        John Doe
+                                    </Typography>
+                                </div>
                             </TableCell>
                             <TableCell align="right">{row.calories}</TableCell>
                             <TableCell align="right">{row.fat}</TableCell>
