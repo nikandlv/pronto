@@ -11,6 +11,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import Switch from "@material-ui/core/Switch";
 import Message from "@material-ui/icons/MessageOutlined";
+import HowToRegOutlined from "@material-ui/icons/HowToRegOutlined";
 
 const useCommentsStyles = makeStyles({
     container: {
@@ -79,22 +80,42 @@ function CommentsToggles() {
                 subheader={<ListSubheader>Comments</ListSubheader>}
                 className={classes.root}
             >
-                <ListItem button onClick={handleToggle("bluetooth")}>
+                <ListItem button onClick={handleToggle("approve")}>
                     <ListItemIcon>
                         <Message />
                     </ListItemIcon>
                     <ListItemText
-                        id="switch-list-label-bluetooth"
+                        id="switch-list-label-approve"
                         primary="Approve comments automatically"
                         secondary="approve comments without wating for approval"
                     />
                     <ListItemSecondaryAction>
                         <Switch
                             edge="end"
-                            onChange={handleToggle("bluetooth")}
-                            checked={checked.indexOf("bluetooth") !== -1}
+                            onChange={handleToggle("approve")}
+                            checked={checked.indexOf("approve") !== -1}
                             inputProps={{
-                                "aria-labelledby": "switch-list-label-bluetooth"
+                                "aria-labelledby": "switch-list-label-approve"
+                            }}
+                        />
+                    </ListItemSecondaryAction>
+                </ListItem>
+                <ListItem button onClick={handleToggle("anonymous")}>
+                    <ListItemIcon>
+                        <HowToRegOutlined />
+                    </ListItemIcon>
+                    <ListItemText
+                        id="switch-list-label-anonymous"
+                        primary="Allow anonymous comments"
+                        secondary="Allow viewer to comment without signing in"
+                    />
+                    <ListItemSecondaryAction>
+                        <Switch
+                            edge="end"
+                            onChange={handleToggle("anonymous")}
+                            checked={checked.indexOf("anonymous") !== -1}
+                            inputProps={{
+                                "aria-labelledby": "switch-list-label-anonymous"
                             }}
                         />
                     </ListItemSecondaryAction>
