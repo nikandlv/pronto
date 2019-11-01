@@ -11,6 +11,10 @@ use Psy\Util\Json;
 
 class AuthController extends Controller
 {
+    public function index()
+    {
+        return \response(auth()->user()->toArray());
+    }
 
     /**
      * A new User can be created
@@ -35,6 +39,11 @@ class AuthController extends Controller
         return  response(['message' => 'account created successfully!']);
     }
 
+    /**
+     * logout the current logged in user
+     *
+     * @return ResponseFactory|Response
+     */
     public function destroy()
     {
         auth()->user()->token()->revoke();

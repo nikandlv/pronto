@@ -85,7 +85,7 @@ class UserSystemTest extends TestCase
         $this->assertIsString($json->access_token);
     }
 
-    /** @test **/
+    /** @test * */
     public function a_username_and_a_password_is_needed_to_login()
     {
         $user = factory(User::class)->create();
@@ -111,12 +111,12 @@ class UserSystemTest extends TestCase
         ]);
     }
 
-    /** @test **/
+    /** @test * */
     public function a_valid_already_created_user_credentials_must_be_used_to_log_in()
     {
         $this->withoutExceptionHandling();
 //        given :  we have a guest
-        $guest  = factory(User::class)->make();
+        $guest = factory(User::class)->make();
 
         DB::table('oauth_clients')
             ->insert([
@@ -138,7 +138,7 @@ class UserSystemTest extends TestCase
 
     }
 
-    /** @test **/
+    /** @test * */
     public function a_logged_in_user_can_logout()
     {
         $user = $this->signIn();
@@ -150,14 +150,15 @@ class UserSystemTest extends TestCase
         ]);
     }
 
-    /** @test **/
+    /** @test * */
     public function the_currently_logged_in_user_can_be_get()
     {
         $this->withoutExceptionHandling();
         $user = $this->signIn();
 
-        $response = $this->getJson('/api/user' );
+        $response = $this->getJson('/api/user');
 
-        $this->assertEquals($user , $response);
+        $content = $response->getContent();
+        $this->assertEquals($user, $content);
     }
 }
