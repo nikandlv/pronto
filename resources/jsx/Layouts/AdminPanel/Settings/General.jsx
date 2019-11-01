@@ -13,7 +13,7 @@ import Switch from "@material-ui/core/Switch";
 import BuildIcon from "@material-ui/icons/BuildOutlined";
 import LightIcon from "@material-ui/icons/BrightnessLowOutlined";
 import LightOutIcon from "@material-ui/icons/Brightness2Outlined";
-import { TwitterPicker } from "react-color";
+import { CirclePicker } from "react-color";
 
 const useGeneralStyles = makeStyles({
     container: {
@@ -49,9 +49,9 @@ export default function General() {
                     </Card>
                     <br />
                     <Button>Primary color</Button>
-                    <TwitterPicker />
+                    <CirclePicker />
                     <Button>Primary color</Button>
-                    <TwitterPicker />
+                    <CirclePicker />
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <GeneralToggles />

@@ -17,6 +17,7 @@ import PostIcon from "@material-ui/icons/ReceiptOutlined";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import WidgetIcon from "@material-ui/icons/WidgetsOutlined";
 import { Box } from "@material-ui/core";
+import Topbar from "../Blog/Topbar";
 
 const drawerWidth = 240;
 
@@ -46,26 +47,22 @@ const useStyles = makeStyles(theme => ({
         width: drawerWidth,
         margin: 16,
         maxHeight: "95%",
-        borderRadius: 16,
+        paddingTop: 64,
+        borderRadius: 24,
         borderLeft: "1px solid rgba(0, 0, 0, 0.12)",
-        borderBottom: "2px solid rgba(0, 0, 0, 0.12)",
-        "&::before": {
-            position: "absolute",
-            width: "24%",
-            height: "100%",
-            background: theme.palette.primary.main,
-            content: "''"
-        }
+        borderBottom: "2px solid rgba(0, 0, 0, 0.12)"
     },
     content: {
         flexGrow: 1,
-        padding: theme.spacing(3),
+        paddingTop: 64,
+
         maxWidth: `calc( 100vw - ${drawerWidth + 24}px )`,
         overflowX: "hidden",
         [theme.breakpoints.down("sm")]: {
             maxWidth: "calc( 100vw - 24px )"
         }
-    }
+    },
+    icon: {}
 }));
 
 function ResponsiveDrawer(props) {
@@ -140,6 +137,12 @@ function ResponsiveDrawer(props) {
     return (
         <Box m={2}>
             <div className={classes.root}>
+                <Topbar
+                    hasMenu
+                    className={classes.appBar}
+                    position="absolute"
+                    onMenuClick={handleDrawerToggle}
+                />
                 <nav className={classes.drawer} aria-label="mailbox folders">
                     {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                     <Hidden smUp implementation="css">
