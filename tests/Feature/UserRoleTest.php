@@ -13,9 +13,10 @@ class UserRoleTest extends TestCase
     use RefreshDatabase;
 
     /** @test **/
-    public function a_user_can_be_updated_to_be_a_admin()
+    public function an_admin_can_promote_another_user_to_be_admin()
     {
         $user = factory(User::class)->create();
+        $admin = $this->beAdmin();
 
         $this->assertDatabaseHas('users', [
             'name' => $user->name,
