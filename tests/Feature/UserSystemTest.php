@@ -47,6 +47,7 @@ class UserSystemTest extends TestCase
 
     /** @test **/
     public function a_user_must_confirm_his_password_when_is_creating_an_account()
+
     {
         $guest = factory(User::class)->make();
 
@@ -58,4 +59,19 @@ class UserSystemTest extends TestCase
 
     }
 
+
+    /** @test **/
+    public function a_user_can_log_in_and_get_bearer_token()
+    {
+        $this->withoutExceptionHandling();
+
+        $user = factory(User::class)->create();
+
+        $response = $this->postJson('/api/login', [
+            'email' => $user->email,
+            'password'=> $user->password
+        ]);
+
+        dd($response);
+    }
 }

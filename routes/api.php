@@ -18,6 +18,7 @@
 //});
 
 Route::post('/register', 'AuthController@store');
+Route::post('/register', 'AuthController@store');
 
 Route::post('/posts' , 'PostsController@store');
 Route::delete('/posts/{post}', 'PostsController@destroy');
