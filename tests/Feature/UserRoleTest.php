@@ -12,7 +12,7 @@ class UserRoleTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test * */
+    /** @test **/
     public function a_user_can_be_updated_to_be_a_admin()
     {
         $user = factory(User::class)->create();
@@ -47,8 +47,38 @@ class UserRoleTest extends TestCase
         ]);
     }
 
+    /** @test **/
     public function a_user_can_be_updated_to_be_member()
     {
+        $admin = $this->beAdmin();
 
+        $this->assertDatabaseHas('users', [
+            'name' => $admin->name,
+            'email' => $admin->email,
+            'password' => $admin->password,
+            'role' => UserRoleManager::ROLE_ADMIN
+        ]);
+
+        $this->patchJson('/api/user/' . $admin->id . '/admin', [
+            'id' => $admin->id,
+            'name' => $admin->name,
+            'email' => $admin->email,
+            'password' => $admin->password,
+            'role' => UserRoleManager::ROLE_MEMBER
+        ]);
+
+        $this->assertDatabaseHas('users', [
+            'name' => $admin->name,
+            'email' => $admin->email,
+            'password' => $admin->password,
+            'role' => UserRoleManager::ROLE_MEMBER
+        ]);
+
+        $this->assertDatabaseMissing('users', [
+            'name' => $admin->name,
+            'email' => $admin->email,
+            'password' => $admin->password,
+            'role' => UserRoleManager::ROLE_ADMIN
+        ]);
     }
 }
