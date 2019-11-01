@@ -23,7 +23,8 @@ const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
     root: {
         display: "flex",
-        position: "relative"
+        position: "relative",
+        maxWidth: "100vw"
     },
     drawer: {
         [theme.breakpoints.up("sm")]: {
@@ -44,13 +45,20 @@ const useStyles = makeStyles(theme => ({
     drawerPaper: {
         width: drawerWidth,
         margin: 16,
+        maxHeight: "95%",
         borderRadius: 16,
         paddingTop: 64,
-        borderLeft: "1px solid rgba(0, 0, 0, 0.12)"
+        borderLeft: "1px solid rgba(0, 0, 0, 0.12)",
+        borderBottom: "2px solid rgba(0, 0, 0, 0.12)"
     },
     content: {
         flexGrow: 1,
-        padding: theme.spacing(3)
+        padding: theme.spacing(3),
+        maxWidth: `calc( 100vw - ${drawerWidth + 24}px )`,
+        overflowX: "hidden",
+        [theme.breakpoints.down("sm")]: {
+            maxWidth: "calc( 100vw - 24px )"
+        }
     }
 }));
 
@@ -120,12 +128,6 @@ function ResponsiveDrawer(props) {
     return (
         <Box m={2}>
             <div className={classes.root}>
-                <Topbar
-                    position="absolute"
-                    className={classes.appBar}
-                    hasMenu
-                    onMenuClick={handleDrawerToggle.bind(this)}
-                />
                 <nav className={classes.drawer} aria-label="mailbox folders">
                     {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                     <Hidden smUp implementation="css">
@@ -159,10 +161,7 @@ function ResponsiveDrawer(props) {
                         </Drawer>
                     </Hidden>
                 </nav>
-                <main className={classes.content}>
-                    <div className={classes.toolbar} />
-                    {props.children}
-                </main>
+                <main className={classes.content}>{props.children}</main>
             </div>
         </Box>
     );
