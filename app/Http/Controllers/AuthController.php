@@ -34,14 +34,11 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|string|min:5|max:255|confirmed'
         ]);
+        
+        $attributes['role'] = UserRoleManager::ROLE_MEMBER;
 
 
-        User::create([
-            'name' => $attributes['name'],
-            'email' => $attributes['email'],
-            'password' => $attributes['password'],
-            'role' => UserRoleManager::ROLE_MEMBER
-        ]);
+        User::create($attributes);
 
         return response(['message' => 'account created successfully!']);
     }
