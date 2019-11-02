@@ -86,9 +86,11 @@ function UsersTable() {
                                 </Tooltip>
                             </TableCell>
                             <TableCell align="center">
-                                <IconButton size="small">
-                                    <TrashIcon />
-                                </IconButton>
+                                <Tooltip title="Delete User">
+                                    <IconButton size="small">
+                                        <TrashIcon />
+                                    </IconButton>
+                                </Tooltip>
                             </TableCell>
                         </TableRow>
                     ))}
