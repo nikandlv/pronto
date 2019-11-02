@@ -16,12 +16,12 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->user()->role === UserRoleManager::ROLE_ADMIN) {
+        if ($request->user()->role === UserRoleManager::ROLE_ADMIN) {
             return $next($request);
         }
 
         return response([
-            'status' => 404,
+            'status' => 403,
         ]);
     }
 }
