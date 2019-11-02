@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\InternalRequest;
+use App\pronto\users\UserRoleManager;
 use App\User;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
@@ -11,6 +12,11 @@ use Psy\Util\Json;
 
 class AuthController extends Controller
 {
+    /**
+     * get currently logged in user
+     *
+     * @return ResponseFactory|Response
+     */
     public function index()
     {
         return \response(auth()->user()->toArray());
@@ -28,15 +34,13 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|string|min:5|max:255|confirmed'
         ]);
+        
+        $attributes['role'] = UserRoleManager::ROLE_MEMBER;
 
 
-        User::create([
-            'name' => $attributes['name'],
-            'email' => $attributes['email'],
-            'password' => $attributes['password']
-        ]);
+        User::create($attributes);
 
-        return  response(['message' => 'account created successfully!']);
+        return response(['message' => 'account created successfully!']);
     }
 
     /**
@@ -51,5 +55,18 @@ class AuthController extends Controller
         return \response([
             'message' => 'User have been logged out!'
         ]);
+    }
+
+    /**
+     * update a user data
+     *
+     * @return ResponseFactory|Response
+     */
+    public function update()
+    {
+        User::where('id' , \request('id'))
+            ->update(\request()->all());
+
+        return \response(['message' => 'user updated successfully']);
     }
 }
