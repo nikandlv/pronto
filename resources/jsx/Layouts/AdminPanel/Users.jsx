@@ -6,7 +6,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { Box, Avatar, Typography, Chip } from "@material-ui/core";
+import { Box, Avatar, Typography, Chip, Tooltip } from "@material-ui/core";
 import StyledTitle from "../../Components/StyledTitle";
 
 const useStyles = makeStyles({
@@ -72,8 +72,12 @@ function UsersTable() {
                             <TableCell align="center">
                                 <Chip label="verified" />
                             </TableCell>
-                            <TableCell align="center">{row.carbs}</TableCell>
-                            <TableCell align="center">{row.protein}</TableCell>
+                            <TableCell align="center">
+                                <Tooltip title="2019-06-01 10:12:51">
+                                    <Typography>Oct 26</Typography>
+                                </Tooltip>
+                            </TableCell>
+                            <TableCell align="center"></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
