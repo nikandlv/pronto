@@ -7,6 +7,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TrashIcon from "@material-ui/icons/DeleteOutlineOutlined";
+import EditIcon from "@material-ui/icons/EditOutlined";
 import {
     Box,
     Avatar,
@@ -86,9 +87,14 @@ function UsersTable() {
                                 </Tooltip>
                             </TableCell>
                             <TableCell align="center">
-                                <Tooltip title="Delete User">
+                                <Tooltip title="Delete User ">
                                     <IconButton size="small">
                                         <TrashIcon />
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip title="Edit User ">
+                                    <IconButton size="small">
+                                        <EditIcon />
                                     </IconButton>
                                 </Tooltip>
                             </TableCell>
