@@ -46,7 +46,7 @@ function UsersTable() {
                 <TableHead>
                     <TableRow>
                         <TableCell>Avatar/Name</TableCell>
-                        <TableCell align="center">Calories</TableCell>
+                        <TableCell>Email</TableCell>
                         <TableCell align="center">Fat&nbsp;(g)</TableCell>
                         <TableCell align="center">Carbs&nbsp;(g)</TableCell>
                         <TableCell align="center">Actions</TableCell>
@@ -66,7 +66,9 @@ function UsersTable() {
                                     </Typography>
                                 </div>
                             </TableCell>
-                            <TableCell align="center">{row.calories}</TableCell>
+                            <TableCell>
+                                <Typography>example@example.com</Typography>
+                            </TableCell>
                             <TableCell align="center">{row.fat}</TableCell>
                             <TableCell align="center">{row.carbs}</TableCell>
                             <TableCell align="center">{row.protein}</TableCell>
