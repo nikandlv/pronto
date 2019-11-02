@@ -6,7 +6,15 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { Box, Avatar, Typography, Chip, Tooltip } from "@material-ui/core";
+import TrashIcon from "@material-ui/icons/DeleteOutlineOutlined";
+import {
+    Box,
+    Avatar,
+    Typography,
+    Chip,
+    Tooltip,
+    IconButton
+} from "@material-ui/core";
 import StyledTitle from "../../Components/StyledTitle";
 
 const useStyles = makeStyles({
@@ -77,7 +85,11 @@ function UsersTable() {
                                     <Typography>Oct 26</Typography>
                                 </Tooltip>
                             </TableCell>
-                            <TableCell align="center"></TableCell>
+                            <TableCell align="center">
+                                <IconButton size="small">
+                                    <TrashIcon />
+                                </IconButton>
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
