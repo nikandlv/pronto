@@ -10,6 +10,7 @@ mixDependency.require('@babel/plugin-proposal-class-properties');
 mixDependency.require('react-swipeable-views');
 mixDependency.require('react-color');
 mixDependency.require('mui-pastel');
+mixDependency.require('mui-nutella');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
