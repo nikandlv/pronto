@@ -18,6 +18,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import WidgetIcon from "@material-ui/icons/WidgetsOutlined";
 import { Box } from "@material-ui/core";
 import Topbar from "../Blog/Topbar";
+import clsx from "clsx";
 
 const drawerWidth = 240;
 
@@ -27,12 +28,7 @@ const useStyles = makeStyles(theme => ({
         position: "relative",
         maxWidth: "100vw"
     },
-    drawer: {
-        [theme.breakpoints.up("sm")]: {
-            width: drawerWidth,
-            flexShrink: 0
-        }
-    },
+    drawer: {},
     appBar: {
         zIndex: 1250
     },
@@ -44,7 +40,6 @@ const useStyles = makeStyles(theme => ({
     },
     toolbar: theme.mixins.toolbar,
     drawerPaper: {
-        width: drawerWidth,
         margin: 16,
         maxHeight: "95%",
         paddingTop: 64,
@@ -54,13 +49,7 @@ const useStyles = makeStyles(theme => ({
     },
     content: {
         flexGrow: 1,
-        paddingTop: 64,
-
-        maxWidth: `calc( 100vw - ${drawerWidth + 24}px )`,
-        overflowX: "hidden",
-        [theme.breakpoints.down("sm")]: {
-            maxWidth: "calc( 100vw - 24px )"
-        }
+        paddingTop: 64
     },
     menu: {
         width: "95%",
@@ -81,6 +70,24 @@ const useStyles = makeStyles(theme => ({
     icon: {},
     text: {
         fontWeight: "500"
+    },
+    drawerOpen: {
+        width: drawerWidth,
+        transition: theme.transitions.create("width", {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen
+        })
+    },
+    drawerClose: {
+        transition: theme.transitions.create("width", {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen
+        }),
+        overflowX: "hidden",
+        width: theme.spacing(9),
+        [theme.breakpoints.up("sm")]: {
+            width: theme.spacing(9)
+        }
     }
 }));
 
@@ -89,8 +96,13 @@ function ResponsiveDrawer(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [expanded, setExpanded] = React.useState(true);
 
     const currentPath = window.location.pathname;
+
+    const handleExpandToggle = () => {
+        setExpanded(!expanded);
+    };
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -178,9 +190,12 @@ function ResponsiveDrawer(props) {
             <div className={classes.root}>
                 <Topbar
                     hasMenu
+                    hasExpand
+                    expanded={expanded}
                     className={classes.appBar}
                     position="absolute"
                     onMenuClick={handleDrawerToggle}
+                    onExpandClick={handleExpandToggle}
                 />
                 <nav className={classes.drawer} aria-label="mailbox folders">
                     {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -205,8 +220,15 @@ function ResponsiveDrawer(props) {
                     </Hidden>
                     <Hidden xsDown implementation="css">
                         <Drawer
+                            className={clsx(classes.drawerPaper, {
+                                [classes.drawerOpen]: expanded,
+                                [classes.drawerClose]: !expanded
+                            })}
                             classes={{
-                                paper: classes.drawerPaper
+                                paper: clsx(classes.drawerPaper, {
+                                    [classes.drawerOpen]: expanded,
+                                    [classes.drawerClose]: !expanded
+                                })
                             }}
                             variant="permanent"
                             open
