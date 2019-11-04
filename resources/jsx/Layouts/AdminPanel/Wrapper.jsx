@@ -68,13 +68,14 @@ const useStyles = makeStyles(theme => ({
         borderRadius: "3rem"
     },
     activeMenu: {
-        background: theme.palette.primary.main,
+        background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+        boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
         color: "white",
         "& svg": {
             color: "white"
         },
         "&:hover,&:active,&:focus": {
-            background: theme.palette.primary.dark
+            background: "linear-gradient(45deg, #FE6B8B 50%, #FF8E53 80%)"
         }
     },
     icon: {},
