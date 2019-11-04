@@ -18,7 +18,7 @@ class UserRoleTest extends TestCase
         $user1 = $this->signIn();
         $user2 = factory(User::class)->create();
 
-        $this->patchJson('/api/user/' . $user2->id . '/admin', [
+        $this->patchJson('/api/users/' . $user2->id . '/admin', [
             'id' => $user2->id,
             'name' => $user2->name,
             'email' => $user2->email,
@@ -42,7 +42,7 @@ class UserRoleTest extends TestCase
             'role' => UserRoleManager::ROLE_MEMBER
         ]);
 
-        $this->patchJson('/api/user/' . $user->id . '/admin', [
+        $this->patchJson('/api/users/' . $user->id . '/admin', [
             'id' => $user->id,
             'name' => $user->name,
             'email' => $user->email,
@@ -77,7 +77,7 @@ class UserRoleTest extends TestCase
             'role' => UserRoleManager::ROLE_ADMIN
         ]);
 
-        $this->patchJson('/api/user/' . $admin->id . '/admin', [
+        $this->patchJson('/api/users/' . $admin->id . '/admin', [
             'id' => $admin->id,
             'name' => $admin->name,
             'email' => $admin->email,
@@ -106,7 +106,7 @@ class UserRoleTest extends TestCase
         $user = $this->signIn();
         $admin = factory(User::class)->create(['role' => UserRoleManager::ROLE_ADMIN]);
 
-        $this->patchJson('/api/user/' . $admin->id . '/admin', [
+        $this->patchJson('/api/users/' . $admin->id . '/admin', [
             'id' => $admin->id,
             'name' => $admin->name,
             'email' => $admin->email,
