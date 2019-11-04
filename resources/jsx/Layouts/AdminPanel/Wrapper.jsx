@@ -69,7 +69,10 @@ const useStyles = makeStyles(theme => ({
     },
     activeMenu: {
         background: theme.palette.primary.main,
-        color: "white !important",
+        color: "white",
+        "& svg": {
+            color: "white"
+        },
         "&:hover,&:active,&:focus": {
             background: theme.palette.primary.dark
         }
