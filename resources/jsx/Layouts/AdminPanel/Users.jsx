@@ -17,7 +17,7 @@ import {
     IconButton
 } from "@material-ui/core";
 import StyledTitle from "../../Components/StyledTitle";
-
+import Pastel from "mui-pastel";
 const useStyles = makeStyles({
     root: {
         width: "100%",
@@ -79,7 +79,7 @@ function UsersTable() {
                                 <Typography>example@example.com</Typography>
                             </TableCell>
                             <TableCell align="center">
-                                <Chip label="verified" />
+                                <Pastel label="Verified" />
                             </TableCell>
                             <TableCell align="center">
                                 <Tooltip title="2019-06-01 10:12:51">
