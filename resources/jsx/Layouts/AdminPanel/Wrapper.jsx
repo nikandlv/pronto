@@ -62,7 +62,22 @@ const useStyles = makeStyles(theme => ({
             maxWidth: "calc( 100vw - 24px )"
         }
     },
-    icon: {}
+    menu: {
+        width: "95%",
+        margin: "0 auto",
+        borderRadius: "3rem"
+    },
+    activeMenu: {
+        background: theme.palette.primary.main,
+        color: "white !important",
+        "&:hover,&:active,&:focus": {
+            background: theme.palette.primary.dark
+        }
+    },
+    icon: {},
+    text: {
+        fontWeight: "500"
+    }
 }));
 
 function ResponsiveDrawer(props) {
@@ -70,6 +85,8 @@ function ResponsiveDrawer(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
+
+    const currentPath = window.location.pathname;
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -79,57 +96,75 @@ function ResponsiveDrawer(props) {
         props.history.push(link);
     };
 
+    const drawerItems = {
+        "/admin": {
+            label: "Overview",
+            icon: ExploreIcon,
+            onClick: navigate("/admin")
+        },
+        "/admin/categories": {
+            label: "Categories",
+            icon: CategoryIcon,
+            onClick: navigate("/admin/categories")
+        },
+        "/admin/posts": {
+            label: "Posts",
+            icon: PostIcon,
+            onClick: navigate("/admin/posts")
+        },
+        "/admin/media": {
+            label: "Media",
+            icon: MediaIcon,
+            onClick: navigate("/admin/media")
+        },
+        "/admin/uploads": {
+            label: "Uploads",
+            icon: UploadIcon,
+            onClick: navigate("/admin/uploads")
+        },
+        "/admin/users": {
+            label: "Users",
+            icon: UsersIcon,
+            onClick: navigate("/admin/users")
+        },
+        "/admin/widgets": {
+            label: "Widgets",
+            icon: WidgetIcon,
+            onClick: navigate("/admin/widgets")
+        },
+        "/admin/settings": {
+            label: "Settings",
+            icon: SettingsIcon,
+            onClick: navigate("/admin/settings")
+        }
+    };
+
     const drawer = (
         <div>
             <List>
-                <ListItem button onClick={navigate("/admin")}>
-                    <ListItemIcon>
-                        <ExploreIcon className={classes.icon} />
-                    </ListItemIcon>
-                    <ListItemText primary="Overview" />
-                </ListItem>
-                <ListItem button onClick={navigate("/admin/categories")}>
-                    <ListItemIcon>
-                        <CategoryIcon className={classes.icon} />
-                    </ListItemIcon>
-                    <ListItemText primary="Categories" />
-                </ListItem>
-                <ListItem button onClick={navigate("/admin/posts")}>
-                    <ListItemIcon>
-                        <PostIcon className={classes.icon} />
-                    </ListItemIcon>
-                    <ListItemText primary="Posts" />
-                </ListItem>
-                <ListItem button onClick={navigate("/admin/media")}>
-                    <ListItemIcon>
-                        <MediaIcon className={classes.icon} />
-                    </ListItemIcon>
-                    <ListItemText primary="Media" />
-                </ListItem>
-                <ListItem button onClick={navigate("/admin/uploads")}>
-                    <ListItemIcon>
-                        <UploadIcon className={classes.icon} />
-                    </ListItemIcon>
-                    <ListItemText primary="Uploads" />
-                </ListItem>
-                <ListItem button onClick={navigate("/admin/users")}>
-                    <ListItemIcon>
-                        <UsersIcon className={classes.icon} />
-                    </ListItemIcon>
-                    <ListItemText primary="Users" />
-                </ListItem>
-                <ListItem button onClick={navigate("/admin/widgets")}>
-                    <ListItemIcon>
-                        <WidgetIcon className={classes.icon} />
-                    </ListItemIcon>
-                    <ListItemText primary="Widgets" />
-                </ListItem>
-                <ListItem button onClick={navigate("/admin/settings")}>
-                    <ListItemIcon>
-                        <SettingsIcon className={classes.icon} />
-                    </ListItemIcon>
-                    <ListItemText primary="Settings" />
-                </ListItem>
+                {Object.keys(drawerItems).map(path => {
+                    let item = drawerItems[path];
+                    return (
+                        <ListItem
+                            key={path}
+                            button
+                            onClick={item.onClick}
+                            className={`${classes.menu} ${
+                                currentPath === path ? classes.activeMenu : ""
+                            }`}
+                        >
+                            <ListItemIcon>
+                                <item.icon />
+                            </ListItemIcon>
+                            <ListItemText
+                                classes={{
+                                    primary: classes.text
+                                }}
+                                primary={item.label}
+                            />
+                        </ListItem>
+                    );
+                })}
             </List>
         </div>
     );
