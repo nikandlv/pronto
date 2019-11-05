@@ -103,7 +103,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Markdown Mail hasSettings
+    | Markdown Mail hasUserSettings
     |--------------------------------------------------------------------------
     |
     | If you are using Markdown based email rendering, you may configure your
