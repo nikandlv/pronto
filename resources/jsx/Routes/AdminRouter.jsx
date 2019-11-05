@@ -15,7 +15,7 @@ const RouteContainer = posed.div({
     exit: { y: 100, opacity: 0 }
 });
 
-export default function AdminRouter() {
+export default function AdminRouter(props) {
     return (
         <Wrapper>
             <PoseGroup>
