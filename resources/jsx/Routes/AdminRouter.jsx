@@ -9,6 +9,7 @@ import Media from "../Layouts/AdminPanel/Media";
 import Users from "../Layouts/AdminPanel/Users";
 import Settings from "../Layouts/AdminPanel/Settings";
 import posed, { PoseGroup } from "react-pose";
+
 export default function AdminRouter() {
     return (
         <Wrapper>
