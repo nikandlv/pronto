@@ -18,16 +18,33 @@ const RouteContainer = posed.div({
 export default function AdminRouter() {
     return (
         <Wrapper>
-            <Switch>
-                <Route path="/admin" component={Overview} exact />
-                <Route path="/admin/" component={Overview} exact />
-                <Route path="/admin/categories" component={Categories} exact />
-                <Route path="/admin/posts" component={Posts} exact />
-                <Route path="/admin/uploads" component={Uploads} exact />
-                <Route path="/admin/media" component={Media} exact />
-                <Route path="/admin/users" component={Users} exact />
-                <Route path="/admin/settings" component={Settings} exact />
-            </Switch>
+            <PoseGroup>
+                <RouteContainer key={props.location.pathname}>
+                    <Switch></Switch>
+                    <Switch>
+                        <Route path="/admin" component={Overview} exact />
+                        <Route path="/admin/" component={Overview} exact />
+                        <Route
+                            path="/admin/categories"
+                            component={Categories}
+                            exact
+                        />
+                        <Route path="/admin/posts" component={Posts} exact />
+                        <Route
+                            path="/admin/uploads"
+                            component={Uploads}
+                            exact
+                        />
+                        <Route path="/admin/media" component={Media} exact />
+                        <Route path="/admin/users" component={Users} exact />
+                        <Route
+                            path="/admin/settings"
+                            component={Settings}
+                            exact
+                        />
+                    </Switch>
+                </RouteContainer>
+            </PoseGroup>
         </Wrapper>
     );
 }
