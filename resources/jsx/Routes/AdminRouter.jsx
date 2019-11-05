@@ -10,6 +10,11 @@ import Users from "../Layouts/AdminPanel/Users";
 import Settings from "../Layouts/AdminPanel/Settings";
 import posed, { PoseGroup } from "react-pose";
 
+const RouteContainer = posed.div({
+    enter: { y: 0, opacity: 1, beforeChildren: true },
+    exit: { y: 100, opacity: 0 }
+});
+
 export default function AdminRouter() {
     return (
         <Wrapper>
