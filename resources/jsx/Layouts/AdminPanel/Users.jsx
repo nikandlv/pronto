@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { withRouter } from "react-router-dom";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -47,7 +48,7 @@ const rows = [
     createData("Gingerbread", 356, 16.0, 49, 3.9)
 ];
 
-function UsersTable() {
+function UsersTable(props) {
     const classes = useStyles();
 
     return (
@@ -95,7 +96,14 @@ function UsersTable() {
                                         </IconButton>
                                     </Tooltip>
                                 </Prompt.Inline>
-                                <Tooltip title="Edit User ">
+                                <Tooltip
+                                    title="Edit User"
+                                    onClick={() =>
+                                        props.history.push(
+                                            `/admin/users/edit/${1}`
+                                        )
+                                    }
+                                >
                                     <IconButton size="small">
                                         <EditIcon />
                                     </IconButton>
@@ -109,12 +117,14 @@ function UsersTable() {
     );
 }
 
+const WrappedUsersTable = withRouter(UsersTable);
+
 export default class Users extends React.Component {
     render() {
         return (
             <Box m={2}>
                 <StyledTitle>Users</StyledTitle>
-                <UsersTable />
+                <WrappedUsersTable />
             </Box>
         );
     }
