@@ -26,15 +26,11 @@ export default function Settings() {
                 aria-label="Settings tabs"
             >
                 <Tab label="General" />
-                <Tab label="Posts" />
                 <Tab label="Comments" />
-                <Tab label="Users" />
             </Tabs>
             <SwipeableViews index={tab}>
                 <General />
-                <Posts />
                 <Comments />
-                <Users />
             </SwipeableViews>
         </div>
     );
