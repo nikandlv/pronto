@@ -21,6 +21,7 @@
         "lodash": "^4.17.13",
         "mui-nutella": "*",
         "mui-pastel": "^1.0.0",
+        "mui-prompt": "^1.0.3",
         "popper.js": "^1.12",
         "react-localization": "^1.0.15",
         "react-pose": "^4.0.9",
