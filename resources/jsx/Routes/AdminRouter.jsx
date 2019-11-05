@@ -20,8 +20,7 @@ export default function AdminRouter() {
         <Wrapper>
             <PoseGroup>
                 <RouteContainer key={props.location.pathname}>
-                    <Switch></Switch>
-                    <Switch>
+                    <Switch location={props.location}>
                         <Route path="/admin" component={Overview} exact />
                         <Route path="/admin/" component={Overview} exact />
                         <Route
