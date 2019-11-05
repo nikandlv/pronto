@@ -1,14 +1,14 @@
-import React from 'react'
-import {Switch, Route} from 'react-router-dom'
-import Wrapper from '../Layouts/AdminPanel/Wrapper'
-import Overview from '../Layouts/AdminPanel/Overview'
-import Categories from '../Layouts/AdminPanel/Categories'
-import Posts from '../Layouts/AdminPanel/Posts'
-import Uploads from '../Layouts/AdminPanel/Uploads'
-import Media from '../Layouts/AdminPanel/Media'
-import Users from '../Layouts/AdminPanel/Users'
-import Settings from '../Layouts/AdminPanel/Settings'
-
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import Wrapper from "../Layouts/AdminPanel/Wrapper";
+import Overview from "../Layouts/AdminPanel/Overview";
+import Categories from "../Layouts/AdminPanel/Categories";
+import Posts from "../Layouts/AdminPanel/Posts";
+import Uploads from "../Layouts/AdminPanel/Uploads";
+import Media from "../Layouts/AdminPanel/Media";
+import Users from "../Layouts/AdminPanel/Users";
+import Settings from "../Layouts/AdminPanel/Settings";
+import posed, { PoseGroup } from "react-pose";
 export default function AdminRouter() {
     return (
         <Wrapper>
@@ -23,5 +23,5 @@ export default function AdminRouter() {
                 <Route path="/admin/settings" component={Settings} exact />
             </Switch>
         </Wrapper>
-    )
+    );
 }
