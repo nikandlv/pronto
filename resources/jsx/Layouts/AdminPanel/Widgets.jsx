@@ -17,8 +17,8 @@ export default function Widgets() {
         <Box m={2}>
             <Grid container justify="center">
                 <Grid item xs={11} sm={7} md={6} lg={5}>
-                    <Paper>
-                        <List>
+                    <List>
+                        <Paper>
                             <ListItem>
                                 <ListItemText
                                     primary="Links"
@@ -33,8 +33,25 @@ export default function Widgets() {
                                     </IconButton>
                                 </ListItemSecondaryAction>
                             </ListItem>
-                        </List>
-                    </Paper>
+                        </Paper>
+                        <br />
+                        <Paper>
+                            <ListItem>
+                                <ListItemText
+                                    primary="Links 2"
+                                    secondary="Add your internal/external links"
+                                />
+                                <ListItemSecondaryAction>
+                                    <IconButton>
+                                        <DeleteIcon />
+                                    </IconButton>
+                                    <IconButton>
+                                        <ReorderIcon />
+                                    </IconButton>
+                                </ListItemSecondaryAction>
+                            </ListItem>
+                        </Paper>
+                    </List>
                 </Grid>
             </Grid>
         </Box>
