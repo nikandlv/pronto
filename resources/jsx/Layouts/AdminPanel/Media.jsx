@@ -96,7 +96,9 @@ const useStyles = makeStyles(theme => ({
         justifyContent: "space-around",
         overflow: "hidden"
     },
-    gridList: {},
+    gridList: {
+        width: "100%"
+    },
     icon: {
         color: "rgba(255, 255, 255, 0.54)"
     }
@@ -110,10 +112,14 @@ export default function Media() {
             <StyledTitle gutterBottom>Media</StyledTitle>
             <Paper>
                 <div className={classes.root}>
-                    <GridList cellHeight={300} className={classes.gridList}>
+                    <GridList
+                        cellHeight={300}
+                        className={classes.gridList}
+                        cols={4}
+                    >
                         <GridListTile
                             key="Subheader"
-                            cols={2}
+                            cols={4}
                             style={{ height: "auto" }}
                         >
                             <ListSubheader component="div">
@@ -121,7 +127,7 @@ export default function Media() {
                             </ListSubheader>
                         </GridListTile>
                         {tileData.map(tile => (
-                            <GridListTile key={tile.img}>
+                            <GridListTile key={tile.img} cols={1}>
                                 <img src={tile.img} alt={tile.title} />
                                 <GridListTileBar
                                     title={tile.title}
