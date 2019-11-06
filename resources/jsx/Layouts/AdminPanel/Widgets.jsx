@@ -6,7 +6,8 @@ import {
     List,
     ListItem,
     ListItemText,
-    ListItemSecondaryAction
+    ListItemSecondaryAction,
+    IconButton
 } from "@material-ui/core";
 import ReorderIcon from "@material-ui/icons/ReorderOutlined";
 import DeleteIcon from "@material-ui/icons/DeleteOutlineOutlined";
@@ -23,7 +24,14 @@ export default function Widgets() {
                                     primary="Links"
                                     secondary="Add your internal/external links"
                                 />
-                                <ListItemSecondaryAction></ListItemSecondaryAction>
+                                <ListItemSecondaryAction>
+                                    <IconButton>
+                                        <DeleteIcon />
+                                    </IconButton>
+                                    <IconButton>
+                                        <ReorderIcon />
+                                    </IconButton>
+                                </ListItemSecondaryAction>
                             </ListItem>
                         </List>
                     </Paper>
