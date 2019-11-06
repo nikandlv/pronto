@@ -18,20 +18,18 @@ export default function Settings() {
     const [tab, setTab] = React.useState(0);
     return (
         <div>
-            <AppBar className={styles.appbar} position="static" color="default">
-                <Tabs
-                    value={tab}
-                    onChange={(_, tab) => {
-                        setTab(tab);
-                    }}
-                    aria-label="Settings tabs"
-                >
-                    <Tab label="General" />
-                    <Tab label="Posts" />
-                    <Tab label="Comments" />
-                    <Tab label="Users" />
-                </Tabs>
-            </AppBar>
+            <Tabs
+                value={tab}
+                onChange={(_, tab) => {
+                    setTab(tab);
+                }}
+                aria-label="Settings tabs"
+            >
+                <Tab label="General" />
+                <Tab label="Posts" />
+                <Tab label="Comments" />
+                <Tab label="Users" />
+            </Tabs>
             <SwipeableViews index={tab}>
                 <General />
                 <Posts />
