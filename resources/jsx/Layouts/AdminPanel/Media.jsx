@@ -7,6 +7,7 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 import { Box, Paper } from "@material-ui/core";
+import StyledTitle from "../../Components/StyledTitle";
 
 const tileData = [
     {
@@ -106,6 +107,7 @@ export default function Media() {
 
     return (
         <Box m={3}>
+            <StyledTitle gutterBottom>Media</StyledTitle>
             <Paper>
                 <div className={classes.root}>
                     <GridList cellHeight={300} className={classes.gridList}>
