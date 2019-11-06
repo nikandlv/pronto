@@ -1,5 +1,34 @@
 import React from "react";
+import {
+    Box,
+    Grid,
+    Paper,
+    List,
+    ListItem,
+    ListItemText,
+    ListItemSecondaryAction
+} from "@material-ui/core";
+import ReorderIcon from "@material-ui/icons/ReorderOutlined";
+import DeleteIcon from "@material-ui/icons/DeleteOutlineOutlined";
 
 export default function Widgets() {
-    return <div></div>;
+    return (
+        <Box m={2}>
+            <Grid container justify="center">
+                <Grid item xs={11} sm={7} md={6} lg={5}>
+                    <Paper>
+                        <List>
+                            <ListItem>
+                                <ListItemText
+                                    primary="Links"
+                                    secondary="Add your internal/external links"
+                                />
+                                <ListItemSecondaryAction></ListItemSecondaryAction>
+                            </ListItem>
+                        </List>
+                    </Paper>
+                </Grid>
+            </Grid>
+        </Box>
+    );
 }
