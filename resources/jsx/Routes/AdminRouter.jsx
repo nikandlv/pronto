@@ -10,6 +10,7 @@ import Users from "../Layouts/AdminPanel/Users";
 import Settings from "../Layouts/AdminPanel/Settings";
 import posed, { PoseGroup } from "react-pose";
 import EditUser from "../Layouts/AdminPanel/EditUser";
+import Widgets from "../Layouts/AdminPanel/Widgets";
 
 const RouteContainer = posed.div({
     enter: { y: 0, opacity: 1, beforeChildren: true },
@@ -40,6 +41,11 @@ export default function AdminRouter(props) {
                         <Route
                             path="/admin/users/edit/:id"
                             component={EditUser}
+                            exact
+                        />
+                        <Route
+                            path="/admin/widgets"
+                            component={Widgets}
                             exact
                         />
                         <Route
