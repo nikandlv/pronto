@@ -2,9 +2,7 @@ import React from "react";
 import { Tabs, Tab, AppBar, makeStyles } from "@material-ui/core";
 import SwipeableViews from "react-swipeable-views";
 import General from "./Settings/General";
-import Posts from "./Settings/Posts";
 import Comments from "./Settings/Comments";
-import Users from "./Settings/Users";
 
 const useStyles = makeStyles({
     appbar: {
