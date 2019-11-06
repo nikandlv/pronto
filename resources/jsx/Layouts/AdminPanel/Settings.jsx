@@ -1,11 +1,15 @@
-import React from 'react';
-import { Tabs, Tab, AppBar, makeStyles } from '@material-ui/core';
-import SwipeableViews from 'react-swipeable-views';
+import React from "react";
+import { Tabs, Tab, AppBar, makeStyles } from "@material-ui/core";
+import SwipeableViews from "react-swipeable-views";
+import General from "./Settings/General";
+import Posts from "./Settings/Posts";
+import Comments from "./Settings/Comments";
+import Users from "./Settings/Users";
 
 const useStyles = makeStyles({
     appbar: {
-        borderRadius: '1rem',
-        overflow: 'hidden'
+        borderRadius: "1rem",
+        overflow: "hidden"
     }
 });
 
@@ -20,7 +24,7 @@ export default function Settings() {
                     onChange={(_, tab) => {
                         setTab(tab);
                     }}
-                    aria-label="simple tabs example"
+                    aria-label="Settings tabs"
                 >
                     <Tab label="General" />
                     <Tab label="Posts" />
@@ -29,10 +33,10 @@ export default function Settings() {
                 </Tabs>
             </AppBar>
             <SwipeableViews index={tab}>
-                <div>General</div>
-                <div>Posts</div>
-                <div>Comments</div>
-                <div>Users</div>
+                <General />
+                <Posts />
+                <Comments />
+                <Users />
             </SwipeableViews>
         </div>
     );

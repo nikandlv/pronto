@@ -23,6 +23,7 @@
         "popper.js": "^1.12",
         "react-localization": "^1.0.15",
         "react-pose": "^4.0.9",
+        "react-swipeable-views": "^0.13.3",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.15.2",
         "sass-loader": "^7.1.0",
