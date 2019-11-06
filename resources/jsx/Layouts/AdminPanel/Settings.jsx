@@ -4,15 +4,7 @@ import SwipeableViews from "react-swipeable-views";
 import General from "./Settings/General";
 import Comments from "./Settings/Comments";
 
-const useStyles = makeStyles({
-    appbar: {
-        borderRadius: "1rem",
-        overflow: "hidden"
-    }
-});
-
 export default function Settings() {
-    const styles = useStyles();
     const [tab, setTab] = React.useState(0);
     return (
         <div>
