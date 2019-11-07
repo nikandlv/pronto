@@ -10,7 +10,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import Switch from "@material-ui/core/Switch";
-import WifiIcon from "@material-ui/icons/Wifi";
+import BuildIcon from "@material-ui/icons/BuildOutlined";
 import LightIcon from "@material-ui/icons/BrightnessLowOutlined";
 import LightOutIcon from "@material-ui/icons/Brightness2Outlined";
 
@@ -81,22 +81,6 @@ function GeneralToggles() {
                 subheader={<ListSubheader>General</ListSubheader>}
                 className={classes.root}
             >
-                <ListItem button onClick={handleToggle("wifi")}>
-                    <ListItemIcon>
-                        <WifiIcon />
-                    </ListItemIcon>
-                    <ListItemText id="switch-list-label-wifi" primary="Wi-Fi" />
-                    <ListItemSecondaryAction>
-                        <Switch
-                            edge="end"
-                            onChange={handleToggle("wifi")}
-                            checked={checked.indexOf("wifi") !== -1}
-                            inputProps={{
-                                "aria-labelledby": "switch-list-label-wifi"
-                            }}
-                        />
-                    </ListItemSecondaryAction>
-                </ListItem>
                 <ListItem button onClick={handleToggle("bluetooth")}>
                     <ListItemIcon>
                         {checked.indexOf("bluetooth") !== -1 ? (
@@ -117,6 +101,26 @@ function GeneralToggles() {
                             checked={checked.indexOf("bluetooth") !== -1}
                             inputProps={{
                                 "aria-labelledby": "switch-list-label-bluetooth"
+                            }}
+                        />
+                    </ListItemSecondaryAction>
+                </ListItem>
+                <ListItem button onClick={handleToggle("maintenance")}>
+                    <ListItemIcon>
+                        <BuildIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                        id="switch-list-label-maintenance"
+                        primary="Maintenance mode"
+                        secondary="Restrict users from accessing the blog for upgrades"
+                    />
+                    <ListItemSecondaryAction>
+                        <Switch
+                            edge="end"
+                            onChange={handleToggle("maintenance")}
+                            checked={checked.indexOf("maintenance") !== -1}
+                            inputProps={{
+                                "aria-labelledby": "switch-list-label-wifi"
                             }}
                         />
                     </ListItemSecondaryAction>
