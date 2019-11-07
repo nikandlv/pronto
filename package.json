@@ -12,6 +12,7 @@
     "devDependencies": {
         "@babel/plugin-proposal-class-properties": "^7.5.5",
         "@babel/preset-react": "^7.0.0",
+        "array-move": "^2.2.0",
         "axios": "^0.19",
         "axios-endpoint": "^1.0.1",
         "bootstrap": "^4.1.0",
@@ -25,6 +26,7 @@
         "popper.js": "^1.12",
         "react-localization": "^1.0.15",
         "react-pose": "^4.0.9",
+        "react-sortable-hoc": "^1.10.1",
         "react-swipeable-views": "^0.13.3",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.15.2",
