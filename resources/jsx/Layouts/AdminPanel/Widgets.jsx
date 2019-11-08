@@ -77,7 +77,11 @@ class SortableComponent extends React.Component {
     };
     render() {
         return (
-            <SortableList items={this.state.items} onSortEnd={this.onSortEnd} />
+            <SortableList
+                useDragHandle
+                items={this.state.items}
+                onSortEnd={this.onSortEnd}
+            />
         );
     }
 }
