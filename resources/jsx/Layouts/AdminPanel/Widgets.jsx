@@ -52,7 +52,7 @@ const SortableItem = SortableElement(({ value }) => (
     </div>
 ));
 
-const SortableList = SortableContainer(({ items }) => {
+const SortableList = SortableContainer(({ open, setOpen, items }) => {
     return (
         <List component="ul">
             {items.map((value, index) => (
@@ -60,6 +60,8 @@ const SortableList = SortableContainer(({ items }) => {
                     key={`item-${value}`}
                     index={index}
                     value={value}
+                    open={open}
+                    setOpen={setOpen}
                 />
             ))}
         </List>
@@ -68,11 +70,14 @@ const SortableList = SortableContainer(({ items }) => {
 
 class SortableComponent extends React.Component {
     render() {
+        const { items, onSortEnd, open, setOpen } = this.props;
         return (
             <SortableList
                 useDragHandle
-                items={this.props.items}
-                onSortEnd={this.props.onSortEnd}
+                items={items}
+                onSortEnd={onSortEnd}
+                open={open}
+                setOpen={setOpen}
             />
         );
     }
@@ -107,9 +112,12 @@ class WidgetManager extends React.Component {
         });
     }
     render() {
+        const { open, items } = this.state;
         return (
             <SortableComponent
                 items={items}
+                open={open}
+                setOpen={this.setOpen.bind(this)}
                 onSortEnd={this.onSortEnd.bind(this)}
             />
         );
