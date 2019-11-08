@@ -39,6 +39,14 @@ export default function General() {
                         </CardContent>
                     </Card>
                     <br />
+                    <Card className={styles.paper}>
+                        <CardContent>
+                            <StyledTextField fullWidth>
+                                Base Path
+                            </StyledTextField>
+                        </CardContent>
+                    </Card>
+                    <br />
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <GeneralToggles />
