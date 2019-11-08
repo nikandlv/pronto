@@ -22,6 +22,8 @@ import {
 import arrayMove from "array-move";
 import { makeStyles } from "@material-ui/styles";
 import StyledButton from "../../Components/StyledButton";
+import Prompt from "mui-prompt";
+
 const DragHandle = SortableHandle(() => (
     <IconButton>
         <ReorderIcon />
@@ -37,9 +39,11 @@ const SortableItem = SortableElement(({ value }) => (
                     secondary="Add your internal/external links"
                 />
                 <ListItemSecondaryAction>
-                    <IconButton>
-                        <DeleteIcon />
-                    </IconButton>
+                    <Prompt.Inline continueText="Delete">
+                        <IconButton>
+                            <DeleteIcon />
+                        </IconButton>
+                    </Prompt.Inline>
                     <DragHandle />
                 </ListItemSecondaryAction>
             </ListItem>
