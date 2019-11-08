@@ -30,7 +30,11 @@ const useStyles = makeStyles(theme => ({
     },
     drawer: {},
     appBar: {
-        zIndex: 1250
+        zIndex: 1250,
+        margin: theme.spacing(2),
+        boxSizing: "border-box",
+        top: 0,
+        left: 0
     },
     menuButton: {
         marginRight: theme.spacing(2),
@@ -197,7 +201,7 @@ function ResponsiveDrawer(props) {
                     hasExpand
                     expanded={expanded}
                     className={classes.appBar}
-                    position="absolute"
+                    position="fixed"
                     onMenuClick={handleDrawerToggle}
                     onExpandClick={handleExpandToggle}
                 />
