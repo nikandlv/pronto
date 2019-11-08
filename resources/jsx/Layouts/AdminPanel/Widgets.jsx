@@ -53,7 +53,9 @@ const SortableItem = SortableElement(({ value, open, setOpen }) => {
                         <DragHandle />
                     </ListItemSecondaryAction>
                 </ListItem>
-                <Collapse in={isOpen}></Collapse>
+                <Collapse in={isOpen}>
+                    <StyledButton>Hello!</StyledButton>
+                </Collapse>
             </Paper>
             <br />
         </div>
