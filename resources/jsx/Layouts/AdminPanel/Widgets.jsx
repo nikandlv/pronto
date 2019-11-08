@@ -18,6 +18,7 @@ import {
 } from "react-sortable-hoc";
 import arrayMove from "array-move";
 import { makeStyles } from "@material-ui/styles";
+import StyledButton from "../../Components/StyledButton";
 const DragHandle = SortableHandle(() => (
     <IconButton>
         <ReorderIcon />
@@ -25,20 +26,23 @@ const DragHandle = SortableHandle(() => (
 ));
 
 const SortableItem = SortableElement(({ value }) => (
-    <Paper>
-        <ListItem>
-            <ListItemText
-                primary="Links 2"
-                secondary="Add your internal/external links"
-            />
-            <ListItemSecondaryAction>
-                <IconButton>
-                    <DeleteIcon />
-                </IconButton>
-                <DragHandle />
-            </ListItemSecondaryAction>
-        </ListItem>
-    </Paper>
+    <div>
+        <Paper>
+            <ListItem>
+                <ListItemText
+                    primary={value}
+                    secondary="Add your internal/external links"
+                />
+                <ListItemSecondaryAction>
+                    <IconButton>
+                        <DeleteIcon />
+                    </IconButton>
+                    <DragHandle />
+                </ListItemSecondaryAction>
+            </ListItem>
+        </Paper>
+        <br />
+    </div>
 ));
 
 const SortableList = SortableContainer(({ items }) => {
@@ -76,14 +80,31 @@ const useStyles = makeStyles({
         body: {
             listStyleType: "none"
         }
+    },
+    button: {
+        display: "flex",
+        justifyContent: "center",
+        margin: 16
     }
 });
 
 export default function Widgets() {
     const styles = useStyles();
     return (
-        <Box m={2} className={styles}>
+        <Box m={2}>
             <Grid container justify="center">
+                <Grid
+                    item
+                    xs={11}
+                    sm={7}
+                    md={6}
+                    lg={5}
+                    className={styles.button}
+                >
+                    <StyledButton size="large">Add a widget</StyledButton>
+                    <br />
+                </Grid>
+                <Grid item xs={12} />
                 <Grid item xs={11} sm={7} md={6} lg={5}>
                     <SortableComponent />
                 </Grid>
