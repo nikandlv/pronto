@@ -11,14 +11,42 @@ import {
 } from "@material-ui/core";
 import ReorderIcon from "@material-ui/icons/ReorderOutlined";
 import DeleteIcon from "@material-ui/icons/DeleteOutlineOutlined";
-import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import {
+    SortableContainer,
+    SortableElement,
+    SortableHandle
+} from "react-sortable-hoc";
 import arrayMove from "array-move";
+const DragHandle = SortableHandle(() => (
+    <IconButton>
+        <ReorderIcon />
+    </IconButton>
+));
 
-const SortableItem = SortableElement(({ value }) => <li>{value}</li>);
+const SortableItem = SortableElement(({ value }) => (
+    <Paper>
+        <ListItem
+            styles={{
+                listStyleType: "none"
+            }}
+        >
+            <ListItemText
+                primary="Links 2"
+                secondary="Add your internal/external links"
+            />
+            <ListItemSecondaryAction>
+                <IconButton>
+                    <DeleteIcon />
+                </IconButton>
+                <DragHandle />
+            </ListItemSecondaryAction>
+        </ListItem>
+    </Paper>
+));
 
 const SortableList = SortableContainer(({ items }) => {
     return (
-        <ul>
+        <List>
             {items.map((value, index) => (
                 <SortableItem
                     key={`item-${value}`}
@@ -26,7 +54,7 @@ const SortableList = SortableContainer(({ items }) => {
                     value={value}
                 />
             ))}
-        </ul>
+        </List>
     );
 });
 
@@ -51,42 +79,7 @@ export default function Widgets() {
         <Box m={2}>
             <Grid container justify="center">
                 <Grid item xs={11} sm={7} md={6} lg={5}>
-                    <List>
-                        <SortableComponent />
-                        <Paper>
-                            <ListItem>
-                                <ListItemText
-                                    primary="Links"
-                                    secondary="Add your internal/external links"
-                                />
-                                <ListItemSecondaryAction>
-                                    <IconButton>
-                                        <DeleteIcon />
-                                    </IconButton>
-                                    <IconButton>
-                                        <ReorderIcon />
-                                    </IconButton>
-                                </ListItemSecondaryAction>
-                            </ListItem>
-                        </Paper>
-                        <br />
-                        <Paper>
-                            <ListItem>
-                                <ListItemText
-                                    primary="Links 2"
-                                    secondary="Add your internal/external links"
-                                />
-                                <ListItemSecondaryAction>
-                                    <IconButton>
-                                        <DeleteIcon />
-                                    </IconButton>
-                                    <IconButton>
-                                        <ReorderIcon />
-                                    </IconButton>
-                                </ListItemSecondaryAction>
-                            </ListItem>
-                        </Paper>
-                    </List>
+                    <SortableComponent />
                 </Grid>
             </Grid>
         </Box>
