@@ -9,7 +9,8 @@ import {
     ListItemSecondaryAction,
     IconButton,
     Menu,
-    MenuItem
+    MenuItem,
+    Collapse
 } from "@material-ui/core";
 import ReorderIcon from "@material-ui/icons/ReorderOutlined";
 import DeleteIcon from "@material-ui/icons/DeleteOutlineOutlined";
@@ -30,27 +31,34 @@ const DragHandle = SortableHandle(() => (
     </IconButton>
 ));
 
-const SortableItem = SortableElement(({ value }) => (
-    <div>
-        <Paper>
-            <ListItem button>
-                <ListItemText
-                    primary={value}
-                    secondary="Add your internal/external links"
-                />
-                <ListItemSecondaryAction>
-                    <Prompt.Inline continueText="Delete">
-                        <IconButton>
-                            <DeleteIcon />
-                        </IconButton>
-                    </Prompt.Inline>
-                    <DragHandle />
-                </ListItemSecondaryAction>
-            </ListItem>
-        </Paper>
-        <br />
-    </div>
-));
+const SortableItem = SortableElement(({ value, open, setOpen }) => {
+    let isOpen = open[value] === true;
+    function openDetails() {
+        setOpen(value, !isOpen);
+    }
+    return (
+        <div>
+            <Paper>
+                <ListItem button onClick={openDetails}>
+                    <ListItemText
+                        primary={value}
+                        secondary="Add your internal/external links"
+                    />
+                    <ListItemSecondaryAction>
+                        <Prompt.Inline continueText="Delete">
+                            <IconButton>
+                                <DeleteIcon />
+                            </IconButton>
+                        </Prompt.Inline>
+                        <DragHandle />
+                    </ListItemSecondaryAction>
+                </ListItem>
+                <Collapse in={isOpen}></Collapse>
+            </Paper>
+            <br />
+        </div>
+    );
+});
 
 const SortableList = SortableContainer(({ open, setOpen, items }) => {
     return (
