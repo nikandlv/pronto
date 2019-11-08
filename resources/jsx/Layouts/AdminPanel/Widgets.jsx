@@ -17,6 +17,7 @@ import {
     SortableHandle
 } from "react-sortable-hoc";
 import arrayMove from "array-move";
+import { makeStyles } from "@material-ui/styles";
 const DragHandle = SortableHandle(() => (
     <IconButton>
         <ReorderIcon />
@@ -25,11 +26,7 @@ const DragHandle = SortableHandle(() => (
 
 const SortableItem = SortableElement(({ value }) => (
     <Paper>
-        <ListItem
-            styles={{
-                listStyleType: "none"
-            }}
-        >
+        <ListItem>
             <ListItemText
                 primary="Links 2"
                 secondary="Add your internal/external links"
@@ -46,7 +43,7 @@ const SortableItem = SortableElement(({ value }) => (
 
 const SortableList = SortableContainer(({ items }) => {
     return (
-        <List>
+        <List component="ul">
             {items.map((value, index) => (
                 <SortableItem
                     key={`item-${value}`}
@@ -74,9 +71,18 @@ class SortableComponent extends React.Component {
     }
 }
 
+const useStyles = makeStyles({
+    "@global": {
+        body: {
+            listStyleType: "none"
+        }
+    }
+});
+
 export default function Widgets() {
+    const styles = useStyles();
     return (
-        <Box m={2}>
+        <Box m={2} className={styles}>
             <Grid container justify="center">
                 <Grid item xs={11} sm={7} md={6} lg={5}>
                     <SortableComponent />
