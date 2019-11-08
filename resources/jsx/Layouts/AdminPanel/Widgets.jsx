@@ -7,7 +7,9 @@ import {
     ListItem,
     ListItemText,
     ListItemSecondaryAction,
-    IconButton
+    IconButton,
+    Menu,
+    MenuItem
 } from "@material-ui/core";
 import ReorderIcon from "@material-ui/icons/ReorderOutlined";
 import DeleteIcon from "@material-ui/icons/DeleteOutlineOutlined";
@@ -89,7 +91,16 @@ const useStyles = makeStyles({
 });
 
 export default function Widgets() {
+    const [anchorEl, setAnchorEl] = React.useState(null);
     const styles = useStyles();
+
+    const handleClick = event => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
     return (
         <Box m={2}>
             <Grid container justify="center">
@@ -101,7 +112,29 @@ export default function Widgets() {
                     lg={5}
                     className={styles.button}
                 >
-                    <StyledButton size="large">Add a widget</StyledButton>
+                    <StyledButton size="large" onClick={handleClick}>
+                        Add a widget
+                    </StyledButton>
+                    <Menu
+                        id="add-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
+                    >
+                        <MenuItem onClick={handleClose}>
+                            Add a link widget
+                        </MenuItem>
+                        <MenuItem onClick={handleClose}>
+                            Add a github widget
+                        </MenuItem>
+                        <MenuItem onClick={handleClose}>
+                            Add a author widget
+                        </MenuItem>
+                        <MenuItem onClick={handleClose}>
+                            Add a text widget
+                        </MenuItem>
+                    </Menu>
                     <br />
                 </Grid>
                 <Grid item xs={12} />
