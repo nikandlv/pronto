@@ -67,20 +67,12 @@ const SortableList = SortableContainer(({ items }) => {
 });
 
 class SortableComponent extends React.Component {
-    state = {
-        items: ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6"]
-    };
-    onSortEnd = ({ oldIndex, newIndex }) => {
-        this.setState(({ items }) => ({
-            items: arrayMove(items, oldIndex, newIndex)
-        }));
-    };
     render() {
         return (
             <SortableList
                 useDragHandle
-                items={this.state.items}
-                onSortEnd={this.onSortEnd}
+                items={this.props.items}
+                onSortEnd={this.props.onSortEnd}
             />
         );
     }
@@ -98,6 +90,31 @@ const useStyles = makeStyles({
         margin: 16
     }
 });
+
+class WidgetManager extends React.Component {
+    state = {
+        items: ["Item 1", "Item 2", "Item 3"],
+        open: []
+    };
+    onSortEnd({ oldIndex, newIndex }) {
+        this.setState(({ items }) => ({
+            items: arrayMove(items, oldIndex, newIndex)
+        }));
+    }
+    setOpen(key, value) {
+        this.setState({
+            open: { ...this.state.open, [key]: value }
+        });
+    }
+    render() {
+        return (
+            <SortableComponent
+                items={items}
+                onSortEnd={this.onSortEnd.bind(this)}
+            />
+        );
+    }
+}
 
 export default function Widgets() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -149,7 +166,7 @@ export default function Widgets() {
                 </Grid>
                 <Grid item xs={12} />
                 <Grid item xs={11} sm={7} md={6} lg={5}>
-                    <SortableComponent />
+                    <WidgetManager />
                 </Grid>
             </Grid>
         </Box>
