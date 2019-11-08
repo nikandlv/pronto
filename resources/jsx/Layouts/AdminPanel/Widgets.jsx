@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core";
 import ReorderIcon from "@material-ui/icons/ReorderOutlined";
 import DeleteIcon from "@material-ui/icons/DeleteOutlineOutlined";
+import AddIcon from "@material-ui/icons/AddOutlined";
 import {
     SortableContainer,
     SortableElement,
@@ -113,6 +114,7 @@ export default function Widgets() {
                     className={styles.button}
                 >
                     <StyledButton size="large" onClick={handleClick}>
+                        <AddIcon />
                         Add a widget
                     </StyledButton>
                     <Menu
