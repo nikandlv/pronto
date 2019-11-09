@@ -26,6 +26,7 @@ import arrayMove from "array-move";
 import { makeStyles } from "@material-ui/styles";
 import StyledButton from "../../Components/StyledButton";
 import Prompt from "mui-prompt";
+import clsx from "clsx";
 
 const DragHandle = SortableHandle(() => (
     <IconButton>
@@ -35,6 +36,13 @@ const DragHandle = SortableHandle(() => (
 
 const SortableItem = SortableElement(({ item, open, setOpen }) => {
     let isOpen = open[item.id] === true;
+    let title = item.type;
+    let description = item.type;
+    if (title === "GITHUB_WIDGET") {
+        title = "Github activity widget";
+        description = "Show contribution history and activities";
+    }
+
     function openDetails() {
         setOpen(item.id, !isOpen);
     }
@@ -42,10 +50,7 @@ const SortableItem = SortableElement(({ item, open, setOpen }) => {
         <div>
             <Paper>
                 <ListItem button onClick={openDetails}>
-                    <ListItemText
-                        primary={item.type}
-                        secondary="Add your internal/external links"
-                    />
+                    <ListItemText primary={title} secondary={description} />
                     <ListItemSecondaryAction>
                         <Prompt.Inline continueText="Delete">
                             <IconButton>
@@ -63,6 +68,22 @@ const SortableItem = SortableElement(({ item, open, setOpen }) => {
                                 variant="outlined"
                                 fullWidth
                             />
+                        ) : null}
+                        {item.type === "GITHUB_WIDGET" ? (
+                            <React.Fragment>
+                                <TextField
+                                    label="Github Username"
+                                    variant="outlined"
+                                    fullWidth
+                                />
+                                <br />
+                                <br />
+                                <TextField
+                                    label="Activity Limit"
+                                    variant="outlined"
+                                    fullWidth
+                                />
+                            </React.Fragment>
                         ) : null}
                     </CardContent>
                 </Collapse>
