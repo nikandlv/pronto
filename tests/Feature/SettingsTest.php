@@ -8,15 +8,20 @@ use Tests\TestCase;
 
 class SettingsTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function testExample()
-    {
-        $response = $this->get('/');
+    use RefreshDatabase;
 
-        $response->assertStatus(200);
+    /** @test **/
+    public function a_user_can_store_settings()
+    {
+        $this->withoutExceptionHandling();
+        $user = $this->signIn();
+
+        $this->postJson($user->path() . '/settings', [
+            'theme' => 'dark'
+        ]);
+
+        $this->assertDatabaseHas('settings', [
+            'theme' => 'dark'
+        ]);
     }
 }
