@@ -10,18 +10,19 @@ class SettingsTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test **/
+    /** @test * */
     public function a_user_can_store_settings()
     {
         $this->withoutExceptionHandling();
         $user = $this->signIn();
 
         $this->postJson($user->path() . '/settings', [
-            'theme' => 'dark'
+            'settings' => [
+                'theme' => 'dark'
+            ]
         ]);
 
-        $this->assertDatabaseHas('settings', [
-            'theme' => 'dark'
-        ]);
+
+        $this->assertEquals('dark', $this->getSetting('theme'));
     }
 }

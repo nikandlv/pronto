@@ -19,4 +19,19 @@ class UserUnitTest extends TestCase
 
         $this->assertEquals('api/users/' . $user->id, $user->path());
     }
+
+    /** @test **/
+    public function it_can_update_its_settings()
+    {
+        $this->withoutExceptionHandling();
+        $user = factory(User::class)->create();
+
+        $settings = ['settings' => ['theme' => 'dark']];
+
+        $user->updateSettings($settings);
+
+        $this->assertDatabaseHas('settings' , [
+            'theme' => 'dark'
+        ]);
+    }
 }
