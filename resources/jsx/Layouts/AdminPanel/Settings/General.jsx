@@ -1,7 +1,7 @@
 import React from "react";
 import StyledTitle from "../../../Components/StyledTitle";
 import StyledTextField from "../../../Components/StyledTextField";
-import { Paper, Grid, Card, CardContent, Box } from "@material-ui/core";
+import { Paper, Grid, Card, CardContent, Box, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -13,6 +13,7 @@ import Switch from "@material-ui/core/Switch";
 import BuildIcon from "@material-ui/icons/BuildOutlined";
 import LightIcon from "@material-ui/icons/BrightnessLowOutlined";
 import LightOutIcon from "@material-ui/icons/Brightness2Outlined";
+import { CirclePicker } from "react-color";
 
 const useGeneralStyles = makeStyles({
     container: {
@@ -29,7 +30,7 @@ export default function General() {
     return (
         <Box p={2}>
             <StyledTitle>General</StyledTitle>
-            <Grid container>
+            <Grid container justify="center">
                 <Grid item xs={12} md={6}>
                     <Card className={styles.paper}>
                         <CardContent>

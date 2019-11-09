@@ -8,6 +8,7 @@ mixDependency.require('axios');
 mixDependency.require('axios-endpoint');
 mixDependency.require('@babel/plugin-proposal-class-properties');
 mixDependency.require('react-swipeable-views');
+mixDependency.require('react-color');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management

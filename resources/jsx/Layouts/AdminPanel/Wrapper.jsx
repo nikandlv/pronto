@@ -15,15 +15,17 @@ import MediaIcon from "@material-ui/icons/PermMediaOutlined";
 import UploadIcon from "@material-ui/icons/CloudUploadOutlined";
 import PostIcon from "@material-ui/icons/ReceiptOutlined";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Topbar from "../Blog/Topbar";
+import WidgetIcon from "@material-ui/icons/WidgetsOutlined";
 import { Box } from "@material-ui/core";
+import Topbar from "../Blog/Topbar";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
     root: {
         display: "flex",
-        position: "relative"
+        position: "relative",
+        maxWidth: "100vw"
     },
     drawer: {
         [theme.breakpoints.up("sm")]: {
@@ -44,14 +46,23 @@ const useStyles = makeStyles(theme => ({
     drawerPaper: {
         width: drawerWidth,
         margin: 16,
-        borderRadius: 16,
+        maxHeight: "95%",
         paddingTop: 64,
-        borderLeft: "1px solid rgba(0, 0, 0, 0.12)"
+        borderRadius: 24,
+        borderLeft: "1px solid rgba(0, 0, 0, 0.12)",
+        borderBottom: "2px solid rgba(0, 0, 0, 0.12)"
     },
     content: {
         flexGrow: 1,
-        padding: theme.spacing(3)
-    }
+        paddingTop: 64,
+
+        maxWidth: `calc( 100vw - ${drawerWidth + 24}px )`,
+        overflowX: "hidden",
+        [theme.breakpoints.down("sm")]: {
+            maxWidth: "calc( 100vw - 24px )"
+        }
+    },
+    icon: {}
 }));
 
 function ResponsiveDrawer(props) {
@@ -73,43 +84,49 @@ function ResponsiveDrawer(props) {
             <List>
                 <ListItem button onClick={navigate("/admin")}>
                     <ListItemIcon>
-                        <ExploreIcon />
+                        <ExploreIcon className={classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Overview" />
                 </ListItem>
                 <ListItem button onClick={navigate("/admin/categories")}>
                     <ListItemIcon>
-                        <CategoryIcon />
+                        <CategoryIcon className={classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Categories" />
                 </ListItem>
                 <ListItem button onClick={navigate("/admin/posts")}>
                     <ListItemIcon>
-                        <PostIcon />
+                        <PostIcon className={classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Posts" />
                 </ListItem>
                 <ListItem button onClick={navigate("/admin/media")}>
                     <ListItemIcon>
-                        <MediaIcon />
+                        <MediaIcon className={classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Media" />
                 </ListItem>
                 <ListItem button onClick={navigate("/admin/uploads")}>
                     <ListItemIcon>
-                        <UploadIcon />
+                        <UploadIcon className={classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Uploads" />
                 </ListItem>
                 <ListItem button onClick={navigate("/admin/users")}>
                     <ListItemIcon>
-                        <UsersIcon />
+                        <UsersIcon className={classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Users" />
                 </ListItem>
+                <ListItem button onClick={navigate("/admin/widgets")}>
+                    <ListItemIcon>
+                        <WidgetIcon className={classes.icon} />
+                    </ListItemIcon>
+                    <ListItemText primary="Widgets" />
+                </ListItem>
                 <ListItem button onClick={navigate("/admin/settings")}>
                     <ListItemIcon>
-                        <SettingsIcon />
+                        <SettingsIcon className={classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Settings" />
                 </ListItem>
@@ -121,10 +138,10 @@ function ResponsiveDrawer(props) {
         <Box m={2}>
             <div className={classes.root}>
                 <Topbar
-                    position="absolute"
-                    className={classes.appBar}
                     hasMenu
-                    onMenuClick={handleDrawerToggle.bind(this)}
+                    className={classes.appBar}
+                    position="absolute"
+                    onMenuClick={handleDrawerToggle}
                 />
                 <nav className={classes.drawer} aria-label="mailbox folders">
                     {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -159,10 +176,7 @@ function ResponsiveDrawer(props) {
                         </Drawer>
                     </Hidden>
                 </nav>
-                <main className={classes.content}>
-                    <div className={classes.toolbar} />
-                    {props.children}
-                </main>
+                <main className={classes.content}>{props.children}</main>
             </div>
         </Box>
     );
