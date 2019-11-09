@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
+    /**
+     * store a setting for given user
+     *
+     * @param User $user
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function store(User $user)
     {
 //        we have settings key in the array for validation

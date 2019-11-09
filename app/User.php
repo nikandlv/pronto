@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\pronto\traits\hasSettings;
 use Cassandra\Collection;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,7 +13,7 @@ use App\Settings;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasApiTokens;
+    use Notifiable, HasApiTokens, hasSettings;
 
     /**
      * The attributes that are mass assignable.
@@ -49,29 +50,5 @@ class User extends Authenticatable
     public function path()
     {
         return 'api/users/' . $this->id;
-    }
-
-    public function updateSettings($settings)
-    {
-        foreach ($settings as $key => $value) {
-            $this->settings()->updateOrCreate([
-                'user_id' => $this->id,
-                'key' => $key,
-                'value' => $value
-            ]);
-        }
-    }
-
-    public function settings()
-    {
-        return $this->hasMany(Settings::class, 'user_id', 'id');
-    }
-
-    public function settingValue($key)
-    {
-        return $this->settings()
-            ->where('user_id', $this->id)
-            ->where('key', $key)
-            ->pluck('value')[0];
     }
 }
