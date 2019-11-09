@@ -55,7 +55,7 @@ class User extends Authenticatable
     {
         foreach ($settings as $key => $value) {
             $this->settings()->updateOrCreate([
-                'user_id'=> $this->id,
+                'user_id' => $this->id,
                 'key' => $key,
                 'value' => $value
             ]);
@@ -65,5 +65,13 @@ class User extends Authenticatable
     public function settings()
     {
         return $this->hasMany(Settings::class, 'user_id', 'id');
+    }
+
+    public function settingValue($key)
+    {
+        return $this->settings()
+            ->where('user_id', $this->id)
+            ->where('key', $key)
+            ->pluck('value')[0];
     }
 }

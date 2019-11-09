@@ -22,7 +22,6 @@ class SettingsTest extends TestCase
             ]
         ])->assertExactJson(['message' => 'setting updated successfully']);
 
-
-        $this->assertEquals('dark', $user->getSetting('theme'));
+        $this->assertEquals('dark', $user->settingValue('theme'));
     }
 }

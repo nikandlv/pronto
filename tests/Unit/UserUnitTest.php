@@ -68,6 +68,6 @@ class UserUnitTest extends TestCase
 
         $user->updateSettings($settings);
 
-        $this->assertEquals('dark' , $user->getSetting('theme'));
+        $this->assertEquals('dark', $user->settingValue('theme'));
     }
 }
