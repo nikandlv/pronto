@@ -108,7 +108,7 @@ const useStyles = makeStyles({
 
 class WidgetManager extends React.Component {
     state = {
-        items: ["Item 1", "Item 2", "Item 3"],
+        items: [{ id: 1, type: "GITHUB_WIDGET", config: {}, order: 0 }],
         open: []
     };
     onSortEnd({ oldIndex, newIndex }) {
