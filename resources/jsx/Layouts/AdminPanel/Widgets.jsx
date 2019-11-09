@@ -10,7 +10,9 @@ import {
     IconButton,
     Menu,
     MenuItem,
-    Collapse
+    Collapse,
+    TextField,
+    CardContent
 } from "@material-ui/core";
 import ReorderIcon from "@material-ui/icons/ReorderOutlined";
 import DeleteIcon from "@material-ui/icons/DeleteOutlineOutlined";
@@ -54,7 +56,9 @@ const SortableItem = SortableElement(({ item, open, setOpen }) => {
                     </ListItemSecondaryAction>
                 </ListItem>
                 <Collapse in={isOpen}>
-                    <StyledButton>Hello!</StyledButton>
+                    <CardContent>
+                        <TextField label="Text" variant="outlined" fullWidth />
+                    </CardContent>
                 </Collapse>
             </Paper>
             <br />
