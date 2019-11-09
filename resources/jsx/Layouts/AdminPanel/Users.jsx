@@ -6,7 +6,16 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { Box, Avatar, Typography } from "@material-ui/core";
+import TrashIcon from "@material-ui/icons/DeleteOutlineOutlined";
+import EditIcon from "@material-ui/icons/EditOutlined";
+import {
+    Box,
+    Avatar,
+    Typography,
+    Chip,
+    Tooltip,
+    IconButton
+} from "@material-ui/core";
 import StyledTitle from "../../Components/StyledTitle";
 
 const useStyles = makeStyles({
@@ -46,9 +55,9 @@ function UsersTable() {
                 <TableHead>
                     <TableRow>
                         <TableCell>Avatar/Name</TableCell>
-                        <TableCell align="center">Calories</TableCell>
-                        <TableCell align="center">Fat&nbsp;(g)</TableCell>
-                        <TableCell align="center">Carbs&nbsp;(g)</TableCell>
+                        <TableCell>Email</TableCell>
+                        <TableCell align="center">Badges</TableCell>
+                        <TableCell align="center">Signup date</TableCell>
                         <TableCell align="center">Actions</TableCell>
                     </TableRow>
                 </TableHead>
@@ -66,10 +75,29 @@ function UsersTable() {
                                     </Typography>
                                 </div>
                             </TableCell>
-                            <TableCell align="center">{row.calories}</TableCell>
-                            <TableCell align="center">{row.fat}</TableCell>
-                            <TableCell align="center">{row.carbs}</TableCell>
-                            <TableCell align="center">{row.protein}</TableCell>
+                            <TableCell>
+                                <Typography>example@example.com</Typography>
+                            </TableCell>
+                            <TableCell align="center">
+                                <Chip label="verified" />
+                            </TableCell>
+                            <TableCell align="center">
+                                <Tooltip title="2019-06-01 10:12:51">
+                                    <Typography>Oct 26</Typography>
+                                </Tooltip>
+                            </TableCell>
+                            <TableCell align="center">
+                                <Tooltip title="Delete User ">
+                                    <IconButton size="small">
+                                        <TrashIcon />
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip title="Edit User ">
+                                    <IconButton size="small">
+                                        <EditIcon />
+                                    </IconButton>
+                                </Tooltip>
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
