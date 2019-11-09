@@ -55,4 +55,19 @@ class UserUnitTest extends TestCase
 
         $this->assertInstanceOf(Collection::class, $user->settings);
     }
+
+    /** @test **/
+    public function it_can_get_a_specific_setting()
+    {
+        $this->withoutExceptionHandling();
+        $user = $this->signIn();
+
+        $settings = [
+            'theme' => 'dark'
+        ];
+
+        $user->updateSettings($settings);
+
+        $this->assertEquals('dark' , $user->getSetting('theme'));
+    }
 }

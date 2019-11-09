@@ -20,9 +20,9 @@ class SettingsTest extends TestCase
             'settings' => [
                 'theme' => 'dark'
             ]
-        ]);
+        ])->assertExactJson(['message' => 'setting updated successfully']);
 
 
-        $this->assertEquals('dark', $this->getSetting('theme'));
+        $this->assertEquals('dark', $user->getSetting('theme'));
     }
 }
