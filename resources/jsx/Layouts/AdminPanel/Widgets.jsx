@@ -31,17 +31,17 @@ const DragHandle = SortableHandle(() => (
     </IconButton>
 ));
 
-const SortableItem = SortableElement(({ value, open, setOpen }) => {
-    let isOpen = open[value] === true;
+const SortableItem = SortableElement(({ item, open, setOpen }) => {
+    let isOpen = open[item.id] === true;
     function openDetails() {
-        setOpen(value, !isOpen);
+        setOpen(item.id, !isOpen);
     }
     return (
         <div>
             <Paper>
                 <ListItem button onClick={openDetails}>
                     <ListItemText
-                        primary={value}
+                        primary={item.type}
                         secondary="Add your internal/external links"
                     />
                     <ListItemSecondaryAction>
@@ -65,11 +65,11 @@ const SortableItem = SortableElement(({ value, open, setOpen }) => {
 const SortableList = SortableContainer(({ open, setOpen, items }) => {
     return (
         <List component="ul">
-            {items.map((value, index) => (
+            {items.map((item, index) => (
                 <SortableItem
-                    key={`item-${value}`}
+                    key={`item-${item.id}`}
                     index={index}
-                    value={value}
+                    item={item}
                     open={open}
                     setOpen={setOpen}
                 />
@@ -108,7 +108,36 @@ const useStyles = makeStyles({
 
 class WidgetManager extends React.Component {
     state = {
-        items: [{ id: 1, type: "GITHUB_WIDGET", config: {}, order: 0 }],
+        items: [
+            {
+                id: 1,
+                type: "LINK_WIDGET",
+                config: {},
+                order: 0,
+                position: "SIDEBAR"
+            },
+            {
+                id: 2,
+                type: "GITHUB_WIDGET",
+                config: {},
+                order: 0,
+                position: "SIDEBAR"
+            },
+            {
+                id: 3,
+                type: "TEXT_WIDGET",
+                config: {},
+                order: 0,
+                position: "SIDEBAR"
+            },
+            {
+                id: 4,
+                type: "AUTHORS_WIDGET",
+                config: {},
+                order: 0,
+                position: "SIDEBAR"
+            }
+        ],
         open: []
     };
     onSortEnd({ oldIndex, newIndex }) {
