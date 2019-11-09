@@ -12,6 +12,9 @@
 |
 */
 
+// Startup
+Route::get('/' , 'StartupController@index');
+
 // Auth system
 Route::post('/login', 'LoginController@login')->name('login');
 Route::post('/register', 'AuthController@store')->name('register');
@@ -23,6 +26,7 @@ Route::patch('/users/{user}/admin' , 'AdminController@update')->middleware('auth
 
 // hasSettings
 Route::post('/users/{user}/settings' , 'SettingsController@store')->middleware('auth:api')->name('settings');
+
 
 Route::middleware(['auth:api'])->group(function () {
     Route::post('/posts' , 'PostsController@store');
