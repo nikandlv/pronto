@@ -8,15 +8,10 @@ use Tests\TestCase;
 
 class StartupTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function testExample()
-    {
-        $response = $this->get('/');
+    use RefreshDatabase;
 
-        $response->assertStatus(200);
+    /** @test **/
+    public function in_the_application_startup_configuration_and_current_logged_in_user_can_be_fetched()
+    {
     }
 }
