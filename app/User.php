@@ -37,4 +37,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * get user path
+     *
+     * @return string
+     */
+    public function path()
+    {
+        return '/users/' . $this->id;
+    }
 }
