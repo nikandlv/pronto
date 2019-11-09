@@ -57,7 +57,13 @@ const SortableItem = SortableElement(({ item, open, setOpen }) => {
                 </ListItem>
                 <Collapse in={isOpen}>
                     <CardContent>
-                        <TextField label="Text" variant="outlined" fullWidth />
+                        {item.type === "TEXT_WIDGET" ? (
+                            <TextField
+                                label="Text"
+                                variant="outlined"
+                                fullWidth
+                            />
+                        ) : null}
                     </CardContent>
                 </Collapse>
             </Paper>
