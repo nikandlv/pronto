@@ -34,4 +34,20 @@ class UserUnitTest extends TestCase
             'theme' => 'dark'
         ]);
     }
+
+
+    /** @test **/
+    public function it_can_get_its_settings()
+    {
+        $this->withoutExceptionHandling();
+        $user = $this->signIn();
+
+        $settings = [
+                'theme' => 'dark'
+        ];
+
+        $user->updateSettings($settings);
+
+        $this->assertEquals($settings, $user->getSettings());
+    }
 }

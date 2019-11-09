@@ -13,6 +13,6 @@ class SettingsController extends Controller
             'settings' => 'required|array'
         ]);
 
-        $user->changeSettings($settings);
+        $user->updateSettings($settings);
     }
 }
