@@ -12,13 +12,13 @@
 |
 */
 
+// Routes for auth system login and log out
+Route::post('/login', 'LoginController@login')->name('login');
+Route::post('/register', 'AuthController@store')->name('register');
+Route::post('/logout', 'AuthController@destroy')->middleware('auth:api')->name('logout');
+Route::get('/user', 'AuthController@index')->middleware('auth:api')->name('currentUser');
 
-
-Route::post('/register', 'AuthController@store');
-Route::post('/logout', 'AuthController@destroy')->middleware('auth:api');
-Route::get('/user', 'AuthController@index')->middleware('auth:api');
-Route::patch('/user/{user}/admin' , 'AuthController@update')->middleware('auth:api' , 'admin');
-Route::post('/login', 'LoginController@login');
+Route::patch('/users/{user}/admin' , 'AdminController@update')->middleware('auth:api' , 'admin')->name('updateUser');
 
 
 Route::middleware(['auth:api'])->group(function () {

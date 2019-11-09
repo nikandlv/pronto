@@ -34,7 +34,7 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|string|min:5|max:255|confirmed'
         ]);
-        
+
         $attributes['role'] = UserRoleManager::ROLE_MEMBER;
 
 
@@ -55,18 +55,5 @@ class AuthController extends Controller
         return \response([
             'message' => 'User have been logged out!'
         ]);
-    }
-
-    /**
-     * update a user data
-     *
-     * @return ResponseFactory|Response
-     */
-    public function update()
-    {
-        User::where('id' , \request('id'))
-            ->update(\request()->all());
-
-        return \response(['message' => 'user updated successfully']);
     }
 }
