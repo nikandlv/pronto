@@ -20,6 +20,7 @@
         "laravel-mix": "^4.0.7",
         "lodash": "^4.17.13",
         "mui-nutella": "*",
+        "mui-pastel": "^1.0.0",
         "popper.js": "^1.12",
         "react-localization": "^1.0.15",
         "react-pose": "^4.0.9",

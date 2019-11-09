@@ -12,13 +12,20 @@
 |
 */
 
+// Startup
+Route::get('/' , 'StartupController@index');
 
+// Auth system
+Route::post('/login', 'LoginController@login')->name('login');
+Route::post('/register', 'AuthController@store')->name('register');
+Route::post('/logout', 'AuthController@destroy')->middleware('auth:api')->name('logout');
+Route::get('/user', 'AuthController@index')->middleware('auth:api')->name('currentUser');
 
-Route::post('/register', 'AuthController@store');
-Route::post('/logout', 'AuthController@destroy')->middleware('auth:api');
-Route::get('/user', 'AuthController@index')->middleware('auth:api');
-Route::patch('/user/{user}/admin' , 'AuthController@update')->middleware('auth:api' , 'admin');
-Route::post('/login', 'LoginController@login');
+// Admin
+Route::patch('/users/{user}/admin' , 'AdminController@update')->middleware('auth:api' , 'admin')->name('updateUser');
+
+// hasSettings
+Route::post('/users/{user}/settings' , 'SettingsController@store')->middleware('auth:api')->name('settings');
 
 
 Route::middleware(['auth:api'])->group(function () {
