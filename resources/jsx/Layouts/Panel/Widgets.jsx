@@ -139,6 +139,13 @@ const SortableItem = SortableElement(({ item, open, setOpen }) => {
                                         <MessageIcon />
                                     </ListItemIcon>
                                     <ListItemText primary="Contact me" />
+                                    <ListItemSecondaryAction>
+                                        <Prompt.Inline continueText="Delete">
+                                            <IconButton>
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </Prompt.Inline>
+                                    </ListItemSecondaryAction>
                                 </ListItem>
                             </List>
                         ) : null}
