@@ -130,6 +130,16 @@ const SortableItem = SortableElement(({ item, open, setOpen }) => {
                                 </Select>
                             </FormControl>
                         ) : null}
+                        {item.type === "LINK_WIDGET" ? (
+                            <TextField
+                                label="Text"
+                                variant="outlined"
+                                fullWidth
+                                rows={5}
+                                multiline
+                                value={config.text}
+                            />
+                        ) : null}
                     </CardContent>
                 </Collapse>
             </Paper>
