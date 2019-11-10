@@ -6,6 +6,7 @@ import {
     List,
     ListItem,
     ListItemText,
+    ListItemIcon,
     ListItemSecondaryAction,
     IconButton,
     Menu,
@@ -33,6 +34,7 @@ import AnimatedWidgetArea from "../AnimatedWidgetArea";
 import StyledTitle from "../../Components/StyledTitle";
 import { Tabs, Tab } from "@material-ui/core";
 import SwipeableViews from "react-swipeable-views";
+import MessageIcon from "@material-ui/icons/MessageOutlined";
 const DragHandle = SortableHandle(() => (
     <IconButton>
         <ReorderIcon />
@@ -131,14 +133,14 @@ const SortableItem = SortableElement(({ item, open, setOpen }) => {
                             </FormControl>
                         ) : null}
                         {item.type === "LINK_WIDGET" ? (
-                            <TextField
-                                label="Text"
-                                variant="outlined"
-                                fullWidth
-                                rows={5}
-                                multiline
-                                value={config.text}
-                            />
+                            <List>
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <MessageIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Contact me" />
+                                </ListItem>
+                            </List>
                         ) : null}
                     </CardContent>
                 </Collapse>
