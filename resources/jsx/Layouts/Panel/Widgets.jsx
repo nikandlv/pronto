@@ -26,8 +26,7 @@ import arrayMove from "array-move";
 import { makeStyles } from "@material-ui/styles";
 import StyledButton from "../../Components/StyledButton";
 import Prompt from "mui-prompt";
-import clsx from "clsx";
-import WidgetArea from "../WidgetArea";
+import AnimatedWidgetArea from "../AnimatedWidgetArea";
 import StyledTitle from "../../Components/StyledTitle";
 
 const DragHandle = SortableHandle(() => (
@@ -115,7 +114,7 @@ const SortableList = SortableContainer(({ open, setOpen, items }) => {
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <StyledTitle>Preview</StyledTitle>
-                    <WidgetArea widgets={items} />
+                    <AnimatedWidgetArea widgets={items} />
                 </Grid>
             </Grid>
         </React.Fragment>
