@@ -2,13 +2,15 @@ import React from "react";
 import AuthorWidget from "./Widgets/AuthorWidget";
 import { Typography } from "@material-ui/core";
 import GithubWidget from "./Widgets/GithubWidget";
+import TextWidget from "./Widgets/TextWidget";
+import LinkWidget from "./Widgets/LinkWidget";
 import posed, { PoseGroup } from "react-pose";
 
 const available = {
-    LINK_WIDGET: AuthorWidget,
+    LINK_WIDGET: LinkWidget,
     GITHUB_WIDGET: GithubWidget,
-    TEXT_WIDGET: AuthorWidget,
-    AUTHORS_WIDGET: AuthorWidget
+    TEXT_WIDGET: TextWidget,
+    AUTHOR_WIDGET: AuthorWidget
 };
 
 const Item = posed.div({});
