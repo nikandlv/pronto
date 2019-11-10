@@ -12,7 +12,10 @@ import {
     MenuItem,
     Collapse,
     TextField,
-    CardContent
+    CardContent,
+    FormControl,
+    InputLabel,
+    Select
 } from "@material-ui/core";
 import ReorderIcon from "@material-ui/icons/ReorderOutlined";
 import DeleteIcon from "@material-ui/icons/DeleteOutlineOutlined";
@@ -105,6 +108,27 @@ const SortableItem = SortableElement(({ item, open, setOpen }) => {
                                     value={config.limit}
                                 />
                             </React.Fragment>
+                        ) : null}
+                        {item.type === "AUTHOR_WIDGET" ? (
+                            <FormControl variant="outlined" fullWidth>
+                                <InputLabel id="author-widget-label">
+                                    Author
+                                </InputLabel>
+                                <Select
+                                    labelId="author-widget-label"
+                                    id="author-widget"
+                                    value={0}
+                                    onChange={() => {}}
+                                    labelWidth={54}
+                                >
+                                    <MenuItem value="">
+                                        <em>None</em>
+                                    </MenuItem>
+                                    <MenuItem value={0}>Ten</MenuItem>
+                                    <MenuItem value={1}>Twenty</MenuItem>
+                                    <MenuItem value={2}>Thirty</MenuItem>
+                                </Select>
+                            </FormControl>
                         ) : null}
                     </CardContent>
                 </Collapse>
