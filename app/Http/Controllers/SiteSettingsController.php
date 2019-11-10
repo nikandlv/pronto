@@ -4,28 +4,36 @@ namespace App\Http\Controllers;
 
 use App\SiteSetting;
 use App\User;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class SiteSettingsController extends Controller
 {
-
-    public function __construct()
+    /**
+     * to validate incoming site requests
+     *
+     * @param SiteSetting $siteSetting
+     * @return mixed
+     */
+    public function validateSettings(SiteSetting $siteSetting)
     {
-        $allowed = ['language'];
-        $this->rules = array_fill_keys($allowed, 'sometimes|string');
+        $rules = array_fill_keys($siteSetting->allowed_keys, 'sometimes|string');
+
+        return \request()->validate($rules);
     }
 
-    public function store(Request $request)
+    /**
+     * store site settings
+     *
+     * @param SiteSetting $siteSetting
+     * @return ResponseFactory|Response
+     */
+    public function store(SiteSetting $siteSetting)
     {
-        $attributes = $request->validate($this->rules);
+        $attributes = $this->validateSettings($siteSetting);
 
-        foreach ($attributes as $key => $value) {
-            $setting = SiteSetting::firstOrNew([
-                'key' => $key,
-            ]);
-            $setting->value = $value;
-            $setting->save();
-        }
+        $siteSetting->updateGlobalSettings($attributes);
 
         return response(['message' => 'site setting updated successfully']);
     }
