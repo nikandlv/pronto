@@ -40,9 +40,23 @@ const SortableItem = SortableElement(({ item, open, setOpen }) => {
     let isOpen = open[item.id] === true;
     let title = item.type;
     let description = item.type;
+    let config = item.config;
     if (title === "GITHUB_WIDGET") {
         title = "Github activity widget";
         description = "Show contribution history and activities";
+    }
+    if (title === "TEXT_WIDGET") {
+        title = "Text widget";
+        description = "Show your awesome and informatic text";
+    }
+    if (title === "LINK_WIDGET") {
+        title = "Links widget";
+        description = "A list of internal and external links";
+    }
+
+    if (title === "AUTHOR_WIDGET") {
+        title = "Author widget";
+        description = "Show off information of an author";
     }
 
     function openDetails() {
@@ -69,6 +83,9 @@ const SortableItem = SortableElement(({ item, open, setOpen }) => {
                                 label="Text"
                                 variant="outlined"
                                 fullWidth
+                                rows={5}
+                                multiline
+                                value={config.text}
                             />
                         ) : null}
                         {item.type === "GITHUB_WIDGET" ? (
@@ -77,6 +94,7 @@ const SortableItem = SortableElement(({ item, open, setOpen }) => {
                                     label="Github Username"
                                     variant="outlined"
                                     fullWidth
+                                    value={config.username}
                                 />
                                 <br />
                                 <br />
@@ -84,6 +102,7 @@ const SortableItem = SortableElement(({ item, open, setOpen }) => {
                                     label="Activity Limit"
                                     variant="outlined"
                                     fullWidth
+                                    value={config.limit}
                                 />
                             </React.Fragment>
                         ) : null}
@@ -163,20 +182,20 @@ class WidgetManager extends React.Component {
             {
                 id: 2,
                 type: "GITHUB_WIDGET",
-                config: {},
+                config: { username: "nikandlv", limit: -1 },
                 order: 0,
                 position: "SIDEBAR"
             },
             {
                 id: 3,
                 type: "TEXT_WIDGET",
-                config: {},
+                config: { text: "Hello there! welcome to my blog" },
                 order: 0,
                 position: "SIDEBAR"
             },
             {
                 id: 4,
-                type: "AUTHORS_WIDGET",
+                type: "AUTHOR_WIDGET",
                 config: {},
                 order: 0,
                 position: "SIDEBAR"

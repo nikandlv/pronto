@@ -7,7 +7,7 @@ const available = {
     LINK_WIDGET: AuthorWidget,
     GITHUB_WIDGET: GithubWidget,
     TEXT_WIDGET: AuthorWidget,
-    AUTHORS_WIDGET: AuthorWidget
+    AUTHOR_WIDGET: AuthorWidget
 };
 
 export default function WidgetArea(props) {
