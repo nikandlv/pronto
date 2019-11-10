@@ -27,6 +27,8 @@ import { makeStyles } from "@material-ui/styles";
 import StyledButton from "../../Components/StyledButton";
 import Prompt from "mui-prompt";
 import clsx from "clsx";
+import WidgetArea from "../WidgetArea";
+import StyledTitle from "../../Components/StyledTitle";
 
 const DragHandle = SortableHandle(() => (
     <IconButton>
@@ -95,17 +97,28 @@ const SortableItem = SortableElement(({ item, open, setOpen }) => {
 
 const SortableList = SortableContainer(({ open, setOpen, items }) => {
     return (
-        <List component="ul">
-            {items.map((item, index) => (
-                <SortableItem
-                    key={`item-${item.id}`}
-                    index={index}
-                    item={item}
-                    open={open}
-                    setOpen={setOpen}
-                />
-            ))}
-        </List>
+        <React.Fragment>
+            <Grid container justify="center" spacing={4}>
+                <Grid item xs={12} md={5}>
+                    <StyledTitle>Widgets</StyledTitle>
+                    <List component="ul">
+                        {items.map((item, index) => (
+                            <SortableItem
+                                key={`item-${item.id}`}
+                                index={index}
+                                item={item}
+                                open={open}
+                                setOpen={setOpen}
+                            />
+                        ))}
+                    </List>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <StyledTitle>Preview</StyledTitle>
+                    <WidgetArea widgets={items} />
+                </Grid>
+            </Grid>
+        </React.Fragment>
     );
 });
 
@@ -243,7 +256,7 @@ export default function Widgets() {
                     <br />
                 </Grid>
                 <Grid item xs={12} />
-                <Grid item xs={11} sm={7} md={6} lg={5}>
+                <Grid item xs={12}>
                     <WidgetManager />
                 </Grid>
             </Grid>

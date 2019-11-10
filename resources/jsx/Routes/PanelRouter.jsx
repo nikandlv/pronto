@@ -1,16 +1,16 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import Wrapper from "../Layouts/AdminPanel/Wrapper";
-import Overview from "../Layouts/AdminPanel/Overview";
-import Categories from "../Layouts/AdminPanel/Categories";
-import Posts from "../Layouts/AdminPanel/Posts";
-import Uploads from "../Layouts/AdminPanel/Uploads";
-import Media from "../Layouts/AdminPanel/Media";
-import Users from "../Layouts/AdminPanel/Users";
-import Settings from "../Layouts/AdminPanel/Settings";
+import Wrapper from "../Layouts/Panel/Wrapper";
+import Overview from "../Layouts/Panel/Overview";
+import Categories from "../Layouts/Panel/Categories";
+import Posts from "../Layouts/Panel/Posts";
+import Uploads from "../Layouts/Panel/Uploads";
+import Media from "../Layouts/Panel/Media";
+import Users from "../Layouts/Panel/Users";
+import Settings from "../Layouts/Panel/Settings";
 import posed, { PoseGroup } from "react-pose";
-import EditUser from "../Layouts/AdminPanel/EditUser";
-import Widgets from "../Layouts/AdminPanel/Widgets";
+import EditUser from "../Layouts/Panel/EditUser";
+import Widgets from "../Layouts/Panel/Widgets";
 
 const RouteContainer = posed.div({
     enter: { y: 0, opacity: 1, beforeChildren: true },
