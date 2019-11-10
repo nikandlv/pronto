@@ -28,7 +28,8 @@ import StyledButton from "../../Components/StyledButton";
 import Prompt from "mui-prompt";
 import AnimatedWidgetArea from "../AnimatedWidgetArea";
 import StyledTitle from "../../Components/StyledTitle";
-
+import { Tabs, Tab } from "@material-ui/core";
+import SwipeableViews from "react-swipeable-views";
 const DragHandle = SortableHandle(() => (
     <IconButton>
         <ReorderIcon />
@@ -206,7 +207,7 @@ class WidgetManager extends React.Component {
     }
 }
 
-export default function Widgets() {
+function WidgetGroupManager() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const styles = useStyles();
 
@@ -260,5 +261,26 @@ export default function Widgets() {
                 </Grid>
             </Grid>
         </Box>
+    );
+}
+
+export default function Widgets() {
+    const [tab, setTab] = React.useState(0);
+    return (
+        <div>
+            <Tabs
+                value={tab}
+                onChange={(_, tab) => {
+                    setTab(tab);
+                }}
+                aria-label="Settings tabs"
+            >
+                <Tab label="Sidebar" />
+            </Tabs>
+            <SwipeableViews index={tab}>
+                <WidgetGroupManager />
+                <WidgetGroupManager />
+            </SwipeableViews>
+        </div>
     );
 }
