@@ -76,7 +76,8 @@ const useStyles = makeStyles(theme => ({
         transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen
-        })
+        }),
+        overflowX: "hidden"
     },
     drawerClose: {
         transition: theme.transitions.create("width", {
@@ -84,9 +85,12 @@ const useStyles = makeStyles(theme => ({
             duration: theme.transitions.duration.leavingScreen
         }),
         overflowX: "hidden",
-        width: theme.spacing(9),
+        width: theme.spacing(8),
         [theme.breakpoints.up("sm")]: {
-            width: theme.spacing(9)
+            width: theme.spacing(8)
+        },
+        "&:hover": {
+            width: drawerWidth
         }
     }
 }));
@@ -220,7 +224,7 @@ function ResponsiveDrawer(props) {
                     </Hidden>
                     <Hidden xsDown implementation="css">
                         <Drawer
-                            className={clsx(classes.drawerPaper, {
+                            className={clsx({
                                 [classes.drawerOpen]: expanded,
                                 [classes.drawerClose]: !expanded
                             })}

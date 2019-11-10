@@ -11,6 +11,7 @@ mixDependency.require('react-swipeable-views');
 mixDependency.require('react-color');
 mixDependency.require('mui-pastel');
 mixDependency.require('mui-nutella');
+mixDependency.require('mui-prompt');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management

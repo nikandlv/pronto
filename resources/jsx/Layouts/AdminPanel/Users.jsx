@@ -18,6 +18,7 @@ import {
 } from "@material-ui/core";
 import StyledTitle from "../../Components/StyledTitle";
 import Pastel from "mui-pastel";
+import Prompt from "mui-prompt";
 const useStyles = makeStyles({
     root: {
         width: "100%",
@@ -87,11 +88,13 @@ function UsersTable() {
                                 </Tooltip>
                             </TableCell>
                             <TableCell align="center">
-                                <Tooltip title="Delete User ">
-                                    <IconButton size="small">
-                                        <TrashIcon />
-                                    </IconButton>
-                                </Tooltip>
+                                <Prompt.Inline continueText="Delete">
+                                    <Tooltip title="Delete User ">
+                                        <IconButton size="small">
+                                            <TrashIcon />
+                                        </IconButton>
+                                    </Tooltip>
+                                </Prompt.Inline>
                                 <Tooltip title="Edit User ">
                                     <IconButton size="small">
                                         <EditIcon />
