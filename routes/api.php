@@ -22,11 +22,11 @@ Route::post('/logout', 'AuthController@destroy')->middleware('auth:api')->name('
 Route::get('/user', 'AuthController@index')->middleware('auth:api')->name('user.current');
 
 // Admin
-Route::patch('/users/{user}/admin' , 'AdminController@update')->middleware('auth:api' , 'admin')->name('users.update');
+Route::patch('/users/{user}/admin' , 'AdminController@update')->middleware('auth:api' , 'role:admin')->name('users.update');
 
 // hasUserSettings
 Route::post('/users/{user}/settings' , 'SettingsController@store')->middleware('auth:api')->name('settings.personal');
-Route::post('/admin/{admin}/settings' , 'SiteSettingsController@store')->middleware('role:admin')->name('settings.global');
+Route::post('/admins/{admin}/settings' , 'SiteSettingsController@store')->middleware('role:admin')->name('settings.global');
 
 Route::middleware(['auth:api'])->group(function () {
     Route::post('/posts' , 'PostsController@store')->name('post.create');
