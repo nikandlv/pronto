@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\pronto\traits\hasSettings;
+use App\pronto\traits\hasUserSettings;
 use Cassandra\Collection;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,7 +13,7 @@ use App\Settings;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasApiTokens, hasSettings;
+    use Notifiable, HasApiTokens, hasUserSettings;
 
     /**
      * The attributes that are mass assignable.

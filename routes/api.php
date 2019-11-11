@@ -24,7 +24,7 @@ Route::get('/user', 'AuthController@index')->middleware('auth:api')->name('curre
 // Admin
 Route::patch('/users/{user}/admin' , 'AdminController@update')->middleware('auth:api' , 'admin')->name('updateUser');
 
-// hasSettings
+// hasUserSettings
 Route::post('/users/{user}/settings' , 'SettingsController@store')->middleware('auth:api')->name('settings');
 
 

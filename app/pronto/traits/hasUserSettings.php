@@ -8,7 +8,7 @@ use App\Settings;
 use App\User;
 use App\UserSetting;
 
-trait hasSettings
+trait hasUserSettings
 {
 
     /**
