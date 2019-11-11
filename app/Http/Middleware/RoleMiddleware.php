@@ -14,26 +14,30 @@ class RoleMiddleware
      * @param \Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $role)
+    public function handle($request, Closure $next, $roles)
     {
 
-//        role is a string changing it to role numbers defined in the RoleManger File
-        switch ($role) {
-            case 'admin' :
-                $role = UserRoleManager::ROLE_ADMIN;
-                break;
-            case 'member' :
-                $role = UserRoleManager::ROLE_MEMBER;
-                break;
-            case 'author' :
-                $role = UserRoleManager::ROLE_AUTHOR;
-                break;
+        $required_roles = explode(',', $roles);
+
+        foreach ($required_roles as $key => $role) {
+            //        role is a string changing it to role numbers defined in the RoleManger File
+            switch ($role) {
+                case 'admin':
+                    $required_roles[$key] = UserRoleManager::ROLE_ADMIN;
+                    break;
+                case 'member':
+                    $required_roles[$key] = UserRoleManager::ROLE_MEMBER;
+                    break;
+                case 'author':
+                    $required_roles[$key] = UserRoleManager::ROLE_AUTHOR;
+                    break;
+            }
         }
 
-        if (auth()->user()->role === $role) {
+        if (in_array(auth()->user()->role, $required_roles)) {
             return $next($request);
-        } else {
-            return response(['status' => 404]);
         }
+
+        return response(['status' => 403]);
     }
 }
