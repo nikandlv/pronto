@@ -8,19 +8,23 @@ use Illuminate\Http\Request;
 
 class SiteSettingsController extends Controller
 {
-    public function store(User $admin)
+
+    public function __construct()
     {
-        $attributes = \request()->validate([
-            'settings' => 'required|array'
-        ]);
+        $allowed = ['test'];
+        $this->rules = array_fill_keys($allowed, 'sometimes|string');
+    }
 
-        $settings = $attributes['settings'];
+    public function store(Request $request)
+    {
+        $attributes = $request->validate($this->rules);
 
-        foreach ($settings as $key => $value) {
-            SiteSetting::create([
+        foreach ($attributes as $key => $value) {
+            $setting = SiteSetting::firstOrNew([
                 'key' => $key,
-                'value'=> $value
             ]);
+            $setting->value = $value;
+            $setting->save();
         }
 
         return response(['message' => 'site setting updated successfully']);
