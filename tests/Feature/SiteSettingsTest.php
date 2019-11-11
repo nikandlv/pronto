@@ -18,9 +18,7 @@ class SiteSettingsTest extends TestCase
         $admin = $this->beAdmin();
 
         $settings = [
-            'settings' => [
-                'language' => 'english',
-            ]
+            'language' => 'english',
         ];
 
         $this->postJson($admin->path() . '/settings', $settings);
@@ -38,26 +36,9 @@ class SiteSettingsTest extends TestCase
 
 
         $settings = [
-            'settings' => [
-                'language' => 'english',
-            ]
+            'language' => 'english',
         ];
 
         $response = $this->postJson('/admins/1/settings', $settings)->assertStatus(404);
     }
-
-    /** @test * */
-    public function all_settings_must_be_wrapped_in_settings_array()
-    {
-        $admin = $this->beAdmin();
-
-
-        $settings = [
-            'language' => 'english',
-        ];
-
-        $this->postJson($admin->path() . '/settings', $settings)->assertJsonValidationErrors(['settings']);
-    }
-
-
 }

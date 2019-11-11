@@ -11,7 +11,7 @@ class SiteSettingsController extends Controller
 
     public function __construct()
     {
-        $allowed = ['test'];
+        $allowed = ['language'];
         $this->rules = array_fill_keys($allowed, 'sometimes|string');
     }
 
