@@ -30,6 +30,15 @@ class UserUnitTest extends TestCase
         $this->assertEquals('api/admins/' . $admin->id, $admin->path());
     }
 
+    /** @test **/
+    public function it_can_check_if_it_is_admin()
+    {
+        $admin = $this->beAdmin();
+        $user = factory(User::class)->create();
+
+        $this->assertTrue($admin->isAdmin());
+        $this->assertTrue($user->isAdmin());
+    }
     /** @test * */
     public function it_can_update_its_settings()
     {
