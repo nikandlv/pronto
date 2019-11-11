@@ -9,7 +9,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TrashIcon from "@material-ui/icons/DeleteOutlineOutlined";
 import EditIcon from "@material-ui/icons/EditOutlined";
-import DownloadIcon from "@material-ui/icons/CloudDownloadOutlined";
+import CommentsIcon from "@material-ui/icons/MessageOutlined";
+import ViewIcon from "@material-ui/icons/VisibilityOutlined";
 import {
     Box,
     Avatar,
@@ -100,9 +101,19 @@ function UsersTable(props) {
                                             </IconButton>
                                         </Tooltip>
                                     </Prompt.Inline>
-                                    <Tooltip title="Download">
+                                    <Tooltip title="Comments">
                                         <IconButton size="small">
-                                            <DownloadIcon />
+                                            <CommentsIcon />
+                                        </IconButton>
+                                    </Tooltip>
+                                    <Tooltip title="Edit post">
+                                        <IconButton size="small">
+                                            <EditIcon />
+                                        </IconButton>
+                                    </Tooltip>
+                                    <Tooltip title="View post">
+                                        <IconButton size="small">
+                                            <ViewIcon />
                                         </IconButton>
                                     </Tooltip>
                                 </TableCell>
