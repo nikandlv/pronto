@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class SettingsController extends Controller
 {
@@ -11,7 +13,7 @@ class SettingsController extends Controller
      * store a setting for given user
      *
      * @param User $user
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return ResponseFactory|Response
      */
     public function store(User $user)
     {
