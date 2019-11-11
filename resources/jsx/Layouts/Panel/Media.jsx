@@ -1,13 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
-import ListSubheader from "@material-ui/core/ListSubheader";
-import IconButton from "@material-ui/core/IconButton";
-import InfoIcon from "@material-ui/icons/Info";
-import { Box, Paper } from "@material-ui/core";
+import UploadIcon from "@material-ui/icons/CloudUploadOutlined";
+import { Box, Paper, Grid, Card, CardMedia } from "@material-ui/core";
 import StyledTitle from "../../Components/StyledTitle";
+import StyledButton from "../../Components/StyledButton";
 
 const tileData = [
     {
@@ -101,6 +97,23 @@ const useStyles = makeStyles(theme => ({
     },
     icon: {
         color: "rgba(255, 255, 255, 0.54)"
+    },
+    card: {
+        maxWidth: 345
+    },
+    media: {
+        height: 0,
+        paddingTop: "56.25%" // 16:9
+    },
+    push: {
+        flexGrow: 1
+    },
+    grid: {
+        display: "flex",
+        alignItems: "center"
+    },
+    uploadIcon: {
+        margin: "0 6px "
     }
 }));
 
@@ -109,43 +122,28 @@ export default function Media() {
 
     return (
         <Box m={3}>
-            <StyledTitle gutterBottom>Media</StyledTitle>
-            <Paper>
-                <div className={classes.root}>
-                    <GridList
-                        cellHeight={300}
-                        className={classes.gridList}
-                        cols={4}
-                    >
-                        <GridListTile
-                            key="Subheader"
-                            cols={4}
-                            style={{ height: "auto" }}
-                        >
-                            <ListSubheader component="div">
-                                December
-                            </ListSubheader>
-                        </GridListTile>
-                        {tileData.map(tile => (
-                            <GridListTile key={tile.img} cols={1}>
-                                <img src={tile.img} alt={tile.title} />
-                                <GridListTileBar
-                                    title={tile.title}
-                                    subtitle={<span>by: {tile.author}</span>}
-                                    actionIcon={
-                                        <IconButton
-                                            aria-label={`info about ${tile.title}`}
-                                            className={classes.icon}
-                                        >
-                                            <InfoIcon />
-                                        </IconButton>
-                                    }
-                                />
-                            </GridListTile>
-                        ))}
-                    </GridList>
-                </div>
-            </Paper>
+            <Grid container spacing={2}>
+                <Grid item xs={12} className={classes.grid}>
+                    <StyledTitle gutterBottom className={classes.push}>
+                        Media
+                    </StyledTitle>
+                    <StyledButton size="large">
+                        <UploadIcon className={classes.uploadIcon} />
+                        Upload
+                    </StyledButton>
+                </Grid>
+                {tileData.map(tile => (
+                    <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Card className={classes.card}>
+                            <CardMedia
+                                className={classes.media}
+                                image={tile.img}
+                                title="Paella dish"
+                            />
+                        </Card>
+                    </Grid>
+                ))}
+            </Grid>
         </Box>
     );
 }
