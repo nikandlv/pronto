@@ -34,7 +34,7 @@ class UserUnitTest extends TestCase
 
         $user->updateSettings($settings);
 
-        $this->assertDatabaseHas('settings', [
+        $this->assertDatabaseHas('user_settings', [
             'key' => 'theme',
             'value' => 'dark'
         ]);

@@ -6,6 +6,7 @@ namespace App\pronto\traits;
 
 use App\Settings;
 use App\User;
+use App\UserSetting;
 
 trait hasSettings
 {
@@ -32,7 +33,7 @@ trait hasSettings
      */
     public function settings()
     {
-        return $this->hasMany(Settings::class, 'user_id', 'id');
+        return $this->hasMany(UserSetting::class, 'user_id', 'id');
     }
 
     /**
