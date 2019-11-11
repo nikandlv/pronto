@@ -25,7 +25,7 @@ class UserRoleTest extends TestCase
             'password' => $user2->password,
             'role' => UserRoleManager::ROLE_ADMIN
         ])->assertExactJson([
-            'status' => 403
+            'status' => 404
         ]);
     }
 
@@ -113,7 +113,7 @@ class UserRoleTest extends TestCase
             'password' => $admin->password,
             'role' => UserRoleManager::ROLE_MEMBER
         ])->assertExactJson([
-            'status' => 403
+            'status' => 404
         ]);
     }
 }

@@ -32,6 +32,8 @@ class RoleMiddleware
 
         if (auth()->user()->role === $role) {
             return $next($request);
+        } else {
+            return response(['status' => 404]);
         }
     }
 }
