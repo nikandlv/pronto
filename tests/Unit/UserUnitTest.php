@@ -15,11 +15,19 @@ class UserUnitTest extends TestCase
     use RefreshDatabase;
 
     /** @test * */
-    public function it_knows_its_path()
+    public function a_user_knows_its_path()
     {
         $user = factory(User::class)->create();
 
         $this->assertEquals('api/users/' . $user->id, $user->path());
+    }
+
+    /** @test **/
+    public function a_admin_knows_its_path()
+    {
+        $admin = $this->beAdmin();
+
+        $this->assertEquals('api/admins/' . $admin->id, $admin->path());
     }
 
     /** @test * */
