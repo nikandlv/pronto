@@ -35,6 +35,7 @@ import StyledTitle from "../../Components/StyledTitle";
 import { Tabs, Tab } from "@material-ui/core";
 import SwipeableViews from "react-swipeable-views";
 import MessageIcon from "@material-ui/icons/MessageOutlined";
+
 const DragHandle = SortableHandle(() => (
     <IconButton>
         <ReorderIcon />
@@ -146,6 +147,12 @@ const SortableItem = SortableElement(({ item, open, setOpen }) => {
                                             </IconButton>
                                         </Prompt.Inline>
                                     </ListItemSecondaryAction>
+                                </ListItem>
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <AddIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Add a new link" />
                                 </ListItem>
                             </List>
                         ) : null}
