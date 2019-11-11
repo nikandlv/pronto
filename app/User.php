@@ -56,6 +56,11 @@ class User extends Authenticatable
         return 'api/users/' . $this->id;
     }
 
+    /**
+     * check user is admin or not
+     *
+     * @return bool
+     */
     public function isAdmin()
     {
         return $this->role === UserRoleManager::ROLE_ADMIN;

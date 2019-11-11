@@ -22,7 +22,7 @@ class UserUnitTest extends TestCase
         $this->assertEquals('api/users/' . $user->id, $user->path());
     }
 
-    /** @test **/
+    /** @test * */
     public function a_admin_knows_its_path()
     {
         $admin = $this->beAdmin();
@@ -30,7 +30,7 @@ class UserUnitTest extends TestCase
         $this->assertEquals('api/admins/' . $admin->id, $admin->path());
     }
 
-    /** @test **/
+    /** @test * */
     public function it_can_check_if_it_is_admin()
     {
         $admin = $this->beAdmin();
@@ -39,6 +39,7 @@ class UserUnitTest extends TestCase
         $this->assertTrue($admin->isAdmin());
         $this->assertFalse($user->isAdmin());
     }
+
     /** @test * */
     public function it_can_update_its_settings()
     {
@@ -57,7 +58,6 @@ class UserUnitTest extends TestCase
         ]);
     }
 
-
     /** @test * */
     public function it_can_get_its_settings()
     {
@@ -73,7 +73,7 @@ class UserUnitTest extends TestCase
         $this->assertInstanceOf(Collection::class, $user->settings);
     }
 
-    /** @test **/
+    /** @test * */
     public function it_can_get_a_specific_setting()
     {
         $this->withoutExceptionHandling();
