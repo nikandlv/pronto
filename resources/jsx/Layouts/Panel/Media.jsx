@@ -1,7 +1,14 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import UploadIcon from "@material-ui/icons/CloudUploadOutlined";
-import { Box, Paper, Grid, Card, CardMedia } from "@material-ui/core";
+import {
+    Box,
+    Paper,
+    Grid,
+    Card,
+    CardMedia,
+    CardActions
+} from "@material-ui/core";
 import StyledTitle from "../../Components/StyledTitle";
 import StyledButton from "../../Components/StyledButton";
 
@@ -98,9 +105,6 @@ const useStyles = makeStyles(theme => ({
     icon: {
         color: "rgba(255, 255, 255, 0.54)"
     },
-    card: {
-        maxWidth: 345
-    },
     media: {
         height: 0,
         paddingTop: "56.25%" // 16:9
@@ -133,13 +137,14 @@ export default function Media() {
                     </StyledButton>
                 </Grid>
                 {tileData.map(tile => (
-                    <Grid item xs={12} sm={6} md={4} lg={3}>
-                        <Card className={classes.card}>
+                    <Grid item xs={12} sm={6} md={4} xlg={3}>
+                        <Card>
                             <CardMedia
                                 className={classes.media}
                                 image={tile.img}
                                 title="Paella dish"
                             />
+                            <CardActions>A good day to smile!</CardActions>
                         </Card>
                     </Grid>
                 ))}
