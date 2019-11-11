@@ -37,7 +37,7 @@ class UserUnitTest extends TestCase
         $user = factory(User::class)->create();
 
         $this->assertTrue($admin->isAdmin());
-        $this->assertTrue($user->isAdmin());
+        $this->assertFalse($user->isAdmin());
     }
     /** @test * */
     public function it_can_update_its_settings()

@@ -3,6 +3,7 @@
 namespace App;
 
 use App\pronto\traits\hasUserSettings;
+use App\pronto\users\UserRoleManager;
 use Cassandra\Collection;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -50,8 +51,13 @@ class User extends Authenticatable
     public function path()
     {
         if ($this->isAdmin()) {
-            return 'api/admin/' . $this->id;
+            return 'api/admins/' . $this->id;
         }
         return 'api/users/' . $this->id;
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === UserRoleManager::ROLE_ADMIN;
     }
 }
