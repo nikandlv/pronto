@@ -49,6 +49,9 @@ class User extends Authenticatable
      */
     public function path()
     {
+        if ($this->isAdmin()) {
+            return 'api/admin/' . $this->id;
+        }
         return 'api/users/' . $this->id;
     }
 }
