@@ -16,7 +16,8 @@ class SiteSettingsController extends Controller
 
     public function store(SiteSetting $siteSetting)
     {
-        $attributes = \request()->validate($siteSetting->alloweds);
+        $rules = array_fill_keys($siteSetting->alloweds, 'sometimes|string');
+        $attributes = \request()->validate($rules);
 
         $siteSetting->updateGlobalSettings($attributes);
 

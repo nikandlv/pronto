@@ -20,4 +20,21 @@ class SiteSettingsUnitTest extends TestCase
 
         $this->assertIsArray($siteSetting->alloweds);
     }
+
+    /** @test **/
+    public function it_can_be_updated()
+    {
+        $this->withoutExceptionHandling();
+
+        $siteSetting = new  SiteSetting();
+
+        $setting = ['language' => 'english'];
+
+        $siteSetting->updateGlobalSettings($setting);
+
+        $this->assertDatabaseHas('site_settings', [
+            'key' => 'language',
+            'value' => 'english'
+        ]);
+    }
 }
