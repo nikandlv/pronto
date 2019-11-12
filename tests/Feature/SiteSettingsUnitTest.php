@@ -22,7 +22,7 @@ class SiteSettingsUnitTest extends TestCase
     }
 
     /** @test **/
-    public function it_can_be_updated()
+    public function it_can_be_stored()
     {
         $this->withoutExceptionHandling();
 

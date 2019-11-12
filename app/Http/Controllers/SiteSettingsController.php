@@ -8,26 +8,30 @@ use Illuminate\Http\Request;
 
 class SiteSettingsController extends Controller
 {
-//    public function __construct()
-//    {
-//        $allowed = ['language'];
-//        $this->rules = array_fill_keys($allowed, 'sometimes|string');
-//    }
-
-    public function store(SiteSetting $siteSetting)
+    /**
+     * to validate incoming site requests
+     *
+     * @param SiteSetting $siteSetting
+     * @return mixed
+     */
+    public function valdateSettings(SiteSetting $siteSetting)
     {
         $rules = array_fill_keys($siteSetting->alloweds, 'sometimes|string');
-        $attributes = \request()->validate($rules);
+
+        return \request()->validate($rules);
+    }
+
+    /**
+     * store site settings
+     *
+     * @param SiteSetting $siteSetting
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function store(SiteSetting $siteSetting)
+    {
+        $attributes = $this->valdateSettings($siteSetting);
 
         $siteSetting->updateGlobalSettings($attributes);
-
-//        foreach ($attributes as $key => $value) {
-//            $setting = SiteSetting::firstOrNew([
-//                'key' => $key,
-//            ]);
-//            $setting->value = $value;
-//            $setting->save();
-//        }
 
         return response(['message' => 'site setting updated successfully']);
     }

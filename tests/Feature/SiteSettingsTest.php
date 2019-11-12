@@ -12,19 +12,18 @@ class SiteSettingsTest extends TestCase
 
     /** @test * */
     public function an_admin_can_store_site_global_settings()
-
     {
         $this->withoutExceptionHandling();
         $admin = $this->beAdmin();
 
         $settings = [
-            'language' => 'english',
+            'languages' => 'english',
         ];
 
         $this->postJson($admin->path() . '/settings', $settings);
 
         $this->assertDatabaseHas('site_settings', [
-            'key' => 'language',
+            'key' => 'languages',
             'value' => 'english',
         ]);
     }
