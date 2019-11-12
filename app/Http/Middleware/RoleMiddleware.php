@@ -12,32 +12,45 @@ class RoleMiddleware
      *
      * @param \Illuminate\Http\Request $request
      * @param \Closure $next
+     * @param array $roles
      * @return mixed
      */
-    public function handle($request, Closure $next, $roles)
+    public function handle($request, Closure $next, ...$roles)
     {
+        $roles = $this->changeRoleStringToNumber($roles);
 
-        $required_roles = explode(',', $roles);
-
-        foreach ($required_roles as $key => $role) {
-            //        role is a string changing it to role numbers defined in the RoleManger File
-            switch ($role) {
-                case 'admin':
-                    $required_roles[$key] = UserRoleManager::ROLE_ADMIN;
-                    break;
-                case 'member':
-                    $required_roles[$key] = UserRoleManager::ROLE_MEMBER;
-                    break;
-                case 'author':
-                    $required_roles[$key] = UserRoleManager::ROLE_AUTHOR;
-                    break;
-            }
-        }
-
-        if (in_array(auth()->user()->role, $required_roles)) {
+        if (in_array(auth()->user()->role, $roles)) {
             return $next($request);
         }
 
         return response(['status' => 403]);
+    }
+
+    /**
+     * changing given roles from routes to defined number in UserRoleManager
+     *
+     * @param $roles
+     * @return mixed
+     */
+    public function changeRoleStringToNumber($roles)
+    {
+        if (in_array('admin', $roles)) {
+            $index = array_search('admin', $roles);
+
+            $roles[$index] = UserRoleManager::ROLE_ADMIN;
+        }
+
+        if (in_array('author', $roles)) {
+            $index = array_search('author', $roles);
+
+            $roles[$index] = UserRoleManager::ROLE_AUTHOR;
+        }
+
+        if (in_array('member', $roles)) {
+            $index = array_search('member', $roles);
+
+            $roles[$index] = UserRoleManager::ROLE_MEMBER;
+        }
+        return $roles;
     }
 }

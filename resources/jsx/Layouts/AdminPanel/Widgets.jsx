@@ -9,7 +9,8 @@ import {
     ListItemSecondaryAction,
     IconButton,
     Menu,
-    MenuItem
+    MenuItem,
+    Collapse
 } from "@material-ui/core";
 import ReorderIcon from "@material-ui/icons/ReorderOutlined";
 import DeleteIcon from "@material-ui/icons/DeleteOutlineOutlined";
@@ -30,36 +31,47 @@ const DragHandle = SortableHandle(() => (
     </IconButton>
 ));
 
-const SortableItem = SortableElement(({ value }) => (
-    <div>
-        <Paper>
-            <ListItem button>
-                <ListItemText
-                    primary={value}
-                    secondary="Add your internal/external links"
-                />
-                <ListItemSecondaryAction>
-                    <Prompt.Inline continueText="Delete">
-                        <IconButton>
-                            <DeleteIcon />
-                        </IconButton>
-                    </Prompt.Inline>
-                    <DragHandle />
-                </ListItemSecondaryAction>
-            </ListItem>
-        </Paper>
-        <br />
-    </div>
-));
+const SortableItem = SortableElement(({ item, open, setOpen }) => {
+    let isOpen = open[item.id] === true;
+    function openDetails() {
+        setOpen(item.id, !isOpen);
+    }
+    return (
+        <div>
+            <Paper>
+                <ListItem button onClick={openDetails}>
+                    <ListItemText
+                        primary={item.type}
+                        secondary="Add your internal/external links"
+                    />
+                    <ListItemSecondaryAction>
+                        <Prompt.Inline continueText="Delete">
+                            <IconButton>
+                                <DeleteIcon />
+                            </IconButton>
+                        </Prompt.Inline>
+                        <DragHandle />
+                    </ListItemSecondaryAction>
+                </ListItem>
+                <Collapse in={isOpen}>
+                    <StyledButton>Hello!</StyledButton>
+                </Collapse>
+            </Paper>
+            <br />
+        </div>
+    );
+});
 
-const SortableList = SortableContainer(({ items }) => {
+const SortableList = SortableContainer(({ open, setOpen, items }) => {
     return (
         <List component="ul">
-            {items.map((value, index) => (
+            {items.map((item, index) => (
                 <SortableItem
-                    key={`item-${value}`}
+                    key={`item-${item.id}`}
                     index={index}
-                    value={value}
+                    item={item}
+                    open={open}
+                    setOpen={setOpen}
                 />
             ))}
         </List>
@@ -67,20 +79,15 @@ const SortableList = SortableContainer(({ items }) => {
 });
 
 class SortableComponent extends React.Component {
-    state = {
-        items: ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6"]
-    };
-    onSortEnd = ({ oldIndex, newIndex }) => {
-        this.setState(({ items }) => ({
-            items: arrayMove(items, oldIndex, newIndex)
-        }));
-    };
     render() {
+        const { items, onSortEnd, open, setOpen } = this.props;
         return (
             <SortableList
                 useDragHandle
-                items={this.state.items}
-                onSortEnd={this.onSortEnd}
+                items={items}
+                onSortEnd={onSortEnd}
+                open={open}
+                setOpen={setOpen}
             />
         );
     }
@@ -98,6 +105,63 @@ const useStyles = makeStyles({
         margin: 16
     }
 });
+
+class WidgetManager extends React.Component {
+    state = {
+        items: [
+            {
+                id: 1,
+                type: "LINK_WIDGET",
+                config: {},
+                order: 0,
+                position: "SIDEBAR"
+            },
+            {
+                id: 2,
+                type: "GITHUB_WIDGET",
+                config: {},
+                order: 0,
+                position: "SIDEBAR"
+            },
+            {
+                id: 3,
+                type: "TEXT_WIDGET",
+                config: {},
+                order: 0,
+                position: "SIDEBAR"
+            },
+            {
+                id: 4,
+                type: "AUTHORS_WIDGET",
+                config: {},
+                order: 0,
+                position: "SIDEBAR"
+            }
+        ],
+        open: []
+    };
+    onSortEnd({ oldIndex, newIndex }) {
+        this.setState(({ items }) => ({
+            items: arrayMove(items, oldIndex, newIndex)
+        }));
+    }
+    setOpen(key, value) {
+        this.setState({
+            open: { ...this.state.open, [key]: value }
+        });
+    }
+    render() {
+        const { open, items } = this.state;
+        return (
+            <SortableComponent
+                items={items}
+                open={open}
+                setOpen={this.setOpen.bind(this)}
+                onSortEnd={this.onSortEnd.bind(this)}
+            />
+        );
+    }
+}
 
 export default function Widgets() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -149,7 +213,7 @@ export default function Widgets() {
                 </Grid>
                 <Grid item xs={12} />
                 <Grid item xs={11} sm={7} md={6} lg={5}>
-                    <SortableComponent />
+                    <WidgetManager />
                 </Grid>
             </Grid>
         </Box>
