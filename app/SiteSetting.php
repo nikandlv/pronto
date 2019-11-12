@@ -8,7 +8,7 @@ class SiteSetting extends Model
 {
     protected $fillable = ['key', 'value'];
 
-    public $alloweds = ['languages'];
+    public $allowed_keys = ['languages'];
 
     public function updateGlobalSettings($settings)
     {

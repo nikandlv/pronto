@@ -18,7 +18,7 @@ class SiteSettingsController extends Controller
      */
     public function validateSettings(SiteSetting $siteSetting)
     {
-        $rules = array_fill_keys($siteSetting->alloweds, 'sometimes|string');
+        $rules = array_fill_keys($siteSetting->allowed_keys, 'sometimes|string');
 
         return \request()->validate($rules);
     }

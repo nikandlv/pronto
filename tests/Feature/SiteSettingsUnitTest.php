@@ -18,7 +18,7 @@ class SiteSettingsUnitTest extends TestCase
 
         $siteSetting = new  SiteSetting();
 
-        $this->assertIsArray($siteSetting->alloweds);
+        $this->assertIsArray($siteSetting->allowed_keys);
     }
 
     /** @test **/
