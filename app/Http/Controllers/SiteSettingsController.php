@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class SiteSettingsController extends Controller
 {
-    public function __construct()
-    {
-        $allowed = ['language'];
-        $this->rules = array_fill_keys($allowed, 'sometimes|string');
-    }
+//    public function __construct()
+//    {
+//        $allowed = ['language'];
+//        $this->rules = array_fill_keys($allowed, 'sometimes|string');
+//    }
 
     public function store(SiteSetting $siteSetting)
     {
