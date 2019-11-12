@@ -33,7 +33,7 @@ const DragHandle = SortableHandle(() => (
 const SortableItem = SortableElement(({ value }) => (
     <div>
         <Paper>
-            <ListItem>
+            <ListItem button>
                 <ListItemText
                     primary={value}
                     secondary="Add your internal/external links"
