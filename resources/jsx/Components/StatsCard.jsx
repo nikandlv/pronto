@@ -7,17 +7,15 @@ import {
     ListItemAvatar,
     Avatar
 } from "@material-ui/core";
+import Pastel from "mui-pastel";
 
 import Person from "@material-ui/icons/PersonOutlineOutlined";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles({
     avatar: {
-        width: 60,
-        height: 60
-    },
-    avatarIcon: {
-        fontSize: 32
+        display: "flex",
+        alignItems: "center"
     }
 });
 
@@ -29,9 +27,15 @@ export default function StatsCard() {
                 <ListItem>
                     <ListItemText primary="Test" secondary="34K" />
                     <ListItemAvatar>
-                        <Avatar className={styles.avatar}>
-                            <Person className={styles.avatarIcon} />
-                        </Avatar>
+                        <Pastel
+                            size="medium"
+                            label={
+                                <span className={styles.avatar}>
+                                    <Person />
+                                    abc
+                                </span>
+                            }
+                        />
                     </ListItemAvatar>
                 </ListItem>
             </CardContent>
