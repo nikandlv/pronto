@@ -9,16 +9,28 @@ import {
 } from "@material-ui/core";
 
 import Person from "@material-ui/icons/PersonOutlineOutlined";
+import { makeStyles } from "@material-ui/styles";
+
+const useStyles = makeStyles({
+    avatar: {
+        width: 60,
+        height: 60
+    },
+    avatarIcon: {
+        fontSize: 32
+    }
+});
 
 export default function StatsCard() {
+    const styles = useStyles();
     return (
         <Card>
             <CardContent>
                 <ListItem>
                     <ListItemText primary="Test" secondary="34K" />
                     <ListItemAvatar>
-                        <Avatar>
-                            <Person />
+                        <Avatar className={styles.avatar}>
+                            <Person className={styles.avatarIcon} />
                         </Avatar>
                     </ListItemAvatar>
                 </ListItem>
