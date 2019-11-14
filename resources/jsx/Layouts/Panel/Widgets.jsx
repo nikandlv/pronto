@@ -6,13 +6,17 @@ import {
     List,
     ListItem,
     ListItemText,
+    ListItemIcon,
     ListItemSecondaryAction,
     IconButton,
     Menu,
     MenuItem,
     Collapse,
     TextField,
-    CardContent
+    CardContent,
+    FormControl,
+    InputLabel,
+    Select
 } from "@material-ui/core";
 import ReorderIcon from "@material-ui/icons/ReorderOutlined";
 import DeleteIcon from "@material-ui/icons/DeleteOutlineOutlined";
@@ -30,6 +34,8 @@ import AnimatedWidgetArea from "../AnimatedWidgetArea";
 import StyledTitle from "../../Components/StyledTitle";
 import { Tabs, Tab } from "@material-ui/core";
 import SwipeableViews from "react-swipeable-views";
+import MessageIcon from "@material-ui/icons/MessageOutlined";
+
 const DragHandle = SortableHandle(() => (
     <IconButton>
         <ReorderIcon />
@@ -105,6 +111,50 @@ const SortableItem = SortableElement(({ item, open, setOpen }) => {
                                     value={config.limit}
                                 />
                             </React.Fragment>
+                        ) : null}
+                        {item.type === "AUTHOR_WIDGET" ? (
+                            <FormControl variant="outlined" fullWidth>
+                                <InputLabel id="author-widget-label">
+                                    Author
+                                </InputLabel>
+                                <Select
+                                    labelId="author-widget-label"
+                                    id="author-widget"
+                                    value={0}
+                                    onChange={() => {}}
+                                    labelWidth={54}
+                                >
+                                    <MenuItem value="">
+                                        <em>None</em>
+                                    </MenuItem>
+                                    <MenuItem value={0}>Ten</MenuItem>
+                                    <MenuItem value={1}>Twenty</MenuItem>
+                                    <MenuItem value={2}>Thirty</MenuItem>
+                                </Select>
+                            </FormControl>
+                        ) : null}
+                        {item.type === "LINK_WIDGET" ? (
+                            <List>
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <MessageIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Contact me" />
+                                    <ListItemSecondaryAction>
+                                        <Prompt.Inline continueText="Delete">
+                                            <IconButton>
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </Prompt.Inline>
+                                    </ListItemSecondaryAction>
+                                </ListItem>
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <AddIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Add a new link" />
+                                </ListItem>
+                            </List>
                         ) : null}
                     </CardContent>
                 </Collapse>
