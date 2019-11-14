@@ -27,15 +27,7 @@ export default function StatsCard() {
                 <ListItem>
                     <ListItemText primary="Test" secondary="34K" />
                     <ListItemAvatar>
-                        <Pastel
-                            size="medium"
-                            label={
-                                <span className={styles.avatar}>
-                                    <Person />
-                                    abc
-                                </span>
-                            }
-                        />
+                        <Pastel size="medium" label={<Person />} />
                     </ListItemAvatar>
                 </ListItem>
             </CardContent>
