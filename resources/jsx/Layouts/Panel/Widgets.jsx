@@ -10,7 +10,9 @@ import {
     IconButton,
     Menu,
     MenuItem,
-    Collapse
+    Collapse,
+    TextField,
+    CardContent
 } from "@material-ui/core";
 import ReorderIcon from "@material-ui/icons/ReorderOutlined";
 import DeleteIcon from "@material-ui/icons/DeleteOutlineOutlined";
@@ -24,7 +26,10 @@ import arrayMove from "array-move";
 import { makeStyles } from "@material-ui/styles";
 import StyledButton from "../../Components/StyledButton";
 import Prompt from "mui-prompt";
-
+import AnimatedWidgetArea from "../AnimatedWidgetArea";
+import StyledTitle from "../../Components/StyledTitle";
+import { Tabs, Tab } from "@material-ui/core";
+import SwipeableViews from "react-swipeable-views";
 const DragHandle = SortableHandle(() => (
     <IconButton>
         <ReorderIcon />
@@ -33,6 +38,27 @@ const DragHandle = SortableHandle(() => (
 
 const SortableItem = SortableElement(({ item, open, setOpen }) => {
     let isOpen = open[item.id] === true;
+    let title = item.type;
+    let description = item.type;
+    let config = item.config;
+    if (title === "GITHUB_WIDGET") {
+        title = "Github activity widget";
+        description = "Show contribution history and activities";
+    }
+    if (title === "TEXT_WIDGET") {
+        title = "Text widget";
+        description = "Show your awesome and informatic text";
+    }
+    if (title === "LINK_WIDGET") {
+        title = "Links widget";
+        description = "A list of internal and external links";
+    }
+
+    if (title === "AUTHOR_WIDGET") {
+        title = "Author widget";
+        description = "Show off information of an author";
+    }
+
     function openDetails() {
         setOpen(item.id, !isOpen);
     }
@@ -40,10 +66,7 @@ const SortableItem = SortableElement(({ item, open, setOpen }) => {
         <div>
             <Paper>
                 <ListItem button onClick={openDetails}>
-                    <ListItemText
-                        primary={item.type}
-                        secondary="Add your internal/external links"
-                    />
+                    <ListItemText primary={title} secondary={description} />
                     <ListItemSecondaryAction>
                         <Prompt.Inline continueText="Delete">
                             <IconButton>
@@ -54,7 +77,36 @@ const SortableItem = SortableElement(({ item, open, setOpen }) => {
                     </ListItemSecondaryAction>
                 </ListItem>
                 <Collapse in={isOpen}>
-                    <StyledButton>Hello!</StyledButton>
+                    <CardContent>
+                        {item.type === "TEXT_WIDGET" ? (
+                            <TextField
+                                label="Text"
+                                variant="outlined"
+                                fullWidth
+                                rows={5}
+                                multiline
+                                value={config.text}
+                            />
+                        ) : null}
+                        {item.type === "GITHUB_WIDGET" ? (
+                            <React.Fragment>
+                                <TextField
+                                    label="Github Username"
+                                    variant="outlined"
+                                    fullWidth
+                                    value={config.username}
+                                />
+                                <br />
+                                <br />
+                                <TextField
+                                    label="Activity Limit"
+                                    variant="outlined"
+                                    fullWidth
+                                    value={config.limit}
+                                />
+                            </React.Fragment>
+                        ) : null}
+                    </CardContent>
                 </Collapse>
             </Paper>
             <br />
@@ -64,17 +116,28 @@ const SortableItem = SortableElement(({ item, open, setOpen }) => {
 
 const SortableList = SortableContainer(({ open, setOpen, items }) => {
     return (
-        <List component="ul">
-            {items.map((item, index) => (
-                <SortableItem
-                    key={`item-${item.id}`}
-                    index={index}
-                    item={item}
-                    open={open}
-                    setOpen={setOpen}
-                />
-            ))}
-        </List>
+        <React.Fragment>
+            <Grid container justify="center" spacing={4}>
+                <Grid item xs={12} md={5}>
+                    <StyledTitle>Widgets</StyledTitle>
+                    <List component="ul">
+                        {items.map((item, index) => (
+                            <SortableItem
+                                key={`item-${item.id}`}
+                                index={index}
+                                item={item}
+                                open={open}
+                                setOpen={setOpen}
+                            />
+                        ))}
+                    </List>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <StyledTitle>Preview</StyledTitle>
+                    <AnimatedWidgetArea widgets={items} />
+                </Grid>
+            </Grid>
+        </React.Fragment>
     );
 });
 
@@ -119,20 +182,20 @@ class WidgetManager extends React.Component {
             {
                 id: 2,
                 type: "GITHUB_WIDGET",
-                config: {},
+                config: { username: "nikandlv", limit: -1 },
                 order: 0,
                 position: "SIDEBAR"
             },
             {
                 id: 3,
                 type: "TEXT_WIDGET",
-                config: {},
+                config: { text: "Hello there! welcome to my blog" },
                 order: 0,
                 position: "SIDEBAR"
             },
             {
                 id: 4,
-                type: "AUTHORS_WIDGET",
+                type: "AUTHOR_WIDGET",
                 config: {},
                 order: 0,
                 position: "SIDEBAR"
@@ -163,7 +226,7 @@ class WidgetManager extends React.Component {
     }
 }
 
-export default function Widgets() {
+function WidgetGroupManager() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const styles = useStyles();
 
@@ -212,10 +275,31 @@ export default function Widgets() {
                     <br />
                 </Grid>
                 <Grid item xs={12} />
-                <Grid item xs={11} sm={7} md={6} lg={5}>
+                <Grid item xs={12}>
                     <WidgetManager />
                 </Grid>
             </Grid>
         </Box>
+    );
+}
+
+export default function Widgets() {
+    const [tab, setTab] = React.useState(0);
+    return (
+        <div>
+            <Tabs
+                value={tab}
+                onChange={(_, tab) => {
+                    setTab(tab);
+                }}
+                aria-label="Settings tabs"
+            >
+                <Tab label="Sidebar" />
+            </Tabs>
+            <SwipeableViews index={tab}>
+                <WidgetGroupManager />
+                <WidgetGroupManager />
+            </SwipeableViews>
+        </div>
     );
 }

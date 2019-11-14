@@ -14,8 +14,8 @@ import WorkIcon from "@material-ui/icons/WorkOutlineOutlined";
 import SubjectIcon from "@material-ui/icons/SubjectOutlined";
 import MessageIcon from "@material-ui/icons/MessageOutlined";
 import Gutter from "../../Components/Gutter";
-import AboutCard from "../../Components/AboutCard";
-import GithubWidget from "../../Components/GithubWidget";
+import AboutCard from "../Widgets/AuthorWidget";
+import GithubWidget from "../Widgets/GithubWidget";
 import CollisionLink from "../../Components/CollisionLink";
 
 const useStyles = makeStyles({
