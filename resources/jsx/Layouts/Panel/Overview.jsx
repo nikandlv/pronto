@@ -1,29 +1,22 @@
 import React from "react";
 import { Grid, Paper, Box, Card, CardContent } from "@material-ui/core";
 import { Chart } from "react-charts";
+import StatsCard from "../../Components/StatsCard";
 export default function Overview() {
     return (
         <Box m={2}>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={3}>
-                    <Card>
-                        <CardContent>abc</CardContent>
-                    </Card>
+                    <StatsCard />
                 </Grid>
                 <Grid item xs={12} md={3}>
-                    <Card>
-                        <CardContent>abc</CardContent>
-                    </Card>
+                    <StatsCard />
                 </Grid>
                 <Grid item xs={12} md={3}>
-                    <Card>
-                        <CardContent>abc</CardContent>
-                    </Card>
+                    <StatsCard />
                 </Grid>
                 <Grid item xs={12} md={3}>
-                    <Card>
-                        <CardContent>abc</CardContent>
-                    </Card>
+                    <StatsCard />
                 </Grid>
                 <Grid item xs={12} md={4}>
                     <Paper style={{ width: "100%", height: "200px" }}>
