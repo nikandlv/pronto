@@ -16,7 +16,8 @@ import {
     CardContent,
     FormControl,
     InputLabel,
-    Select
+    Select,
+    LinearProgress
 } from "@material-ui/core";
 import ReorderIcon from "@material-ui/icons/ReorderOutlined";
 import DeleteIcon from "@material-ui/icons/DeleteOutlineOutlined";
@@ -164,7 +165,7 @@ const SortableItem = SortableElement(({ item, open, setOpen }) => {
     );
 });
 
-const SortableList = SortableContainer(({ open, setOpen, items }) => {
+const SortableList = SortableContainer(({ open, setOpen, items, delay }) => {
     return (
         <React.Fragment>
             <Grid container justify="center" spacing={4}>
@@ -184,7 +185,11 @@ const SortableList = SortableContainer(({ open, setOpen, items }) => {
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <StyledTitle>Preview</StyledTitle>
-                    <AnimatedWidgetArea widgets={items} />
+                    {delay === false ? (
+                        <AnimatedWidgetArea widgets={items} />
+                    ) : (
+                        <LinearProgress color="primary" />
+                    )}
                 </Grid>
             </Grid>
         </React.Fragment>
@@ -192,6 +197,19 @@ const SortableList = SortableContainer(({ open, setOpen, items }) => {
 });
 
 class SortableComponent extends React.Component {
+    state = {
+        delay: true
+    };
+    componentDidMount() {
+        window.setTimeout(
+            () => [
+                this.setState({
+                    delay: false
+                })
+            ],
+            1000
+        );
+    }
     render() {
         const { items, onSortEnd, open, setOpen } = this.props;
         return (
@@ -201,6 +219,7 @@ class SortableComponent extends React.Component {
                 onSortEnd={onSortEnd}
                 open={open}
                 setOpen={setOpen}
+                delay={this.state.delay}
             />
         );
     }
