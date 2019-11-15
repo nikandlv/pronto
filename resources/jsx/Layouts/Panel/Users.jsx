@@ -111,7 +111,7 @@ const WrappedUsersTable = withRouter(UsersTable);
 export default class Users extends React.Component {
     render() {
         return (
-            <Box m={2}>
+            <Box m={3}>
                 <StyledTitle>Users</StyledTitle>
                 <WrappedUsersTable />
             </Box>
