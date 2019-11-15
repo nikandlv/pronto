@@ -13,8 +13,8 @@ import EditUser from "../Layouts/Panel/EditUser";
 import Widgets from "../Layouts/Panel/Widgets";
 
 const RouteContainer = posed.div({
-    enter: { y: 0, opacity: 1, beforeChildren: true },
-    exit: { y: 100, opacity: 0 }
+    enter: { x: 0, y: 0, opacity: 1, beforeChildren: true },
+    exit: { x: 100, y: 100, opacity: 0 }
 });
 
 export default function AdminRouter(props) {
