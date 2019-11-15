@@ -88,7 +88,7 @@ function UsersTable(props) {
                                     <Pastel color="green" label="General" />
                                 </TableCell>
                                 <TableCell align="center">
-                                    <Pastel label="24 Comments" color="blue" />
+                                    <Pastel label="24" color="red" />
                                 </TableCell>
                                 <TableCell align="center">
                                     <Tooltip title="2019-06-01 10:12:51">
@@ -103,19 +103,9 @@ function UsersTable(props) {
                                             </IconButton>
                                         </Tooltip>
                                     </Prompt.Inline>
-                                    <Tooltip title="Comments">
-                                        <IconButton size="small">
-                                            <CommentsIcon />
-                                        </IconButton>
-                                    </Tooltip>
                                     <Tooltip title="Edit post">
                                         <IconButton size="small">
                                             <EditIcon />
-                                        </IconButton>
-                                    </Tooltip>
-                                    <Tooltip title="View post">
-                                        <IconButton size="small">
-                                            <ViewIcon />
                                         </IconButton>
                                     </Tooltip>
                                 </TableCell>
