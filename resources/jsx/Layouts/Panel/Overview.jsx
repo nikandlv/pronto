@@ -158,7 +158,7 @@ function CustomStyles() {
     });
     return (
         <MyChart
-            elementType="line"
+            elementType="area"
             setState={setState}
             activeDatumIndex={activeDatumIndex}
             activeSeriesIndex={activeSeriesIndex}
