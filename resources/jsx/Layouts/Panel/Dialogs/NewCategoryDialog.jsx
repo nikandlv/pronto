@@ -4,7 +4,7 @@ import withDynamic from "../../../Data/withDynamic";
 import { closeNewCategoryDialog } from "../../../Data/Actions/CategoryDialogActions";
 
 function NewCategoryDialog(props) {
-    const state = props.NewDialog || { open: false };
+    const state = props.NewCategory || { open: false };
     const close = props.close;
     return (
         <Dialog maxWidth="xs" fullWidth open={state.open} onClose={close}>
