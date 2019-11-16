@@ -84,10 +84,10 @@ function UsersTable(props) {
                         {rows.map(row => (
                             <TableRow key={row.name}>
                                 <TableCell component="th" scope="row">
-                                    Hello world!
+                                    <Pastel label="Hello world" />
                                 </TableCell>
                                 <TableCell align="center">
-                                    <Pastel color="green" label="General" />
+                                    <Pastel label="General" />
                                 </TableCell>
                                 <TableCell align="center">
                                     <Pastel label="24" color="red" />
