@@ -115,6 +115,16 @@ export default function Overview() {
                         </ListItem>
                     </Paper>
                 </Grid>
+                <Grid item xs={12} md={6}>
+                    <Card className={styles.paper}>
+                        <CardContent>a</CardContent>
+                    </Card>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Card className={styles.paper}>
+                        <CardContent>a</CardContent>
+                    </Card>
+                </Grid>
             </Grid>
         </Box>
     );
