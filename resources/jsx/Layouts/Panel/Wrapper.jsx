@@ -21,7 +21,7 @@ import Topbar from "../Blog/Topbar";
 import clsx from "clsx";
 import Store from "../../Data/Store";
 import NewCategoryReducer from "../../Data/Reducers/NewCategoryReducer";
-import NewCategoryDialog from "./Dialogs/NewCategoryDialog";
+import Dialogs from "./Dialogs/Dialogs";
 
 Store.injectReducer("NewCategory", NewCategoryReducer);
 
@@ -206,7 +206,7 @@ function ResponsiveDrawer(props) {
 
     return (
         <Box m={2}>
-            <NewCategoryDialog />
+            <Dialogs />
             <div className={classes.root}>
                 <Topbar
                     hasMenu
