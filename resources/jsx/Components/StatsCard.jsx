@@ -1,11 +1,9 @@
 import React from "react";
 import {
-    Card,
-    CardContent,
+    Paper,
     ListItem,
     ListItemText,
-    ListItemAvatar,
-    Avatar
+    ListItemAvatar
 } from "@material-ui/core";
 import Pastel from "mui-pastel";
 import Explore from "@material-ui/icons/ExploreOutlined";
@@ -13,7 +11,8 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles({
     card: {
-        borderRadius: 32
+        borderRadius: 32,
+        padding: 4
     },
     avatar: {
         display: "flex",
@@ -28,15 +27,13 @@ export default function StatsCard(props) {
     const color = props.color || "amber";
     const icon = props.icon || <Explore />;
     return (
-        <Card className={styles.card}>
-            <CardContent>
-                <ListItem>
-                    <ListItemText primary={primary} secondary={secondary} />
-                    <ListItemAvatar>
-                        <Pastel size="medium" color={color} label={icon} />
-                    </ListItemAvatar>
-                </ListItem>
-            </CardContent>
-        </Card>
+        <Paper className={styles.card}>
+            <ListItem>
+                <ListItemText primary={primary} secondary={secondary} />
+                <ListItemAvatar>
+                    <Pastel size="medium" color={color} label={icon} />
+                </ListItemAvatar>
+            </ListItem>
+        </Paper>
     );
 }
