@@ -1,4 +1,4 @@
-import NEW_CATEGORY_DIALOG from "../Actions/types";
+import { NEW_CATEGORY_DIALOG } from "../Actions/types";
 const initialState = {
     open: false
 };

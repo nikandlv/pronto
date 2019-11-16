@@ -19,6 +19,10 @@ import WidgetIcon from "@material-ui/icons/WidgetsOutlined";
 import { Box } from "@material-ui/core";
 import Topbar from "../Blog/Topbar";
 import clsx from "clsx";
+import Store from "../../Data/Store";
+import NewCategoryReducer from "../../Data/Reducers/NewCategoryReducer";
+
+Store.injectReducer("NewCategory", NewCategoryReducer);
 
 const drawerWidth = 240;
 

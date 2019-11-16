@@ -1,4 +1,4 @@
-import NEW_CATEGORY_DIALOG from "./types";
+import { NEW_CATEGORY_DIALOG } from "./types";
 
 const openNewCategoryDialog = () => dispatch => {
     dispatch({
