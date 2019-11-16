@@ -4,13 +4,15 @@ import {
     Paper,
     Box,
     Card,
-    CardContent,
+    IconButton,
     makeStyles,
     ListItem,
     ListItemText,
     ListItemAvatar,
     Avatar,
-    Divider
+    Divider,
+    ListItemSecondaryAction,
+    List
 } from "@material-ui/core";
 import { Chart } from "react-charts";
 import StatsCard from "../../Components/StatsCard";
@@ -20,6 +22,8 @@ import CommentsIcon from "@material-ui/icons/MessageOutlined";
 import PostIcon from "@material-ui/icons/ReceiptOutlined";
 import StyledTitle from "../../Components/StyledTitle";
 import Pastel from "mui-pastel";
+import Reply from "@material-ui/icons/ReplyOutlined";
+import StyledButton from "../../Components/StyledButton";
 
 const useStyles = makeStyles({
     wrapper: {
@@ -117,12 +121,100 @@ export default function Overview() {
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <Card className={styles.paper}>
-                        <CardContent>a</CardContent>
+                        <List>
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Pastel
+                                        label={<CommentsIcon />}
+                                        color="teal"
+                                    />
+                                </ListItemAvatar>
+                                <ListItemText primary="Latest comments" />
+                                <ListItemSecondaryAction>
+                                    <StyledButton>View all</StyledButton>
+                                </ListItemSecondaryAction>
+                            </ListItem>
+                            <Divider variant="middle" />
+                            <ListItem button>
+                                <ListItemAvatar>
+                                    <Avatar src={"/img/user.png"} />
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary="I Think this is a good idea, however i suggest that we look into more stuff before taking further actions"
+                                    secondary="Nikan Dalvand - Oct 18 2019"
+                                />
+                            </ListItem>
+                            <ListItem button>
+                                <ListItemAvatar>
+                                    <Avatar src={"/img/user.png"} />
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary="I Think this is a good idea, however i suggest that we look into more stuff before taking further actions"
+                                    secondary="Nikan Dalvand - Oct 18 2019"
+                                />
+                            </ListItem>
+                            <ListItem button>
+                                <ListItemAvatar>
+                                    <Avatar src={"/img/user.png"} />
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary="I Think this is a good idea, however i suggest that we look into more stuff before taking further actions"
+                                    secondary="Nikan Dalvand - Oct 18 2019"
+                                />
+                            </ListItem>
+                            <ListItem button>
+                                <ListItemAvatar>
+                                    <Avatar src={"/img/user.png"} />
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary="I Think this is a good idea, however i suggest that we look into more stuff before taking further actions"
+                                    secondary="Nikan Dalvand - Oct 18 2019"
+                                />
+                            </ListItem>
+                        </List>
                     </Card>
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <Card className={styles.paper}>
-                        <CardContent>a</CardContent>
+                        <List>
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Pastel
+                                        label={<PeopleIcon />}
+                                        color="pink"
+                                    />
+                                </ListItemAvatar>
+                                <ListItemText primary="Latest users" />
+                                <ListItemSecondaryAction>
+                                    <StyledButton>View all</StyledButton>
+                                </ListItemSecondaryAction>
+                            </ListItem>
+                            <Divider variant="middle" />
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar src="/img/user.png" />
+                                </ListItemAvatar>
+                                <ListItemText primary="Latest users" />
+                            </ListItem>
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar src="/img/user.png" />
+                                </ListItemAvatar>
+                                <ListItemText primary="Latest users" />
+                            </ListItem>
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar src="/img/user.png" />
+                                </ListItemAvatar>
+                                <ListItemText primary="Latest users" />
+                            </ListItem>
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar src="/img/user.png" />
+                                </ListItemAvatar>
+                                <ListItemText primary="Latest users" />
+                            </ListItem>
+                        </List>
                     </Card>
                 </Grid>
             </Grid>
