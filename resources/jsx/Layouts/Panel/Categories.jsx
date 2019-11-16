@@ -9,8 +9,6 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TrashIcon from "@material-ui/icons/DeleteOutlineOutlined";
 import EditIcon from "@material-ui/icons/EditOutlined";
-import CommentsIcon from "@material-ui/icons/MessageOutlined";
-import ViewIcon from "@material-ui/icons/VisibilityOutlined";
 import {
     Box,
     Avatar,
