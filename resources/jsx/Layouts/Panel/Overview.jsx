@@ -3,17 +3,21 @@ import { Grid, Paper, Box, Card, CardContent } from "@material-ui/core";
 import { Chart } from "react-charts";
 import StatsCard from "../../Components/StatsCard";
 import ViewIcon from "@material-ui/icons/VisibilityOutlined";
+import PeopleIcon from "@material-ui/icons/PeopleOutlineOutlined";
 import CommentsIcon from "@material-ui/icons/MessageOutlined";
 export default function Overview() {
     return (
         <Box m={2}>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={3}>
+                    <StatsCard color="pink" />
+                </Grid>
+                <Grid item xs={12} md={3}>
                     <StatsCard
                         primary="38K"
                         secondary={"Views this week"}
                         icon={<ViewIcon />}
-                        color="lightBlue"
+                        color="green"
                     />
                 </Grid>
                 <Grid item xs={12} md={3}>
@@ -25,10 +29,12 @@ export default function Overview() {
                     />
                 </Grid>
                 <Grid item xs={12} md={3}>
-                    <StatsCard />
-                </Grid>
-                <Grid item xs={12} md={3}>
-                    <StatsCard />
+                    <StatsCard
+                        primary="101"
+                        secondary={"Total People"}
+                        icon={<PeopleIcon />}
+                        color="amber"
+                    />
                 </Grid>
                 <Grid item xs={12} md={4}>
                     <Paper style={{ width: "100%", height: "200px" }}>
