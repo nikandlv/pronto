@@ -26,14 +26,12 @@ const useStyles = makeStyles({
         position: "relative"
     },
     paper: {
-        borderRadius: 16
+        borderRadius: 16,
+        overflow: "hidden"
     },
     wrapperTop: {
-        width: "90%",
-        height: "200px",
-        margin: "0 auto",
-        zIndex: 1,
-        position: "relative"
+        width: "100%",
+        height: "200px"
     }
 });
 
