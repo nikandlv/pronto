@@ -3,6 +3,7 @@ import { Grid, Paper, Box, Card, CardContent } from "@material-ui/core";
 import { Chart } from "react-charts";
 import StatsCard from "../../Components/StatsCard";
 import ViewIcon from "@material-ui/icons/VisibilityOutlined";
+import CommentsIcon from "@material-ui/icons/MessageOutlined";
 export default function Overview() {
     return (
         <Box m={2}>
@@ -16,7 +17,12 @@ export default function Overview() {
                     />
                 </Grid>
                 <Grid item xs={12} md={3}>
-                    <StatsCard />
+                    <StatsCard
+                        primary="104"
+                        secondary={"Pending comments"}
+                        icon={<CommentsIcon />}
+                        color="lightBlue"
+                    />
                 </Grid>
                 <Grid item xs={12} md={3}>
                     <StatsCard />
