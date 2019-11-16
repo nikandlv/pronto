@@ -25,6 +25,8 @@ import AddIcon from "@material-ui/icons/AddOutlined";
 import Pastel from "mui-pastel";
 import Prompt from "mui-prompt";
 import StyledButton from "../../Components/StyledButton";
+import withDynamic from "../../Data/withDynamic";
+import { openNewCategoryDialog } from "../../Data/Actions/CategoryDialogActions";
 const useStyles = makeStyles({
     root: {
         width: "100%",
@@ -55,14 +57,14 @@ const rows = [{}, {}, {}, {}];
 
 function UsersTable(props) {
     const classes = useStyles();
-
+    const openDialog = props.openDialog;
     return (
         <React.Fragment>
             <Grid item xs={12} className={classes.grid}>
                 <StyledTitle gutterBottom className={classes.push}>
                     Categories
                 </StyledTitle>
-                <StyledButton size="large">
+                <StyledButton size="large" onClick={openDialog}>
                     <AddIcon className={classes.addIcon} />
                     New category
                 </StyledButton>
@@ -118,7 +120,9 @@ function UsersTable(props) {
     );
 }
 
-const WrappedUsersTable = withRouter(UsersTable);
+const WrappedUsersTable = withDynamic(withRouter(UsersTable))
+    .injectAction("openDialog", openNewCategoryDialog)
+    .build();
 
 export default class Categories extends React.Component {
     render() {

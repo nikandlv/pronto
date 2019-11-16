@@ -5,9 +5,9 @@ import { closeNewCategoryDialog } from "../../../Data/Actions/CategoryDialogActi
 
 function NewCategoryDialog(props) {
     const state = props.NewCategory || { open: false };
-    const close = props.close;
+    const closeDialog = props.closeDialog;
     return (
-        <Dialog maxWidth="xs" fullWidth open={state.open} onClose={close}>
+        <Dialog maxWidth="xs" fullWidth open={state.open} onClose={closeDialog}>
             <DialogContent></DialogContent>
         </Dialog>
     );
@@ -15,5 +15,5 @@ function NewCategoryDialog(props) {
 
 export default withDynamic(NewCategoryDialog)
     .injectReducer("NewCategory")
-    .injectAction("close", closeNewCategoryDialog)
+    .injectAction("closeDialog", closeNewCategoryDialog)
     .build();
