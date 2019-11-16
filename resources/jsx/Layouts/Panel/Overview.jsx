@@ -5,6 +5,7 @@ import StatsCard from "../../Components/StatsCard";
 import ViewIcon from "@material-ui/icons/VisibilityOutlined";
 import PeopleIcon from "@material-ui/icons/PeopleOutlineOutlined";
 import CommentsIcon from "@material-ui/icons/MessageOutlined";
+import PostIcon from "@material-ui/icons/ReceiptOutlined";
 import StyledTitle from "../../Components/StyledTitle";
 export default function Overview() {
     return (
@@ -13,10 +14,10 @@ export default function Overview() {
             <Grid container spacing={2}>
                 <Grid item xs={12} md={3}>
                     <StatsCard
-                        primary="38K"
-                        secondary={"Views this week"}
-                        icon={<ViewIcon />}
-                        color="deepPurple"
+                        primary="4"
+                        secondary={"Total posts"}
+                        icon={<PostIcon />}
+                        color="deepOrange"
                     />
                 </Grid>
                 <Grid item xs={12} md={3}>
