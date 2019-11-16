@@ -26,7 +26,10 @@ import Pastel from "mui-pastel";
 import Prompt from "mui-prompt";
 import StyledButton from "../../Components/StyledButton";
 import withDynamic from "../../Data/withDynamic";
-import { openNewCategoryDialog } from "../../Data/Actions/CategoryDialogActions";
+import {
+    openNewCategoryDialog,
+    openEditCategoryDialog
+} from "../../Data/Actions/CategoryDialogActions";
 const useStyles = makeStyles({
     root: {
         width: "100%",
@@ -57,14 +60,15 @@ const rows = [{}, {}, {}, {}];
 
 function UsersTable(props) {
     const classes = useStyles();
-    const openDialog = props.openDialog;
+    const openNewDialog = props.openNewDialog;
+    const openEditDialog = props.openEditDialog;
     return (
         <React.Fragment>
             <Grid item xs={12} className={classes.grid}>
                 <StyledTitle gutterBottom className={classes.push}>
                     Categories
                 </StyledTitle>
-                <StyledButton size="large" onClick={openDialog}>
+                <StyledButton size="large" onClick={openNewDialog}>
                     <AddIcon className={classes.addIcon} />
                     New category
                 </StyledButton>
@@ -81,38 +85,46 @@ function UsersTable(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map(row => (
-                            <TableRow key={row.name}>
-                                <TableCell component="th" scope="row">
-                                    <Pastel label="Hello world" />
-                                </TableCell>
-                                <TableCell align="center">
-                                    <Pastel label="General" />
-                                </TableCell>
-                                <TableCell align="center">
-                                    <Pastel label="24" color="red" />
-                                </TableCell>
-                                <TableCell align="center">
-                                    <Tooltip title="2019-06-01 10:12:51">
-                                        <Typography>Oct 26</Typography>
-                                    </Tooltip>
-                                </TableCell>
-                                <TableCell align="center">
-                                    <Prompt.Inline continueText="Delete">
-                                        <Tooltip title="Delete post">
-                                            <IconButton size="small">
-                                                <TrashIcon />
+                        {rows.map(row => {
+                            function editCategory() {
+                                openEditDialog(row.id);
+                            }
+                            return (
+                                <TableRow key={row.name}>
+                                    <TableCell component="th" scope="row">
+                                        <Pastel label="Hello world" />
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        <Pastel label="General" />
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        <Pastel label="24" color="red" />
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        <Tooltip title="2019-06-01 10:12:51">
+                                            <Typography>Oct 26</Typography>
+                                        </Tooltip>
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        <Prompt.Inline continueText="Delete">
+                                            <Tooltip title="Delete post">
+                                                <IconButton size="small">
+                                                    <TrashIcon />
+                                                </IconButton>
+                                            </Tooltip>
+                                        </Prompt.Inline>
+                                        <Tooltip title="Edit post">
+                                            <IconButton
+                                                size="small"
+                                                onClick={editCategory}
+                                            >
+                                                <EditIcon />
                                             </IconButton>
                                         </Tooltip>
-                                    </Prompt.Inline>
-                                    <Tooltip title="Edit post">
-                                        <IconButton size="small">
-                                            <EditIcon />
-                                        </IconButton>
-                                    </Tooltip>
-                                </TableCell>
-                            </TableRow>
-                        ))}
+                                    </TableCell>
+                                </TableRow>
+                            );
+                        })}
                     </TableBody>
                 </Table>
             </Paper>
@@ -121,7 +133,8 @@ function UsersTable(props) {
 }
 
 const WrappedUsersTable = withDynamic(withRouter(UsersTable))
-    .injectAction("openDialog", openNewCategoryDialog)
+    .injectAction("openNewDialog", openNewCategoryDialog)
+    .injectAction("openEditDialog", openEditCategoryDialog)
     .build();
 
 export default class Categories extends React.Component {
