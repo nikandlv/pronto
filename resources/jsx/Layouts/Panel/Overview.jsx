@@ -2,12 +2,18 @@ import React from "react";
 import { Grid, Paper, Box, Card, CardContent } from "@material-ui/core";
 import { Chart } from "react-charts";
 import StatsCard from "../../Components/StatsCard";
+import ViewIcon from "@material-ui/icons/VisibilityOutlined";
 export default function Overview() {
     return (
         <Box m={2}>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={3}>
-                    <StatsCard />
+                    <StatsCard
+                        primary="38K"
+                        secondary={"Views this week"}
+                        icon={<ViewIcon />}
+                        color="lightBlue"
+                    />
                 </Grid>
                 <Grid item xs={12} md={3}>
                     <StatsCard />
