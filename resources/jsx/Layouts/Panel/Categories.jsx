@@ -83,12 +83,12 @@ function UsersTable(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map(row => {
+                        {rows.map((row, index) => {
                             function editCategory() {
                                 openEditDialog(row.id);
                             }
                             return (
-                                <TableRow key={row.name}>
+                                <TableRow key={index}>
                                     <TableCell component="th" scope="row">
                                         <Pastel label="Hello world" />
                                     </TableCell>

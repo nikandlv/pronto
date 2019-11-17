@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 
 function EditCategoryDialog(props) {
     const styles = useStyles();
-    const state = props.NewCategory || { open: false };
+    const state = props.EditCategory || { open: false };
     const closeDialog = props.closeDialog;
     return (
         <Dialog maxWidth="xs" fullWidth open={state.open} onClose={closeDialog}>
