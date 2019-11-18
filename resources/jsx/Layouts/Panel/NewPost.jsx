@@ -35,6 +35,9 @@ const useStyles = makeStyles({
         display: "flex",
         alignItems: "center"
     },
+    collapseListTitle: {
+        borderRadius: 16
+    },
     tagInput: {
         flexGrow: 1
     }
@@ -48,7 +51,10 @@ export default function NewPost() {
                 <Grid item xs={12} md={4} xlg={3}>
                     <Paper className={styles.collapseWrapper}>
                         <List className={styles.collapseList}>
-                            <ListItem button>
+                            <ListItem
+                                button
+                                className={styles.collapseListTitle}
+                            >
                                 <ListItemText primary="Categories and tags" />
                                 <ListItemSecondaryAction>
                                     <ArrowDownIcon />
