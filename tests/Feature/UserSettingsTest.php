@@ -17,7 +17,7 @@ class UserSettingsTest extends TestCase
         $this->withoutExceptionHandling();
         $user = $this->signIn();
 
-        $this->postJson($user->path() . '/settings', [
+        $this->postJson($user->settingsPath(), [
             'settings' => [
                 'theme' => 'dark'
             ]
@@ -31,7 +31,7 @@ class UserSettingsTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->postJson($user->path() . '/settings', [
+        $response = $this->postJson($user->settingsPath(), [
             'settings' => [
                 'theme' => 'dark'
             ]
@@ -43,7 +43,7 @@ class UserSettingsTest extends TestCase
     {
         $user = $this->signIn();
 
-        $this->postJson($user->path() . '/settings', [
+        $this->postJson($user->settingsPath(), [
             'theme' => 'dark'
         ])->assertJsonValidationErrors(['settings']);
     }

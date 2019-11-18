@@ -16,22 +16,30 @@
 Route::get('/', 'StartupController@index');
 
 // Auth system
-Route::post('/login', 'LoginController@login')->name('login');
-Route::post('/register', 'AuthController@store')->name('register');
-Route::post('/logout', 'AuthController@destroy')->middleware('auth:api')->name('logout');
-Route::get('/user', 'AuthController@index')->middleware('auth:api')->name('user.current');
+Route::group(['prefix' => '/auth'], function () {
+    Route::post('/login', 'LoginController@login');
+    Route::post('/register', 'AuthController@store');
+    Route::post('/logout', 'AuthController@destroy')->middleware('auth:api');
+    Route::get('/user', 'AuthController@index')->middleware('auth:api');
+});
 
-// Admin
-Route::patch('/users/{user}/admin', 'AdminController@update')->middleware('auth:api', 'role:admin')->name('users.update');
 
-// hasUserSettings
-Route::post('/users/{user}/settings', 'SettingsController@store')->middleware('auth:api')->name('settings.personal');
-Route::post('/admins/{admin}/settings', 'SiteSettingsController@store')->middleware('auth:api', 'role:admin')->name('settings.global');
+// User Management system
+Route::group(['prefix' => '/users'], function () {
+    Route::patch('/{user}/admin', 'AdminController@update')->middleware('auth:api', 'role:admin');
+});
 
-Route::middleware(['auth:api'])->group(function () {
-    Route::post('/posts', 'PostsController@store')->name('post.create');
-    Route::delete('/posts/{post}', 'PostsController@destroy')->name('post.delete');
-    Route::get('/posts', 'PostsController@index')->name('post.getAll');
-    Route::get('/posts/{post}', 'PostsController@show')->name('post.getOne');
-    Route::put('/posts/{post}', 'PostsController@update')->name('post.update');
+// Settings management system
+Route::group(['prefix' => '/settings'],function () {
+    Route::post('/users/{user}', 'SettingsController@store')->middleware('auth:api');
+    Route::post('/admins/{admin}', 'SiteSettingsController@store')->middleware('auth:api', 'role:admin');
+});
+
+// Post system
+Route::group(['middleware' => 'auth:api', 'prefix' => '/posts'], function () {
+    Route::post('', 'PostsController@store')->name('post.create');
+    Route::delete('/{post}', 'PostsController@destroy')->name('post.delete');
+    Route::get('', 'PostsController@index')->name('post.getAll');
+    Route::get('/{post}', 'PostsController@show')->name('post.getOne');
+    Route::put('/{post}', 'PostsController@update')->name('post.update');
 });

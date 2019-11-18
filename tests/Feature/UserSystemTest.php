@@ -18,7 +18,7 @@ class UserSystemTest extends TestCase
     {
         $guest = factory(User::class)->make();
 
-        $response = $this->postJson('/api/register', [
+        $response = $this->postJson('/api/auth/register', [
             'name' => $guest['name'],
             'email' => $guest['email'],
             'password' => $guest['password'],
@@ -39,7 +39,7 @@ class UserSystemTest extends TestCase
     {
         $guest = factory(User::class)->make();
 
-        $this->postJson('/api/register', [
+        $this->postJson('/api/auth/register', [
             'name' => null,
             'email' => null,
             'password' => null,
@@ -52,7 +52,7 @@ class UserSystemTest extends TestCase
     {
         $guest = factory(User::class)->make();
 
-        $response = $this->postJson('/api/register', [
+        $response = $this->postJson('/api/auth/register', [
             'name' => $guest['name'],
             'email' => $guest['email'],
             'password' => $guest['password'],
@@ -74,7 +74,7 @@ class UserSystemTest extends TestCase
                 'redirect' => '/home'
             ]);
 
-        $response = $this->postJson('/api/login', [
+        $response = $this->postJson('/api/auth/login', [
             'email' => $user['email'],
             'password' => 'password'
         ])->assertStatus(200);
@@ -99,7 +99,7 @@ class UserSystemTest extends TestCase
                 'redirect' => '/home'
             ]);
 
-        $response = $this->postJson('/api/login', [
+        $response = $this->postJson('/api/auth/login', [
             'email' => null,
             'password' => null
         ])->assertExactJson([
@@ -128,7 +128,7 @@ class UserSystemTest extends TestCase
                 'redirect' => '/home'
             ]);
 //        when : he requests to login
-        $response = $this->postJson('/api/login', [
+        $response = $this->postJson('/api/auth/login', [
             'email' => $guest['email'],
             'password' => 'password'
         ])->assertExactJson([
@@ -143,7 +143,7 @@ class UserSystemTest extends TestCase
     {
         $user = $this->signIn();
 
-        $response = $this->postJson('/api/logout');
+        $response = $this->postJson('/api/auth/logout');
 
         $response->assertExactJson([
             'message' => 'User have been logged out!'
@@ -155,7 +155,7 @@ class UserSystemTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this->postJson('api/logout')->assertExactJson([
+        $this->postJson('api/auth/logout')->assertExactJson([
             'message' => 'Unauthenticated.'
         ]);
 
@@ -166,7 +166,7 @@ class UserSystemTest extends TestCase
     {
         $user = $this->signIn();
 
-        $response = $this->getJson('/api/user');
+        $response = $this->getJson('/api/auth/user');
 
         $content = $response->getContent();
         $this->assertEquals($user, $content);
@@ -177,7 +177,7 @@ class UserSystemTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this->getJson('/api/user')->assertExactJson([
+        $this->getJson('/api/auth/user')->assertExactJson([
             'message' => 'Unauthenticated.'
         ]);
     }
