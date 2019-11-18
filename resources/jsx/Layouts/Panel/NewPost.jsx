@@ -14,10 +14,12 @@ import {
     FormControl,
     InputLabel,
     Select,
-    MenuItem
+    MenuItem,
+    IconButton
 } from "@material-ui/core";
 
 import ArrowDownIcon from "@material-ui/icons/KeyboardArrowDownOutlined";
+import AddIcon from "@material-ui/icons/AddOutlined";
 import { makeStyles } from "@material-ui/styles";
 import StyledTitle from "../../Components/StyledTitle";
 import Pastel from "mui-pastel";
@@ -28,6 +30,13 @@ const useStyles = makeStyles({
     },
     collapseList: {
         padding: 0
+    },
+    tagInputWrapper: {
+        display: "flex",
+        alignItems: "center"
+    },
+    tagInput: {
+        flexGrow: 1
     }
 });
 
@@ -86,6 +95,21 @@ export default function NewPost() {
                                         </MenuItem>
                                     </Select>
                                 </FormControl>
+                                <br />
+                                <br />
+                                <Divider variant="middle" />
+                                <StyledTitle variant="h6">Tags</StyledTitle>
+                                <div className={styles.tagInputWrapper}>
+                                    <TextField
+                                        variant="outlined"
+                                        label="Tag"
+                                        className={styles.tagInput}
+                                        fullWidth
+                                    />
+                                    <IconButton color="primary">
+                                        <AddIcon />
+                                    </IconButton>
+                                </div>
                             </CardContent>
                         </Collapse>
                     </Paper>
