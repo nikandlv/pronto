@@ -99,6 +99,10 @@ export default function NewPost() {
                                 <br />
                                 <Divider variant="middle" />
                                 <StyledTitle variant="h6">Tags</StyledTitle>
+                                <Pastel label="hello" />
+                                <Pastel label="test 1" />
+                                <br />
+                                <br />
                                 <div className={styles.tagInputWrapper}>
                                     <TextField
                                         variant="outlined"
