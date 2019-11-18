@@ -11,6 +11,7 @@ import Settings from "../Layouts/Panel/Settings";
 import posed, { PoseGroup } from "react-pose";
 import EditUser from "../Layouts/Panel/EditUser";
 import Widgets from "../Layouts/Panel/Widgets";
+import NewPost from "../Layouts/Panel/NewPost";
 
 const RouteContainer = posed.div({
     enter: { x: 0, y: 0, opacity: 1, beforeChildren: true },
@@ -31,6 +32,11 @@ export default function AdminRouter(props) {
                             exact
                         />
                         <Route path="/admin/posts" component={Posts} exact />
+                        <Route
+                            path="/admin/posts/new"
+                            component={NewPost}
+                            exact
+                        />
                         <Route
                             path="/admin/uploads"
                             component={Uploads}
