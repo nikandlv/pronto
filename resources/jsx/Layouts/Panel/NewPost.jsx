@@ -54,15 +54,23 @@ export default function NewPost() {
                                 </StyledTitle>
                                 <FormControl variant="outlined" fullWidth>
                                     <InputLabel id="demo-simple-select-outlined-label">
-                                        Parent Category
+                                        Categories
                                     </InputLabel>
                                     <Select
                                         fullWidth
                                         labelId="demo-simple-select-outlined-label"
                                         id="demo-simple-select-outlined"
-                                        value={0}
+                                        value={[0, 1]}
                                         onChange={() => {}}
-                                        labelWidth={120}
+                                        labelWidth={85}
+                                        multiple
+                                        renderValue={selected => (
+                                            <div>
+                                                {selected.map(value => (
+                                                    <Pastel label={value} />
+                                                ))}
+                                            </div>
+                                        )}
                                     >
                                         <MenuItem value="">
                                             <em>None</em>
@@ -70,8 +78,12 @@ export default function NewPost() {
                                         <MenuItem value={0}>
                                             <Pastel label="General" />
                                         </MenuItem>
-                                        <MenuItem value={20}>Twenty</MenuItem>
-                                        <MenuItem value={30}>Thirty</MenuItem>
+                                        <MenuItem value={1}>
+                                            <Pastel label="Test" />
+                                        </MenuItem>
+                                        <MenuItem value={30}>
+                                            <Pastel label="Programming" />
+                                        </MenuItem>
                                     </Select>
                                 </FormControl>
                             </CardContent>
