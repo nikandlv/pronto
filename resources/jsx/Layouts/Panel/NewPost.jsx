@@ -123,6 +123,26 @@ export default function NewPost() {
                             </CardContent>
                         </Collapse>
                     </Paper>
+                    <br />
+                    <Paper className={styles.collapseWrapper}>
+                        <List className={styles.collapseList}>
+                            <ListItem
+                                button
+                                className={styles.collapseListTitle}
+                            >
+                                <ListItemText primary="Options" />
+                                <ListItemSecondaryAction>
+                                    <ArrowDownIcon />
+                                </ListItemSecondaryAction>
+                            </ListItem>
+                        </List>
+                        <Collapse in={true}>
+                            <CardContent>
+                                <Divider variant="middle" />
+                                <StyledTitle variant="h6">General</StyledTitle>
+                            </CardContent>
+                        </Collapse>
+                    </Paper>
                 </Grid>
                 <Grid item xs={12} md={8} xlg={9}>
                     <Paper>a</Paper>
