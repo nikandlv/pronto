@@ -6,7 +6,7 @@ import {
     List,
     ListItem,
     ListItemAvatar,
-    ListItemText,
+    ListItemText
 } from "@material-ui/core";
 import StyledButton from "../../../Components/StyledButton";
 import AttachmentIcon from "@material-ui/icons/AttachmentOutlined";
@@ -28,8 +28,9 @@ const useStyles = makeStyles({
     listItem: {
         background: "rgba(0,0,0,0.04)",
         borderRadius: 16,
-        margin: 6,
-        display: "flex",
+        margin: 4,
+        width: "30%",
+        display: "inline-flex",
         flexDirection: "column"
     }
 });
@@ -52,7 +53,7 @@ export default function MediaPickerDialogSidebar() {
                 </ListItem>
                 <ListItem className={styles.listItem}>
                     <ListItemAvatar>
-                        <Pastel label={<SdcardIcon />} color="grey"/>
+                        <Pastel label={<SdcardIcon />} color="lightBlue" />
                     </ListItemAvatar>
                     <ListItemText primary="5.42MB" />
                 </ListItem>
@@ -62,7 +63,6 @@ export default function MediaPickerDialogSidebar() {
                     </ListItemAvatar>
                     <ListItemText primary="178x570" />
                 </ListItem>
-                
             </List>
             <div className={styles.space} />
             <CardContent>
