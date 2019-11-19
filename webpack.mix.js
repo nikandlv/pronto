@@ -16,6 +16,8 @@ mixDependency.require('react-sortable-hoc');
 mixDependency.require('array-move');
 mixDependency.require('react-charts');
 mixDependency.require('@material-ui/pickers');
+mixDependency.require('date-fns@next');
+mixDependency.require('@date-io/date-fns');
 
 /*
  |--------------------------------------------------------------------------
