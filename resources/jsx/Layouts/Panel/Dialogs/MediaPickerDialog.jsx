@@ -8,13 +8,15 @@ import {
     makeStyles
 } from "@material-ui/core";
 import MediaPickerDialogGallery from "./MediaPickerDialogGallery";
+import MediaPickerDialogSidebar from "./MediaPickerDialogSidebar";
 
 const useStyles = makeStyles({
     sidebar: {
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
         minHeight: "calc(100vh - 96px)",
-        maxHeight: "calc(100vh - 96px)"
+        maxHeight: "calc(100vh - 96px)",
+        alignItems: 'center'
     },
     content: {
         height: "100%",
@@ -30,7 +32,9 @@ function MediaPickerDialog(props) {
         <Dialog open={state.open} fullWidth maxWidth="lg">
             <Grid container>
                 <Grid item xs={12} sm={3}>
-                    <Paper className={styles.sidebar}>abc</Paper>
+                    <Paper className={styles.sidebar}>
+                        <MediaPickerDialogSidebar />
+                    </Paper>
                 </Grid>
                 <Grid item xs={12} sm={9}>
                     <DialogContent className={styles.content}>
