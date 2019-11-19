@@ -1,6 +1,6 @@
 import { MEDIA_PICKER } from "../Actions/types";
 const initialState = {
-    open: false
+    open: true
 };
 
 export default function MediaPickerReducer(state = initialState, action) {
