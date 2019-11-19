@@ -4,6 +4,9 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import withDynamic from "../Data/withDynamic";
 import { red } from "@material-ui/core/colors";
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+
 const theme = {
     light: createMuiTheme({
         palette: {
@@ -36,7 +39,9 @@ function Wrapper(props) {
     return (
         <ThemeProvider theme={currentTheme}>
             <CssBaseline />
-            {props.children}
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                {props.children}
+            </MuiPickersUtilsProvider>
         </ThemeProvider>
     );
 }
