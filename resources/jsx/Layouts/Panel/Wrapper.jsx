@@ -23,9 +23,11 @@ import Store from "../../Data/Store";
 import NewCategoryReducer from "../../Data/Reducers/NewCategoryReducer";
 import Dialogs from "./Dialogs/Dialogs";
 import EditCategoryReducer from "../../Data/Reducers/EditCategoryReducer";
+import MediaPickerReducer from '../../Data/Reducers/MediaPickerReducer';
 
 Store.injectReducer("NewCategory", NewCategoryReducer);
 Store.injectReducer("EditCategory", EditCategoryReducer);
+Store.injectReducer("MediaPicker", MediaPickerReducer);
 
 const drawerWidth = 240;
 
