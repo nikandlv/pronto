@@ -7,6 +7,7 @@ import {
     DialogContent,
     makeStyles
 } from "@material-ui/core";
+import MediaPickerDialogGallery from "./MediaPickerDialogGallery";
 
 const useStyles = makeStyles({
     sidebar: {
@@ -33,51 +34,7 @@ function MediaPickerDialog(props) {
                 </Grid>
                 <Grid item xs={12} sm={9}>
                     <DialogContent className={styles.content}>
-                        abc
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        ab abc
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        ab abc
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        ab abc
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        ab
+                        <MediaPickerDialogGallery />
                     </DialogContent>
                 </Grid>
             </Grid>
