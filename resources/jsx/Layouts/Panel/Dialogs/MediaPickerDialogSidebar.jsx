@@ -11,6 +11,7 @@ import {
 import StyledButton from "../../../Components/StyledButton";
 import AttachmentIcon from "@material-ui/icons/AttachmentOutlined";
 import SdcardIcon from "@material-ui/icons/SdStorageOutlined";
+import StraightenIcon from "@material-ui/icons/StraightenOutlined";
 import Pastel from "mui-pastel";
 const useStyles = makeStyles({
     media: {
@@ -51,10 +52,17 @@ export default function MediaPickerDialogSidebar() {
                 </ListItem>
                 <ListItem className={styles.listItem}>
                     <ListItemAvatar>
-                        <Pastel label={<SdcardIcon />} />
+                        <Pastel label={<SdcardIcon />} color="grey"/>
                     </ListItemAvatar>
                     <ListItemText primary="5.42MB" />
                 </ListItem>
+                <ListItem className={styles.listItem}>
+                    <ListItemAvatar>
+                        <Pastel label={<StraightenIcon />} color="deepPurple" />
+                    </ListItemAvatar>
+                    <ListItemText primary="178x570" />
+                </ListItem>
+                
             </List>
             <div className={styles.space} />
             <CardContent>
