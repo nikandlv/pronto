@@ -15,13 +15,13 @@ const useStyles = makeStyles({
         display: "flex",
         flexDirection: "column",
         minHeight: "calc(100vh - 96px)",
-        maxHeight: "calc(100vh - 96px)",
-        alignItems: 'center'
+        alignItems: "center",
+        top: 0,
+        position: "sticky"
     },
     content: {
         height: "100%",
-        minHeight: "calc(100vh - 96px)",
-        maxHeight: "calc(100vh - 96px)"
+        minHeight: "calc(100vh - 96px)"
     }
 });
 
