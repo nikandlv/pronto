@@ -28,7 +28,7 @@ import Pastel from "mui-pastel";
 
 
 const useStyles = makeStyles({
-    collapseWrapper: {
+    card: {
         borderRadius: 16
     },
     collapseList: {
@@ -80,7 +80,7 @@ export default function NewPost() {
                 </StyledTitle>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={4} xlg={3}>
-                    <Paper className={styles.collapseWrapper}>
+                    <Paper className={styles.card}>
                         <List className={styles.collapseList}>
                             <ListItem
                                 button
@@ -156,7 +156,7 @@ export default function NewPost() {
                         </Collapse>
                     </Paper>
                     <br />
-                    <Paper className={styles.collapseWrapper}>
+                    <Paper className={styles.card}>
                         <List className={styles.collapseList}>
                             <ListItem
                                 button
@@ -188,7 +188,7 @@ export default function NewPost() {
                         </Collapse>
                     </Paper>
                     <br />
-                    <Paper className={styles.collapseWrapper}>
+                    <Paper className={styles.card}>
                         <List className={styles.collapseList}>
                             <ListItem
                                 button
@@ -221,7 +221,7 @@ export default function NewPost() {
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={8} xlg={9}>
-                    <Card>
+                    <Card className={styles.card}>
                         <CardContent>
                         <StyledTitle variant="h4">General</StyledTitle>
                         <Grid container spacing="3">
