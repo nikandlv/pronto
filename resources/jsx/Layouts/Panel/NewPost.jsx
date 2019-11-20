@@ -46,15 +46,29 @@ const useStyles = makeStyles({
 
 export default function NewPost() {
     const styles = useStyles();
-    const [openCategories,setOpenCategories] = React.useState(false)
+    const [openCategories,setOpenCategories] = React.useState(true)
     const [openOptions,setOpenOptions] = React.useState(false)
+    const [openVisibility,setOpenVisibility] = React.useState(false)
+
+    function closeAll() {
+        setOpenCategories(false)
+        setOpenOptions(false)
+        setOpenVisibility(false)
+    }
 
     function toggleCategories() {
+        closeAll()
         setOpenCategories(!openCategories)
     }
     
     function toggleOptions() {
+        closeAll()
         setOpenOptions(!openOptions)
+    }
+
+    function toggleVisibility() {
+        closeAll()
+        setOpenVisibility(!openVisibility)
     }
 
     return (
@@ -145,13 +159,45 @@ export default function NewPost() {
                                 onClick={toggleOptions}
 
                             >
-                                <ListItemText primary="Options" />
+                                <ListItemText primary="Options and configuration" />
                                 <ListItemSecondaryAction>
                                     <ArrowDownIcon />
                                 </ListItemSecondaryAction>
                             </ListItem>
                         </List>
                         <Collapse in={openOptions}>
+                            <CardContent>
+                                <Divider variant="middle" />
+                                <StyledTitle variant="h6">General</StyledTitle>
+                                <List dense>
+                                    <ListItem button>
+                                        <Checkbox size="small" checked={true} />
+                                        <ListItemText primary="Pinned" />
+                                    </ListItem>
+                                    <ListItem button>
+                                        <Checkbox size="small" checked={true} />
+                                        <ListItemText primary="Allow comments" />
+                                    </ListItem>
+                                </List>
+                            </CardContent>
+                        </Collapse>
+                    </Paper>
+                    <br />
+                    <Paper className={styles.collapseWrapper}>
+                        <List className={styles.collapseList}>
+                            <ListItem
+                                button
+                                className={styles.collapseListTitle}
+                                onClick={toggleVisibility}
+
+                            >
+                                <ListItemText primary="Visibility and schedule" />
+                                <ListItemSecondaryAction>
+                                    <ArrowDownIcon />
+                                </ListItemSecondaryAction>
+                            </ListItem>
+                        </List>
+                        <Collapse in={openVisibility}>
                             <CardContent>
                                 <Divider variant="middle" />
                                 <StyledTitle variant="h6">General</StyledTitle>
