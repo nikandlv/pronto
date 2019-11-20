@@ -17,7 +17,9 @@ import {
     MenuItem,
     IconButton,
     Checkbox,
-    Card
+    Card,
+    Tabs,
+    Tab
 } from "@material-ui/core";
 
 import ArrowDownIcon from "@material-ui/icons/KeyboardArrowDownOutlined";
@@ -241,6 +243,9 @@ export default function NewPost() {
                     </Card>
                     <br />
                     <Card className={styles.card}>
+                        <Tabs>
+                            <Tab label="English" />
+                        </Tabs>
                         <CardContent>
                             <Grid container spacing="3">
                                 <Grid item xs={12} md={6}>
