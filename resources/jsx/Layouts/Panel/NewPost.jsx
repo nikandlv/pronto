@@ -46,6 +46,11 @@ const useStyles = makeStyles({
 
 export default function NewPost() {
     const styles = useStyles();
+    const [openCategories,setOpenCategories] = React.useState(false)
+
+    function toggleCategories() {
+        setOpenCategories(!openCategories)
+    }
     return (
         <Box m={2}>
             <Grid container spacing={3}>
@@ -55,6 +60,7 @@ export default function NewPost() {
                             <ListItem
                                 button
                                 className={styles.collapseListTitle}
+                                onClick={toggleCategories}
                             >
                                 <ListItemText primary="Categories and tags" />
                                 <ListItemSecondaryAction>
@@ -62,7 +68,7 @@ export default function NewPost() {
                                 </ListItemSecondaryAction>
                             </ListItem>
                         </List>
-                        <Collapse in={true}>
+                        <Collapse in={openCategories}>
                             <CardContent>
                                 <Divider variant="middle" />
                                 <StyledTitle variant="h6">
