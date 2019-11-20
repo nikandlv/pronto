@@ -25,6 +25,7 @@ import { makeStyles } from "@material-ui/styles";
 import StyledTitle from "../../Components/StyledTitle";
 import Pastel from "mui-pastel";
 
+
 const useStyles = makeStyles({
     collapseWrapper: {
         borderRadius: 16
@@ -73,6 +74,9 @@ export default function NewPost() {
 
     return (
         <Box m={2}>
+            <StyledTitle>
+                New post
+                </StyledTitle>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={4} xlg={3}>
                     <Paper className={styles.collapseWrapper}>
