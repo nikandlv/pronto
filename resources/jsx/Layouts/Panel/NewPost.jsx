@@ -26,7 +26,6 @@ import { makeStyles } from "@material-ui/styles";
 import StyledTitle from "../../Components/StyledTitle";
 import Pastel from "mui-pastel";
 
-
 const useStyles = makeStyles({
     card: {
         borderRadius: 16
@@ -48,36 +47,34 @@ const useStyles = makeStyles({
 
 export default function NewPost() {
     const styles = useStyles();
-    const [openCategories,setOpenCategories] = React.useState(true)
-    const [openOptions,setOpenOptions] = React.useState(false)
-    const [openVisibility,setOpenVisibility] = React.useState(false)
+    const [openCategories, setOpenCategories] = React.useState(true);
+    const [openOptions, setOpenOptions] = React.useState(false);
+    const [openVisibility, setOpenVisibility] = React.useState(false);
 
     function closeAll() {
-        setOpenCategories(false)
-        setOpenOptions(false)
-        setOpenVisibility(false)
+        setOpenCategories(false);
+        setOpenOptions(false);
+        setOpenVisibility(false);
     }
 
     function toggleCategories() {
-        closeAll()
-        setOpenCategories(!openCategories)
+        closeAll();
+        setOpenCategories(!openCategories);
     }
-    
+
     function toggleOptions() {
-        closeAll()
-        setOpenOptions(!openOptions)
+        closeAll();
+        setOpenOptions(!openOptions);
     }
 
     function toggleVisibility() {
-        closeAll()
-        setOpenVisibility(!openVisibility)
+        closeAll();
+        setOpenVisibility(!openVisibility);
     }
 
     return (
         <Box m={2}>
-            <StyledTitle>
-                New post
-                </StyledTitle>
+            <StyledTitle>New post</StyledTitle>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={4} xlg={3}>
                     <Paper className={styles.card}>
@@ -162,7 +159,6 @@ export default function NewPost() {
                                 button
                                 className={styles.collapseListTitle}
                                 onClick={toggleOptions}
-
                             >
                                 <ListItemText primary="Options and configuration" />
                                 <ListItemSecondaryAction>
@@ -194,7 +190,6 @@ export default function NewPost() {
                                 button
                                 className={styles.collapseListTitle}
                                 onClick={toggleVisibility}
-
                             >
                                 <ListItemText primary="Visibility and schedule" />
                                 <ListItemSecondaryAction>
@@ -221,52 +216,52 @@ export default function NewPost() {
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={8} xlg={9}>
-                <Card className={styles.card}>
+                    <Card className={styles.card}>
                         <CardContent>
-                        <StyledTitle variant="h4">General</StyledTitle>
-                        <Grid container spacing="3">
-                        <Grid item xs={12} md={6}>
-                        <TextField
+                            <StyledTitle variant="h4">General</StyledTitle>
+                            <Grid container spacing="3">
+                                <Grid item xs={12} md={6}>
+                                    <TextField
                                         variant="outlined"
                                         label="Slug"
                                         className={styles.tagInput}
                                         fullWidth
                                     />
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                        <TextField
+                                </Grid>
+                                <Grid item xs={12} md={6}>
+                                    <TextField
                                         variant="outlined"
                                         label="Slug"
                                         className={styles.tagInput}
                                         fullWidth
                                     />
+                                </Grid>
                             </Grid>
-                            </Grid>
-                            </CardContent>
-                        </Card>
-                        <br/>
-                        <Card className={styles.card}>
+                        </CardContent>
+                    </Card>
+                    <br />
+                    <Card className={styles.card}>
                         <CardContent>
-                        <Grid container spacing="3">
-                        <Grid item xs={12} md={6}>
-                        <TextField
+                            <Grid container spacing="3">
+                                <Grid item xs={12} md={6}>
+                                    <TextField
                                         variant="outlined"
                                         label="Slug"
                                         className={styles.tagInput}
                                         fullWidth
                                     />
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                        <TextField
+                                </Grid>
+                                <Grid item xs={12} md={6}>
+                                    <TextField
                                         variant="outlined"
                                         label="Slug"
                                         className={styles.tagInput}
                                         fullWidth
                                     />
+                                </Grid>
                             </Grid>
-                            </Grid>
-                            </CardContent>
-                        </Card>
+                        </CardContent>
+                    </Card>
                 </Grid>
             </Grid>
         </Box>
