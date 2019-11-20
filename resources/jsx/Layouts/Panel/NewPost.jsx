@@ -221,9 +221,32 @@ export default function NewPost() {
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={8} xlg={9}>
-                    <Card className={styles.card}>
+                <Card className={styles.card}>
                         <CardContent>
                         <StyledTitle variant="h4">General</StyledTitle>
+                        <Grid container spacing="3">
+                        <Grid item xs={12} md={6}>
+                        <TextField
+                                        variant="outlined"
+                                        label="Slug"
+                                        className={styles.tagInput}
+                                        fullWidth
+                                    />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                        <TextField
+                                        variant="outlined"
+                                        label="Slug"
+                                        className={styles.tagInput}
+                                        fullWidth
+                                    />
+                            </Grid>
+                            </Grid>
+                            </CardContent>
+                        </Card>
+                        <br/>
+                        <Card className={styles.card}>
+                        <CardContent>
                         <Grid container spacing="3">
                         <Grid item xs={12} md={6}>
                         <TextField
