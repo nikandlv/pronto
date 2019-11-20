@@ -250,6 +250,7 @@ export default function NewPost() {
                         </Tabs>
                         <Divider variant="middle" />
                         <CardContent>
+                            <StyledTitle variant="h4">Description</StyledTitle>
                             <FroalaEditorComponent tag="textarea" />
                         </CardContent>
                     </Card>
