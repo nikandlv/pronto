@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import MediaPickerDialogGallery from "./MediaPickerDialogGallery";
 import MediaPickerDialogSidebar from "./MediaPickerDialogSidebar";
-
+import {closeMediapicker} from '../../../Data/Actions/MediaPickerActions'
 const useStyles = makeStyles({
     sidebar: {
         display: "flex",
@@ -26,10 +26,10 @@ const useStyles = makeStyles({
 });
 
 function MediaPickerDialog(props) {
-    const state = props.MediaPicker;
+    const {MediaPicker , closeDialog} = props;
     const styles = useStyles();
     return (
-        <Dialog open={state.open} fullWidth maxWidth="lg">
+        <Dialog open={MediaPicker.open} fullWidth maxWidth="lg" onClose={closeDialog}>
             <Grid container>
                 <Grid item xs={12} sm={3}>
                     <Paper className={styles.sidebar}>
@@ -48,4 +48,5 @@ function MediaPickerDialog(props) {
 
 export default withDynamic(MediaPickerDialog)
     .injectReducer("MediaPicker")
+    .injectAction('closeDialog', closeMediapicker)
     .build();
