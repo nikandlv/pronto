@@ -12,6 +12,7 @@ import StyledButton from "../../../Components/StyledButton";
 import AttachmentIcon from "@material-ui/icons/AttachmentOutlined";
 import SdcardIcon from "@material-ui/icons/SdStorageOutlined";
 import StraightenIcon from "@material-ui/icons/StraightenOutlined";
+import CalendarTodayIcon from "@material-ui/icons/CalendarTodayOutlined";
 import Pastel from "mui-pastel";
 const useStyles = makeStyles({
     media: {
@@ -26,12 +27,16 @@ const useStyles = makeStyles({
         width: "90%"
     },
     listItem: {
-        background: "rgba(0,0,0,0.04)",
+        background: "rgba(0,0,0,0.03)",
         borderRadius: 16,
         margin: 4,
         width: "30%",
         display: "inline-flex",
-        flexDirection: "column"
+        flexDirection: "column",
+        "&.full": {
+            width: "100%",
+            flexDirection: "row"
+        }
     }
 });
 
@@ -45,7 +50,7 @@ export default function MediaPickerDialogSidebar() {
                 title="Contemplative Reptile"
             />
             <List className={styles.list}>
-                <ListItem className={styles.listItem}>
+                <ListItem className={`${styles.listItem} full`}>
                     <ListItemAvatar>
                         <Pastel label={<AttachmentIcon />} color="amber" />
                     </ListItemAvatar>
@@ -53,15 +58,24 @@ export default function MediaPickerDialogSidebar() {
                 </ListItem>
                 <ListItem className={styles.listItem}>
                     <ListItemAvatar>
-                        <Pastel label={<SdcardIcon />} color="lightBlue" />
+                        <Pastel label={<StraightenIcon />} color="deepPurple" />
                     </ListItemAvatar>
-                    <ListItemText primary="5.42MB" />
+                    <ListItemText secondary="178x570" />
                 </ListItem>
                 <ListItem className={styles.listItem}>
                     <ListItemAvatar>
-                        <Pastel label={<StraightenIcon />} color="deepPurple" />
+                        <Pastel label={<SdcardIcon />} color="lightBlue" />
                     </ListItemAvatar>
-                    <ListItemText primary="178x570" />
+                    <ListItemText secondary="5.42MB" />
+                </ListItem>
+                <ListItem className={styles.listItem}>
+                    <ListItemAvatar>
+                        <Pastel
+                            label={<CalendarTodayIcon />}
+                            color="deepPurple"
+                        />
+                    </ListItemAvatar>
+                    <ListItemText secondary="2019/4/30" />
                 </ListItem>
             </List>
             <div className={styles.space} />
