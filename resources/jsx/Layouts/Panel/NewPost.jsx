@@ -27,6 +27,7 @@ import AddIcon from "@material-ui/icons/AddOutlined";
 import { makeStyles } from "@material-ui/styles";
 import StyledTitle from "../../Components/StyledTitle";
 import Pastel from "mui-pastel";
+import FroalaEditorComponent from "react-froala-wysiwyg";
 
 const useStyles = makeStyles({
     card: {
@@ -249,24 +250,7 @@ export default function NewPost() {
                         </Tabs>
                         <Divider variant="middle" />
                         <CardContent>
-                            <Grid container spacing="3">
-                                <Grid item xs={12} md={6}>
-                                    <TextField
-                                        variant="outlined"
-                                        label="Slug"
-                                        className={styles.tagInput}
-                                        fullWidth
-                                    />
-                                </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <TextField
-                                        variant="outlined"
-                                        label="Slug"
-                                        className={styles.tagInput}
-                                        fullWidth
-                                    />
-                                </Grid>
-                            </Grid>
+                            <FroalaEditorComponent tag="textarea" />
                         </CardContent>
                     </Card>
                 </Grid>

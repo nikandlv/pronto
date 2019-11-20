@@ -23,8 +23,10 @@ import Store from "../../Data/Store";
 import NewCategoryReducer from "../../Data/Reducers/NewCategoryReducer";
 import Dialogs from "./Dialogs/Dialogs";
 import EditCategoryReducer from "../../Data/Reducers/EditCategoryReducer";
-import MediaPickerReducer from '../../Data/Reducers/MediaPickerReducer';
-
+import MediaPickerReducer from "../../Data/Reducers/MediaPickerReducer";
+// Require Editor CSS files.
+import "froala-editor/css/froala_style.min.css";
+import "froala-editor/css/froala_editor.pkgd.min.css";
 Store.injectReducer("NewCategory", NewCategoryReducer);
 Store.injectReducer("EditCategory", EditCategoryReducer);
 Store.injectReducer("MediaPicker", MediaPickerReducer);
