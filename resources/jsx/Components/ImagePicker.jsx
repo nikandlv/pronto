@@ -3,6 +3,8 @@ import { makeStyles, IconButton } from "@material-ui/core";
 import PhotoIcon from "@material-ui/icons/PhotoOutlined";
 import DeleteIcon from "@material-ui/icons/DeleteOutlined";
 import propTypes from "prop-types";
+import { openMediapicker } from "../Data/Actions/MediaPickerActions";
+import withDynamic from "../Data/withDynamic";
 const useStyles = makeStyles({
     wrapper: {
         width: "100%",
@@ -43,7 +45,7 @@ const useStyles = makeStyles({
     }
 });
 
-export default function ImagePicker(props) {
+function ImagePicker(props) {
     const image = props.image || "/img/placeholder.jpg";
     const styles = useStyles();
     return (
@@ -64,3 +66,5 @@ export default function ImagePicker(props) {
 ImagePicker.propTypes = {
     image: propTypes.string
 };
+
+export default withDynamic(ImagePicker).injectAction('openPicker', openMediapicker).build()
