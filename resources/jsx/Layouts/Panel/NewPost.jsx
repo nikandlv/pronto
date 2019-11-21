@@ -20,7 +20,8 @@ import {
     Card,
     Tabs,
     Tab,
-    withTheme
+    withTheme,
+    CardMedia
 } from "@material-ui/core";
 
 import ArrowDownIcon from "@material-ui/icons/KeyboardArrowDownOutlined";
@@ -34,7 +35,8 @@ import Froalaeditor from "froala-editor";
 import "froala-editor/js/plugins.pkgd.min.js";
 import Store from "../../Data/Store";
 import { openMediapicker } from "../../Data/Actions/MediaPickerActions";
-
+import { DateTimePicker } from "@material-ui/pickers";
+import ImagePicker from "../../Components/ImagePicker";
 const useStyles = makeStyles({
     card: {
         borderRadius: 16,
@@ -248,6 +250,7 @@ function NewPost(props) {
                         </List>
                         <Collapse in={openOptions}>
                             <CardContent>
+                                <ImagePicker image="https://source.unsplash.com/random?sig=0" />
                                 <Divider variant="middle" />
                                 <StyledTitle variant="h6">General</StyledTitle>
                                 <List dense>
@@ -305,6 +308,21 @@ function NewPost(props) {
                                     <TextField
                                         variant="outlined"
                                         label="Password"
+                                        fullWidth
+                                    />
+                                </Collapse>
+                                <Divider variant="middle" />
+                                <StyledTitle variant="h6">Schedule</StyledTitle>
+                                <List>
+                                    <ListItem button>
+                                        <Checkbox size="small" checked={true} />
+                                        <ListItemText primary="Schedule" />
+                                    </ListItem>
+                                </List>
+                                <Collapse in={true}>
+                                    <DateTimePicker
+                                        inputVariant="outlined"
+                                        label="Date"
                                         fullWidth
                                     />
                                 </Collapse>
