@@ -36,6 +36,7 @@ const useStyles = makeStyles({
     button: {
         backgroundColor: "rgba(0,0,0,0.5)",
         transition: "200ms background-color",
+        margin: 4,
         "&:hover,&:active,&:focus": {
             backgroundColor: "rgba(0,0,0,1)"
         }
