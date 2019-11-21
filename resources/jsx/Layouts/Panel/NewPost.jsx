@@ -28,6 +28,7 @@ import { makeStyles } from "@material-ui/styles";
 import StyledTitle from "../../Components/StyledTitle";
 import Pastel from "mui-pastel";
 import FroalaEditorComponent from "react-froala-wysiwyg";
+ import 'froala-editor/js/plugins.pkgd.min.js';
 
 const useStyles = makeStyles({
     card: {
@@ -251,7 +252,11 @@ export default function NewPost() {
                         <Divider variant="middle" />
                         <CardContent>
                             <StyledTitle variant="h4">Description</StyledTitle>
-                            <FroalaEditorComponent tag="textarea" />
+                            <FroalaEditorComponent config={
+                                {
+                                    toolbarButtons:["fullscreen", "bold", "italic", "underline", "strikeThrough", "subscript", "superscript", "|", "fontFamily", "fontSize", "color", "inlineStyle", "paragraphStyle", "|", "paragraphFormat", "align", "formatOL", "formatUL", "outdent", "indent", "quote", "-", "insertLink", "insertImage", "insertVideo", "insertFile", "insertTable", "|", "emoticons", "specialCharacters", "insertHR", "selectAll", "clearFormatting", "|", "print", "help", "html", "|", "undo", "redo"]
+                                }
+                            } tag="textarea" />
                         </CardContent>
                     </Card>
                 </Grid>
