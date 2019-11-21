@@ -1797,10 +1797,9 @@
       margin-left: 4px;
       margin-right: 4px; }
   .royal-theme.fr-toolbar .fr-btn-grp {
-    margin: 0 17px 0 12px; }
-    @media (max-width: 768px) {
-      .royal-theme.fr-toolbar .fr-btn-grp {
-        margin: 0 7px 0 6px; } }
+      background: rgba(0,0,0,0.07);
+    border-radius: 16px;
+    margin: 4px; }
   .royal-theme.fr-toolbar .fr-command.fr-btn.fr-open {
     margin-top: 10px;
     margin-bottom: -1px;
