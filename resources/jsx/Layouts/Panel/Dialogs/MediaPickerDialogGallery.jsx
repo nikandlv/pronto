@@ -134,7 +134,7 @@ export default function MediaPickerDialogGallery() {
                         <Card>
                             <CardMedia
                                 className={classes.media}
-                                image={tile.img}
+                                image={`${tile.img}?sig=${index}`}
                                 title="Paella dish"
                             />
                             <CardActions>A good day to smile!</CardActions>
