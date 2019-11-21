@@ -31,6 +31,8 @@ import Pastel from "mui-pastel";
 import FroalaEditorComponent from "react-froala-wysiwyg";
 import Froalaeditor from 'froala-editor';
 import 'froala-editor/js/plugins.pkgd.min.js';
+import Store from '../../Data/Store'
+import {openMediapicker} from '../../Data/Actions/MediaPickerActions'
 
 const useStyles = makeStyles({
     card: {
@@ -60,8 +62,7 @@ Froalaeditor.RegisterCommand('selectMedia', {
   undo: true,
   refreshAfterCallback: true,
   callback: function () {
-    this.html.set('');
-    this.events.focus();
+    Store.dispatch(openMediapicker())
   }
 });
 
