@@ -54,9 +54,11 @@ const useStyles = makeStyles({
 function NewPost(props) {
     const styles = useStyles();
     const theme = props.theme
+    const key = theme.palette.type === 'dark' ? 'darkmode' : '';
     const [openCategories, setOpenCategories] = React.useState(true);
     const [openOptions, setOpenOptions] = React.useState(false);
     const [openVisibility, setOpenVisibility] = React.useState(false);
+    const [model, setModel] = React.useState('');
 
     function closeAll() {
         setOpenCategories(false);
@@ -255,7 +257,7 @@ function NewPost(props) {
                         <Divider variant="middle" />
                         <CardContent>
                             <StyledTitle variant="h4">Description</StyledTitle>
-                            <FroalaEditorComponent config={
+                            <FroalaEditorComponent model={model} onModelChange={setModel} key={key} config={
                                 {
                                     toolbarButtons:["fullscreen", "bold", "italic", "underline", "strikeThrough", "subscript", "superscript", "|", "fontFamily", "fontSize", "color", "inlineStyle", "paragraphStyle", "|", "paragraphFormat", "align", "formatOL", "formatUL", "outdent", "indent", "quote", "-", "insertLink", "insertImage", "insertVideo", "insertFile", "insertTable", "|", "emoticons", "specialCharacters", "insertHR", "selectAll", "clearFormatting", "|", "print", "help", "html", "|", "undo", "redo"],
                                     theme: theme.palette.type === 'dark' ? 'darkmode' : ''
