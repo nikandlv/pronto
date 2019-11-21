@@ -30,15 +30,15 @@ import StyledTitle from "../../Components/StyledTitle";
 import StyledButton from "../../Components/StyledButton";
 import Pastel from "mui-pastel";
 import FroalaEditorComponent from "react-froala-wysiwyg";
-import Froalaeditor from 'froala-editor';
-import 'froala-editor/js/plugins.pkgd.min.js';
-import Store from '../../Data/Store'
-import {openMediapicker} from '../../Data/Actions/MediaPickerActions'
+import Froalaeditor from "froala-editor";
+import "froala-editor/js/plugins.pkgd.min.js";
+import Store from "../../Data/Store";
+import { openMediapicker } from "../../Data/Actions/MediaPickerActions";
 
 const useStyles = makeStyles({
     card: {
         borderRadius: 16,
-        overflow: 'visible'
+        overflow: "visible"
     },
     collapseList: {
         padding: 0
@@ -65,16 +65,18 @@ const useStyles = makeStyles({
     }
 });
 
-
-Froalaeditor.DefineIcon('selectMedia', {NAME: 'Select media', SVG_KEY: 'insertImage'});
-Froalaeditor.RegisterCommand('selectMedia', {
-  title: 'Select Media',
-  focus: false,
-  undo: true,
-  refreshAfterCallback: true,
-  callback: function () {
-    Store.dispatch(openMediapicker())
-  }
+Froalaeditor.DefineIcon("selectMedia", {
+    NAME: "Select media",
+    SVG_KEY: "insertImage"
+});
+Froalaeditor.RegisterCommand("selectMedia", {
+    title: "Select Media",
+    focus: false,
+    undo: true,
+    refreshAfterCallback: true,
+    callback: function() {
+        Store.dispatch(openMediapicker());
+    }
 });
 
 const toolbarButtons = [
@@ -112,17 +114,17 @@ const toolbarButtons = [
     "html",
     "|",
     "undo",
-"redo"
+    "redo"
 ];
 
 function NewPost(props) {
     const styles = useStyles();
-    const theme = props.theme
-    const key = theme.palette.type === 'dark' ? 'darkmode' : '';
+    const theme = props.theme;
+    const key = theme.palette.type === "dark" ? "darkmode" : "";
     const [openCategories, setOpenCategories] = React.useState(true);
     const [openOptions, setOpenOptions] = React.useState(false);
     const [openVisibility, setOpenVisibility] = React.useState(false);
-    const [model, setModel] = React.useState('');
+    const [model, setModel] = React.useState("");
 
     function closeAll() {
         setOpenCategories(false);
@@ -147,14 +149,12 @@ function NewPost(props) {
 
     return (
         <Box m={2}>
-                <Grid item xs={12} className={styles.grid}>
-                    <StyledTitle gutterBottom className={styles.push}>
-                        New Post
-                    </StyledTitle>
-                    <StyledButton size="large">
-                        Save
-                    </StyledButton>
-                </Grid>
+            <Grid item xs={12} className={styles.grid}>
+                <StyledTitle gutterBottom className={styles.push}>
+                    New Post
+                </StyledTitle>
+                <StyledButton size="large">Save</StyledButton>
+            </Grid>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={4} xlg={3}>
                     <Paper className={styles.card}>
@@ -280,17 +280,34 @@ function NewPost(props) {
                         <Collapse in={openVisibility}>
                             <CardContent>
                                 <Divider variant="middle" />
-                                <StyledTitle variant="h6">General</StyledTitle>
-                                <List dense>
-                                    <ListItem button>
-                                        <Checkbox size="small" checked={true} />
-                                        <ListItemText primary="Pinned" />
-                                    </ListItem>
-                                    <ListItem button>
-                                        <Checkbox size="small" checked={true} />
-                                        <ListItemText primary="Allow comments" />
-                                    </ListItem>
-                                </List>
+                                <StyledTitle variant="h6">Listing</StyledTitle>
+                                <FormControl fullWidth variant="outlined">
+                                    <InputLabel>Visibility</InputLabel>
+                                    <Select
+                                        fullWidth
+                                        value="public"
+                                        labelWidth={65}
+                                    >
+                                        <MenuItem value="public">
+                                            Public
+                                        </MenuItem>
+                                        <MenuItem value="private">
+                                            Private
+                                        </MenuItem>
+                                        <MenuItem value="passwordprotected">
+                                            Password protected
+                                        </MenuItem>
+                                    </Select>
+                                </FormControl>
+                                <br />
+                                <br />
+                                <Collapse in={true}>
+                                    <TextField
+                                        variant="outlined"
+                                        label="Password"
+                                        fullWidth
+                                    />
+                                </Collapse>
                             </CardContent>
                         </Collapse>
                     </Paper>
@@ -308,7 +325,6 @@ function NewPost(props) {
                                         fullWidth
                                     />
                                 </Grid>
-
                             </Grid>
                         </CardContent>
                     </Card>
@@ -320,22 +336,36 @@ function NewPost(props) {
                         </Tabs>
                         <Divider variant="middle" />
                         <CardContent>
-                        <StyledTitle variant="h4">Description</StyledTitle>
-                            <FroalaEditorComponent model={model} onModelChange={setModel} key={key} config={
-                                {
+                            <StyledTitle variant="h4">Description</StyledTitle>
+                            <FroalaEditorComponent
+                                model={model}
+                                onModelChange={setModel}
+                                key={key}
+                                config={{
                                     toolbarButtons,
-                                    theme: theme.palette.type === 'dark' ? 'darkmode' : 'royal'
-                                }
-                            } tag="textarea" />
+                                    theme:
+                                        theme.palette.type === "dark"
+                                            ? "darkmode"
+                                            : "royal"
+                                }}
+                                tag="textarea"
+                            />
                         </CardContent>
                         <CardContent>
-                        <StyledTitle variant="h4">Content</StyledTitle>
-                            <FroalaEditorComponent model={model} onModelChange={setModel} key={key} config={
-                                {
+                            <StyledTitle variant="h4">Content</StyledTitle>
+                            <FroalaEditorComponent
+                                model={model}
+                                onModelChange={setModel}
+                                key={key}
+                                config={{
                                     toolbarButtons,
-                                    theme: theme.palette.type === 'dark' ? 'darkmode' : 'royal'
-                                }
-                            } tag="textarea" />
+                                    theme:
+                                        theme.palette.type === "dark"
+                                            ? "darkmode"
+                                            : "royal"
+                                }}
+                                tag="textarea"
+                            />
                         </CardContent>
                     </Card>
                 </Grid>
@@ -344,4 +374,4 @@ function NewPost(props) {
     );
 }
 
-export default withTheme(NewPost)
+export default withTheme(NewPost);
