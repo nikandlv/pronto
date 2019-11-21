@@ -19,7 +19,8 @@ import {
     Checkbox,
     Card,
     Tabs,
-    Tab
+    Tab,
+    withTheme
 } from "@material-ui/core";
 
 import ArrowDownIcon from "@material-ui/icons/KeyboardArrowDownOutlined";
@@ -32,7 +33,8 @@ import FroalaEditorComponent from "react-froala-wysiwyg";
 
 const useStyles = makeStyles({
     card: {
-        borderRadius: 16
+        borderRadius: 16,
+        overflow: 'visible'
     },
     collapseList: {
         padding: 0
@@ -49,8 +51,9 @@ const useStyles = makeStyles({
     }
 });
 
-export default function NewPost() {
+function NewPost(props) {
     const styles = useStyles();
+    const theme = props.theme
     const [openCategories, setOpenCategories] = React.useState(true);
     const [openOptions, setOpenOptions] = React.useState(false);
     const [openVisibility, setOpenVisibility] = React.useState(false);
@@ -254,7 +257,8 @@ export default function NewPost() {
                             <StyledTitle variant="h4">Description</StyledTitle>
                             <FroalaEditorComponent config={
                                 {
-                                    toolbarButtons:["fullscreen", "bold", "italic", "underline", "strikeThrough", "subscript", "superscript", "|", "fontFamily", "fontSize", "color", "inlineStyle", "paragraphStyle", "|", "paragraphFormat", "align", "formatOL", "formatUL", "outdent", "indent", "quote", "-", "insertLink", "insertImage", "insertVideo", "insertFile", "insertTable", "|", "emoticons", "specialCharacters", "insertHR", "selectAll", "clearFormatting", "|", "print", "help", "html", "|", "undo", "redo"]
+                                    toolbarButtons:["fullscreen", "bold", "italic", "underline", "strikeThrough", "subscript", "superscript", "|", "fontFamily", "fontSize", "color", "inlineStyle", "paragraphStyle", "|", "paragraphFormat", "align", "formatOL", "formatUL", "outdent", "indent", "quote", "-", "insertLink", "insertImage", "insertVideo", "insertFile", "insertTable", "|", "emoticons", "specialCharacters", "insertHR", "selectAll", "clearFormatting", "|", "print", "help", "html", "|", "undo", "redo"],
+                                    theme: theme.palette.type === 'dark' ? 'darkmode' : ''
                                 }
                             } tag="textarea" />
                         </CardContent>
@@ -264,3 +268,5 @@ export default function NewPost() {
         </Box>
     );
 }
+
+export default withTheme(NewPost)
