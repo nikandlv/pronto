@@ -26,7 +26,8 @@ import EditCategoryReducer from "../../Data/Reducers/EditCategoryReducer";
 import MediaPickerReducer from "../../Data/Reducers/MediaPickerReducer";
 // Require Editor CSS files.
 import "froala-editor/css/froala_style.min.css";
-import "../../../css/darkmode.css";
+import "../../../css/froala/darkmode.css";
+import "../../../css/froala/royal.css";
 import "froala-editor/css/froala_editor.pkgd.min.css";
 Store.injectReducer("NewCategory", NewCategoryReducer);
 Store.injectReducer("EditCategory", EditCategoryReducer);
