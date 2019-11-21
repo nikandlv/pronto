@@ -27,6 +27,7 @@ import ArrowDownIcon from "@material-ui/icons/KeyboardArrowDownOutlined";
 import AddIcon from "@material-ui/icons/AddOutlined";
 import { makeStyles } from "@material-ui/styles";
 import StyledTitle from "../../Components/StyledTitle";
+import StyledButton from "../../Components/StyledButton";
 import Pastel from "mui-pastel";
 import FroalaEditorComponent from "react-froala-wysiwyg";
 import Froalaeditor from 'froala-editor';
@@ -51,6 +52,16 @@ const useStyles = makeStyles({
     },
     tagInput: {
         flexGrow: 1
+    },
+    push: {
+        flexGrow: 1
+    },
+    grid: {
+        display: "flex",
+        alignItems: "center"
+    },
+    uploadIcon: {
+        margin: "0 6px "
     }
 });
 
@@ -136,7 +147,14 @@ function NewPost(props) {
 
     return (
         <Box m={2}>
-            <StyledTitle>New post</StyledTitle>
+                <Grid item xs={12} className={styles.grid}>
+                    <StyledTitle gutterBottom className={styles.push}>
+                        New Post
+                    </StyledTitle>
+                    <StyledButton size="large">
+                        Save
+                    </StyledButton>
+                </Grid>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={4} xlg={3}>
                     <Paper className={styles.card}>
