@@ -29,7 +29,8 @@ import { makeStyles } from "@material-ui/styles";
 import StyledTitle from "../../Components/StyledTitle";
 import Pastel from "mui-pastel";
 import FroalaEditorComponent from "react-froala-wysiwyg";
- import 'froala-editor/js/plugins.pkgd.min.js';
+import Froalaeditor from 'froala-editor';
+import 'froala-editor/js/plugins.pkgd.min.js';
 
 const useStyles = makeStyles({
     card: {
@@ -49,6 +50,19 @@ const useStyles = makeStyles({
     tagInput: {
         flexGrow: 1
     }
+});
+
+
+Froalaeditor.DefineIcon('selectMedia', {NAME: 'Select media', SVG_KEY: 'insertImage'});
+Froalaeditor.RegisterCommand('selectMedia', {
+  title: 'Select Media',
+  focus: false,
+  undo: true,
+  refreshAfterCallback: true,
+  callback: function () {
+    this.html.set('');
+    this.events.focus();
+  }
 });
 
 const toolbarButtons = [
@@ -73,6 +87,7 @@ const toolbarButtons = [
     "indent",
     "quote",
     "-",
+    "selectMedia",
     "insertTable",
     "emoticons",
     "specialCharacters",
