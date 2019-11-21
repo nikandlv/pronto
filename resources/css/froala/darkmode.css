@@ -1860,6 +1860,7 @@
       -webkit-background-clip: padding-box;
       background-clip: padding-box; }
   .darkmode-theme.fr-toolbar.fr-sticky-on {
+        z-index: 1300;
     border-radius: 0;
     -moz-border-radius: 0;
     -webkit-border-radius: 0;

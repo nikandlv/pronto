@@ -51,6 +51,43 @@ const useStyles = makeStyles({
     }
 });
 
+const toolbarButtons = [
+    "fullscreen",
+    "bold",
+    "italic",
+    "underline",
+    "strikeThrough",
+    "subscript",
+    "superscript",
+    "|",
+    "fontSize",
+    "color",
+    "inlineStyle",
+    "paragraphStyle",
+    "|",
+    "paragraphFormat",
+    "align",
+    "formatOL",
+    "formatUL",
+    "outdent",
+    "indent",
+    "quote",
+    "-",
+    "insertTable",
+    "emoticons",
+    "specialCharacters",
+    "insertHR",
+    "selectAll",
+    "clearFormatting",
+    "|",
+    "print",
+    "help",
+    "html",
+    "|",
+    "undo",
+"redo"
+];
+
 function NewPost(props) {
     const styles = useStyles();
     const theme = props.theme
@@ -237,14 +274,7 @@ function NewPost(props) {
                                         fullWidth
                                     />
                                 </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <TextField
-                                        variant="outlined"
-                                        label="Slug"
-                                        className={styles.tagInput}
-                                        fullWidth
-                                    />
-                                </Grid>
+
                             </Grid>
                         </CardContent>
                     </Card>
@@ -256,10 +286,19 @@ function NewPost(props) {
                         </Tabs>
                         <Divider variant="middle" />
                         <CardContent>
-                            <StyledTitle variant="h4">Description</StyledTitle>
+                        <StyledTitle variant="h4">Description</StyledTitle>
                             <FroalaEditorComponent model={model} onModelChange={setModel} key={key} config={
                                 {
-                                    toolbarButtons:["fullscreen", "bold", "italic", "underline", "strikeThrough", "subscript", "superscript", "|", "fontFamily", "fontSize", "color", "inlineStyle", "paragraphStyle", "|", "paragraphFormat", "align", "formatOL", "formatUL", "outdent", "indent", "quote", "-", "insertLink", "insertImage", "insertVideo", "insertFile", "insertTable", "|", "emoticons", "specialCharacters", "insertHR", "selectAll", "clearFormatting", "|", "print", "help", "html", "|", "undo", "redo"],
+                                    toolbarButtons,
+                                    theme: theme.palette.type === 'dark' ? 'darkmode' : 'royal'
+                                }
+                            } tag="textarea" />
+                        </CardContent>
+                        <CardContent>
+                        <StyledTitle variant="h4">Content</StyledTitle>
+                            <FroalaEditorComponent model={model} onModelChange={setModel} key={key} config={
+                                {
+                                    toolbarButtons,
                                     theme: theme.palette.type === 'dark' ? 'darkmode' : 'royal'
                                 }
                             } tag="textarea" />
