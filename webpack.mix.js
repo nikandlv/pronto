@@ -14,6 +14,8 @@ mixDependency.require('mui-nutella');
 mixDependency.require('mui-prompt');
 mixDependency.require('react-sortable-hoc');
 mixDependency.require('array-move');
+mixDependency.require('react-charts');
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
