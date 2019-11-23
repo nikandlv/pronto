@@ -23,6 +23,11 @@ import clsx from "clsx";
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
+    "@global": {
+        body: {
+            overflowX: "hidden"
+        }
+    },
     root: {
         display: "flex",
         position: "relative",

@@ -72,6 +72,7 @@ function UsersTable(props) {
                     <TableHead>
                         <TableRow>
                             <TableCell>Post title</TableCell>
+                            <TableCell align="center">Categories</TableCell>
                             <TableCell align="center">Badges</TableCell>
                             <TableCell align="center">Creation date</TableCell>
                             <TableCell align="center">Actions</TableCell>
@@ -82,6 +83,9 @@ function UsersTable(props) {
                             <TableRow key={row.name}>
                                 <TableCell component="th" scope="row">
                                     Hello world!
+                                </TableCell>
+                                <TableCell align="center">
+                                    <Pastel color="amber" label="General" />
                                 </TableCell>
                                 <TableCell align="center">
                                     <Pastel color="green" label="Published" />
@@ -95,7 +99,7 @@ function UsersTable(props) {
                                 </TableCell>
                                 <TableCell align="center">
                                     <Prompt.Inline continueText="Delete">
-                                        <Tooltip title="Delete User">
+                                        <Tooltip title="Delete post">
                                             <IconButton size="small">
                                                 <TrashIcon />
                                             </IconButton>
