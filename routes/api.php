@@ -29,11 +29,6 @@ Route::group(['prefix' => '/users'], function () {
     Route::patch('/{user}/admin', 'AdminController@update')->middleware('auth:api', 'role:admin');
 });
 
-/**
- * /users/{user}/settings => /settings/users/{user}
- * /admins/{admin}/settings => /settings/admins/{admin}
- */
-
 // Settings management system
 Route::group(['prefix' => '/settings'],function () {
     Route::post('/users/{user}', 'SettingsController@store')->middleware('auth:api');
