@@ -1,38 +1,43 @@
-import Store from './Store';
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 
-let reducer_list = []
+class Builder {
+    reducer_list = [];
 
-let action_list = []
+    action_list = [];
 
-let component = null
+    component = null;
 
-const builder = {
-    injectAction: (key,action) => {
-        action_list[key] = action
-        return builder
-    },
-    injectReducer: (reducer) => {
-        reducer_list = [...reducer_list,reducer]
-        return builder
-    },
-    build: () => {
-        if(component === null) {
-            console.error('Component should not be null')
+    constructor(component) {
+        this.component = component;
+    }
+
+    injectAction(key, action) {
+        this.action_list[key] = action;
+        return this;
+    }
+    injectReducer(reducer) {
+        this.reducer_list = [...this.reducer_list, reducer];
+        return this;
+    }
+    build() {
+        if (this.component === null) {
+            console.error("Component should not be null");
         }
-        return connect(() => (state) => {
-            let result = {}
-            Object.keys(state).map((key) => {
-                if(reducer_list.includes(key)) {
-                    result[key] = (state[key])
-                }
-            })
-            return result
-        },action_list)(component)
+        return connect(
+            () => state => {
+                let result = {};
+                Object.keys(state).map(key => {
+                    if (this.reducer_list.includes(key)) {
+                        result[key] = state[key];
+                    }
+                });
+                return result;
+            },
+            this.action_list
+        )(this.component);
     }
 }
 
-export default function withDynamic(input) {
-    component = input
-    return builder
+export default function withDynamic(component) {
+    return new Builder(component);
 }

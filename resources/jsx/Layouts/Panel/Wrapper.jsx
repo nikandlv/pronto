@@ -19,6 +19,13 @@ import WidgetIcon from "@material-ui/icons/WidgetsOutlined";
 import { Box } from "@material-ui/core";
 import Topbar from "../Blog/Topbar";
 import clsx from "clsx";
+import Store from "../../Data/Store";
+import NewCategoryReducer from "../../Data/Reducers/NewCategoryReducer";
+import Dialogs from "./Dialogs/Dialogs";
+import EditCategoryReducer from "../../Data/Reducers/EditCategoryReducer";
+
+Store.injectReducer("NewCategory", NewCategoryReducer);
+Store.injectReducer("EditCategory", EditCategoryReducer);
 
 const drawerWidth = 240;
 
@@ -201,6 +208,7 @@ function ResponsiveDrawer(props) {
 
     return (
         <Box m={2}>
+            <Dialogs />
             <div className={classes.root}>
                 <Topbar
                     hasMenu

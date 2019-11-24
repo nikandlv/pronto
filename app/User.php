@@ -56,6 +56,14 @@ class User extends Authenticatable
         return 'api/users/' . $this->id;
     }
 
+    public function settingsPath()
+    {
+        if($this->isAdmin()) {
+            return '/api/settings/admins/' . $this->id;
+        }
+
+        return '/api/settings/users/' . $this->id;
+    }
     /**
      * check user is admin or not
      *

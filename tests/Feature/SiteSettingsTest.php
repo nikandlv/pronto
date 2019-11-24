@@ -20,7 +20,7 @@ class SiteSettingsTest extends TestCase
             'languages' => 'english',
         ];
 
-        $this->postJson($admin->path() . '/settings', $settings);
+        $this->postJson($admin->settingsPath(), $settings);
 
         $this->assertDatabaseHas('site_settings', [
             'key' => 'languages',
@@ -32,7 +32,6 @@ class SiteSettingsTest extends TestCase
     public function an_valid_admin_just_can_set_site_settings()
     {
         $user = $this->signIn();
-
 
         $settings = [
             'language' => 'english',
