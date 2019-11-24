@@ -33,7 +33,6 @@ class SiteSettingsTest extends TestCase
     {
         $user = $this->signIn();
 
-
         $settings = [
             'language' => 'english',
         ];
