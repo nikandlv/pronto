@@ -16,7 +16,7 @@
 Route::get('/', 'StartupController@index');
 
 // Auth system
-Route::group(['prefix' => '/auth/'], function () {
+Route::group(['prefix' => '/auth'], function () {
     Route::post('/login', 'LoginController@login');
     Route::post('/register', 'AuthController@store');
     Route::post('/logout', 'AuthController@destroy')->middleware('auth:api');
