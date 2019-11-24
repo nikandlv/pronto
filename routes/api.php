@@ -16,17 +16,20 @@
 Route::get('/', 'StartupController@index');
 
 // Auth system
-Route::post('/login', 'LoginController@login')->name('login');
-Route::post('/register', 'AuthController@store')->name('register');
-Route::post('/logout', 'AuthController@destroy')->middleware('auth:api')->name('logout');
-Route::get('/user', 'AuthController@index')->middleware('auth:api')->name('user.current');
+Route::group(['prefix' => '/auth/'], function () {
+    Route::post('/login', 'LoginController@login');
+    Route::post('/register', 'AuthController@store');
+    Route::post('/logout', 'AuthController@destroy')->middleware('auth:api');
+    Route::get('/user', 'AuthController@index')->middleware('auth:api');
+});
+
 
 // Admin
-Route::patch('/users/{user}/admin', 'AdminController@update')->middleware('auth:api', 'role:admin')->name('users.update');
+Route::patch('/users/{user}/admin', 'AdminController@update')->middleware('auth:api', 'role:admin');
 
 // hasUserSettings
-Route::post('/users/{user}/settings', 'SettingsController@store')->middleware('auth:api')->name('settings.personal');
-Route::post('/admins/{admin}/settings', 'SiteSettingsController@store')->middleware('auth:api', 'role:admin')->name('settings.global');
+Route::post('/users/{user}/settings', 'SettingsController@store')->middleware('auth:api');
+Route::post('/admins/{admin}/settings', 'SiteSettingsController@store')->middleware('auth:api', 'role:admin');
 
 // Post system
 Route::group(['middleware' => 'auth:api', 'prefix' => '/posts'], function () {
