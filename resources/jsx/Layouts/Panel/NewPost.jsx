@@ -15,7 +15,8 @@ import {
     InputLabel,
     Select,
     MenuItem,
-    IconButton
+    IconButton,
+    Checkbox
 } from "@material-ui/core";
 
 import ArrowDownIcon from "@material-ui/icons/KeyboardArrowDownOutlined";
@@ -120,6 +121,36 @@ export default function NewPost() {
                                         <AddIcon />
                                     </IconButton>
                                 </div>
+                            </CardContent>
+                        </Collapse>
+                    </Paper>
+                    <br />
+                    <Paper className={styles.collapseWrapper}>
+                        <List className={styles.collapseList}>
+                            <ListItem
+                                button
+                                className={styles.collapseListTitle}
+                            >
+                                <ListItemText primary="Options" />
+                                <ListItemSecondaryAction>
+                                    <ArrowDownIcon />
+                                </ListItemSecondaryAction>
+                            </ListItem>
+                        </List>
+                        <Collapse in={true}>
+                            <CardContent>
+                                <Divider variant="middle" />
+                                <StyledTitle variant="h6">General</StyledTitle>
+                                <List dense>
+                                    <ListItem button>
+                                        <Checkbox size="small" checked={true} />
+                                        <ListItemText primary="Pinned" />
+                                    </ListItem>
+                                    <ListItem button>
+                                        <Checkbox size="small" checked={true} />
+                                        <ListItemText primary="Allow comments" />
+                                    </ListItem>
+                                </List>
                             </CardContent>
                         </Collapse>
                     </Paper>
