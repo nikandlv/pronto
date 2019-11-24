@@ -24,12 +24,21 @@ Route::group(['prefix' => '/auth'], function () {
 });
 
 
-// Admin
-Route::patch('/users/{user}/admin', 'AdminController@update')->middleware('auth:api', 'role:admin');
+// User Management system
+Route::group(['prefix' => '/users'], function () {
+    Route::patch('/{user}/admin', 'AdminController@update')->middleware('auth:api', 'role:admin');
+});
 
-// hasUserSettings
-Route::post('/users/{user}/settings', 'SettingsController@store')->middleware('auth:api');
-Route::post('/admins/{admin}/settings', 'SiteSettingsController@store')->middleware('auth:api', 'role:admin');
+/**
+ * /users/{user}/settings => /settings/users/{user}
+ * /admins/{admin}/settings => /settings/admins/{admin}
+ */
+
+// Settings management system
+Route::group(['prefix' => '/settings'],function () {
+    Route::post('/users/{user}', 'SettingsController@store')->middleware('auth:api');
+    Route::post('/admins/{admin}', 'SiteSettingsController@store')->middleware('auth:api', 'role:admin');
+});
 
 // Post system
 Route::group(['middleware' => 'auth:api', 'prefix' => '/posts'], function () {

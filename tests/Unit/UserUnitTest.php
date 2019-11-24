@@ -22,6 +22,13 @@ class UserUnitTest extends TestCase
         $this->assertEquals('api/users/' . $user->id, $user->path());
     }
 
+    /** @test **/
+    public function a_user_knows_it_settings_path()
+    {
+        $user = factory(User::class)->create();
+
+        $this->assertEquals('/api/settings/users/'. $user->id, $user->settingsPath());
+    }
     /** @test * */
     public function a_admin_knows_its_path()
     {
