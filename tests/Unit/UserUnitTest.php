@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 
+use App\pronto\users\UserRoleManager;
 use App\Settings;
 use App\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -22,19 +23,28 @@ class UserUnitTest extends TestCase
         $this->assertEquals('api/users/' . $user->id, $user->path());
     }
 
-    /** @test **/
+    /** @test * */
     public function a_user_knows_it_settings_path()
     {
         $user = factory(User::class)->create();
 
-        $this->assertEquals('/api/settings/users/'. $user->id, $user->settingsPath());
+        $this->assertEquals('/api/settings/users/' . $user->id, $user->settingsPath());
     }
+
     /** @test * */
     public function a_admin_knows_its_path()
     {
         $admin = $this->beAdmin();
 
         $this->assertEquals('api/admins/' . $admin->id, $admin->path());
+    }
+
+    /** @test * */
+    public function an_admin_knows_its_settings_path()
+    {
+        $admin = factory(User::class)->create(['role' => UserRoleManager::ROLE_ADMIN]);
+
+        $this->assertEquals('/api/settings/admins/'. $admin->id, $admin->settingsPath());
     }
 
     /** @test * */
