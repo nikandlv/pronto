@@ -62,7 +62,10 @@ function UsersTable(props) {
                 <StyledTitle gutterBottom className={classes.push}>
                     Posts
                 </StyledTitle>
-                <StyledButton size="large">
+                <StyledButton
+                    size="large"
+                    onClick={() => props.history.push("/admin/posts/new")}
+                >
                     <AddIcon className={classes.addIcon} />
                     New Post
                 </StyledButton>
