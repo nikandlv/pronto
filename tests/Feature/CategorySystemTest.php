@@ -10,19 +10,25 @@ class CategorySystemTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test **/
+    /** @test * */
     public function a_category_can_be_made()
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->postJson('/api/categories/', [
+        $this->postJson('/api/categories/', [
             'title' => 'funny',
-        ]);
+        ])->assertExactJson(['message' => 'category created successfully', 'status' => 201]);
 
         $this->assertDatabaseHas('categories', [
             'title' => 'funny',
         ]);
     }
 
-
+    /** @test * */
+    public function a_title_is_necessary_for_making_a_category()
+    {
+        $this->postJson('/api/categories/', [
+            'title' => null,
+        ])->assertJsonValidationErrors(['title']);
+    }
 }

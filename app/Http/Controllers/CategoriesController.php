@@ -9,6 +9,12 @@ class CategoriesController extends Controller
 {
     public function store()
     {
-        Category::create(\request()->all());
+        $attributes = \request()->validate([
+            'title' => 'required|string|min:4|max:40'
+        ]);
+
+        Category::create($attributes);
+
+        return response(['message' => 'category created successfully', 'status' => 201]);
     }
 }
