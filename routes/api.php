@@ -37,11 +37,11 @@ Route::group(['prefix' => '/settings'], function () {
 
 // Post system
 Route::group(['middleware' => 'auth:api', 'prefix' => '/posts'], function () {
-    Route::post('', 'PostsController@store')->name('post.create');
-    Route::delete('/{post}', 'PostsController@destroy')->name('post.delete');
-    Route::get('', 'PostsController@index')->name('post.getAll');
-    Route::get('/{post}', 'PostsController@show')->name('post.getOne');
-    Route::put('/{post}', 'PostsController@update')->name('post.update');
+    Route::post('', 'PostsController@store');
+    Route::delete('/{post}', 'PostsController@destroy');
+    Route::get('', 'PostsController@index');
+    Route::get('/{post}', 'PostsController@show');
+    Route::put('/{post}', 'PostsController@update');
 });
 
 // Category System
