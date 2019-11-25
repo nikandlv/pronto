@@ -72,6 +72,7 @@ class PostsSystemTest extends TestCase
                 'message' => 'Unauthenticated.'
             ]);
     }
+
     /** @test **/
     public function a_logged_in_user_can_delete_a_post()
     {
@@ -96,6 +97,7 @@ class PostsSystemTest extends TestCase
             'message' => 'Unauthenticated.'
         ]);
     }
+
     /** @test * */
     public function a_logged_in_user_can_fetch_all_posts()
     {
