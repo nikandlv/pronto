@@ -15,7 +15,9 @@ class CategorySystemTest extends TestCase
 
     public function makeCategory($category = null)
     {
-        $category = $category === null ?: factory(Category::class)->create();
+        $category = $category === null ? factory(Category::class)->create() : $category;
+
+        return $category;
     }
 
 
@@ -66,6 +68,6 @@ class CategorySystemTest extends TestCase
             'parent' => $category->id,
         ]);
 
-        $this->assertInstanceOf(Collection::class, $category->subCategories);
+        $this->assertInstanceOf(Collection::class, $category->subCategories());
     }
 }
