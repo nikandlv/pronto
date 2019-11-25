@@ -45,6 +45,6 @@ Route::group(['middleware' => 'auth:api', 'prefix' => '/posts'], function () {
 });
 
 // Category System
-Route::group(['prefix' => '/categories', 'middleware' => 'auth:api'], function () {
+Route::group(['prefix' => '/categories', 'middleware' => ['auth:api' , 'role:admin,author']], function () {
     Route::post('', 'CategoriesController@store');
 });

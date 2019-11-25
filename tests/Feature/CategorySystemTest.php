@@ -91,8 +91,15 @@ class CategorySystemTest extends TestCase
         $this->postJson('/api/categories/', [
             'title' => 'funny'
         ])->assertUnauthorized();
-
-
     }
-    
+
+    /** @test **/
+    public function user_must_be_author_or_admin_to_make_a_category()
+    {
+        $this->signIn();
+
+        $this->postJson('/api/categories/', [
+            'title' => 'funny'
+        ])->assertExactJson(['status' => 403]);
+    }
 }
