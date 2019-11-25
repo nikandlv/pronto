@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Category;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CategorySystemTest extends TestCase
@@ -22,7 +21,7 @@ class CategorySystemTest extends TestCase
 
 
     /** @test * */
-    public function a_category_can_be_made()
+    public function an_authenticated_user_can_make_a_category()
     {
         $this->withoutExceptionHandling();
 
@@ -75,7 +74,7 @@ class CategorySystemTest extends TestCase
         ]);
     }
 
-    /** @test **/
+    /** @test * */
     public function the_parent_id_must_be_a_number()
     {
         $category = $this->makeCategory();
@@ -85,4 +84,15 @@ class CategorySystemTest extends TestCase
             'parent_id' => 'bad_id',
         ])->assertJsonValidationErrors(['parent_id']);
     }
+
+    /** @test * */
+    public function user_must_be_authenticated_to_make_a_category()
+    {
+        $this->postJson('/api/categories/', [
+            'title' => 'funny'
+        ])->assertUnauthorized();
+
+
+    }
+    
 }
