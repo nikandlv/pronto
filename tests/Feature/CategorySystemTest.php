@@ -21,7 +21,6 @@ class CategorySystemTest extends TestCase
     }
 
 
-
     /** @test * */
     public function a_category_can_be_made()
     {
@@ -65,9 +64,14 @@ class CategorySystemTest extends TestCase
 
         $this->postJson('/api/categories/', [
             'title' => 'sub_title',
-            'parent' => $category->id,
+            'parent_id' => $category->id,
         ]);
 
-        $this->assertInstanceOf(Collection::class, $category->subCategories());
+        $this->assertInstanceOf(Collection::class, $category->subCategories);
+
+        $this->assertDatabaseHas('categories', [
+            'title' => 'sub_title',
+            'parent_id' => $category->id
+        ]);
     }
 }

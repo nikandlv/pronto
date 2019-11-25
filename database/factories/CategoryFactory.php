@@ -8,6 +8,6 @@ use Faker\Generator as Faker;
 $factory->define(Category::class, function (Faker $faker) {
     return [
         'title' => $faker->randomLetter,
-        'parent' => null
+        'parent_id' => null
     ];
 });
