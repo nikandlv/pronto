@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
-    //
+    public function store()
+    {
+        Category::insert(\request()->all());
+    }
 }
