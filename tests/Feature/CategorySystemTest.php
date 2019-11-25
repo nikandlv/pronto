@@ -23,6 +23,7 @@ class CategorySystemTest extends TestCase
     /** @test * */
     public function an_authenticated_user_can_make_a_category()
     {
+        $this->beAuthor();
         $this->withoutExceptionHandling();
 
         $this->postJson('/api/categories/', [
@@ -37,6 +38,8 @@ class CategorySystemTest extends TestCase
     /** @test * */
     public function a_title_is_necessary_for_making_a_category()
     {
+        $this->beAuthor();
+
         $this->postJson('/api/categories/', [
             'title' => null,
         ])->assertJsonValidationErrors(['title']);
@@ -45,6 +48,8 @@ class CategorySystemTest extends TestCase
     /** @test * */
     public function a_title_must_only_include_letters_and_dashes()
     {
+        $this->beAuthor();
+
         $this->postJson('/api/categories/', [
             'title' => 'this.is.a.bad.title'
         ])->assertJsonValidationErrors(['title']);
@@ -58,6 +63,7 @@ class CategorySystemTest extends TestCase
     public function a_category_can_have_sub_categories()
     {
         $this->withoutExceptionHandling();
+        $this->beAuthor();
 
         $category = $this->makeCategory();
 
@@ -77,6 +83,8 @@ class CategorySystemTest extends TestCase
     /** @test * */
     public function the_parent_id_must_be_a_number()
     {
+        $this->beAuthor();
+
         $category = $this->makeCategory();
 
         $this->postJson('/api/categories/', [
