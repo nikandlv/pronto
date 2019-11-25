@@ -74,4 +74,15 @@ class CategorySystemTest extends TestCase
             'parent_id' => $category->id
         ]);
     }
+
+    /** @test **/
+    public function the_parent_id_must_be_a_number()
+    {
+        $category = $this->makeCategory();
+
+        $this->postJson('/api/categories/', [
+            'title' => 'sub_title',
+            'parent_id' => 'bad_id',
+        ])->assertJsonValidationErrors(['parent_id']);
+    }
 }

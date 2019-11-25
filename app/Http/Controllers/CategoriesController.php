@@ -12,7 +12,7 @@ class CategoriesController extends Controller
 
         $attributes = \request()->validate([
             'title' => 'required|string|alpha_dash|min:4|max:50',
-            'parent_id' => 'sometimes'
+            'parent_id' => 'sometimes|numeric'
         ]);
 
         Category::create($attributes);
