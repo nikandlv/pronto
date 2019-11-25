@@ -15,12 +15,14 @@ class CategorySystemTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $this->postJson('/api/categories/', [
+        $response = $this->postJson('/api/categories/', [
             'title' => 'funny',
-        ])->assertStatus(201);
+        ]);
 
         $this->assertDatabaseHas('categories', [
             'title' => 'funny',
         ]);
     }
+
+
 }
