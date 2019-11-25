@@ -30,7 +30,7 @@ Route::group(['prefix' => '/users'], function () {
 });
 
 // Settings management system
-Route::group(['prefix' => '/settings'],function () {
+Route::group(['prefix' => '/settings'], function () {
     Route::post('/users/{user}', 'SettingsController@store')->middleware('auth:api');
     Route::post('/admins/{admin}', 'SiteSettingsController@store')->middleware('auth:api', 'role:admin');
 });
@@ -42,4 +42,9 @@ Route::group(['middleware' => 'auth:api', 'prefix' => '/posts'], function () {
     Route::get('', 'PostsController@index')->name('post.getAll');
     Route::get('/{post}', 'PostsController@show')->name('post.getOne');
     Route::put('/{post}', 'PostsController@update')->name('post.update');
+});
+
+// Category System
+Route::group(['prefix' => '/categories'], function () {
+    Route::post('', 'CategoriesController@store');
 });

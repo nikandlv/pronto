@@ -9,10 +9,18 @@ use Tests\TestCase;
 class CategorySystemTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     /** @test **/
-    public function () 
+    public function a_category_can_be_made()
     {
-        
+        $this->withoutExceptionHandling();
+
+        $this->postJson('/api/categories/', [
+            'title' => 'funny',
+        ])->assertStatus(201);
+
+        $this->assertDatabaseHas('categories', [
+            'title' => 'funny',
+        ]);
     }
 }
