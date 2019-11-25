@@ -31,4 +31,12 @@ class CategorySystemTest extends TestCase
             'title' => null,
         ])->assertJsonValidationErrors(['title']);
     }
+
+    /** @test **/
+    public function a_title_must_only_include_letters()
+    {
+        $this->postJson('/api/categories/', [
+           'title' => 'this.is.a.bad.title'
+        ])->assertJsonValidationErrors(['title']);
+    }
 }

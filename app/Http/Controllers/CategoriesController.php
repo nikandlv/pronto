@@ -10,7 +10,7 @@ class CategoriesController extends Controller
     public function store()
     {
         $attributes = \request()->validate([
-            'title' => 'required|string|min:4|max:40'
+            'title' => 'required|string|alpha|min:4|max:50'
         ]);
 
         Category::create($attributes);
