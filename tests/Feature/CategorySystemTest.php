@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Category;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Resources\Json\Resource;
 use Tests\TestCase;
 
 class CategorySystemTest extends TestCase
@@ -101,7 +102,7 @@ class CategorySystemTest extends TestCase
         ])->assertUnauthorized();
     }
 
-    /** @test **/
+    /** @test * */
     public function user_must_be_author_or_admin_to_make_a_category()
     {
         $this->signIn();
@@ -111,19 +112,15 @@ class CategorySystemTest extends TestCase
         ])->assertExactJson(['status' => 403]);
     }
 
-    /** @test **/
+    /** @test * */
     public function a_authenticated_user_can_get_a_list_of_all_categories()
     {
         $this->withoutExceptionHandling();
 
         $author = $this->beAuthor();
 
-        $this->makeCategory();
+        $category = $this->makeCategory()->toArray();
 
-        $response = $this->getJson('/api/categories');
-
-        $this->assertInstanceOf(Collection::class , $response);
-
-        $this->assertCount(1 , $response);
+        $this->getJson('/api/categories')->assertJson(['data' => [$category]]);
     }
 }
