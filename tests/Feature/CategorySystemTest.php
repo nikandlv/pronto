@@ -95,6 +95,19 @@ class CategorySystemTest extends TestCase
     }
 
     /** @test * */
+    public function the_parent_id_must_be_id_of_a_valid_category()
+    {
+        $this->beAuthor();
+
+        $parentCategory = $this->makeCategory();
+
+        $this->postJson('/api/categories', [
+            'title' => 'funny',
+            'parent_id' => 9999 // invalid category
+        ])->assertJsonValidationErrors(['parent_id']);
+    }
+
+    /** @test * */
     public function user_must_be_authenticated_to_make_a_category()
     {
         $this->postJson('/api/categories/', [
@@ -173,7 +186,7 @@ class CategorySystemTest extends TestCase
         ])->assertJsonValidationErrors(['title']);
     }
 
-    /** @test **/
+    /** @test * */
     public function a_member_can_not_update_a_category()
     {
         $this->signIn();
@@ -183,5 +196,31 @@ class CategorySystemTest extends TestCase
         $this->putJson('/api/categories/' . $category->id, [
             'title' => null
         ])->assertExactJson(['status' => 403]);
+    }
+
+    /** @test * */
+    public function parent_id_must_be_a_number_for_category_update()
+    {
+        $this->beAuthor();
+
+        $category = $this->makeCategory();
+
+        $this->putJson('/api/categories/' . $category->id, [
+            'title' => 'funny',
+            'parent_id' => 'bad id'
+        ])->assertJsonValidationErrors(['parent_id']);
+    }
+
+    /** @test **/
+    public function parent_id_must_be_an_valid_category_id()
+    {
+        $this->beAuthor();
+
+        $category = $this->makeCategory();
+
+        $this->putJson('/api/categories/' . $category->id, [
+            'title' => 'funny',
+            'parent_id' => 9999 // bad category id
+        ])->assertJsonValidationErrors(['parent_id']);
     }
 }

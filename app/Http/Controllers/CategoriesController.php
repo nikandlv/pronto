@@ -32,7 +32,7 @@ class CategoriesController extends Controller
 
         $attributes = \request()->validate([
             'title' => 'required|string|alpha_dash|min:4|max:50',
-            'parent_id' => 'sometimes|numeric'
+            'parent_id' => 'sometimes|numeric|exists:categories,id'
         ]);
 
         Category::create($attributes);
@@ -44,9 +44,11 @@ class CategoriesController extends Controller
     {
         $attributes = \request()->validate([
             'title' => 'required|string|alpha_dash|min:4|max:50',
-            'parent_id' => 'sometimes|numeric'
+            'parent_id' => 'sometimes|numeric|exists:categories,id'
         ]);
 
         $category->update(\request()->all());
+
+        return response(['message' => 'category updated successfully', 'status' => 200]);
     }
 }
