@@ -148,7 +148,7 @@ class CategorySystemTest extends TestCase
 
         $category = $this->makeCategory();
 
-        $this->patchJson('/categories/' . $category->id,[
+        $this->putJson('/categories/' . $category->id,[
             'title' => 'newTitle'
         ]);
 

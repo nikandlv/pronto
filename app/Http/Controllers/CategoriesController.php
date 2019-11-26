@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\Http\Resources\categoriesResource;
 use App\Http\Resources\CategoryResource;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response;
 
 class CategoriesController extends Controller
 {
@@ -13,6 +15,7 @@ class CategoriesController extends Controller
     /**
      * get all categories
      *
+     * @return AnonymousResourceCollection
      */
     public function index()
     {
@@ -22,7 +25,7 @@ class CategoriesController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return ResponseFactory|Response
      */
     public function store()
     {
@@ -36,4 +39,6 @@ class CategoriesController extends Controller
 
         return response(['message' => 'category created successfully', 'status' => 201]);
     }
+
+
 }
