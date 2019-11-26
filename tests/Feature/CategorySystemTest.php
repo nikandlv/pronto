@@ -113,7 +113,7 @@ class CategorySystemTest extends TestCase
     }
 
     /** @test * */
-    public function a_authenticated_user_can_get_a_list_of_all_categories()
+    public function a_authenticated_author_can_get_a_list_of_all_categories()
     {
         $this->withoutExceptionHandling();
 
@@ -123,4 +123,11 @@ class CategorySystemTest extends TestCase
 
         $this->getJson('/api/categories')->assertJson(['data' => [$category]]);
     }
+
+    /** @test **/
+    public function an_unauthenticated_user_can_not_get_a_list_of_all_categories()
+    {
+        $this->getJson('/api/categories')->assertUnauthorized();
+    }
+
 }
