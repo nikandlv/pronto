@@ -148,7 +148,7 @@ class CategorySystemTest extends TestCase
 
         $category = $this->makeCategory();
 
-        $this->putJson('/categories/' . $category->id,[
+        $this->putJson('/api/categories/' . $category->id,[
             'title' => 'newTitle'
         ]);
 
@@ -160,4 +160,6 @@ class CategorySystemTest extends TestCase
             'title' => $category->title,
         ]);
     }
+
+
 }

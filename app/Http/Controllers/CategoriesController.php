@@ -40,5 +40,8 @@ class CategoriesController extends Controller
         return response(['message' => 'category created successfully', 'status' => 201]);
     }
 
-
+    public function update(Category $category)
+    {
+        $category->update(\request()->all());
+    }
 }
