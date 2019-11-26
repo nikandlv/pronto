@@ -130,4 +130,12 @@ class CategorySystemTest extends TestCase
         $this->getJson('/api/categories')->assertUnauthorized();
     }
 
+    /** @test **/
+    public function an_member_user_can_not_get_all_categories()
+    {
+        $this->signIn();
+
+        $this->getJson('/api/categories')->assertExactJson(['status' => 403]);
+    }
+
 }
