@@ -139,4 +139,25 @@ class CategorySystemTest extends TestCase
 
         $this->getJson('/api/categories')->assertJson(['data' => [$category]]);
     }
+
+    /** @test **/
+    public function an_author_can_update_a_category()
+    {
+        $this->withoutExceptionHandling();
+        $author = $this->beAuthor();
+
+        $category = $this->makeCategory();
+
+        $this->patchJson('/categories/' . $category->id,[
+            'title' => 'newTitle'
+        ]);
+
+        $this->assertDatabaseHas('categories', [
+            'title' => 'newTitle',
+        ]);
+
+        $this->assertDatabaseMissing('categories', [
+            'title' => $category->title,
+        ]);
+    }
 }
