@@ -110,4 +110,20 @@ class CategorySystemTest extends TestCase
             'title' => 'funny'
         ])->assertExactJson(['status' => 403]);
     }
+
+    /** @test **/
+    public function a_authenticated_user_can_get_a_list_of_all_categories()
+    {
+        $this->withoutExceptionHandling();
+
+        $author = $this->beAuthor();
+
+        $this->makeCategory();
+
+        $response = $this->getJson('/categories');
+
+        $this->assertInstanceOf(Collection::class , $response);
+
+        $this->assertCount(1 , $response);
+    }
 }
