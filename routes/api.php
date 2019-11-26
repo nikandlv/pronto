@@ -21,10 +21,12 @@ Route::group(['prefix' => '/auth'], function () {
     Route::post('/register', 'AuthController@store');
     Route::post('/logout', 'AuthController@destroy')->middleware('auth:api');
     Route::get('/user', 'AuthController@index')->middleware('auth:api');
+
+
 });
 
 
-// User Management system
+// Admin Management system
 Route::group(['prefix' => '/users'], function () {
     Route::patch('/{user}/admin', 'AdminController@update')->middleware('auth:api', 'role:admin');
 });
@@ -45,6 +47,8 @@ Route::group(['middleware' => 'auth:api', 'prefix' => '/posts'], function () {
 });
 
 // Category System
-Route::group(['prefix' => '/categories', 'middleware' => ['auth:api' , 'role:admin,author']], function () {
+Route::group(['prefix' => '/categories', 'middleware' => ['auth:api', 'role:admin,author']], function () {
     Route::post('', 'CategoriesController@store');
+    Route::put('{category}' , 'CategoriesController@update');
 });
+Route::get('/categories', 'CategoriesController@index')->middleware('auth:api', 'role:admin,author,member'); // making this apart cause member also can access this route

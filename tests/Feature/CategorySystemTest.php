@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Category;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Resources\Json\Resource;
 use Tests\TestCase;
 
 class CategorySystemTest extends TestCase
@@ -94,6 +95,19 @@ class CategorySystemTest extends TestCase
     }
 
     /** @test * */
+    public function the_parent_id_must_be_id_of_a_valid_category()
+    {
+        $this->beAuthor();
+
+        $parentCategory = $this->makeCategory();
+
+        $this->postJson('/api/categories', [
+            'title' => 'funny',
+            'parent_id' => 9999 // invalid category
+        ])->assertJsonValidationErrors(['parent_id']);
+    }
+
+    /** @test * */
     public function user_must_be_authenticated_to_make_a_category()
     {
         $this->postJson('/api/categories/', [
@@ -101,7 +115,7 @@ class CategorySystemTest extends TestCase
         ])->assertUnauthorized();
     }
 
-    /** @test **/
+    /** @test * */
     public function user_must_be_author_or_admin_to_make_a_category()
     {
         $this->signIn();
@@ -109,5 +123,104 @@ class CategorySystemTest extends TestCase
         $this->postJson('/api/categories/', [
             'title' => 'funny'
         ])->assertExactJson(['status' => 403]);
+    }
+
+    /** @test * */
+    public function a_authenticated_author_can_get_a_list_of_all_categories()
+    {
+        $this->withoutExceptionHandling();
+
+        $author = $this->beAuthor();
+
+        $category = $this->makeCategory()->toArray();
+
+        $this->getJson('/api/categories')->assertJson(['data' => [$category]]);
+    }
+
+    /** @test * */
+    public function an_unauthenticated_user_can_not_get_a_list_of_all_categories()
+    {
+        $this->getJson('/api/categories')->assertUnauthorized();
+    }
+
+    /** @test * */
+    public function an_member_user_can_get_all_categories()
+    {
+        $this->signIn();
+
+        $category = $this->makeCategory()->toArray();
+
+        $this->getJson('/api/categories')->assertJson(['data' => [$category]]);
+    }
+
+    /** @test * */
+    public function an_author_can_update_a_category()
+    {
+        $this->withoutExceptionHandling();
+        $author = $this->beAuthor();
+
+        $category = $this->makeCategory();
+
+        $this->putJson('/api/categories/' . $category->id, [
+            'title' => 'newTitle'
+        ]);
+
+        $this->assertDatabaseHas('categories', [
+            'title' => 'newTitle',
+        ]);
+
+        $this->assertDatabaseMissing('categories', [
+            'title' => $category->title,
+        ]);
+    }
+
+    /** @test * */
+    public function a_title_is_needed_for_updating_a_category()
+    {
+        $author = $this->beAuthor();
+
+        $category = $this->makeCategory();
+
+        $this->putJson('/api/categories/' . $category->id, [
+            'title' => null
+        ])->assertJsonValidationErrors(['title']);
+    }
+
+    /** @test * */
+    public function a_member_can_not_update_a_category()
+    {
+        $this->signIn();
+
+        $category = $this->makeCategory();
+
+        $this->putJson('/api/categories/' . $category->id, [
+            'title' => null
+        ])->assertExactJson(['status' => 403]);
+    }
+
+    /** @test * */
+    public function parent_id_must_be_a_number_for_category_update()
+    {
+        $this->beAuthor();
+
+        $category = $this->makeCategory();
+
+        $this->putJson('/api/categories/' . $category->id, [
+            'title' => 'funny',
+            'parent_id' => 'bad id'
+        ])->assertJsonValidationErrors(['parent_id']);
+    }
+
+    /** @test **/
+    public function parent_id_must_be_an_valid_category_id()
+    {
+        $this->beAuthor();
+
+        $category = $this->makeCategory();
+
+        $this->putJson('/api/categories/' . $category->id, [
+            'title' => 'funny',
+            'parent_id' => 9999 // bad category id
+        ])->assertJsonValidationErrors(['parent_id']);
     }
 }
