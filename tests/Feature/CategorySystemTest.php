@@ -120,7 +120,7 @@ class CategorySystemTest extends TestCase
 
         $this->makeCategory();
 
-        $response = $this->getJson('/categories');
+        $response = $this->getJson('/api/categories');
 
         $this->assertInstanceOf(Collection::class , $response);
 
