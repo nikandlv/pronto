@@ -161,5 +161,16 @@ class CategorySystemTest extends TestCase
         ]);
     }
 
+    /** @test **/
+    public function a_title_is_needed_for_updating_a_category()
+    {
+        $this->withoutExceptionHandling();
+        $author = $this->beAuthor();
 
+        $category = $this->makeCategory();
+
+        $this->putJson('/api/categories/' . $category->id,[
+            'title' => null
+        ])->assertJsonValidationErrors(['title']);
+    }
 }
