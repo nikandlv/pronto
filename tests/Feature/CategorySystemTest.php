@@ -131,11 +131,12 @@ class CategorySystemTest extends TestCase
     }
 
     /** @test **/
-    public function an_member_user_can_not_get_all_categories()
+    public function an_member_user_can_get_all_categories()
     {
         $this->signIn();
 
-        $this->getJson('/api/categories')->assertExactJson(['status' => 403]);
-    }
+        $category = $this->makeCategory()->toArray();
 
+        $this->getJson('/api/categories')->assertJson(['data' => [$category]]);
+    }
 }
