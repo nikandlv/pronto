@@ -124,13 +124,13 @@ class CategorySystemTest extends TestCase
         $this->getJson('/api/categories')->assertJson(['data' => [$category]]);
     }
 
-    /** @test **/
+    /** @test * */
     public function an_unauthenticated_user_can_not_get_a_list_of_all_categories()
     {
         $this->getJson('/api/categories')->assertUnauthorized();
     }
 
-    /** @test **/
+    /** @test * */
     public function an_member_user_can_get_all_categories()
     {
         $this->signIn();
@@ -140,7 +140,7 @@ class CategorySystemTest extends TestCase
         $this->getJson('/api/categories')->assertJson(['data' => [$category]]);
     }
 
-    /** @test **/
+    /** @test * */
     public function an_author_can_update_a_category()
     {
         $this->withoutExceptionHandling();
@@ -148,7 +148,7 @@ class CategorySystemTest extends TestCase
 
         $category = $this->makeCategory();
 
-        $this->putJson('/api/categories/' . $category->id,[
+        $this->putJson('/api/categories/' . $category->id, [
             'title' => 'newTitle'
         ]);
 
@@ -161,16 +161,27 @@ class CategorySystemTest extends TestCase
         ]);
     }
 
-    /** @test **/
+    /** @test * */
     public function a_title_is_needed_for_updating_a_category()
     {
-        $this->withoutExceptionHandling();
         $author = $this->beAuthor();
 
         $category = $this->makeCategory();
 
-        $this->putJson('/api/categories/' . $category->id,[
+        $this->putJson('/api/categories/' . $category->id, [
             'title' => null
         ])->assertJsonValidationErrors(['title']);
+    }
+
+    /** @test **/
+    public function a_member_can_not_update_a_category()
+    {
+        $this->signIn();
+
+        $category = $this->makeCategory();
+
+        $this->putJson('/api/categories/' . $category->id, [
+            'title' => null
+        ])->assertExactJson(['status' => 403]);
     }
 }
