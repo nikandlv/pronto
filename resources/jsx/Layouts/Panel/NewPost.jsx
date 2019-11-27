@@ -16,7 +16,10 @@ import {
     Select,
     MenuItem,
     IconButton,
-    Checkbox
+    Checkbox,
+    Card,
+    Tabs,
+    Tab
 } from "@material-ui/core";
 
 import ArrowDownIcon from "@material-ui/icons/KeyboardArrowDownOutlined";
@@ -24,9 +27,10 @@ import AddIcon from "@material-ui/icons/AddOutlined";
 import { makeStyles } from "@material-ui/styles";
 import StyledTitle from "../../Components/StyledTitle";
 import Pastel from "mui-pastel";
+import FroalaEditorComponent from "react-froala-wysiwyg";
 
 const useStyles = makeStyles({
-    collapseWrapper: {
+    card: {
         borderRadius: 16
     },
     collapseList: {
@@ -46,15 +50,42 @@ const useStyles = makeStyles({
 
 export default function NewPost() {
     const styles = useStyles();
+    const [openCategories, setOpenCategories] = React.useState(true);
+    const [openOptions, setOpenOptions] = React.useState(false);
+    const [openVisibility, setOpenVisibility] = React.useState(false);
+
+    function closeAll() {
+        setOpenCategories(false);
+        setOpenOptions(false);
+        setOpenVisibility(false);
+    }
+
+    function toggleCategories() {
+        closeAll();
+        setOpenCategories(!openCategories);
+    }
+
+    function toggleOptions() {
+        closeAll();
+        setOpenOptions(!openOptions);
+    }
+
+    function toggleVisibility() {
+        closeAll();
+        setOpenVisibility(!openVisibility);
+    }
+
     return (
         <Box m={2}>
+            <StyledTitle>New post</StyledTitle>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={4} xlg={3}>
-                    <Paper className={styles.collapseWrapper}>
+                    <Paper className={styles.card}>
                         <List className={styles.collapseList}>
                             <ListItem
                                 button
                                 className={styles.collapseListTitle}
+                                onClick={toggleCategories}
                             >
                                 <ListItemText primary="Categories and tags" />
                                 <ListItemSecondaryAction>
@@ -62,7 +93,7 @@ export default function NewPost() {
                                 </ListItemSecondaryAction>
                             </ListItem>
                         </List>
-                        <Collapse in={true}>
+                        <Collapse in={openCategories}>
                             <CardContent>
                                 <Divider variant="middle" />
                                 <StyledTitle variant="h6">
@@ -125,19 +156,51 @@ export default function NewPost() {
                         </Collapse>
                     </Paper>
                     <br />
-                    <Paper className={styles.collapseWrapper}>
+                    <Paper className={styles.card}>
                         <List className={styles.collapseList}>
                             <ListItem
                                 button
                                 className={styles.collapseListTitle}
+                                onClick={toggleOptions}
                             >
-                                <ListItemText primary="Options" />
+                                <ListItemText primary="Options and configuration" />
                                 <ListItemSecondaryAction>
                                     <ArrowDownIcon />
                                 </ListItemSecondaryAction>
                             </ListItem>
                         </List>
-                        <Collapse in={true}>
+                        <Collapse in={openOptions}>
+                            <CardContent>
+                                <Divider variant="middle" />
+                                <StyledTitle variant="h6">General</StyledTitle>
+                                <List dense>
+                                    <ListItem button>
+                                        <Checkbox size="small" checked={true} />
+                                        <ListItemText primary="Pinned" />
+                                    </ListItem>
+                                    <ListItem button>
+                                        <Checkbox size="small" checked={true} />
+                                        <ListItemText primary="Allow comments" />
+                                    </ListItem>
+                                </List>
+                            </CardContent>
+                        </Collapse>
+                    </Paper>
+                    <br />
+                    <Paper className={styles.card}>
+                        <List className={styles.collapseList}>
+                            <ListItem
+                                button
+                                className={styles.collapseListTitle}
+                                onClick={toggleVisibility}
+                            >
+                                <ListItemText primary="Visibility and schedule" />
+                                <ListItemSecondaryAction>
+                                    <ArrowDownIcon />
+                                </ListItemSecondaryAction>
+                            </ListItem>
+                        </List>
+                        <Collapse in={openVisibility}>
                             <CardContent>
                                 <Divider variant="middle" />
                                 <StyledTitle variant="h6">General</StyledTitle>
@@ -156,7 +219,41 @@ export default function NewPost() {
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={8} xlg={9}>
-                    <Paper>a</Paper>
+                    <Card className={styles.card}>
+                        <CardContent>
+                            <StyledTitle variant="h4">General</StyledTitle>
+                            <Grid container spacing="3">
+                                <Grid item xs={12} md={6}>
+                                    <TextField
+                                        variant="outlined"
+                                        label="Slug"
+                                        className={styles.tagInput}
+                                        fullWidth
+                                    />
+                                </Grid>
+                                <Grid item xs={12} md={6}>
+                                    <TextField
+                                        variant="outlined"
+                                        label="Slug"
+                                        className={styles.tagInput}
+                                        fullWidth
+                                    />
+                                </Grid>
+                            </Grid>
+                        </CardContent>
+                    </Card>
+                    <br />
+                    <Card className={styles.card}>
+                        <Tabs>
+                            <Tab label="English" />
+                            <Tab icon={<AddIcon />} />
+                        </Tabs>
+                        <Divider variant="middle" />
+                        <CardContent>
+                            <StyledTitle variant="h4">Description</StyledTitle>
+                            <FroalaEditorComponent tag="textarea" />
+                        </CardContent>
+                    </Card>
                 </Grid>
             </Grid>
         </Box>

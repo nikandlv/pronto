@@ -1,24 +1,25 @@
-const mix = require('laravel-mix');
-const mixDependency = require('mix-dependency');
+const mix = require("laravel-mix");
+const mixDependency = require("mix-dependency");
 
-mixDependency.require('typeface-hammersmith-one')
-mixDependency.require('react-localization');
-mixDependency.require('react-pose');
-mixDependency.require('axios');
-mixDependency.require('axios-endpoint');
-mixDependency.require('@babel/plugin-proposal-class-properties');
-mixDependency.require('react-swipeable-views');
-mixDependency.require('react-color');
-mixDependency.require('mui-pastel');
-mixDependency.require('mui-nutella');
-mixDependency.require('mui-prompt');
-mixDependency.require('react-sortable-hoc');
-mixDependency.require('array-move');
-mixDependency.require('react-charts');
-mixDependency.require('@material-ui/pickers');
-mixDependency.require('date-fns@next');
-mixDependency.require('@date-io/date-fns');
-
+mixDependency.require("typeface-hammersmith-one");
+mixDependency.require("react-localization");
+mixDependency.require("react-pose");
+mixDependency.require("axios");
+mixDependency.require("axios-endpoint");
+mixDependency.require("@babel/plugin-proposal-class-properties");
+mixDependency.require("react-swipeable-views");
+mixDependency.require("react-color");
+mixDependency.require("mui-pastel");
+mixDependency.require("mui-nutella");
+mixDependency.require("mui-prompt");
+mixDependency.require("react-sortable-hoc");
+mixDependency.require("array-move");
+mixDependency.require("react-charts");
+mixDependency.require("@material-ui/pickers");
+mixDependency.require("date-fns@next");
+mixDependency.require("@date-io/date-fns");
+mixDependency.require("react-froala-wysiwyg");
+mixDependency.require("froala-editor");
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -30,4 +31,4 @@ mixDependency.require('@date-io/date-fns');
  |
  */
 
-mix.react('resources/jsx/App.jsx', 'public/jsx/application.js');
+mix.react("resources/jsx/App.jsx", "public/jsx/application.js");
