@@ -18,7 +18,7 @@ class StorageSystemTest extends TestCase
     public function a_authenticated_user_can_upload_a_media()
     {
         $this->withoutExceptionHandling();
-        $user = $this->signIn();
+        $user = $this->beAuthor();
 
         Storage::fake('files');
 
