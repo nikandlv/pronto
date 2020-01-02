@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\pronto\traits\canUploadFiles;
 use App\pronto\traits\hasUserSettings;
 use App\pronto\users\UserRoleManager;
 use Cassandra\Collection;
@@ -14,7 +15,7 @@ use App\Settings;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasApiTokens, hasUserSettings;
+    use Notifiable, HasApiTokens, hasUserSettings, canUploadFiles;
 
     /**
      * The attributes that are mass assignable.
@@ -58,12 +59,13 @@ class User extends Authenticatable
 
     public function settingsPath()
     {
-        if($this->isAdmin()) {
+        if ($this->isAdmin()) {
             return '/api/settings/admins/' . $this->id;
         }
 
         return '/api/settings/users/' . $this->id;
     }
+
     /**
      * check user is admin or not
      *
@@ -72,5 +74,10 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->role === UserRoleManager::ROLE_ADMIN;
+    }
+
+    public function medias()
+    {
+        return $this->hasMany(File::class,'owner_id');
     }
 }

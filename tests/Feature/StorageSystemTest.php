@@ -26,7 +26,6 @@ class StorageSystemTest extends TestCase
 
         $this->postJson('/api/files/media', [
             'file' => $file,
-            'name' => $file->name,
         ]);
 
         $this->assertDatabaseHas('files', [
