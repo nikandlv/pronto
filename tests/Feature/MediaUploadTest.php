@@ -35,7 +35,7 @@ class MediaUploadTest extends TestCase
         $file = UploadedFile::fake()->image('media.jpg');
 
         $this->postJson('/api/files/media', [
-            'file' => $file,
+            'media' => $file,
         ]);
 
         $this->assertDatabaseHas('files', [
@@ -59,7 +59,7 @@ class MediaUploadTest extends TestCase
         $file = UploadedFile::fake()->image('media.jpg');
 
         $this->postJson('/api/files/media', [
-            'file' => $file,
+            'media' => $file,
         ]);
 
         $this->assertDatabaseHas('files', [
@@ -83,7 +83,7 @@ class MediaUploadTest extends TestCase
         $file = UploadedFile::fake()->image('media.jpg');
 
         $this->postJson('/api/files/media', [
-            'file' => $file,
+            'media' => $file,
         ])->assertExactJson(['status' => 403]);
 
     }
@@ -99,8 +99,8 @@ class MediaUploadTest extends TestCase
         $file = UploadedFile::fake()->create('badFile.pdf');
 
         $this->postJson('/api/files/media', [
-            'file' => $file,
-        ])->assertJsonValidationErrors(['file']);
+            'media' => $file,
+        ])->assertJsonValidationErrors(['media']);
     }
 
     /** @test **/
@@ -111,8 +111,8 @@ class MediaUploadTest extends TestCase
         Storage::fake('files');
 
         $this->postJson('/api/files/media', [
-            'file' => null,
-        ])->assertJsonValidationErrors(['file']);
+            'media' => null,
+        ])->assertJsonValidationErrors(['media']);
     }
 
     /** @test **/
@@ -125,7 +125,7 @@ class MediaUploadTest extends TestCase
         $file = UploadedFile::fake()->image('media.png');
 
         $this->postJson('/api/files/media', [
-            'file' => $file,
+            'media' => $file,
         ]);
 
         $this->assertDatabaseHas('files', [
@@ -143,7 +143,7 @@ class MediaUploadTest extends TestCase
         $file = UploadedFile::fake()->image('media.png');
 
         $this->postJson('/api/files/media', [
-            'file' => $file,
+            'media' => $file,
         ]);
 
         $this->assertDatabaseHas('files', [

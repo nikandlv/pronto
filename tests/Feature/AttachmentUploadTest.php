@@ -35,7 +35,7 @@ class AttachmentUploadTest extends TestCase
         $file = UploadedFile::fake()->create('test.png');
 
         $this->postJson('api/files/attachment', [
-            'file'=> $file
+            'attachment'=> $file
         ]);
 
         Storage::exists('/public/files/attachments/'. $this->getNow() . '/' . $file->hashName());

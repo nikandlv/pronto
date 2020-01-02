@@ -24,10 +24,10 @@ class UploadMediaController extends Controller
     public function store()
     {
         request()->validate([
-            'file' => 'required|file|image|mimes:jpg,jpeg,png'
+            'media' => 'required|file|image|mimes:jpg,jpeg,png'
         ]);
 
-        $file = request()->file('file');
+        $file = request()->file('media');
         $filePath = $file->storeAs('/files/media/' . $this->getNow() , $file->hashName() , 'public');
 
         auth()->user()->medias()->create([
