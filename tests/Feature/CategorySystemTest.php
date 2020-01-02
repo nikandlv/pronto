@@ -187,18 +187,6 @@ class CategorySystemTest extends TestCase
     }
 
     /** @test * */
-    public function a_member_can_not_update_a_category()
-    {
-        $this->signIn();
-
-        $category = $this->makeCategory();
-
-        $this->putJson('/api/categories/' . $category->id, [
-            'title' => null
-        ])->assertExactJson(['status' => 403]);
-    }
-
-    /** @test * */
     public function parent_id_must_be_a_number_for_category_update()
     {
         $this->beAuthor();
@@ -222,5 +210,17 @@ class CategorySystemTest extends TestCase
             'title' => 'funny',
             'parent_id' => 9999 // bad category id
         ])->assertJsonValidationErrors(['parent_id']);
+    }
+
+    /** @test * */
+    public function a_member_can_not_update_a_category()
+    {
+        $this->signIn();
+
+        $category = $this->makeCategory();
+
+        $this->putJson('/api/categories/' . $category->id, [
+            'title' => null
+        ])->assertExactJson(['status' => 403]);
     }
 }
