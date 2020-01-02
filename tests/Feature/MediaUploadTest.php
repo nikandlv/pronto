@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\File;
 use App\pronto\storage\FileUploadTypeManager;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -23,6 +24,19 @@ class MediaUploadTest extends TestCase
     {
         return Carbon::now()->format('Y-m-d');
     }
+
+    /**
+     * upload a fake media
+     *
+     * @return File
+     */
+    public function uploadMedia($media = null)
+    {
+        $media = $media ?: factory(File::class)->create(['type' => FileUploadTypeManager::TYPE_MEDIA]);
+
+        return $media;
+    }
+
 
     /** @test **/
     public function a_guest_can_not_upload_a_media()
