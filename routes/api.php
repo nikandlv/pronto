@@ -52,3 +52,9 @@ Route::group(['prefix' => '/categories', 'middleware' => ['auth:api', 'role:admi
     Route::put('{category}' , 'CategoriesController@update');
 });
 Route::get('/categories', 'CategoriesController@index')->middleware('auth:api', 'role:admin,author,member'); // making this apart cause member also can access this route
+
+// storage system
+Route::group(['prefix' => '/files' , 'middleware' => ['auth:api' , 'role:admin,author']] , function () {
+//    MEDIA
+    Route::post('/media', 'UploadMediaController@store');
+});
