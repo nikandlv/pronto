@@ -25,6 +25,18 @@ class MediaUploadTest extends TestCase
     }
 
     /** @test **/
+    public function a_guest_can_not_upload_a_media()
+    {
+        Storage::fake('files');
+
+        $file = UploadedFile::fake()->image('media.jpg');
+
+        $this->postJson('/api/files/media', [
+            'media' => $file,
+        ])->assertExactJson(['message' => 'Unauthenticated.']);
+    }
+
+    /** @test **/
     public function a_authenticated_author_can_upload_a_media()
     {
         $this->withoutExceptionHandling();

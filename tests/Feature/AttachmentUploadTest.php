@@ -43,7 +43,8 @@ class AttachmentUploadTest extends TestCase
         $author = $this->beAuthor();
 
         Storage::fake('file');
-        $file = UploadedFile::fake()->create('test.png');
+        $file = UploadedFile::fake()->create('test.pdf');
+
 
         $this->postJson('api/files/attachment', [
             'attachment'=> $file
@@ -67,7 +68,7 @@ class AttachmentUploadTest extends TestCase
         $admin = $this->beAdmin();
 
         Storage::fake('file');
-        $file = UploadedFile::fake()->create('test.png');
+        $file = UploadedFile::fake()->create('test.pdf');
 
         $this->postJson('api/files/attachment', [
             'attachment'=> $file
@@ -98,4 +99,29 @@ class AttachmentUploadTest extends TestCase
         ])->assertExactJson(['status' => 403]);
     }
 
+    /** @test **/
+    public function an_attachment_is_required_for_uploading_an_attachment()
+    {
+        $admin = $this->beAdmin();
+
+        Storage::fake('file');
+        $file = UploadedFile::fake()->create('test.png');
+
+        $this->postJson('api/files/attachment', [
+            'attachment'=> null
+        ])->assertJsonValidationErrors(['attachment']);
+    }
+
+    /** @test **/
+    public function an_attachment_must_be_a_file()
+    {
+        $admin = $this->beAdmin();
+
+        Storage::fake('file');
+        $file = UploadedFile::fake()->create('test.png');
+
+        $this->postJson('api/files/attachment', [
+            'attachment'=> 'bad_attachment'
+        ])->assertJsonValidationErrors(['attachment']);
+    }
 }
