@@ -4,7 +4,7 @@
 namespace App\pronto\storage;
 
 
-class FileUploadTypeMangement
+class FileUploadTypeManager
 {
     const TYPE_MEDIA = 1;
     const TYPE_ATTACHEMENT = 2;

@@ -57,4 +57,5 @@ Route::get('/categories', 'CategoriesController@index')->middleware('auth:api', 
 Route::group(['prefix' => 'files' , 'middleware' => ['auth:api' , 'role:admin,author']] , function () {
 //    MEDIA
     Route::post('/media', 'UploadMediaController@store');
+    Route::post('/attachment', 'UploadAttachmentController@store');
 });

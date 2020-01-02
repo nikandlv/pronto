@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 
 
 use App\File;
-use App\pronto\storage\FileUploadTypeMangement;
+use App\pronto\storage\FileUploadTypeManager;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -33,7 +33,7 @@ class UploadMediaController extends Controller
         auth()->user()->medias()->create([
             'name' => $file->hashName(),
             'path' => $filePath,
-            'type' => FileUploadTypeMangement::TYPE_MEDIA,
+            'type' => FileUploadTypeManager::TYPE_MEDIA,
         ]);
     }
 }

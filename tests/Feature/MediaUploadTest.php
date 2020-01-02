@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\pronto\storage\FileUploadTypeMangement;
+use App\pronto\storage\FileUploadTypeManager;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
@@ -41,7 +41,7 @@ class MediaUploadTest extends TestCase
         $this->assertDatabaseHas('files', [
             'name' => $file->hashName(),
             'path' => 'files/media/' . $this->getNow() . '/' . $file->hashName(),
-            'type' => FileUploadTypeMangement::TYPE_MEDIA,
+            'type' => FileUploadTypeManager::TYPE_MEDIA,
             'owner_id' => $user->id
         ]);
 
@@ -65,7 +65,7 @@ class MediaUploadTest extends TestCase
         $this->assertDatabaseHas('files', [
             'name' => $file->hashName(),
             'path' => 'files/media/' . $this->getNow() . '/' . $file->hashName(),
-            'type' => FileUploadTypeMangement::TYPE_MEDIA,
+            'type' => FileUploadTypeManager::TYPE_MEDIA,
             'owner_id' => $user->id
         ]);
 
@@ -129,7 +129,7 @@ class MediaUploadTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('files', [
-            'type' => FileUploadTypeMangement::TYPE_MEDIA
+            'type' => FileUploadTypeManager::TYPE_MEDIA
         ]);
     }
 
