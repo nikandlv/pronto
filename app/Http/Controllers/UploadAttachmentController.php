@@ -16,7 +16,7 @@ class UploadAttachmentController extends Controller
     public function store()
     {
         $attachment = \request()->file('attachment');
-        $attachmentPath = $attachment->storeAs('/public/files/storage/' . $this->getNow() , $attachment->hashName());
+        $attachmentPath = $attachment->storeAs('/public/files/attachments/' . $this->getNow() , $attachment->hashName());
 
         auth()->user()->attachments()->create([
             'name' => $attachment->hashName(),

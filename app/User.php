@@ -7,6 +7,7 @@ use App\pronto\traits\hasUserSettings;
 use App\pronto\users\UserRoleManager;
 use Cassandra\Collection;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
@@ -57,6 +58,11 @@ class User extends Authenticatable
         return 'api/users/' . $this->id;
     }
 
+    /**
+     * get path to user related settings
+     *
+     * @return string
+     */
     public function settingsPath()
     {
         if ($this->isAdmin()) {
@@ -76,8 +82,24 @@ class User extends Authenticatable
         return $this->role === UserRoleManager::ROLE_ADMIN;
     }
 
+    /**
+     * get all medias related to user
+     *
+     * @return HasMany
+     */
     public function medias()
     {
         return $this->hasMany(File::class,'owner_id');
+    }
+
+
+    /**
+     * get all attachments related to user
+     *
+     * @return HasMany
+     */
+    public function attachments()
+    {
+        return $this->hasMany(File::class, 'owner_id');
     }
 }

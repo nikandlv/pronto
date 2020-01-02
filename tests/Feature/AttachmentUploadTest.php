@@ -25,7 +25,18 @@ class AttachmentUploadTest extends TestCase
     }
 
     /** @test **/
-    public function an_authenticated_member_can_upload_an_attachment()
+    public function a_guest_can_not_upload_a_media()
+    {
+        Storage::fake('file');
+        $file = UploadedFile::fake()->create('test.png');
+
+        $this->postJson('api/files/attachment', [
+            'attachment'=> $file
+        ])->assertExactJson(['message' => "Unauthenticated."]);
+    }
+
+    /** @test **/
+    public function an_authenticated_author_can_upload_an_attachment()
     {
         $this->withoutExceptionHandling();
 //        TODO: ask for attachment extension
@@ -42,9 +53,49 @@ class AttachmentUploadTest extends TestCase
 
         $this->assertDatabaseHas('files', [
             'name' => $file->hashName(),
-            'path' => '/public/files/attachments/'. $this->getNow() . '/' . $file->hashName(),
+            'path' => 'public/files/attachments/'. $this->getNow() . '/' . $file->hashName(),
             'type' => FileUploadTypeManager::TYPE_ATTACHEMENT,
             'owner_id' => $author->id
         ]);
     }
+
+    /** @test **/
+    public function an_authenticated_admin_can_upload_an_attachment()
+    {
+        $this->withoutExceptionHandling();
+//        TODO: ask for attachment extension
+        $admin = $this->beAdmin();
+
+        Storage::fake('file');
+        $file = UploadedFile::fake()->create('test.png');
+
+        $this->postJson('api/files/attachment', [
+            'attachment'=> $file
+        ]);
+
+        Storage::exists('/public/files/attachments/'. $this->getNow() . '/' . $file->hashName());
+
+        $this->assertDatabaseHas('files', [
+            'name' => $file->hashName(),
+            'path' => 'public/files/attachments/'. $this->getNow() . '/' . $file->hashName(),
+            'type' => FileUploadTypeManager::TYPE_ATTACHEMENT,
+            'owner_id' => $admin->id
+        ]);
+    }
+
+    /** @test **/
+    public function an_unauthenticated_member_can_not_upload_an_attachment()
+    {
+        $this->withoutExceptionHandling();
+//        TODO: ask for attachment extension
+        $author = $this->signIn();
+
+        Storage::fake('file');
+        $file = UploadedFile::fake()->create('test.png');
+
+        $this->postJson('api/files/attachment', [
+            'attachment'=> $file
+        ])->assertExactJson(['status' => 403]);
+    }
+
 }
