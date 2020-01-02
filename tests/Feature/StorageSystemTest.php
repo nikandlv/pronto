@@ -13,6 +13,16 @@ use Tests\TestCase;
 class StorageSystemTest extends TestCase
 {
     use RefreshDatabase;
+//    HELPERS
+    /**
+     * get the current time with format Y-m-d
+     *
+     * @return string
+     */
+    public function getNow()
+    {
+        return Carbon::now()->format('Y-m-d');
+    }
 
     /** @test **/
     public function a_authenticated_user_can_upload_a_media()
@@ -30,9 +40,11 @@ class StorageSystemTest extends TestCase
 
         $this->assertDatabaseHas('files', [
             'name' => $file->hashName(),
-            'path' => 'storage/files/' . Carbon::today() . '/' . $file->hashName(),
+            'path' => 'files/media/' . $this->getNow() . '/' . $file->hashName(),
             'type' => FileUploadTypeMangement::TYPE_MEDIA,
             'owner_id' => $user->id
         ]);
+
+        Storage::assertExists('public/files/media/' . $this->getNow() . '/' . $file->hashName());
     }
 }

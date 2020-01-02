@@ -9,17 +9,29 @@ use App\File;
 use App\pronto\storage\FileUploadTypeMangement;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UploadMediaController extends Controller
 {
+    private function getNow()
+    {
+        return Carbon::today()->format('Y-m-d');
+    }
+
+    /**
+     * store medias in database
+     */
     public function store()
     {
         $file = request()->file('file');
+        $filePath = $file->storeAs('/files/media/' . $this->getNow() , $file->hashName() , 'public');
 
         auth()->user()->medias()->create([
             'name' => $file->hashName(),
-            'path' => '/storage/files/media' . Carbon::today() . '/' . $file->hashName(),
+            'path' => $filePath,
             'type' => FileUploadTypeMangement::TYPE_MEDIA,
         ]);
+
     }
+
 }
