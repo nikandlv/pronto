@@ -1,0 +1,112 @@
+<?php
+
+namespace Tests\Feature;
+
+use App\pronto\storage\FileUploadTypeMangement;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Tests\TestCase;
+
+class MediaUploadTest extends TestCase
+{
+    use RefreshDatabase;
+//    HELPERS
+    /**
+     * get the current time with format Y-m-d
+     *
+     * @return string
+     */
+    public function getNow()
+    {
+        return Carbon::now()->format('Y-m-d');
+    }
+
+    /** @test **/
+    public function a_authenticated_user_can_upload_a_media()
+    {
+        $this->withoutExceptionHandling();
+        $user = $this->beAuthor();
+
+        Storage::fake('files');
+
+        $file = UploadedFile::fake()->image('media.jpg');
+
+        $this->postJson('/api/files/media', [
+            'file' => $file,
+        ]);
+
+        $this->assertDatabaseHas('files', [
+            'name' => $file->hashName(),
+            'path' => 'files/media/' . $this->getNow() . '/' . $file->hashName(),
+            'type' => FileUploadTypeMangement::TYPE_MEDIA,
+            'owner_id' => $user->id
+        ]);
+
+        Storage::assertExists('public/files/media/' . $this->getNow() . '/' . $file->hashName());
+    }
+
+    /** @test **/
+    public function a_media_must_be_an_image_in_order_to_upload()
+    {
+        $user = $this->beAuthor();
+
+        Storage::fake('files');
+
+        $file = UploadedFile::fake()->create('badFile.pdf');
+
+        $this->postJson('/api/files/media', [
+            'file' => $file,
+        ])->assertJsonValidationErrors(['file']);
+    }
+
+    /** @test **/
+    public function a_file_is_necessary_to_upload_a_media()
+    {
+        $user = $this->beAuthor();
+
+        Storage::fake('files');
+
+        $this->postJson('/api/files/media', [
+            'file' => null,
+        ])->assertJsonValidationErrors(['file']);
+    }
+
+    /** @test **/
+    public function media_type_is_correctly_stored()
+    {
+        $user = $this->beAuthor();
+
+        Storage::fake('files');
+
+        $file = UploadedFile::fake()->image('media.png');
+
+        $this->postJson('/api/files/media', [
+            'file' => $file,
+        ]);
+
+        $this->assertDatabaseHas('files', [
+            'type' => FileUploadTypeMangement::TYPE_MEDIA
+        ]);
+    }
+
+    /** @test **/
+    public function every_media_has_a_owner()
+    {
+        $user = $this->beAuthor();
+
+        Storage::fake('files');
+
+        $file = UploadedFile::fake()->image('media.png');
+
+        $this->postJson('/api/files/media', [
+            'file' => $file,
+        ]);
+
+        $this->assertDatabaseHas('files', [
+            'owner_id' => $user->id
+        ]);
+    }
+}

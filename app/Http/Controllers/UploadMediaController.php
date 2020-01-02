@@ -23,6 +23,10 @@ class UploadMediaController extends Controller
      */
     public function store()
     {
+        request()->validate([
+            'file' => 'required|file|image|mimes:jpg,jpeg,png'
+        ]);
+
         $file = request()->file('file');
         $filePath = $file->storeAs('/files/media/' . $this->getNow() , $file->hashName() , 'public');
 
@@ -31,7 +35,5 @@ class UploadMediaController extends Controller
             'path' => $filePath,
             'type' => FileUploadTypeMangement::TYPE_MEDIA,
         ]);
-
     }
-
 }
