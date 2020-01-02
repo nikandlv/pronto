@@ -1,16 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import UploadIcon from "@material-ui/icons/CloudUploadOutlined";
-import {
-    Box,
-    Paper,
-    Grid,
-    Card,
-    CardMedia,
-    CardActions
-} from "@material-ui/core";
-import StyledTitle from "../../Components/StyledTitle";
-import StyledButton from "../../Components/StyledButton";
+import { Box, Grid, Card, CardMedia, CardActions } from "@material-ui/core";
+import StyledTitle from "../../../Components/StyledTitle";
+import StyledButton from "../../../Components/StyledButton";
 
 const tileData = [
     {
@@ -121,7 +114,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function Media() {
+export default function MediaPickerDialogGallery() {
     const classes = useStyles();
 
     return (

@@ -27,6 +27,7 @@
         "mui-prompt": "^1.0.3",
         "popper.js": "^1.12",
         "react-charts": "^2.0.0-beta.6",
+        "react-froala-wysiwyg": "^3.0.6",
         "react-localization": "^1.0.15",
         "react-pose": "^4.0.9",
         "react-sortable-hoc": "^1.10.1",
