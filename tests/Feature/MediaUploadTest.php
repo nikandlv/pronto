@@ -25,7 +25,7 @@ class MediaUploadTest extends TestCase
     }
 
     /** @test **/
-    public function a_authenticated_user_can_upload_a_media()
+    public function a_authenticated_author_can_upload_a_media()
     {
         $this->withoutExceptionHandling();
         $user = $this->beAuthor();
@@ -47,6 +47,47 @@ class MediaUploadTest extends TestCase
 
         Storage::assertExists('public/files/media/' . $this->getNow() . '/' . $file->hashName());
     }
+
+    /** @test **/
+    public function a_authenticated_admin_can_upload_a_media()
+    {
+        $this->withoutExceptionHandling();
+        $user = $this->beAdmin();
+
+        Storage::fake('files');
+
+        $file = UploadedFile::fake()->image('media.jpg');
+
+        $this->postJson('/api/files/media', [
+            'file' => $file,
+        ]);
+
+        $this->assertDatabaseHas('files', [
+            'name' => $file->hashName(),
+            'path' => 'files/media/' . $this->getNow() . '/' . $file->hashName(),
+            'type' => FileUploadTypeMangement::TYPE_MEDIA,
+            'owner_id' => $user->id
+        ]);
+
+        Storage::assertExists('public/files/media/' . $this->getNow() . '/' . $file->hashName());
+    }
+
+    /** @test **/
+    public function a_authenticated_member_can_not_upload_a_media()
+    {
+        $this->withoutExceptionHandling();
+        $user = $this->signIn();
+
+        Storage::fake('files');
+
+        $file = UploadedFile::fake()->image('media.jpg');
+
+        $this->postJson('/api/files/media', [
+            'file' => $file,
+        ])->assertExactJson(['status' => 403]);
+
+    }
+
 
     /** @test **/
     public function a_media_must_be_an_image_in_order_to_upload()
