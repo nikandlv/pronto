@@ -6,11 +6,17 @@ namespace App\Http\Controllers;
 use App\File;
 use App\pronto\storage\FileUploadTypeManager;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UploadMediaController extends Controller
 {
+    /**
+     * get now time with format Y-m-d
+     *
+     * @return string
+     */
     private function getNow()
     {
         return Carbon::today()->format('Y-m-d');
@@ -37,18 +43,37 @@ class UploadMediaController extends Controller
         }
     }
 
-    public function destory(File $media)
+    /**
+     * delete the media
+     *
+     * @param File $media
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    private function deleteMedia(File $media): JsonResponse
     {
-        if (auth()->user()->isAuthor() && $media->owner()->id === auth()->id()) {
-            if ($media->delete()) {
-                return response()->json(['message' => 'media deleted successfully'])->setStatusCode(202);
-            }
-        }
-
-        if (auth()->user()->isAdmin()) {
-            if ($media->delete()) {
-                return response()->json(['message' => 'media deleted successfully'])->setStatusCode(202);
-            }
+        if ($media->delete()) {
+            return response()->json(['message' => 'media deleted successfully'])->setStatusCode(202);
         }
     }
+
+    /**
+     * delete a media
+     *
+     * @param File $media
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function destory(File $media)
+    {
+        if (auth()->user()->isAuthor() && $media->owner->id === auth()->id()) {
+            return $this->deleteMedia($media);
+        } elseif (auth()->user()->isAdmin()) {
+            return $this->deleteMedia($media);
+        } else {
+            return response()->json(['message' => 'not found!'])->setStatusCode(403);
+        }
+    }
+
+
 }
