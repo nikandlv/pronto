@@ -2,17 +2,37 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+
+use App\File;
+use App\pronto\storage\FileUploadTypeManager;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Collection;
+use Tests\TestCase;
 
 class FileUnitTest extends TestCase
 {
+    use RefreshDatabase;
     /**
-     * A basic unit test example.
+     * upload a fake media
      *
-     * @return void
+     * @return File
      */
-    public function testExample()
+    private function uploadMedia($media = null)
     {
-        $this->assertTrue(true);
+        $media = $media ?: factory(File::class)->create(['type' => FileUploadTypeManager::TYPE_MEDIA]);
+
+        return $media;
+    }
+
+    /** @test **/
+    public function it_may_have_a_owner()
+    {
+        $author = $this->beAuthor();
+
+        $media = $this->uploadMedia();
+
+        $this->assertInstanceOf(Collection::class, $media->owner());
+
+        $this->assertEquals($media->owner()->id , $author->id);
     }
 }

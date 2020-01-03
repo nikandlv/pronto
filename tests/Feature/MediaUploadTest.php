@@ -27,7 +27,7 @@ class MediaUploadTest extends TestCase
      *
      * @return string
      */
-    public function getNow()
+    private function getNow()
     {
         return Carbon::now()->format('Y-m-d');
     }
@@ -37,7 +37,7 @@ class MediaUploadTest extends TestCase
      *
      * @return File
      */
-    public function uploadMedia($media = null)
+    private function uploadMedia($media = null)
     {
         $media = $media ?: factory(File::class)->create(['type' => FileUploadTypeManager::TYPE_MEDIA]);
 
@@ -226,7 +226,6 @@ class MediaUploadTest extends TestCase
         $admin = factory(User::class)->create(['role' => UserRoleManager::ROLE_ADMIN]);
         $adminMedia = factory(File::class)->create(['type' => FileUploadTypeManager::TYPE_MEDIA, 'owner_id' => $admin->id]);
 
-//        dd($adminMedia , $authorMedia);
         $this->deleteJson('/api/files/medias/' . $authorMedia->id)->assertStatus(202);
         $this->assertDatabaseMissing('files', [
             'name' => Hash::make($authorMedia->name),
