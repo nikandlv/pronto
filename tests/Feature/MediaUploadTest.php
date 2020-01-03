@@ -220,7 +220,7 @@ class MediaUploadTest extends TestCase
     public function an_author_can_just_delete_his_own_media()
     {
         $this->withoutExceptionHandling();
-        $author = $this->beAdmin();
+        $author = $this->beAuthor();
         $authorMedia = factory(File::class)->create(['type' => FileUploadTypeManager::TYPE_MEDIA, 'owner_id' => $author->id]);
 
         $admin = factory(User::class)->create(['role' => UserRoleManager::ROLE_ADMIN]);
@@ -232,11 +232,10 @@ class MediaUploadTest extends TestCase
             'owner_id' => $author->id,
         ]);
 
-//        $this->deleteJson('/api/files/medias/' . $adminMedia->id)->assertStatus(403);
-//        $this->assertDatabaseHas('files', [
-//            'name' => Hash::make($adminMedia->name),
-//            'owner_id' => $admin->id,
-//        ]);
+        $this->deleteJson('/api/files/medias/' . $adminMedia->id)->assertStatus(403);
+        $this->assertDatabaseHas('files', [
+            'owner_id' => $admin->id,
+        ]);
     }
 
     /** @test * */
