@@ -5,6 +5,7 @@ namespace Tests\Unit;
 
 use App\File;
 use App\pronto\storage\FileUploadTypeManager;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Collection;
 use Tests\TestCase;
@@ -31,8 +32,8 @@ class FileUnitTest extends TestCase
 
         $media = $this->uploadMedia();
 
-        $this->assertInstanceOf(Collection::class, $media->owner());
+        $this->assertInstanceOf(User::class, $media->owner);
 
-        $this->assertEquals($media->owner()->id , $author->id);
+        $this->assertEquals($media->owner->id , $author->id);
     }
 }
