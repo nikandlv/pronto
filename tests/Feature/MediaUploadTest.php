@@ -4,10 +4,13 @@ namespace Tests\Feature;
 
 use App\File;
 use App\pronto\storage\FileUploadTypeManager;
+use App\pronto\users\UserRoleManager;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Console\Helper\Table;
@@ -16,7 +19,9 @@ use Tests\TestCase;
 class MediaUploadTest extends TestCase
 {
     use RefreshDatabase;
+
 //    HELPERS
+
     /**
      * get the current time with format Y-m-d
      *
@@ -40,19 +45,19 @@ class MediaUploadTest extends TestCase
     }
 
 
-    /** @test **/
+    /** @test * */
     public function a_guest_can_not_upload_a_media()
     {
         Storage::fake('files');
 
         $file = UploadedFile::fake()->image('media.jpg');
 
-        $this->postJson('/api/files/media', [
+        $this->postJson('/api/files/medias', [
             'media' => $file,
         ])->assertExactJson(['message' => 'Unauthenticated.']);
     }
 
-    /** @test **/
+    /** @test * */
     public function a_authenticated_author_can_upload_a_media()
     {
         $this->withoutExceptionHandling();
@@ -62,9 +67,9 @@ class MediaUploadTest extends TestCase
 
         $file = UploadedFile::fake()->image('media.jpg');
 
-        $this->postJson('/api/files/media', [
+        $this->postJson('/api/files/medias', [
             'media' => $file,
-        ]);
+        ])->assertStatus(201);
 
         $this->assertDatabaseHas('files', [
             'name' => $file->hashName(),
@@ -76,7 +81,7 @@ class MediaUploadTest extends TestCase
         Storage::assertExists('public/files/media/' . $this->getNow() . '/' . $file->hashName());
     }
 
-    /** @test **/
+    /** @test * */
     public function a_authenticated_admin_can_upload_a_media()
     {
         $this->withoutExceptionHandling();
@@ -86,7 +91,7 @@ class MediaUploadTest extends TestCase
 
         $file = UploadedFile::fake()->image('media.jpg');
 
-        $this->postJson('/api/files/media', [
+        $this->postJson('/api/files/medias', [
             'media' => $file,
         ]);
 
@@ -100,7 +105,7 @@ class MediaUploadTest extends TestCase
         Storage::assertExists('public/files/media/' . $this->getNow() . '/' . $file->hashName());
     }
 
-    /** @test **/
+    /** @test * */
     public function a_authenticated_member_can_not_upload_a_media()
     {
         $this->withoutExceptionHandling();
@@ -110,14 +115,14 @@ class MediaUploadTest extends TestCase
 
         $file = UploadedFile::fake()->image('media.jpg');
 
-        $this->postJson('/api/files/media', [
+        $this->postJson('/api/files/medias', [
             'media' => $file,
         ])->assertExactJson(['status' => 403]);
 
     }
 
 
-    /** @test **/
+    /** @test * */
     public function a_media_must_be_an_image_in_order_to_upload()
     {
         $user = $this->beAuthor();
@@ -126,24 +131,24 @@ class MediaUploadTest extends TestCase
 
         $file = UploadedFile::fake()->create('badFile.pdf');
 
-        $this->postJson('/api/files/media', [
+        $this->postJson('/api/files/medias', [
             'media' => $file,
         ])->assertJsonValidationErrors(['media']);
     }
 
-    /** @test **/
+    /** @test * */
     public function a_file_is_necessary_to_upload_a_media()
     {
         $user = $this->beAuthor();
 
         Storage::fake('files');
 
-        $this->postJson('/api/files/media', [
+        $this->postJson('/api/files/medias', [
             'media' => null,
         ])->assertJsonValidationErrors(['media']);
     }
 
-    /** @test **/
+    /** @test * */
     public function media_type_is_correctly_stored()
     {
         $user = $this->beAuthor();
@@ -152,7 +157,7 @@ class MediaUploadTest extends TestCase
 
         $file = UploadedFile::fake()->image('media.png');
 
-        $this->postJson('/api/files/media', [
+        $this->postJson('/api/files/medias', [
             'media' => $file,
         ]);
 
@@ -161,7 +166,7 @@ class MediaUploadTest extends TestCase
         ]);
     }
 
-    /** @test **/
+    /** @test * */
     public function every_media_has_a_owner()
     {
         $user = $this->beAuthor();
@@ -170,7 +175,7 @@ class MediaUploadTest extends TestCase
 
         $file = UploadedFile::fake()->image('media.png');
 
-        $this->postJson('/api/files/media', [
+        $this->postJson('/api/files/medias', [
             'media' => $file,
         ]);
 
@@ -179,8 +184,8 @@ class MediaUploadTest extends TestCase
         ]);
     }
 
-    /** @test **/
-    public function a_media_can_be_deleted()
+    /** @test * */
+    public function an_author_media_can_be_deleted()
     {
         $this->withoutExceptionHandling();
 
@@ -188,11 +193,73 @@ class MediaUploadTest extends TestCase
 
         $media = $this->uploadMedia();
 
-        $this->deleteJson('/api/files/medias/' . $media->id);
+        $this->deleteJson('/api/files/medias/' . $media->id)->assertStatus(202);
 
         $this->assertDatabaseMissing('files', [
             'id' => $media->id,
             'name' => Hash::make($media->name),
+        ]);
+    }
+
+    /** @test * */
+    public function an_admin_can_delete_a_media()
+    {
+        $admin = $this->beAdmin();
+
+        $media = $this->uploadMedia();
+
+        $this->deleteJson('/api/files/medias/' . $media->id)->assertStatus(202);
+
+        $this->assertDatabaseMissing('files', [
+            'id' => $media->id,
+            'name' => Hash::make($media->name),
+        ]);
+    }
+
+    /** @test * */
+    public function an_author_can_just_delete_his_own_media()
+    {
+        $this->withoutExceptionHandling();
+        $author = $this->beAdmin();
+        $authorMedia = factory(File::class)->create(['type' => FileUploadTypeManager::TYPE_MEDIA, 'owner_id' => $author->id]);
+
+        $admin = factory(User::class)->create(['role' => UserRoleManager::ROLE_ADMIN]);
+        $adminMedia = factory(File::class)->create(['type' => FileUploadTypeManager::TYPE_MEDIA, 'owner_id' => $admin->id]);
+
+//        dd($adminMedia , $authorMedia);
+        $this->deleteJson('/api/files/medias/' . $authorMedia->id)->assertStatus(202);
+        $this->assertDatabaseMissing('files', [
+            'name' => Hash::make($authorMedia->name),
+            'owner_id' => $author->id,
+        ]);
+
+        $this->deleteJson('/api/files/medias/' . $adminMedia)->assertStatus(403);
+        $this->assertDatabaseHas('files', [
+            'name' => Hash::make($adminMedia->name),
+            'owner_id' => $admin->id,
+        ]);
+    }
+
+    /** @test * */
+    public function a_admin_can_delete_all_media()
+    {
+        $admin = $this->beAdmin();
+        $adminMedia = factory(File::class)->create(['type' => FileUploadTypeManager::TYPE_MEDIA, 'owner_id' => $admin->id]);
+
+        $author = factory(User::class)->create(['role' => UserRoleManager::ROLE_AUTHOR]);
+        $authorMedia = factory(File::class)->create(['type' => FileUploadTypeManager::TYPE_MEDIA, 'owner_id' => $author->id]);
+
+        $this->deleteJson('/api/files/medias/' . $adminMedia->id);
+        $this->deleteJson('/api/files/medias/' . $authorMedia->id);
+
+        $this->assertDatabaseMissing('files', [
+            'name' => Hash::make($authorMedia->name),
+            'owner_id' => $author->id,
+        ]);
+
+        $this->assertDatabaseMissing('files', [
+            'name' => Hash::make($adminMedia->name),
+            'owner_id' => $admin->id
         ]);
     }
 }

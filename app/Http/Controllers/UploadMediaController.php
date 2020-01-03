@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 
-
-
 use App\File;
 use App\pronto\storage\FileUploadTypeManager;
 use Carbon\Carbon;
@@ -28,12 +26,29 @@ class UploadMediaController extends Controller
         ]);
 
         $file = request()->file('media');
-        $filePath = $file->storeAs('/files/media/' . $this->getNow() , $file->hashName() , 'public');
+        $filePath = $file->storeAs('/files/media/' . $this->getNow(), $file->hashName(), 'public');
 
-        auth()->user()->medias()->create([
+        if (auth()->user()->medias()->create([
             'name' => $file->hashName(),
             'path' => $filePath,
             'type' => FileUploadTypeManager::TYPE_MEDIA,
-        ]);
+        ])) {
+            return response()->json(['message' => 'media stored successfully'])->setStatusCode(201);
+        }
+    }
+
+    public function destory(File $media)
+    {
+        if (auth()->user()->isAuthor() && $media->owner()->id === auth()->id()) {
+            if ($media->delete()) {
+                return response()->json(['message' => 'media deleted successfully'])->setStatusCode(202);
+            }
+        }
+
+        if (auth()->user()->isAdmin()) {
+            if ($media->delete()) {
+                return response()->json(['message' => 'media deleted successfully'])->setStatusCode(202);
+            }
+        }
     }
 }

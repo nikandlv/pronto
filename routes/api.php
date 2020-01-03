@@ -56,7 +56,8 @@ Route::get('/categories', 'CategoriesController@index')->middleware('auth:api', 
 // storage system
 Route::group(['prefix' => 'files' , 'middleware' => ['auth:api' , 'role:admin,author']] , function () {
 //    MEDIA
-    Route::post('/media', 'UploadMediaController@store');
+    Route::post('/medias', 'UploadMediaController@store');
+    Route::delete('/medias/{media}', 'UploadMediaController@destory');
 
 //    Attachment
     Route::post('/attachment', 'UploadAttachmentController@store');
