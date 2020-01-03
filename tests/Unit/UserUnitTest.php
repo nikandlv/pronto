@@ -57,6 +57,26 @@ class UserUnitTest extends TestCase
         $this->assertFalse($user->isAdmin());
     }
 
+    /** @test **/
+    public function it_can_check_if_it_is_author()
+    {
+        $author = $this->beAuthor();
+        $user = factory(User::class)->create();
+
+        $this->assertTrue($author->isAuthor());
+        $this->assertFalse($user->isAuthor());
+    }
+
+    /** @test **/
+    public function it_can_check_if_it_is_member()
+    {
+        $user = factory(User::class)->create();
+
+        $this->assertFalse($user->isAuthor());
+        $this->assertFalse($user->isAuthor());
+        $this->assertTrue($user->isMember());
+    }
+
     /** @test * */
     public function it_can_update_its_settings()
     {
