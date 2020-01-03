@@ -8,7 +8,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Console\Helper\Table;
 use Tests\TestCase;
 
 class MediaUploadTest extends TestCase
@@ -174,6 +176,23 @@ class MediaUploadTest extends TestCase
 
         $this->assertDatabaseHas('files', [
             'owner_id' => $user->id
+        ]);
+    }
+
+    /** @test **/
+    public function a_media_can_be_deleted()
+    {
+        $this->withoutExceptionHandling();
+
+        $author = $this->beAuthor();
+
+        $media = $this->uploadMedia();
+
+        $this->deleteJson('/api/files/medias/' . $media->id);
+
+        $this->assertDatabaseMissing('files', [
+            'id' => $media->id,
+            'name' => Hash::make($media->name),
         ]);
     }
 }

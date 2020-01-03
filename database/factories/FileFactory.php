@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factory;
 $factory->define(File::class, function (Faker $faker) {
     return [
         'name' => $faker->firstName,
-        'path' => $faker->address,
+        'path' => $faker->paragraph,
         'type' => \App\pronto\storage\FileUploadTypeManager::TYPE_MEDIA,
         'owner_id'=> auth()->id(),
     ];
