@@ -73,13 +73,31 @@ class User extends Authenticatable
     }
 
     /**
-     * check user is admin or not
+     * check if auth user is admin
      *
      * @return bool
      */
     public function isAdmin()
     {
         return $this->role === UserRoleManager::ROLE_ADMIN;
+    }
+
+    /**
+     * check if auth user is author
+     *
+     *
+     */
+    public function isAuthor()
+    {
+        return $this->role === UserRoleManager::ROLE_AUTHOR;
+    }
+
+    /**
+     * check if auth user is memeber
+     */
+    public function isMember()
+    {
+        return $this->role === UserRoleManager::ROLE_MEMBER;
     }
 
     /**

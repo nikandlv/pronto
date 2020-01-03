@@ -31,7 +31,7 @@ abstract class TestCase extends BaseTestCase
 
     public function beAuthor()
     {
-        $author = factory(User::class)->create(['role' => UserRoleManager::ROLE_ADMIN]);
+        $author = factory(User::class)->create(['role' => UserRoleManager::ROLE_AUTHOR]);
 
         Passport::actingAs($author);
 
