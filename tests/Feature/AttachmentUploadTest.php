@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use App\File;
 use App\pronto\storage\FileUploadTypeManager;
+use App\pronto\users\UserRoleManager;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
@@ -153,4 +155,41 @@ class AttachmentUploadTest extends TestCase
         ]);
     }
 
+    /** @test * */
+    public function an_author_can_just_delete_his_own_attachment()
+    {
+        $this->withoutExceptionHandling();
+        $author = $this->beAuthor();
+        $authorAttachment = factory(File::class)->create(['owner_id' => $author->id]);
+
+        $admin = factory(User::class)->create(['role' => UserRoleManager::ROLE_ADMIN]);
+        $adminAttachment = factory(File::class)->create(['owner_id' => $admin->id]);
+
+        $this->deleteJson('/api/files/attachments/' . $authorAttachment->id)->assertExactJson(['message' => 'attachment deleted successfully'])->assertStatus(200);
+        $this->deleteJson('/api/files/attachments/' . $adminAttachment->id)->assertStatus(403);
+
+    }
+
+    /** @test * */
+    public function an_admin_can_delete_every_ones_attachment()
+    {
+        $admin = $this->beAdmin();
+        $adminAttachment = factory(File::class)->create(['owner_id' => $admin->id]);
+
+        $author = factory(User::class)->create(['role' => UserRoleManager::ROLE_AUTHOR]);
+        $authorAttachment = factory(File::class)->create(['owner_id' => $author->id]);
+
+        $this->deleteJson('/api/files/attachments/' . $authorAttachment->id)->assertExactJson(['message' => 'attachment deleted successfully'])->assertStatus(200);
+        $this->deleteJson('/api/files/attachments/' . $adminAttachment->id)->assertExactJson(['message' => 'attachment deleted successfully'])->assertStatus(200);
+    }
+
+    /** @test * */
+    public function an_member_can_not_delete_an_attachment()
+    {
+        $user = $this->signIn();
+
+        $attacment = $this->uploadAttachment();
+
+        $this->deleteJson('/api/files/attachments/' . $attacment->id)->assertExactJson(['status' => 403]);
+    }
 }
