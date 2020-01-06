@@ -140,18 +140,17 @@ class AttachmentUploadTest extends TestCase
     /** @test * */
     public function an_author_can_delete_an_attachment()
     {
-        $this->withoutExceptionHandling();
-
         $author = $this->beAuthor();
 
         $attachment = $this->uploadAttachment();
 
         $this->deleteJson('/api/files/attachments/' . $attachment->id)->assertExactJson(['message' => 'attachment deleted successfully'])->assertStatus(200);
 
-        $this->assertDatabaseHas('files', [
+        $this->assertDatabaseMissing('files', [
             'id' => $attachment->id,
             'name' => Hash::make($attachment->name),
             'owner_id' => $author->id,
         ]);
     }
+
 }

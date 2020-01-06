@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\File;
 use App\pronto\storage\FileUploadTypeManager;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -31,12 +32,19 @@ class UploadAttachmentController extends Controller
             'attachment' => 'required|file'
         ]);
         $attachment = \request()->file('attachment');
-        $attachmentPath = $attachment->storeAs('/public/files/attachments/' . $this->getNow() , $attachment->hashName());
+        $attachmentPath = $attachment->storeAs('/public/files/attachments/' . $this->getNow(), $attachment->hashName());
 
         auth()->user()->attachments()->create([
             'name' => $attachment->hashName(),
             'path' => $attachmentPath,
             'type' => FileUploadTypeManager::TYPE_ATTACHEMENT,
         ]);
+    }
+
+    public function destroy(File $attachment)
+    {
+        if ($attachment->delete()) {
+            return response(['message' => 'attachment deleted successfully'])->setStatusCode(200);
+        }
     }
 }
