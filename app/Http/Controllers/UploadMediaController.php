@@ -53,7 +53,7 @@ class UploadMediaController extends Controller
     private function deleteMedia(File $media): JsonResponse
     {
         if ($media->delete()) {
-            return response()->json(['message' => 'media deleted successfully'])->setStatusCode(202);
+            return response()->json(['message' => 'media deleted successfully'])->setStatusCode(200);
         }
     }
 

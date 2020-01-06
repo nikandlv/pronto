@@ -43,8 +43,17 @@ class UploadAttachmentController extends Controller
 
     public function destroy(File $attachment)
     {
-        if ($attachment->delete()) {
-            return response(['message' => 'attachment deleted successfully'])->setStatusCode(200);
+
+        if (auth()->user()->isAuthor() && $attachment->owner->id === auth()->id()) {
+            if ($attachment->delete()) {
+                return response(['message' => 'attachment deleted successfully'])->setStatusCode(200);;
+            }
+        } elseif (auth()->user()->isAdmin()) {
+            if ($attachment->delete()) {
+                return response(['message' => 'attachment deleted successfully'])->setStatusCode(200);;
+            }
         }
+
+        return response(['message' => 'not found!'])->setStatusCode(403);
     }
 }
