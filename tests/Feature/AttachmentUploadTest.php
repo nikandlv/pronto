@@ -42,7 +42,7 @@ class AttachmentUploadTest extends TestCase
         Storage::fake('file');
         $file = UploadedFile::fake()->create('test.png');
 
-        $this->postJson('api/files/attachment', [
+        $this->postJson('api/files/attachments', [
             'attachment' => $file
         ])->assertExactJson(['message' => "Unauthenticated."]);
     }
@@ -58,7 +58,7 @@ class AttachmentUploadTest extends TestCase
         $file = UploadedFile::fake()->create('test.pdf');
 
 
-        $this->postJson('api/files/attachment', [
+        $this->postJson('api/files/attachments', [
             'attachment' => $file
         ]);
 
@@ -82,7 +82,7 @@ class AttachmentUploadTest extends TestCase
         Storage::fake('file');
         $file = UploadedFile::fake()->create('test.pdf');
 
-        $this->postJson('api/files/attachment', [
+        $this->postJson('api/files/attachments', [
             'attachment' => $file
         ]);
 
@@ -106,7 +106,7 @@ class AttachmentUploadTest extends TestCase
         Storage::fake('file');
         $file = UploadedFile::fake()->create('test.png');
 
-        $this->postJson('api/files/attachment', [
+        $this->postJson('api/files/attachments', [
             'attachment' => $file
         ])->assertExactJson(['status' => 403]);
     }
@@ -119,7 +119,7 @@ class AttachmentUploadTest extends TestCase
         Storage::fake('file');
         $file = UploadedFile::fake()->create('test.png');
 
-        $this->postJson('api/files/attachment', [
+        $this->postJson('api/files/attachments', [
             'attachment' => null
         ])->assertJsonValidationErrors(['attachment']);
     }
@@ -132,7 +132,7 @@ class AttachmentUploadTest extends TestCase
         Storage::fake('file');
         $file = UploadedFile::fake()->create('test.png');
 
-        $this->postJson('api/files/attachment', [
+        $this->postJson('api/files/attachments', [
             'attachment' => 'bad_attachment'
         ])->assertJsonValidationErrors(['attachment']);
     }

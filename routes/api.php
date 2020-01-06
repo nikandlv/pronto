@@ -60,5 +60,6 @@ Route::group(['prefix' => 'files' , 'middleware' => ['auth:api' , 'role:admin,au
     Route::delete('/medias/{media}', 'UploadMediaController@destory');
 
 //    Attachment
-    Route::post('/attachment', 'UploadAttachmentController@store');
+    Route::post('/attachments', 'UploadAttachmentController@store');
+    Route::delete('/attachments/{attachment}', 'UploadAttachmentController@destroy');
 });
