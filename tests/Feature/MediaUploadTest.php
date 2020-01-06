@@ -193,7 +193,7 @@ class MediaUploadTest extends TestCase
 
         $media = $this->uploadMedia();
 
-        $this->deleteJson('/api/files/medias/' . $media->id)->assertStatus(202);
+        $this->deleteJson('/api/files/medias/' . $media->id)->assertExactJson(['message' => 'media deleted successfully!'])->assertStatus(200);
 
         $this->assertDatabaseMissing('files', [
             'id' => $media->id,
@@ -208,7 +208,7 @@ class MediaUploadTest extends TestCase
 
         $media = $this->uploadMedia();
 
-        $this->deleteJson('/api/files/medias/' . $media->id)->assertStatus(202);
+        $this->deleteJson('/api/files/medias/' . $media->id)->assertExactJson(['message' => 'media deleted successfully!'])->assertStatus(200);
 
         $this->assertDatabaseMissing('files', [
             'id' => $media->id,
@@ -226,7 +226,7 @@ class MediaUploadTest extends TestCase
         $admin = factory(User::class)->create(['role' => UserRoleManager::ROLE_ADMIN]);
         $adminMedia = factory(File::class)->create(['type' => FileUploadTypeManager::TYPE_MEDIA, 'owner_id' => $admin->id]);
 
-        $this->deleteJson('/api/files/medias/' . $authorMedia->id)->assertStatus(202);
+        $this->deleteJson('/api/files/medias/' . $authorMedia->id)->assertExactJson(['message' => 'media deleted successfully!'])->assertStatus(200);
         $this->assertDatabaseMissing('files', [
             'name' => Hash::make($authorMedia->name),
             'owner_id' => $author->id,
