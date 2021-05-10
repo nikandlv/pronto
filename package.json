@@ -21,7 +21,7 @@
         "date-fns": "^2.0.0-beta.5",
         "jquery": "^3.2",
         "laravel-mix": "^4.0.7",
-        "lodash": "^4.17.13",
+        "lodash": "^4.17.21",
         "mui-nutella": "*",
         "mui-pastel": "^1.0.0",
         "mui-prompt": "^1.0.3",
